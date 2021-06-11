@@ -87,11 +87,78 @@ const fetchData = async ()=>{
   }
   };
 
+  const closef1refresh = async (e)=>{
+   await cleardata()
+    setisClosef(e)
 
-  const handleedit = (event) => {
+  } 
+
+// edit3
+  const handleedit =async (event)  => {
     setisClosef(2)
+
+ getedi_po(event).then(async data1  => {
+  if(data1.error){
+
+  }
+  else{
+    await  getediasnbyinvoice(event).then(data2=>{
+      if(data2.error){
+
+      }
+      else{
+        if(data2.length>0){
+          itemdata['invoicE_NO'] =  data2[0].invoicE_NO
+          itemdata['producT_NO'] =  data2[0].producT_NO
+          itemdata['pO_NO'] =  data2[0].pO_NO
+          itemdata['invoicE_DATE'] =  data2[0].invoicE_DATE
+          itemdata['vendoR_NAME'] =  data2[0].vendoR_NAME
+          itemdata['location'] =  data2[0].location
+          itemdata['remark'] =  data2[0].remark
+          itemdata['totaL_AMOUNT'] =  data2[0].totaL_AMOUNT
+          itemdata['discounT_PERCENTAGE'] =  data2[0].discounT_PERCENTAGE
+          itemdata['discounT_BAHT'] =  data2[0].discounT_BAHT
+          itemdata['vat'] =   data2[0].vat
+          itemdata['total'] =   data2[0].total
+        setitemdata({ ...itemdata })
+        let ggwp=[]
+          if(data1.length>0){
+            for (let index = 0; index < data1.length; index++) {
+               const form = {
+                c1 :data1[index].codE_GPU,
+                c2 :data1[index].codE_UNSPSC,
+                c3 :data1[index].codE_TMT,
+                c4 :data1[index].baR_CODE,
+                c6 :data1[index].producT_NO,
+                c5 :data1[index].producT_NAME,
+                c9 :data1[index].qty,
+                c10 :data1[index].uniT_PRICE,
+                c11 :data1[index].amount,
+                c7 :data1[index].mfG_DATE,
+                c8 :data1[index].exP_DATE
+                
+    }
+    ggwp.push(form)
+    console.log(form)   
+            }
+            setmapp(mapp.concat(ggwp))
+            console.log(mapp)   
+          }
+       
+         
+          
+        
+        
+        }
+      
+
+        console.log(itemdata)
+      }
+    })
+  }
+ }
  
-    getedi_po(event)
+  )
   }
 
 
@@ -578,7 +645,7 @@ console.log(mapp,mapp.length)
             <>
               <div className="relative ">
                 <div className="absolute mt-5 ml-10 left-0 top-0">
-                  <a onClick={() => setisClosef(1)}>
+                  <a onClick={() => closef1refresh(1)}>
                     <div className="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
                       {" "}
                       <svg
@@ -605,29 +672,51 @@ console.log(mapp,mapp.length)
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  เลขที่ใบสั่งซื้อ <label className="ml-5">00001</label>
+                  เลขที่ใบสั่งซื้อ <label className="ml-5">{itemdata.invoicE_NO}</label>
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  เลขที่ใบส่งของ <label className="ml-5">00001</label>
+                  เลขที่ใบส่งของ <label className="ml-5">{itemdata.producT_NO}</label>
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  รหัสผู้จำหน่าย <label className="ml-5">00001</label>
+                  รหัสผู้จำหน่าย <label className="ml-5">{itemdata.pO_NO}</label>
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  วันที่ใบส่งของ <label className="ml-5">12/12/12</label>
+                  วันที่ใบส่งของ <label className="ml-5">{itemdata.invoicE_DATE}</label>
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  ชื่อผู้จำหน่าย <label className="ml-5">สมศักดิ์</label>
+                  ชื่อผู้จำหน่าย <label className="ml-5">{itemdata.vendoR_NAME}</label>
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  สถาที่ส่งมอบ <label className="ml-5">ตึกสะอาด</label>
+                  สถาที่ส่งมอบ <label className="ml-5">{itemdata.location}</label>
                 </div>
               </div>
 
               <div className="flex flex-col mt-10">
+              {/* kkkk */}
                 <div className=" ">
+                <div className=" flex justify-end  mr-10 mt-5">
+                    <button
+                      onClick={() => setisClose(true)}
+                      className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      ทำซ้ำ
+                    </button>
+                    <button
+                      onClick={() => setisClose(true)}
+                      className="bg-pink-500 ml-2  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      แก้ไข
+                    </button>
+                    <button
+                      onClick={() => setisClose(true)}
+                      className="bg-pink-500 ml-2  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      ลบ
+                    </button>
+                  </div>
+                  
                   <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="shadow overflow-hidden border-gray-200 sm:rounded-lg">
                       <table className="min-w-full w-full">
@@ -705,180 +794,39 @@ console.log(mapp,mapp.length)
                           </tr>
                        
                        
-                          <tr className="bg-white ">
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                ถุงมือ{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                10/10/64{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                10/10/64{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                1000
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                2{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                2{" "}
-                              </div>{" "}
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                ถุงมือ{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                10/10/64{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                10/10/64{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                1000
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                2{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                2{" "}
-                              </div>{" "}
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                ถุงมือ{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                00001{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                10/10/64{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                10/10/64{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                1000
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                2{" "}
-                              </div>{" "}
-                            </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">
-                                2{" "}
-                              </div>{" "}
-                            </td>
-                          </tr>
-                        
+                            {
+                            (mapp.length>0) ? (
+                              mapp.map((data,index)=>(
+                                <tr key={index} className="bg-white ">
+                                <td className="px-6 py-4  border-r whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c1} </div>   </td>
+                                                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c2} </div>   </td>
+                                                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>
+                                                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td>
+                                                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c5} </div>   </td>
+                                                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c6} </div>   </td>
+                                                           <td className="px-6 py-4   whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c7} </div>   </td>
+                                                           <td className="px-6 py-4   whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c8} </div>   </td>
+                                                           <td className="px-6 py-4   whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c9}</div>   </td>
+                                                           <td className="px-6 py-4   whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
+                                                           <td className="px-6 py-4   whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
+                                                           </tr>
+                                  ))
+                                
+                            ) : <></>
+                              // ByeBye!
+        }
+ 
                       </table>
                     </div>
                   </div>
@@ -887,63 +835,42 @@ console.log(mapp,mapp.length)
               <div className="flex flex-col mb-10">
                 <div className="grid grid-cols-2 gap-3 ml-5 mt-5 mr-10">
                   <div className="content-center text-left justify-items-center text-base mt-5 font-bold  ">
-                    หมายเหตุ -
+                    หมายเหตุ      <label className="ml-5">{itemdata.remark}</label>
                   </div>
                   <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
-                    ราคารวม (ไม่รวม VAT){" "}
-                    <input  
-                      id="VAT_AMOUNT"
-                      value="3000"
-                      autoComplete="false"
-                      className="ml-4 bg-white shadow-md rounded   text-gray-900  "
-                    />
+                    ราคารวม (ไม่รวม VAT)
+                
+                   <label className="ml-5">{itemdata.totaL_AMOUNT}</label>
+               
                   </div>
                 </div>
                 <div className="grid grid-cols-1 gap-3 mt-5 mr-10">
                   <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                     ส่วนลด - เปอร์เซ็นต์{" "}
-                    <input 
-                      id="VAT_AMOUNT"
-                      autoComplete="false"
-                      className="ml-4 bg-white shadow-md rounded   text-gray-900  "
-                    />
+                    <label className="ml-5">{itemdata.discounT_PERCENTAGE}</label>
                   </div>
                   <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                     ส่วนลด - บาท{" "}
-                    <input
-                      id="VAT_AMOUNT"
-                      autoComplete="false"
-                      className="ml-4 bg-white shadow-md rounded   text-gray-900  "
-                    />
+                    <label className="ml-5">{itemdata.discounT_BAHT}</label>
                   </div>
                   <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                     VAT{" "}
-                    <input
-                      id="VAT_AMOUNT"
-                      value="30"
-                      autoComplete="false"
-                      className="ml-4 bg-white shadow-md rounded   text-gray-900  "
-                    />
+                    <label className="ml-5">{itemdata.vat}</label>
                   </div>
                   <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                     ราคารวม{" "}
-                    <input
-                      id="VAT_AMOUNT"
-                      value="3030"
-                      autoComplete="false"
-                      className="ml-4 bg-white shadow-md rounded   text-gray-900  "
-                    />
+                    <label className="ml-5">{itemdata.total}</label>
                   </div>
                 </div>{" "}
               </div>
             </>
           );
-        } else if (isClosef == 3) {
+        } else if (isClosef == 3) {   
           return (
             <>
               <div className="relative ">
                 <div className="absolute mt-5 ml-10 left-0 top-0">
-                  <a onClick={() => setisClosef(1)}>
+                  <a onClick={() => closef1refresh(1) }>
                     <div className="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
                       {" "}
                       <svg
