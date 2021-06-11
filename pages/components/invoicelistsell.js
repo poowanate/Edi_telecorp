@@ -1,15 +1,18 @@
 import Layout from "../Layout/Layout";
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
-import {edi_po} from '../api/api_po'
-import {edi_asn,ediproduct} from '../api/api_asn'
+import {edi_po,getedi_po} from '../api/api_po'
+import {edi_asn,ediproduct,getediasn,getediasnbyinvoice} from '../api/api_asn'
+import * as XLSX from 'xlsx';
+
+
 
 
 function table() {
   const [isClose, setisClose] = useState(false);
   const [isClosef, setisClosef] = useState(1);
   const [mapp, setmapp] = useState([]);
-
+  const [showtable, setshowtable] = useState([]);
   const [nn, setn] = useState(Math.random());
   const [itemtable, setitemtable] = useState({
     c1: "",
@@ -25,9 +28,35 @@ function table() {
     c11: "",
   });
 
+  useEffect(async() => {
+    setitemdata({ ...itemdata })
+    fetchData()
+   
+}, [])
+  
+const fetchData = async ()=>{
+  let dataf = [];
+ await getediasn().then(async data   => { 
+  
+  // Router.push('/register/information')
+  if (data.error) {
+  
+  } else {
+    for (let index = 0; index < data.length; index++) {
+      dataf.push(data[index])
+     
+   }
+   await  setshowtable(dataf) 
+  }
+  
+ 
+  
+})
+}
+
   const [itemdata, setitemdata] = useState({
     invoicE_NO: ""  ,
-        invoicE_DATE: "" ,
+        invoicE_DATE: "" ,   
         remark: "" ,
         discounT_PERCENTAGE: null ,
         discounT_BAHT: null ,
@@ -37,13 +66,153 @@ function table() {
         pO_NO: "" ,
         total: "" ,
         vendoR_NAME: "" ,
-        location: "" ,
+        location: "" 
   });
   
 
 
 
   let valuechk = 0;
+
+  const [uploadfile, setuploadfile] = useState();
+
+  const onFileChange = async event => {
+    
+    // Update the state
+  await  setuploadfile({ selectedFile: event.target.files[0] });
+  console.log(uploadfile)
+  if(uploadfile){
+    await  console.log(uploadfile.selectedFile)
+    
+  }
+  };
+
+
+  const handleedit = (event) => {
+    setisClosef(2)
+ 
+    getedi_po(event)
+  }
+
+
+  //f = file
+
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+
+  
+    const file = e.target.files[0]
+    const reader = new FileReader();
+    reader.onload=(event)=>{
+      console.log(event)
+
+      const bstr = event.target.result
+      const workbook = XLSX.read(bstr,{type:"binary"})
+      const worksheetname = workbook.SheetNames[0]
+      const worksheet = workbook.Sheets[worksheetname]
+
+       const fileData = XLSX.utils.sheet_to_json(worksheet,{header:1})
+     if(worksheetname == "PO_IN"){
+      const header = fileData[0]
+      fileData.splice(0,1)
+      const dataheader = fileData[0]
+      fileData.splice(0,5)
+      const tableheader = fileData[0]
+      fileData.splice(0,1)
+      const tabledata = []; 
+     if(fileData.length>0){
+        for (let index = 0; index < fileData.length; index++) {
+          tabledata.push(fileData[index])
+          
+        }
+     }
+    
+    var eheader =deleteempty(header)
+    var edataheader =deleteempty(dataheader)
+   
+      if(edataheader.length>0){
+        itemdata['invoicE_NO'] = edataheader[0]
+        itemdata['producT_NO'] = edataheader[1]
+        itemdata['pO_NO'] = edataheader[2]
+        itemdata['invoicE_DATE'] = edataheader[3]
+        itemdata['vendoR_NAME'] = edataheader[4]
+        itemdata['location'] = edataheader[5]
+        itemdata['remark'] = edataheader[6]
+        itemdata['totaL_AMOUNT'] = edataheader[7]
+        itemdata['discounT_PERCENTAGE'] = edataheader[8]
+        itemdata['discounT_BAHT'] = edataheader[9]
+        itemdata['vat'] = edataheader[10]
+        itemdata['total'] = edataheader[11]
+      }
+ 
+  console.log(tableheader)
+  console.log(tabledata)  
+  setitemdata({ ...itemdata })
+let ggwp = []
+  if(tabledata.length>0){
+for (let index = 0; index < tabledata.length; index++) {
+
+    const form = {
+      c1: tabledata[index][0],
+          c2: tabledata[index][1],
+          c3: tabledata[index][2],
+          c4: tabledata[index][3],
+          c5: tabledata[index][4],
+          c6: tabledata[index][5],
+          c7: tabledata[index][6],
+          c8: tabledata[index][7],
+          c9: tabledata[index][8],
+          c10: tabledata[index][9],
+          c11: tabledata[index][10], 
+    }
+  // for (let indexz = 0; indexz < tabledata[index].length; indexz++) {
+  // let int = indexz+1
+  //   itemtable['c'+int] = tabledata[index][indexz]
+  //   let zaza = itemtable;
+  //   setitemtable({
+  //     c1: "",
+  //     c2: "",
+  //     c3: "",
+  //     c4: "",
+  //     c5: "",
+  //     c6: "",
+  //     c7: "",
+  //     c8: "",
+  //     c9: "",
+  //     c10: "",
+  //     c11: "", 
+  //   })
+    
+  
+  // }
+  ggwp.push(form)
+  console.log(itemtable)
+ 
+  
+}
+setmapp(mapp.concat(ggwp))
+console.log(ggwp)
+
+
+  }
+     }
+        
+    
+    }
+reader.readAsBinaryString(file)
+   
+}
+
+const deleteempty = (data) =>{
+var send =   data.filter(function (el) {
+    return el != null;
+  })
+  return send
+}
+function Download() {
+  document.getElementById('downloadexcel').click();
+}
 
   const handleRemoveItem = (idx) => {
     // assigning the list to temp variable
@@ -93,73 +262,94 @@ function table() {
   const handleChange = (name, e) => {
     itemtable[name] = e.target.value;
     console.log(itemtable);
+ 
   };
  
   const handleChangedata = (name, e) => {
     itemdata[name] = e.target.value;
     console.log(itemdata);
+    setitemdata({ ...itemdata })
   };
+const cleardata = () => {
+  setitemdata( {invoicE_NO: ""  ,
+  invoicE_DATE: "" ,
+  remark: "" ,
+  discounT_PERCENTAGE: "" ,
+  discounT_BAHT: "" ,
+  vat: "" ,
+  totaL_AMOUNT: "" ,
+  producT_NO: "" ,
+  pO_NO: "" ,
+  total: "" ,
+  vendoR_NAME: "" ,
+  location: "" })
+setmapp([])
+}
 
-
-  const saveapipo = () => {
-//     let data = {
-//       invoicE_NO: itemdata.invoicE_NO,
-//       invoicE_DATE: itemdata.invoicE_DATE,
-//       remark: itemdata.remark,
-//       discounT_PERCENTAGE: Number(itemdata.discounT_PERCENTAGE),
-//       discounT_BAHT: Number(itemdata.discounT_BAHT),
-//       vat: Number(itemdata.vat),
-//       totaL_AMOUNT: Number(itemdata.totaL_AMOUNT),
-//       producT_NO: itemdata.producT_NO,
-//       pO_NO: itemdata.pO_NO,
-//       total: Number(itemdata.total),
-//       vendoR_NAME: itemdata.vendoR_NAME,
-//       location: itemdata.location,
-//     }
-//     // console.log(JSON.stringify(data))
-//  edi_asn(data).then(data => {
-//   console.log(data);
-//   // Router.push('/register/information')
-//   if (data.error) {
-//      console.log('ggwp')
-//   } else {
-//     console.log('55')
-//   }
-// })
-    if(mapp.length > 0){
-        for (let index = 0; index < mapp.length; index++) {
-        
-          let datatable = {  
-        producT_ID: mapp[index].invoicE_NO ,
-        codE_GPU: mapp[index].c1 ,
-        codE_UNSPSC: mapp[index].c2 ,
-        codE_TMT: mapp[index].c3 ,
-        baR_CODE: mapp[index].c4 ,
-        producT_NO: mapp[index].c6 ,
-        producT_NAME: mapp[index].c5 ,
-        qty: Number(mapp[index].c9) ,
-        uniT_PRICE:  Number(mapp[index].c10) ,
-        amount:  Number(mapp[index].c11) ,
-        batcH_LOT_NO: 1 ,
-        mfG_DATE: mapp[index].c7 ,
-        exP_DATE: mapp[index].c8 ,
-        uom: 1 ,
-    
-          }
-           ediproduct(datatable).then(data => {
+  const saveapipo = async () => {
+    let data = {
+      invoicE_NO: String(itemdata.invoicE_NO),
+      invoicE_DATE: itemdata.invoicE_DATE,
+      remark: String(itemdata.remark),
+      discounT_PERCENTAGE: Number(itemdata.discounT_PERCENTAGE),
+      discounT_BAHT: Number(itemdata.discounT_BAHT),
+      vat: Number(itemdata.vat),
+      totaL_AMOUNT: Number(itemdata.totaL_AMOUNT),
+      producT_NO: String(itemdata.producT_NO),
+      pO_NO:  String(itemdata.pO_NO),
+      total: Number(itemdata.total),
+      vendoR_NAME:  String(itemdata.vendoR_NAME),
+      location:  String(itemdata.location),
+    }
+    console.log(JSON.stringify(data))
+ await edi_asn(data).then(async data   => { 
   console.log(data);
   // Router.push('/register/information')
   if (data.error) {
      console.log('ggwp')
   } else {
-    console.log('55')
+    if(mapp.length > 0){
+      for (let index = 0; index < mapp.length; index++) {
+      
+        let datatable = {  
+      producT_ID: String(itemdata.invoicE_NO) ,
+      codE_GPU: String(mapp[index].c1) ,
+      codE_UNSPSC: String(mapp[index].c2) ,
+      codE_TMT: String(mapp[index].c3) ,
+      baR_CODE: String(mapp[index].c4) ,
+      producT_NO: String(mapp[index].c6) ,
+      producT_NAME: String(mapp[index].c5) ,
+      qty: Number(mapp[index].c9) ,
+      uniT_PRICE:  Number(mapp[index].c10) ,
+      amount:  Number(mapp[index].c11) ,
+      batcH_LOT_NO: 1 ,
+      mfG_DATE: String(mapp[index].c7) ,
+      exP_DATE: String(mapp[index].c8) ,
+      uom: 1 ,
+  
+        }
+        console.log(JSON.stringify(datatable))
+       await ediproduct(datatable).then(async data => {
+console.log(data);
+// Router.push('/register/information')
+if (data.error) {
+   console.log('ggwp')
+} else {
+  await fetchData();
+  setisClosef(1)
+  cleardata()
+  
+  console.log('55')
+}
+})
+  }
+}
+  else{
+    console.log('555')
+  }
   }
 })
-    }
-  }
-    else{
-        <></>
-    }
+   
 console.log(mapp,mapp.length)
   };
 
@@ -255,8 +445,7 @@ console.log(mapp,mapp.length)
                     <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                       <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table className="min-w-full divide-y divide-gray-200">
-                          <thead className="bg-gray-50">
-                            <tr>
+                            <tr className="bg-gray-50">
                               <th
                                 scope="col"
                                 className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider "
@@ -303,85 +492,79 @@ console.log(mapp,mapp.length)
                                 <span className="sr-only">Edit</span>
                               </th>
                             </tr>
-                          </thead>
-                          <tbody className="bg-white divide-y divide-gray-200">
-                            <tr>
-                              {/* <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center">
-               
-                  <div className="ml-4">
-                    <div className="text-sm font-medium text-gray-900">
-                      Jane Cooper
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      jane.cooper@example.com
-                    </div>
-                  </div>
-                </div>
-              </td> */}
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                  PO 00001{" "}
-                                </div>{" "}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                  00001{" "}
-                                </div>{" "}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                  00000001{" "}
-                                </div>{" "}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                  00000001
-                                </div>{" "}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                  13/03/63{" "}
-                                </div>{" "}
-                              </td>
+                        
+                          
+                         
+                          { showtable.map((data,index)=>(
+< >      <tr key={index} className="bg-white divide-y divide-gray-200">
+                        
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900">
+                            {data.invoicE_NO}
+                          </div>{" "}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900">
+                          {data.pO_NO}
+                          </div>{" "}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900">
+                          {data.vendoR_NAME}
+                          </div>{" "}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900">
+                          {data.producT_NO}
+                          </div>{" "}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900">
+                          {data.invoicE_DATE}
+                          </div>{" "}
+                        </td>
 
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                  อาคารสะอาด{" "}
-                                </div>{" "}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Active
-                                </span>
-                              </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900">
+                          {data.location}
+                          </div>{" "}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            Active
+                          </span>
+                        </td>
 
-                              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <button onClick={() => setisClosef(2)}>
-                                  <svg
-                                    class="text-pink-800  w-6 h-6"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                    ></path>
-                                    <path
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                    ></path>
-                                  </svg>
-                                </button>{" "}
-                              </td>
-                            </tr>
-                          </tbody>
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <button onClick={()=>handleedit(data.producT_NO)}>
+                            <svg
+                              className="text-pink-800  w-6 h-6"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                              ></path>
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                              ></path>
+                            </svg>
+                          </button>{" "}
+                        </td>
+                      </tr>
+            </>
+                      ))
+                    }
+                      
+                        
                         </table>
                       </div>
                     </div>
@@ -393,13 +576,13 @@ console.log(mapp,mapp.length)
         } else if (isClosef == 2) {
           return (
             <>
-              <div class="relative ">
-                <div class="absolute mt-5 ml-10 left-0 top-0">
+              <div className="relative ">
+                <div className="absolute mt-5 ml-10 left-0 top-0">
                   <a onClick={() => setisClosef(1)}>
-                    <div class="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
+                    <div className="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
                       {" "}
                       <svg
-                        class="w-6 h-6 text-white"
+                        className="w-6 h-6 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -420,7 +603,7 @@ console.log(mapp,mapp.length)
                 ใบรับของ (IN)
               </div>
 
-              <div class="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบสั่งซื้อ <label className="ml-5">00001</label>
                 </div>
@@ -447,9 +630,8 @@ console.log(mapp,mapp.length)
                 <div className=" ">
                   <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="shadow overflow-hidden border-gray-200 sm:rounded-lg">
-                      <table className="min-w-full w-full ">
-                        <thead className="bg-gray-50">
-                          <tr>
+                      <table className="min-w-full w-full">
+                    <tr className="bg-gray-50">
                             <th
                               scope="col"
                               className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider"
@@ -521,9 +703,9 @@ console.log(mapp,mapp.length)
                               ราคาต่อหน่วย
                             </th>
                           </tr>
-                        </thead>
-                        <tbody className="bg-white ">
-                          <tr>
+                       
+                       
+                          <tr className="bg-white ">
                             <td className="px-6 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">
                                 00001{" "}
@@ -696,14 +878,14 @@ console.log(mapp,mapp.length)
                               </div>{" "}
                             </td>
                           </tr>
-                        </tbody>
+                        
                       </table>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="flex flex-col mb-10">
-                <div class="grid grid-cols-2 gap-3 ml-5 mt-5 mr-10">
+                <div className="grid grid-cols-2 gap-3 ml-5 mt-5 mr-10">
                   <div className="content-center text-left justify-items-center text-base mt-5 font-bold  ">
                     หมายเหตุ -
                   </div>
@@ -717,7 +899,7 @@ console.log(mapp,mapp.length)
                     />
                   </div>
                 </div>
-                <div class="grid grid-cols-1 gap-3 mt-5 mr-10">
+                <div className="grid grid-cols-1 gap-3 mt-5 mr-10">
                   <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                     ส่วนลด - เปอร์เซ็นต์{" "}
                     <input 
@@ -759,13 +941,13 @@ console.log(mapp,mapp.length)
         } else if (isClosef == 3) {
           return (
             <>
-              <div class="relative ">
-                <div class="absolute mt-5 ml-10 left-0 top-0">
+              <div className="relative ">
+                <div className="absolute mt-5 ml-10 left-0 top-0">
                   <a onClick={() => setisClosef(1)}>
-                    <div class="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
+                    <div className="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
                       {" "}
                       <svg
-                        class="w-6 h-6 text-white"
+                        className="w-6 h-6 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -783,10 +965,17 @@ console.log(mapp,mapp.length)
                 </div>
               </div>
               <div className=" flex justify-end  mr-10 mt-5">
-                <button className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
-                  อัพโหลด
-                </button>
-                <button className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+              <div className="">
+    <label className="flex items-center px-4 py-6 bg-pink-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-pink-700 ">
+        <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+        </svg>
+        <span className="ml-2 text-base leading-normal">อัพโหลด</span>
+        <input type='file' onChange={handleUpload} className="hidden" />
+    </label>
+</div>
+<a id="downloadexcel" href="http://localhost:3000/download/template.xlsx" hidden download> file_name </a>  
+                <button id="my_iframe"  onClick={Download} className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
                   ดาวห์โหลด
                 </button>
               </div>
@@ -794,19 +983,20 @@ console.log(mapp,mapp.length)
                 ใบรับของ (IN)
               </div>
 
-              <div class="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  เลขที่ใบสั่งซื้อ{" "}
-                  <input               onChange={(e) => handleChangedata("invoicE_NO", e)}
-                    id="เลขที่ใบสั่งซื้อ"
-                    autoComplete="false"
+                  เลขที่ใบสั่งซื้อ
+              
+                  <input          onChange={(e) => handleChangedata("invoicE_NO", e)}
+                    id="เลขที่ใบสั่งซื้อ" 
+                    value={itemdata.invoicE_NO} 
                     className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
                   />
                 </div>
-
+              
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบส่งของ{" "}
-                  <input
+                  <input      value={itemdata.producT_NO} 
                     id="เลขที่ใบส่งของ"  onChange={(e) => handleChangedata("producT_NO", e)}
                     autoComplete="false"
                     className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -814,7 +1004,7 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   รหัสผู้จำหน่าย{" "}
-                  <input
+                  <input   value={itemdata.pO_NO} 
                     id="รหัสผู้จำหน่าย"  onChange={(e) => handleChangedata("pO_NO", e)}
                     autoComplete="false"
                     className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -822,7 +1012,7 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   วันที่ใบส่งของ{" "}
-                  <input
+                  <input   value={itemdata.invoicE_DATE} 
                     id="วันที่ใบส่งของ"    onChange={(e) => handleChangedata("invoicE_DATE", e)}
                     autoComplete="false"
                     className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -830,7 +1020,7 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   ชื่อผู้จำหน่าย{" "}
-                  <input   onChange={(e) => handleChangedata("vendoR_NAME", e)}
+                  <input   value={itemdata.vendoR_NAME}   onChange={(e) => handleChangedata("vendoR_NAME", e)}
                     id="ชื่อผู้จำหน่าย"
                     autoComplete="false"
                     className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -839,7 +1029,7 @@ console.log(mapp,mapp.length)
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   สถาที่ส่งมอบ{" "}
-                  <input
+                  <input  value={itemdata.location}  
                     id="สถาที่ส่งมอบ"  onChange={(e) => handleChangedata("location", e)}
                     autoComplete="false"
                     className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -859,9 +1049,8 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="shadow overflow-hidden border-gray-200 sm:rounded-lg">
-                      <table className="min-w-full w-full ">
-                        <thead className="bg-gray-50">
-                          <tr>
+                      <table className="min-w-full w-full">
+                          <tr className="bg-gray-50">
                             <th
                               scope="col"
                               className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider"
@@ -933,25 +1122,12 @@ console.log(mapp,mapp.length)
                               ราคาต่อหน่วย
                             </th>
                           </tr>
-                        </thead>
-                        <tbody className="bg-white ">
-                          {/* {
-        (tableza != undefined) ?
-        tableza.map(projects => (
-            <div>
-            
-               </div>
-          ))
-          :''
-      } */}
-                          {/* {
-  tableza.map(sdsd=>(
-    <></>
-  ))
-} */}
+                       
+                       
+                         
 {
-  mapp.map((data)=>(
-<tr>
+  mapp.map((data,index)=>(
+<tr key={index} className="bg-white ">
 <td className="px-6 py-4  border-r whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c1} </div>   </td>
                            <td className="px-6 py-4  border-r whitespace-nowrap">
@@ -1007,7 +1183,7 @@ console.log(mapp,mapp.length)
                      
                        </tr>
                     */}
-                        </tbody>
+                     
                       </table>
 
                             
@@ -1016,14 +1192,14 @@ console.log(mapp,mapp.length)
                 </div>
               </div>
               <div className="flex flex-col mb-10 ml-10 mr-10">
-                <div class="grid grid-cols-2 gap-3">
-                  <div class="row-span-5 ">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="row-span-5 ">
                     <div className=" text-left  text-base mt-5 font-bold  ">
                       <label className="content-center text-right justify-items-center text-base mt-5 font-bold ">
                         หมายเหตุ
                       </label>{" "}
                       <textarea
-                        cols="60"
+                        cols="60"   value={itemdata.remark} 
                         rows="5"
                         className="w-full border-pink-700 border bg-white shadow-md rounded "
                         onChange={(e) => handleChangedata("remark", e)}
@@ -1033,10 +1209,10 @@ console.log(mapp,mapp.length)
                       </textarea>
                     </div>
                   </div>
-                  <div class="col-span-1">
+                  <div className="col-span-1">
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม (ไม่รวม VAT){" "}
-                      <input    onChange={(e) => handleChangedata("total", e)}
+                      <input    value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1044,7 +1220,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - เปอร์เซ็นต์{" "}
-                      <input
+                      <input    value={itemdata.discounT_PERCENTAGE}
                         id="เลขที่ใบสั่งซื้อ"  onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1052,7 +1228,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - บาท
-                      <input  onChange={(e) => handleChangedata("discounT_BAHT", e)}
+                      <input   value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1060,7 +1236,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       VAT{" "}
-                      <input   onChange={(e) => handleChangedata("vat", e)}
+                      <input   value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1068,7 +1244,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม{" "}
-                      <input    onChange={(e) => handleChangedata("total", e)}
+                      <input   value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1076,11 +1252,11 @@ console.log(mapp,mapp.length)
                     </div>
                   </div>
                 </div>
-                <div class="flex justify-center ">
+                <div className="flex justify-center ">
                   <button onClick={saveapipo} className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     บันทึก
                   </button>
-                  <button className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                  <button onClick={cleardata}  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                     ยกเลิก
                   </button>
                 </div>
@@ -1092,17 +1268,17 @@ console.log(mapp,mapp.length)
 
       {isClose ? (
         <>
-          <div id="myModal" class="modal">
+          <div id="myModal" className="modal">
             <form onSubmit={savetable}>
-              <div class="modal-content">
-                <span class="close" onClick={() => setisClose(false)}>
+              <div className="modal-content">
+                <span className="close" onClick={() => setisClose(false)}>
                   &times;
                 </span>
 
                 <div className="content-center text-center justify-items-center text-3xl mt-5 text-pink-800 ">
                   เพิ่มข้อมูลตาราง
                 </div>
-                <div class="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 gap-4">
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     รหัส GPU
                     <input
@@ -1206,7 +1382,7 @@ console.log(mapp,mapp.length)
                   </div>
                 </div>
 
-                <div class="flex justify-center mt-6">
+                <div className="flex justify-center mt-6">
                   <button
                     type="submit"
                     className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded"

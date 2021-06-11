@@ -59,7 +59,7 @@ var color =''
     color = 'bg-pink-700'
   }
  
-  '+{role}+'
+  // '+{role}+'
   var classnamepo = 'text-gray-300  hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
   var classnameinvoice = 'text-gray-300  hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
   var classnamesend = 'text-gray-300  hover:bg-pink-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
@@ -94,63 +94,63 @@ var color =''
   return (
    <>
  
-<nav class={color}>
+<nav className={color}>
 
-  <div class="mx-auto px-2 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-16">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+  <div className="mx-auto px-2 sm:px-6 lg:px-8">
+    <div className="relative flex items-center justify-between h-16">
+      <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
         
-        <button type="button" class={'inline-flex items-center justify-center p-2  rounded-md text-gray-400 hover:text-white hover: '+color+' focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'} aria-controls="mobile-menu" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
+        <button type="button" className={'inline-flex items-center justify-center p-2  rounded-md text-gray-400 hover:text-white hover: '+color+' focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'} aria-controls="mobile-menu" aria-expanded="false">
+          <span className="sr-only">Open main menu</span>
          
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
           
         
-          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <svg className="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
     
         {(role == 1) && (
-            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <div class="flex-shrink-0 flex items-center">
-            <a class={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
+            <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+            <div className="flex-shrink-0 flex items-center">
+            <a className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
             </div>
-            <div class="hidden sm:block sm:ml-6">
- <div class="flex space-x-4">
+            <div className="hidden sm:block sm:ml-6">
+ <div className="flex space-x-4">
  <Link href="/components/polist">
 
- <a class={classnamepo} aria-current="page">รายการสั่งซื้อทั้งหมด</a>
+ <a className={classnamepo} aria-current="page">รายการสั่งซื้อทั้งหมด</a>
 
 
 </Link>
 <Link href="/components/invoicelist">
-   <a class={classnameinvoice}>รายการรับของ</a>
+   <a className={classnameinvoice}>รายการรับของ</a>
    </Link>
  
  </div>    </div>
       </div>
         )}
           {(role == 2) && (
-               <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-               <div class="flex-shrink-0 flex items-center">
-               {closeprofile ? (  <a  onClick={()=>{setcloseprofile(false)}} class={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
-         ):(  <a  onClick={()=>{setcloseprofile(true)}} class={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
+               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+               <div className="flex-shrink-0 flex items-center">
+               {closeprofile ? (  <a  onClick={()=>{setcloseprofile(false)}} className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
+         ):(  <a  onClick={()=>{setcloseprofile(true)}} className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
          )}
                    </div>
-               <div class="hidden sm:block sm:ml-6">
- <div class="flex space-x-4">
+               <div className="hidden sm:block sm:ml-6">
+ <div className="flex space-x-4">
  <Link href="/components/polistsell">
 
- <a class={classnameposell} aria-current="page">รายการสั่งซื้อทั้งหมด</a>
+ <a className={classnameposell} aria-current="page">รายการสั่งซื้อทั้งหมด</a>
 
 
 </Link>
 <Link href="/components/invoicelistsell">
-   <a class={classnamesend}>รายการส่งของ</a>
+   <a className={classnamesend}>รายการส่งของ</a>
    </Link>
  
  </div> </div>
@@ -158,15 +158,15 @@ var color =''
         )}
          
     
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-      <label class={'text-gray-300 hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'}>{nameuser}</label>
+      <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <label className={'text-gray-300 hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'}>{nameuser}</label>
 
 
         
-        <div class="ml-3 relative">
+        <div className="ml-3 relative">
           <div className={''+color+' flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'}>
-            <button onClick={logout} type="button" class= {''+color+' flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'} id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-            <label class={'text-gray-300 hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'}>Logout</label>
+            <button onClick={logout} type="button" className= {''+color+' flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'} id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+            <label className={'text-gray-300 hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'}>Logout</label>
 
             </button>
           </div>
@@ -180,18 +180,18 @@ var color =''
   </div>
 
   
-  <div class="sm:hidden" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1">
+  <div className="sm:hidden" id="mobile-menu">
+    <div className="px-2 pt-2 pb-3 space-y-1">
       
-      {/* <a href="#" class="bg-indigo-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">รายการสั่งซื้อทั้งหมด</a>
+      {/* <a href="#" className="bg-indigo-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">รายการสั่งซื้อทั้งหมด</a>
 
-      <a href="#" class="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">รายการรับของ</a> */}
+      <a href="#" className="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">รายการรับของ</a> */}
 
  
     </div>
   </div>
 </nav>
-<body class="min-h-screen bg-gray-100">
+<body className="min-h-screen bg-gray-100">
 
 <main className=' flex-grow flex flex-col min-h-screen '>
 

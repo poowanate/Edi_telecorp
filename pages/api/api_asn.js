@@ -42,3 +42,46 @@ export const edi_asn = data => {
     });
   }
   
+
+  export const getediasn = data => {
+
+    return axios({
+        method: 'GET',  
+        url: `http://103.245.164.54:5003/api/EDI_ASN`,
+        headers: {
+      
+            'Content-Type': 'application/json'
+        },
+   
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
+
+
+  export const getediasnbyinvoice = data => {
+
+    return axios({
+        method: 'GET',  
+        url: `  http://103.245.164.54:5003/api/EDI_ASN/GETBYINVOICE_NO?INVOICE_NO=`+data,
+        headers: {
+      
+            'Content-Type': 'application/json'
+        },
+   
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
+
+ 

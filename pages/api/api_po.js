@@ -21,3 +21,25 @@ export const edi_po = data => {
     });
   }
 
+
+
+  export const getedi_po = data => {
+
+    return axios({
+        method: 'GET',
+        url: `http://103.245.164.54:5003/api/EDI_PRODUCT/GETBYPRODUCT_NO?PRODUCT_NO=`+data,
+        headers: {
+      
+            'Content-Type': 'application/json'
+        },
+     
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
+  
