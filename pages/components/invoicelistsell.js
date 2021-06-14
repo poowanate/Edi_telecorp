@@ -26,6 +26,7 @@ function table() {
     c9: "",
     c10: "",
     c11: "",
+    c12: "",
   });
 
   useEffect(async() => {
@@ -135,7 +136,9 @@ const fetchData = async ()=>{
                 c10 :data1[index].uniT_PRICE,
                 c11 :data1[index].amount,
                 c7 :data1[index].mfG_DATE,
-                c8 :data1[index].exP_DATE
+                c8 :data1[index].exP_DATE,
+                c12 :data1[index].total,
+                
                 
     }
     ggwp.push(form)
@@ -166,13 +169,14 @@ const fetchData = async ()=>{
 
 
   const handleUpload = (e) => {
+    
     e.preventDefault();
-
+    cleardata()
   
     const file = e.target.files[0]
     const reader = new FileReader();
     reader.onload=(event)=>{
-      console.log(event)
+    
 
       const bstr = event.target.result
       const workbook = XLSX.read(bstr,{type:"binary"})
@@ -180,23 +184,13 @@ const fetchData = async ()=>{
       const worksheet = workbook.Sheets[worksheetname]
 
        const fileData = XLSX.utils.sheet_to_json(worksheet,{header:1})
-     if(worksheetname == "PO_IN"){
-      const header = fileData[0]
-      fileData.splice(0,1)
-      const dataheader = fileData[0]
-      fileData.splice(0,5)
-      const tableheader = fileData[0]
-      fileData.splice(0,1)
-      const tabledata = []; 
-     if(fileData.length>0){
-        for (let index = 0; index < fileData.length; index++) {
-          tabledata.push(fileData[index])
-          
-        }
-     }
+
     
-    var eheader =deleteempty(header)
-    var edataheader =deleteempty(dataheader)
+   
+       if(worksheetname == "PO_IN"){
+        fileData.splice(0,1)
+        const dataheader = fileData[0]
+            var edataheader =deleteempty(dataheader)
    
       if(edataheader.length>0){
         itemdata['invoicE_NO'] = edataheader[0]
@@ -205,21 +199,52 @@ const fetchData = async ()=>{
         itemdata['invoicE_DATE'] = edataheader[3]
         itemdata['vendoR_NAME'] = edataheader[4]
         itemdata['location'] = edataheader[5]
-        itemdata['remark'] = edataheader[6]
-        itemdata['totaL_AMOUNT'] = edataheader[7]
-        itemdata['discounT_PERCENTAGE'] = edataheader[8]
-        itemdata['discounT_BAHT'] = edataheader[9]
-        itemdata['vat'] = edataheader[10]
-        itemdata['total'] = edataheader[11]
+        // itemdata['remark'] = edataheader[6]
+        // itemdata['totaL_AMOUNT'] = edataheader[7]
+        // itemdata['discounT_PERCENTAGE'] = edataheader[8]
+        // itemdata['discounT_BAHT'] = edataheader[9]
+        // itemdata['vat'] = edataheader[10]
+        // itemdata['total'] = edataheader[11]
+          setitemdata({ ...itemdata })
       }
+      fileData.splice(0,1)
+      // fileData.splice(0,6)
+      let i = 0;
+      
+      for (let index = 0; index < fileData.length; index++) {
  
-  console.log(tableheader)
-  console.log(tabledata)  
-  setitemdata({ ...itemdata })
-let ggwp = []
-  if(tabledata.length>0){
+        for (let indexz = 0; indexz < fileData.length; indexz++) {
+         if(fileData[index] === undefined  || fileData[index].length == 0){
+          //  console.log(index)
+           fileData.splice(index,1)
+         
+           
+         }
+         else  if(fileData[index][0] === 'รหัส GPU' ){
+          fileData.splice(index,1)
+         }
+         else{
+     
+         }
+        }
+        
+      }
+      
+   
+
+
+      const tabledata = []; 
+      if(fileData.length>0){
+         for (let index = 0; index < fileData.length; index++) {
+           tabledata.push(fileData[index])
+           
+         }
+      }
+      console.log(tabledata)
+      let ggwp = []
 for (let index = 0; index < tabledata.length; index++) {
 
+  if(tabledata[index][0] !== '' && tabledata[index][1] !== '' && tabledata[index][2] !== '' && tabledata[index][3] !== '' && tabledata[index][4] !== '' && tabledata[index][5] !== '' && tabledata[index][6] !== '' && tabledata[index][7] !== '' && tabledata[index][8] !== '' && tabledata[index][9] !== '' && tabledata[index][0] !== undefined && tabledata[index][1] !== undefined && tabledata[index][2] !== undefined && tabledata[index][3] !== undefined && tabledata[index][4] !== undefined && tabledata[index][5] !== undefined && tabledata[index][6] !== undefined && tabledata[index][7] !== undefined && tabledata[index][8] !== undefined && tabledata[index][9] !== undefined){
     const form = {
       c1: tabledata[index][0],
           c2: tabledata[index][1],
@@ -232,43 +257,136 @@ for (let index = 0; index < tabledata.length; index++) {
           c9: tabledata[index][8],
           c10: tabledata[index][9],
           c11: tabledata[index][10], 
+          c12: tabledata[index][11]
     }
-  // for (let indexz = 0; indexz < tabledata[index].length; indexz++) {
-  // let int = indexz+1
-  //   itemtable['c'+int] = tabledata[index][indexz]
-  //   let zaza = itemtable;
-  //   setitemtable({
-  //     c1: "",
-  //     c2: "",
-  //     c3: "",
-  //     c4: "",
-  //     c5: "",
-  //     c6: "",
-  //     c7: "",
-  //     c8: "",
-  //     c9: "",
-  //     c10: "",
-  //     c11: "", 
-  //   })
     
-  
-  // }
-  ggwp.push(form)
-  console.log(itemtable)
- 
-  
-}
-setmapp(mapp.concat(ggwp))
-console.log(ggwp)
-
+    ggwp.push(form)
+   setmapp(mapp.concat(ggwp))
+  }
+   else if( tabledata[index][0] == undefined && tabledata[index][1] == undefined && tabledata[index][2] == undefined && tabledata[index][3] == undefined && tabledata[index][4] == undefined && tabledata[index][5] == undefined && tabledata[index][6] == undefined && tabledata[index][7] == undefined && tabledata[index][8] == undefined ){
+     if(tabledata[index][9] == 'ราคารวม (ไม่รวม VAT)'){
+      itemdata['totaL_AMOUNT'] = tabledata[index][11]
+        
+     }
+     if(tabledata[index][9] == 'ส่วนลด - เปอร์เซ็นต์'){
+      itemdata['discounT_PERCENTAGE'] = tabledata[index][11]
+    }
+    if(tabledata[index][9] == 'ส่วนลด - บาท'){
+      itemdata['discounT_BAHT'] = tabledata[index][11]
+    }
+    if(tabledata[index][9] == 'VAT'){
+      itemdata['vat'] = tabledata[index][11]
+    }
+    if(tabledata[index][9] == 'ราคารวม'){
+      itemdata['total'] = tabledata[index][11]
+    }
+    setitemdata({ ...itemdata })
+       
+        
+    // itemdata['remark'] = edataheader[6]
+    //     itemdata['totaL_AMOUNT'] = edataheader[7]
+    //     itemdata['discounT_PERCENTAGE'] = edataheader[8]
+    //     itemdata['discounT_BAHT'] = edataheader[9]
+    //     itemdata['vat'] = edataheader[10]
+    //     itemdata['total'] = edataheader[11]
+    //     setitemdata({ ...itemdata })
+   }
+   else if( tabledata[index][0] == 'หมายเหตุ'){
+    itemdata['remark'] = tabledata[index][1]
+    setitemdata({ ...itemdata })
+   }
 
   }
-     }
+
+}
+//      if(worksheetname == "PO_IN"){
+//       const header = fileData[0]
+//       fileData.splice(0,1)
+//       const dataheader = fileData[0]
+//       fileData.splice(0,5)
+//       const tableheader = fileData[0]
+//       fileData.splice(0,1)
+//       const tabledata = []; 
+//      if(fileData.length>0){
+//         for (let index = 0; index < fileData.length; index++) {
+//           tabledata.push(fileData[index])
+          
+//         }
+//      }
+    
+//     var eheader =deleteempty(header)
+//     var edataheader =deleteempty(dataheader)
+   
+//       if(edataheader.length>0){
+//         itemdata['invoicE_NO'] = edataheader[0]
+//         itemdata['producT_NO'] = edataheader[1]
+//         itemdata['pO_NO'] = edataheader[2]
+//         itemdata['invoicE_DATE'] = edataheader[3]
+//         itemdata['vendoR_NAME'] = edataheader[4]
+//         itemdata['location'] = edataheader[5]
+//         itemdata['remark'] = edataheader[6]
+//         itemdata['totaL_AMOUNT'] = edataheader[7]
+//         itemdata['discounT_PERCENTAGE'] = edataheader[8]
+//         itemdata['discounT_BAHT'] = edataheader[9]
+//         itemdata['vat'] = edataheader[10]
+//         itemdata['total'] = edataheader[11]
+//       }
+ 
+//   console.log(tableheader)
+//   console.log(tabledata)  
+//   setitemdata({ ...itemdata })
+// let ggwp = []
+//   if(tabledata.length>0){
+// for (let index = 0; index < tabledata.length; index++) {
+
+//     const form = {
+//       c1: tabledata[index][0],
+//           c2: tabledata[index][1],
+//           c3: tabledata[index][2],
+//           c4: tabledata[index][3],
+//           c5: tabledata[index][4],
+//           c6: tabledata[index][5],
+//           c7: tabledata[index][6],
+//           c8: tabledata[index][7],
+//           c9: tabledata[index][8],
+//           c10: tabledata[index][9],
+//           c11: tabledata[index][10], 
+//     }
+//   // for (let indexz = 0; indexz < tabledata[index].length; indexz++) {
+//   // let int = indexz+1
+//   //   itemtable['c'+int] = tabledata[index][indexz]
+//   //   let zaza = itemtable;
+//   //   setitemtable({
+//   //     c1: "",
+//   //     c2: "",
+//   //     c3: "",
+//   //     c4: "",
+//   //     c5: "",
+//   //     c6: "",
+//   //     c7: "",
+//   //     c8: "",
+//   //     c9: "",
+//   //     c10: "",
+//   //     c11: "", 
+//   //   })
+    
+  
+//   // }
+//   ggwp.push(form)
+//   console.log(itemtable)
+
+// }
+// setmapp(mapp.concat(ggwp))
+// console.log(ggwp)
+
+
+//   }
+//      }
         
     
     }
 reader.readAsBinaryString(file)
-   
+e.target.value = null;
 }
 
 const deleteempty = (data) =>{
@@ -320,6 +438,7 @@ function Download() {
       c9: "",
       c10: "",
       c11: "",
+      c12: "",
     })
     setisClose(false)
     console.log(mapp);
@@ -338,6 +457,7 @@ function Download() {
     setitemdata({ ...itemdata })
   };
 const cleardata = () => {
+
   setitemdata( {invoicE_NO: ""  ,
   invoicE_DATE: "" ,
   remark: "" ,
@@ -351,6 +471,7 @@ const cleardata = () => {
   vendoR_NAME: "" ,
   location: "" })
 setmapp([])
+
 }
 
   const saveapipo = async () => {
@@ -393,7 +514,7 @@ setmapp([])
       mfG_DATE: String(mapp[index].c7) ,
       exP_DATE: String(mapp[index].c8) ,
       uom: 1 ,
-  
+      total: Number(mapp[index].c12) ,
         }
         console.log(JSON.stringify(datatable))
        await ediproduct(datatable).then(async data => {
@@ -791,6 +912,12 @@ console.log(mapp,mapp.length)
                             >
                               ราคาต่อหน่วย
                             </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              จำนวนเงิน
+                            </th>
                           </tr>
                        
                        
@@ -820,6 +947,8 @@ console.log(mapp,mapp.length)
                                                            <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
                                                            <td className="px-6 py-4   whitespace-nowrap">
                                                            <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
+                                                           <td className="px-6 py-4   whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                                                            </tr>
                                   ))
                                 
@@ -1048,6 +1177,12 @@ console.log(mapp,mapp.length)
                             >
                               ราคาต่อหน่วย
                             </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              จำนวนเงิน
+                            </th>
                           </tr>
                        
                        
@@ -1077,6 +1212,8 @@ console.log(mapp,mapp.length)
                            <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                            </tr>
   ))
 }
@@ -1183,7 +1320,7 @@ console.log(mapp,mapp.length)
                   <button onClick={saveapipo} className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     บันทึก
                   </button>
-                  <button onClick={cleardata}  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                  <button onClick={(e)=>cleardata()}  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                     ยกเลิก
                   </button>
                 </div>
@@ -1302,6 +1439,16 @@ console.log(mapp,mapp.length)
                     ราคาต่อหน่วย
                     <input
                       onChange={(e) => handleChange("c11", e)}
+                      id="extcount "
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  จำนวนเงิน
+                    <input
+                      onChange={(e) => handleChange("c12", e)}
                       id="extcount "
                       autoComplete="false"
                       className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
