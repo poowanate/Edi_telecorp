@@ -1,15 +1,16 @@
 import Layout from "../Layout/Layout";
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
-import {edi_po,getedi_po} from '../api/api_po'
+import {edi_po,getedi_po,GETEDI_ASN} from '../api/api_po'
 import {edi_asn,ediproduct,getediasn,getediasnbyinvoice} from '../api/api_asn'
 import * as XLSX from 'xlsx';
+import moment from "moment";
 
 
-
-
+ 
 function table() {
   const [isClose, setisClose] = useState(false);
+  const [upload, setupload] = useState(true);
   const [isClosef, setisClosef] = useState(1);
   const [mapp, setmapp] = useState([]);
   const [showtable, setshowtable] = useState([]);
@@ -97,47 +98,43 @@ const fetchData = async ()=>{
 // edit3
   const handleedit =async (event)  => {
     setisClosef(2)
+console.log(event)
+    GETEDI_ASN('1306610001').then(async data=>{
+      console.log(data)
 
- getedi_po(event).then(async data1  => {
-  if(data1.error){
-
-  }
-  else{
-    await  getediasnbyinvoice(event).then(data2=>{
-      if(data2.error){
-
-      }
-      else{
-        if(data2.length>0){
-          itemdata['invoicE_NO'] =  data2[0].invoicE_NO
-          itemdata['producT_NO'] =  data2[0].producT_NO
-          itemdata['pO_NO'] =  data2[0].pO_NO
-          itemdata['invoicE_DATE'] =  data2[0].invoicE_DATE
-          itemdata['vendoR_NAME'] =  data2[0].vendoR_NAME
-          itemdata['location'] =  data2[0].location
-          itemdata['remark'] =  data2[0].remark
-          itemdata['totaL_AMOUNT'] =  data2[0].totaL_AMOUNT
-          itemdata['discounT_PERCENTAGE'] =  data2[0].discounT_PERCENTAGE
-          itemdata['discounT_BAHT'] =  data2[0].discounT_BAHT
-          itemdata['vat'] =   data2[0].vat
-          itemdata['total'] =   data2[0].total
-        setitemdata({ ...itemdata })
-        let ggwp=[]
-          if(data1.length>0){
-            for (let index = 0; index < data1.length; index++) {
+      if(data.length>0){
+       console.log(data[0].invoicE_NO) 
+       console.log(data[0].orderdetails.length)
+        itemdata['invoicE_NO'] =  data[0].invoicE_NO
+                  itemdata['producT_NO'] =  data[0].producT_NO
+                  itemdata['pO_NO'] =  data[0].pO_NO
+                  itemdata['invoicE_DATE'] =  data[0].invoicE_DATE
+                  itemdata['vendoR_NAME'] =  data[0].vendoR_NAME
+                  itemdata['location'] =  data[0].ship_to
+                  itemdata['remark'] =  data[0].remark
+                  itemdata['totaL_AMOUNT'] =  data[0].totaL_AMOUNT
+                  itemdata['discounT_PERCENTAGE'] =  data[0].discounT_PERCENTAGE
+                  itemdata['discounT_BAHT'] =  data[0].discounT_BAHT
+                  itemdata['vat'] =   data[0].vat
+                  itemdata['total'] =   data[0].total
+                setitemdata({ ...itemdata })
+                
+                if(data[0].orderdetails.length>0){
+                  let ggwp=[]
+            for (let index = 0; index < data[0].orderdetails.length; index++) {
                const form = {
-                c1 :data1[index].codE_GPU,
-                c2 :data1[index].codE_UNSPSC,
-                c3 :data1[index].codE_TMT,
-                c4 :data1[index].baR_CODE,
-                c6 :data1[index].producT_NO,
-                c5 :data1[index].producT_NAME,
-                c9 :data1[index].qty,
-                c10 :data1[index].uniT_PRICE,
-                c11 :data1[index].amount,
-                c7 :data1[index].mfG_DATE,
-                c8 :data1[index].exP_DATE,
-                c12 :data1[index].total,
+                c1 :data[0].orderdetails[index].codE_GPU,
+                c2 :data[0].orderdetails[index].codE_UNSPSC,
+                c3 :data[0].orderdetails[index].codE_TMT,
+                c4 :data[0].orderdetails[index].baR_CODE,
+                c6 :data[0].orderdetails[index].producT_NO,
+                c5 :data[0].orderdetails[index].producT_NAME,
+                c9 :data[0].orderdetails[index].qty,
+                c10 :data[0].orderdetails[index].uom,
+                c11 :data[0].orderdetails[index].uniT_PRICE,
+                c7 :data[0].orderdetails[index].mfG_DATE,
+                c8 :data[0].orderdetails[index].exP_DATE,
+                c12 :data[0].orderdetails[index].amount,
                 
                 
     }
@@ -147,21 +144,77 @@ const fetchData = async ()=>{
             setmapp(mapp.concat(ggwp))
             console.log(mapp)   
           }
+
+                }
+    
+              
+    })
+
+    
+//  getedi_po(event).then(async data1  => {
+//   if(data1.error){
+
+//   }
+//   else{
+//     await  getediasnbyinvoice(event).then(data2=>{
+//       if(data2.error){
+
+//       }
+//       else{
+//         if(data2.length>0){
+//           itemdata['invoicE_NO'] =  data2[0].invoicE_NO
+//           itemdata['producT_NO'] =  data2[0].producT_NO
+//           itemdata['pO_NO'] =  data2[0].pO_NO
+//           itemdata['invoicE_DATE'] =  data2[0].invoicE_DATE
+//           itemdata['vendoR_NAME'] =  data2[0].vendoR_NAME
+//           itemdata['location'] =  data2[0].location
+//           itemdata['remark'] =  data2[0].remark
+//           itemdata['totaL_AMOUNT'] =  data2[0].totaL_AMOUNT
+//           itemdata['discounT_PERCENTAGE'] =  data2[0].discounT_PERCENTAGE
+//           itemdata['discounT_BAHT'] =  data2[0].discounT_BAHT
+//           itemdata['vat'] =   data2[0].vat
+//           itemdata['total'] =   data2[0].total
+//         setitemdata({ ...itemdata })
+//         let ggwp=[]
+//           if(data1.length>0){
+//             for (let index = 0; index < data1.length; index++) {
+//                const form = {
+//                 c1 :data1[index].codE_GPU,
+//                 c2 :data1[index].codE_UNSPSC,
+//                 c3 :data1[index].codE_TMT,
+//                 c4 :data1[index].baR_CODE,
+//                 c6 :data1[index].producT_NO,
+//                 c5 :data1[index].producT_NAME,
+//                 c9 :data1[index].qty,
+//                 c10 :data1[index].uom,
+//                 c11 :data1[index].uniT_PRICE,
+//                 c7 :data1[index].mfG_DATE,
+//                 c8 :data1[index].exP_DATE,
+//                 c12 :data1[index].amount,
+                
+                
+//     }
+//     ggwp.push(form)
+//     console.log(form)   
+//             }
+//             setmapp(mapp.concat(ggwp))
+//             console.log(mapp)   
+//           }
        
          
           
         
         
-        }
+//         }
       
 
-        console.log(itemdata)
-      }
-    })
-  }
- }
+//         console.log(itemdata)
+//       }
+//     })
+//   }
+//  }
  
-  )
+//   )
   }
 
 
@@ -242,6 +295,7 @@ const fetchData = async ()=>{
       }
       console.log(tabledata)
       let ggwp = []
+      console.log(ggwp)
 for (let index = 0; index < tabledata.length; index++) {
 
   if(tabledata[index][0] !== '' && tabledata[index][1] !== '' && tabledata[index][2] !== '' && tabledata[index][3] !== '' && tabledata[index][4] !== '' && tabledata[index][5] !== '' && tabledata[index][6] !== '' && tabledata[index][7] !== '' && tabledata[index][8] !== '' && tabledata[index][9] !== '' && tabledata[index][0] !== undefined && tabledata[index][1] !== undefined && tabledata[index][2] !== undefined && tabledata[index][3] !== undefined && tabledata[index][4] !== undefined && tabledata[index][5] !== undefined && tabledata[index][6] !== undefined && tabledata[index][7] !== undefined && tabledata[index][8] !== undefined && tabledata[index][9] !== undefined){
@@ -283,13 +337,7 @@ for (let index = 0; index < tabledata.length; index++) {
     setitemdata({ ...itemdata })
        
         
-    // itemdata['remark'] = edataheader[6]
-    //     itemdata['totaL_AMOUNT'] = edataheader[7]
-    //     itemdata['discounT_PERCENTAGE'] = edataheader[8]
-    //     itemdata['discounT_BAHT'] = edataheader[9]
-    //     itemdata['vat'] = edataheader[10]
-    //     itemdata['total'] = edataheader[11]
-    //     setitemdata({ ...itemdata })
+  
    }
    else if( tabledata[index][0] == 'หมายเหตุ'){
     itemdata['remark'] = tabledata[index][1]
@@ -299,91 +347,9 @@ for (let index = 0; index < tabledata.length; index++) {
   }
 
 }
-//      if(worksheetname == "PO_IN"){
-//       const header = fileData[0]
-//       fileData.splice(0,1)
-//       const dataheader = fileData[0]
-//       fileData.splice(0,5)
-//       const tableheader = fileData[0]
-//       fileData.splice(0,1)
-//       const tabledata = []; 
-//      if(fileData.length>0){
-//         for (let index = 0; index < fileData.length; index++) {
-//           tabledata.push(fileData[index])
-          
-//         }
-//      }
-    
-//     var eheader =deleteempty(header)
-//     var edataheader =deleteempty(dataheader)
-   
-//       if(edataheader.length>0){
-//         itemdata['invoicE_NO'] = edataheader[0]
-//         itemdata['producT_NO'] = edataheader[1]
-//         itemdata['pO_NO'] = edataheader[2]
-//         itemdata['invoicE_DATE'] = edataheader[3]
-//         itemdata['vendoR_NAME'] = edataheader[4]
-//         itemdata['location'] = edataheader[5]
-//         itemdata['remark'] = edataheader[6]
-//         itemdata['totaL_AMOUNT'] = edataheader[7]
-//         itemdata['discounT_PERCENTAGE'] = edataheader[8]
-//         itemdata['discounT_BAHT'] = edataheader[9]
-//         itemdata['vat'] = edataheader[10]
-//         itemdata['total'] = edataheader[11]
-//       }
- 
-//   console.log(tableheader)
-//   console.log(tabledata)  
-//   setitemdata({ ...itemdata })
-// let ggwp = []
-//   if(tabledata.length>0){
-// for (let index = 0; index < tabledata.length; index++) {
 
-//     const form = {
-//       c1: tabledata[index][0],
-//           c2: tabledata[index][1],
-//           c3: tabledata[index][2],
-//           c4: tabledata[index][3],
-//           c5: tabledata[index][4],
-//           c6: tabledata[index][5],
-//           c7: tabledata[index][6],
-//           c8: tabledata[index][7],
-//           c9: tabledata[index][8],
-//           c10: tabledata[index][9],
-//           c11: tabledata[index][10], 
-//     }
-//   // for (let indexz = 0; indexz < tabledata[index].length; indexz++) {
-//   // let int = indexz+1
-//   //   itemtable['c'+int] = tabledata[index][indexz]
-//   //   let zaza = itemtable;
-//   //   setitemtable({
-//   //     c1: "",
-//   //     c2: "",
-//   //     c3: "",
-//   //     c4: "",
-//   //     c5: "",
-//   //     c6: "",
-//   //     c7: "",
-//   //     c8: "",
-//   //     c9: "",
-//   //     c10: "",
-//   //     c11: "", 
-//   //   })
-    
-  
-//   // }
-//   ggwp.push(form)
-//   console.log(itemtable)
-
-// }
-// setmapp(mapp.concat(ggwp))
-// console.log(ggwp)
-
-
-//   }
-//      }
         
-    
+setupload(false)
     }
 reader.readAsBinaryString(file)
 e.target.value = null;
@@ -457,7 +423,7 @@ function Download() {
     setitemdata({ ...itemdata })
   };
 const cleardata = () => {
-
+  setupload(true)
   setitemdata( {invoicE_NO: ""  ,
   invoicE_DATE: "" ,
   remark: "" ,
@@ -475,17 +441,32 @@ setmapp([])
 }
 
   const saveapipo = async () => {
+  
+    var date = moment(itemdata.invoicE_DATE, 'DD-MM-YYYY')
+    let discounT_BAHT = itemdata.discounT_BAHT
+    let discounT_PERCENTAGE = itemdata.discounT_PERCENTAGE
+    let vat =itemdata.vat
+    let totaL_AMOUNT = itemdata.totaL_AMOUNT
+    let total = itemdata.total
+    if (isNaN(discounT_PERCENTAGE)) {
+      discounT_PERCENTAGE = 0
+    }
+    if (isNaN(discounT_BAHT)) {
+      discounT_BAHT = 0
+    }
+   
+  
     let data = {
       invoicE_NO: String(itemdata.invoicE_NO),
-      invoicE_DATE: itemdata.invoicE_DATE,
+      invoicE_DATE: date.format('YYYY-MM-DD'),
       remark: String(itemdata.remark),
-      discounT_PERCENTAGE: Number(itemdata.discounT_PERCENTAGE),
-      discounT_BAHT: Number(itemdata.discounT_BAHT),
-      vat: Number(itemdata.vat),
-      totaL_AMOUNT: Number(itemdata.totaL_AMOUNT),
+      discounT_PERCENTAGE: Number(discounT_PERCENTAGE),
+      discounT_BAHT: Number(discounT_BAHT),
+      vat: Number(vat),
+      totaL_AMOUNT: Number(totaL_AMOUNT),
       producT_NO: String(itemdata.producT_NO),
       pO_NO:  String(itemdata.pO_NO),
-      total: Number(itemdata.total),
+      total: Number(total),
       vendoR_NAME:  String(itemdata.vendoR_NAME),
       location:  String(itemdata.location),
     }
@@ -498,23 +479,26 @@ setmapp([])
   } else {
     if(mapp.length > 0){
       for (let index = 0; index < mapp.length; index++) {
-      
+        var c7 = moment(mapp[index].c7, 'DD-MM-YYYY')
+        var c8 = moment(mapp[index].c7, 'DD-MM-YYYY')
+
+        console.log(String(itemdata.invoicE_NO))
         let datatable = {  
-      producT_ID: String(itemdata.invoicE_NO) ,
+      producT_ID: String(index) ,
       codE_GPU: String(mapp[index].c1) ,
       codE_UNSPSC: String(mapp[index].c2) ,
       codE_TMT: String(mapp[index].c3) ,
       baR_CODE: String(mapp[index].c4) ,
-      producT_NO: String(mapp[index].c6) ,
+      producT_NO: String(itemdata.producT_NO) ,
       producT_NAME: String(mapp[index].c5) ,
       qty: Number(mapp[index].c9) ,
-      uniT_PRICE:  Number(mapp[index].c10) ,
-      amount:  Number(mapp[index].c11) ,
-      batcH_LOT_NO: 1 ,
-      mfG_DATE: String(mapp[index].c7) ,
-      exP_DATE: String(mapp[index].c8) ,
-      uom: 1 ,
-      total: Number(mapp[index].c12) ,
+      uom:  String(mapp[index].c10) ,
+      uniT_PRICE:  Number(mapp[index].c11) ,
+      batcH_LOT_NO: 1 , 
+      mfG_DATE: c7.format('YYYY-MM-DD'),
+      exP_DATE: c8.format('YYYY-MM-DD'),
+     
+      amount: Number(mapp[index].c12) ,
         }
         console.log(JSON.stringify(datatable))
        await ediproduct(datatable).then(async data => {
@@ -540,7 +524,7 @@ if (data.error) {
    
 console.log(mapp,mapp.length)
   };
-
+  
   return (
     <Layout>
       {(() => {
@@ -1022,13 +1006,14 @@ console.log(mapp,mapp.length)
               </div>
               <div className=" flex justify-end  mr-10 mt-5">
               <div className="">
-    <label className="flex items-center px-4 py-6 bg-pink-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-pink-700 ">
+              {upload ? ( <label className="flex items-center px-4 py-6 bg-pink-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-pink-700 ">
         <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
         </svg>
         <span className="ml-2 text-base leading-normal">อัพโหลด</span>
         <input type='file' onChange={handleUpload} className="hidden" />
-    </label>
+    </label>) : ''}
+   
 </div>
 <a id="downloadexcel" href="http://localhost:3000/download/template.xlsx" hidden download> file_name </a>  
                 <button id="my_iframe"  onClick={Download} className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">

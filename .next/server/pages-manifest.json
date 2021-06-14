@@ -3,5 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/components/invoicelistsell": "pages/components/invoicelistsell.js",
-  "/Login": "pages/Login.js"
+  "/components/polistsell": "pages/components/polistsell.js"
 }
