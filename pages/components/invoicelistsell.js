@@ -2,7 +2,7 @@ import Layout from "../Layout/Layout";
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
 import {edi_po,getedi_po,GETEDI_ASN} from '../api/api_po'
-import {edi_asn,ediproduct,getediasn,getediasnbyinvoice} from '../api/api_asn'
+import {edi_asn,ediproduct,getediasn,getediasnbyinvoice,asnupdate} from '../api/api_asn'
 import * as XLSX from 'xlsx';
 import moment from "moment";
 
@@ -57,6 +57,7 @@ const fetchData = async ()=>{
 }
 
   const [itemdata, setitemdata] = useState({
+    id:null,
     invoicE_NO: ""  ,
         invoicE_DATE: "" ,   
         remark: "" ,
@@ -73,8 +74,16 @@ const fetchData = async ()=>{
   
 
 
+  const editall = async (e)=>{
+    
+    await asnupdate(e).then(data=>{
 
-  let valuechk = 0;
+        
+    })
+     setisClosef(e)
+ 
+   } 
+ 
 
   const [uploadfile, setuploadfile] = useState();
 
@@ -99,7 +108,7 @@ const fetchData = async ()=>{
   const handleedit =async (event)  => {
     setisClosef(2)
 console.log(event)
-    GETEDI_ASN('1306610001').then(async data=>{
+    GETEDI_ASN(event).then(async data=>{
       console.log(data)
 
       if(data.length>0){
@@ -117,6 +126,8 @@ console.log(event)
                   itemdata['discounT_BAHT'] =  data[0].discounT_BAHT
                   itemdata['vat'] =   data[0].vat
                   itemdata['total'] =   data[0].total
+                  itemdata['id'] =   data[0].id
+                  
                 setitemdata({ ...itemdata })
                 
                 if(data[0].orderdetails.length>0){
@@ -367,13 +378,13 @@ function Download() {
 
   const handleRemoveItem = (idx) => {
     // assigning the list to temp variable
-    const temp = [...itemtable];
+    const temp = [...mapp];
 
     // removing the element using splice
     temp.splice(idx, 1);
 
     // updating the list
-    setitemtable(temp);
+    setmapp(temp);
   };
 
   useEffect(() => {
@@ -425,6 +436,7 @@ function Download() {
 const cleardata = () => {
   setupload(true)
   setitemdata( {invoicE_NO: ""  ,
+  itemdata:"",
   invoicE_DATE: "" ,
   remark: "" ,
   discounT_PERCENTAGE: "" ,
@@ -708,8 +720,8 @@ console.log(mapp,mapp.length)
                         </td>
 
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <button onClick={()=>handleedit(data.producT_NO)}>
-                            <svg
+                          <button onClick={()=>handleedit(data.invoicE_NO)}>
+                            <svg 
                               className="text-pink-800  w-6 h-6"
                               fill="none"
                               stroke="currentColor"
@@ -809,13 +821,13 @@ console.log(mapp,mapp.length)
                       ทำซ้ำ
                     </button>
                     <button
-                      onClick={() => setisClose(true)}
+                       onClick={() => setisClosef(4)}
                       className="bg-pink-500 ml-2  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
                     >
                       แก้ไข
                     </button>
                     <button
-                      onClick={() => setisClose(true)}
+                      onClick={() => setisClosef(4)}
                       className="bg-pink-500 ml-2  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
                     >
                       ลบ
@@ -978,7 +990,8 @@ console.log(mapp,mapp.length)
               </div>
             </>
           );
-        } else if (isClosef == 3) {   
+        } 
+        else if (isClosef == 3) {   
           return (
             <>
               <div className="relative ">
@@ -1303,6 +1316,350 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="flex justify-center ">
                   <button onClick={saveapipo} className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    บันทึก
+                  </button>
+                  <button onClick={(e)=>cleardata()}  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    ยกเลิก
+                  </button>
+                </div>
+              </div>
+            </>
+          );
+        }
+        else if (isClosef == 4) {   
+          return (
+            <>
+              <div className="relative ">
+                <div className="absolute mt-5 ml-10 left-0 top-0">
+                  <a onClick={() => closef1refresh(1) }>
+                    <div className="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
+                      {" "}
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 19l-7-7 7-7"
+                        ></path>
+                      </svg>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className=" flex justify-end  mr-10 mt-5">
+              <div className="">
+              {/* {upload ? ( <label className="flex items-center px-4 py-6 bg-pink-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-pink-700 ">
+        <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+        </svg>
+        <span className="ml-2 text-base leading-normal">อัพโหลด</span>
+        <input type='file' onChange={handleUpload} className="hidden" />
+    </label>) : ''} */}
+   
+</div>
+<a id="downloadexcel" href="http://localhost:3000/download/template.xlsx" hidden download> file_name </a>  
+                <button id="my_iframe"  onClick={Download} className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+                  ดาวห์โหลด
+                </button>
+              </div>
+              <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-800 ">
+                ใบรับของ (IN)
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  เลขที่ใบสั่งซื้อ
+              
+                  <input          onChange={(e) => handleChangedata("invoicE_NO", e)}
+                    id="เลขที่ใบสั่งซื้อ" 
+                    value={itemdata.invoicE_NO} 
+                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                  />
+                </div>
+              
+                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  เลขที่ใบส่งของ{" "}
+                  <input      value={itemdata.producT_NO} 
+                    id="เลขที่ใบส่งของ"  onChange={(e) => handleChangedata("producT_NO", e)}
+                    autoComplete="false"
+                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                  />
+                </div>
+                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  รหัสผู้จำหน่าย{" "}
+                  <input   value={itemdata.pO_NO} 
+                    id="รหัสผู้จำหน่าย"  onChange={(e) => handleChangedata("pO_NO", e)}
+                    autoComplete="false"
+                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                  />
+                </div>
+                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  วันที่ใบส่งของ{" "}
+                  <input   value={itemdata.invoicE_DATE} 
+                    id="วันที่ใบส่งของ"    onChange={(e) => handleChangedata("invoicE_DATE", e)}
+                    autoComplete="false"
+                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                  />
+                </div>
+                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  ชื่อผู้จำหน่าย{" "}
+                  <input   value={itemdata.vendoR_NAME}   onChange={(e) => handleChangedata("vendoR_NAME", e)}
+                    id="ชื่อผู้จำหน่าย"
+                    autoComplete="false"
+                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                  />
+                </div>
+
+                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  สถาที่ส่งมอบ{" "}
+                  <input  value={itemdata.location}  
+                    id="สถาที่ส่งมอบ"  onChange={(e) => handleChangedata("location", e)}
+                    autoComplete="false"
+                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col mt-10">
+                <div className=" ">
+                  <div className=" flex justify-end  mr-10 mt-5">
+                    <button
+                      onClick={() => setisClose(true)}
+                      className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      เพิ่มข้อมูลตาราง
+                    </button>
+                  </div>
+                  <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                    <div className="shadow overflow-hidden border-gray-200 sm:rounded-lg">
+                      <table className="min-w-full w-full">
+                          <tr className="bg-gray-50">
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider"
+                            >
+                              รหัส GPU
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              รหัส UNSPSC
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              รหัส TMT
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              Bar code
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider w-1/2"
+                            >
+                              ชื่อยา / เวชภัณท์
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              รหัสผลิต
+                            </th>
+
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              วันที่ผลิต
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b  text-pink-800 uppercase tracking-wider"
+                            >
+                              วันที่หมดอายุ
+                            </th>
+
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              จำนวน
+                            </th>
+
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              หน่วย
+                            </th>
+
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              ราคาต่อหน่วย
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              จำนวนเงิน
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              ลบ
+                            </th>
+                          </tr>
+                       
+                       
+                         
+{
+  mapp.map((data,index)=>(
+<tr key={index} className="bg-white ">
+<td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c1} </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c2} </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c5} </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c6} </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c7} </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c8} </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c9}</div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                         <button onClick={(e)=>handleRemoveItem(index)} className="rounded-full bg-red-400 text-white h-9 w-9 flex items-center justify-center" >
+                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button> </td>
+                           </tr>
+  ))
+}
+                          {/* <tr>
+                      
+                          <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">00001 </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">00001 </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">00001 </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">00001 </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">ถุงมือ </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">00001 </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">10/10/64 </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">10/10/64 </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">1000</div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">2 </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">2 </div>   </td>
+           
+                         
+           
+                     
+                       </tr>
+                    */}
+                     
+                      </table>
+
+                            
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col mb-10 ml-10 mr-10">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="row-span-5 ">
+                    <div className=" text-left  text-base mt-5 font-bold  ">
+                      <label className="content-center text-right justify-items-center text-base mt-5 font-bold ">
+                        หมายเหตุ
+                      </label>{" "}
+                      <textarea
+                        cols="60"   value={itemdata.remark} 
+                        rows="5"
+                        className="w-full border-pink-700 border bg-white shadow-md rounded "
+                        onChange={(e) => handleChangedata("remark", e)}
+                     
+                     >
+                        
+                      </textarea>
+                    </div>
+                  </div>
+                  <div className="col-span-1">
+                    <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
+                      ราคารวม (ไม่รวม VAT){" "}
+                      <input    value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
+                        id="เลขที่ใบสั่งซื้อ"
+                        autoComplete="false"
+                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                      />
+                    </div>
+                    <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
+                      ส่วนลด - เปอร์เซ็นต์{" "}
+                      <input    value={itemdata.discounT_PERCENTAGE}
+                        id="เลขที่ใบสั่งซื้อ"  onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
+                        autoComplete="false"
+                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                      />
+                    </div>
+                    <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
+                      ส่วนลด - บาท
+                      <input   value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
+                        id="เลขที่ใบสั่งซื้อ"
+                        autoComplete="false"
+                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                      />
+                    </div>
+                    <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
+                      VAT{" "}
+                      <input   value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
+                        id="เลขที่ใบสั่งซื้อ"
+                        autoComplete="false"
+                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                      />
+                    </div>
+                    <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
+                      ราคารวม{" "}
+                      <input   value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
+                        id="เลขที่ใบสั่งซื้อ"
+                        autoComplete="false"
+                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-center ">
+                  <button onClick={(e)=>editall(itemdata.id)} className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     บันทึก
                   </button>
                   <button onClick={(e)=>cleardata()}  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
