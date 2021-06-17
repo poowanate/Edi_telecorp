@@ -2,10 +2,10 @@ import Layout from "../Layout/Layout";
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
 import {edi_po,getedi_po,GETEDI_ASN} from '../api/api_po'
-import {edi_asn,ediproduct,getediasn,getediasnbyinvoice,asnupdate} from '../api/api_asn'
+import {edi_asn,ediproduct,getediasn,getediasnbyinvoice,asnupdate,deleteasn} from '../api/api_asn'
 import * as XLSX from 'xlsx';
 import moment from "moment";
-
+import Swal from 'sweetalert2'
 
  
 function table() {
@@ -13,6 +13,7 @@ function table() {
   const [upload, setupload] = useState(true);
   const [isClosef, setisClosef] = useState(1);
   const [mapp, setmapp] = useState([]);
+  const [deletedOrderItemIds, setdeletedOrderItemIds] = useState('');
   const [showtable, setshowtable] = useState([]);
   const [nn, setn] = useState(Math.random());
   const [itemtable, setitemtable] = useState({
@@ -28,6 +29,7 @@ function table() {
     c10: "",
     c11: "",
     c12: "",
+    id: 0,
   });
 
   useEffect(async() => {
@@ -46,7 +48,8 @@ const fetchData = async ()=>{
   } else {
     for (let index = 0; index < data.length; index++) {
       dataf.push(data[index])
-     
+      console.log(dataf)
+ 
    }
    await  setshowtable(dataf) 
   }
@@ -75,12 +78,78 @@ const fetchData = async ()=>{
 
 
   const editall = async (e)=>{
-    
-    await asnupdate(e).then(data=>{
+    console.log(mapp)
+let mo = []
+    for (let index = 0; index < mapp.length; index++) {
+      var c7 = moment(mapp[index].c7).format('YYYY-MM-DD')
+      var c8 = moment(mapp[index].c8).format('YYYY-MM-DD')
 
-        
-    })
-     setisClosef(e)
+      console.log(c7,c8)
+      let datatable = {  
+    producT_ID: String(mapp[index].c6) ,
+    codE_GPU: String(mapp[index].c1) ,
+    codE_UNSPSC: String(mapp[index].c2) ,
+    codE_TMT: String(mapp[index].c3) ,
+    baR_CODE: String(mapp[index].c4) ,
+    producT_NO:String(itemdata.producT_NO) ,
+    producT_NAME: String(mapp[index].c5) ,
+    qty: Number(mapp[index].c9) ,
+    uom:  String(mapp[index].c10) ,
+    uniT_PRICE:  Number(mapp[index].c11) ,
+    batcH_LOT_NO: 1 , 
+    mfG_DATE: c7,
+    exP_DATE: c8,
+    amount: Number(mapp[index].c12) ,
+    id : Number(mapp[index].id) , 
+      }
+      mo.push(datatable)
+ 
+}
+
+
+const data = {
+  id: e,
+  pO_NO: itemdata.pO_NO,
+  vendoR_NAME: itemdata.vendoR_NAME,
+  invoicE_NO: itemdata.invoicE_NO,
+  invoicE_DATE: itemdata.invoicE_DATE,
+  ship_to: itemdata.location,
+  discounT_PERCENTAGE: itemdata.discounT_PERCENTAGE,
+  discounT_BAHT: itemdata.discounT_BAHT,
+  vat: itemdata.value,
+  totaL_AMOUNT: itemdata.totaL_AMOUNT,
+  remark: itemdata.remark,
+  total: itemdata.total,
+  producT_NO: itemdata.producT_NO,
+  deletedOrderItemIds:deletedOrderItemIds,
+  orderdetails: mo
+
+}
+
+
+console.log(JSON.stringify(data))
+    await asnupdate(e,data).then(() => {
+      Swal.fire({
+        title: 'สำเร็จ',
+        text: "บันทึกข้อมูลสำเร็จ!! ",
+        icon: 'success',
+     
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+  
+        confirmButtonText: 'ยืนยัน'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          closef1refresh(1)
+        }
+      })
+ 
+
+  }).catch(err => {
+      console.log(err);
+     
+  })
+    
  
    } 
  
@@ -101,7 +170,10 @@ const fetchData = async ()=>{
   const closef1refresh = async (e)=>{
    await cleardata()
     setisClosef(e)
-
+   
+    if(e==1){
+     await fetchData()
+    }
   } 
 
 // edit3
@@ -146,7 +218,7 @@ console.log(event)
                 c7 :data[0].orderdetails[index].mfG_DATE,
                 c8 :data[0].orderdetails[index].exP_DATE,
                 c12 :data[0].orderdetails[index].amount,
-                
+                id :data[0].orderdetails[index].id,
                 
     }
     ggwp.push(form)
@@ -379,6 +451,7 @@ function Download() {
   const handleRemoveItem = (idx) => {
     // assigning the list to temp variable
     const temp = [...mapp];
+    console.log(temp)
 
     // removing the element using splice
     temp.splice(idx, 1);
@@ -387,6 +460,60 @@ function Download() {
     setmapp(temp);
   };
 
+  const handleRemoveItem2 = (idx,id) => {
+    // assigning the list to temp variable
+    const temp = [...mapp];
+    console.log(id)
+    let ggwp = deletedOrderItemIds
+    if(id != 0){
+      ggwp = ggwp+','+ id
+      console.log(ggwp)
+     setdeletedOrderItemIds(ggwp)
+    }
+    console.log(deletedOrderItemIds)
+    // removing the element using splice
+    temp.splice(idx, 1);
+
+    // updating the list
+    setmapp(temp);
+  };
+
+  const deleteinvoietable =(invoice,id) =>{
+
+console.log(id)
+    Swal.fire({
+      title: 'ต้องการที่จะลบใช่หรือไม่?',
+      text: "Invoice ที่จะลบคือ "+invoice,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'ยกเลิก',
+      confirmButtonText: 'ยืนยัน'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        deleteasn(id).then(async data=>{
+          if(data.error){
+            Swal.fire(
+              'ไม่สำเร็จ',
+            
+              'error'
+            )
+          }
+          else{
+            Swal.fire(
+              'Deleted!',
+              'ลบการการที่เลือกสำเร็จ',
+              'success'
+            )
+          await  fetchData()
+          }
+        })
+      
+      }
+    })
+  }
   useEffect(() => {
     const fetchData = async () => {
       await settable([]);
@@ -416,6 +543,7 @@ function Download() {
       c10: "",
       c11: "",
       c12: "",
+      id: 0,
     })
     setisClose(false)
     console.log(mapp);
@@ -489,7 +617,9 @@ setmapp([])
   if (data.error) {
      console.log('ggwp')
   } else {
+
     if(mapp.length > 0){
+      let i = mapp.length-1;
       for (let index = 0; index < mapp.length; index++) {
         var c7 = moment(mapp[index].c7, 'DD-MM-YYYY')
         var c8 = moment(mapp[index].c7, 'DD-MM-YYYY')
@@ -519,17 +649,31 @@ console.log(data);
 if (data.error) {
    console.log('ggwp')
 } else {
-  await fetchData();
-  setisClosef(1)
-  cleardata()
+  if(i==index){
+    Swal.fire({
+      title: 'สำเร็จ',
+      text: "บันทึกข้อมูลสำเร็จ!! ",
+      icon: 'success',
+   
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
   
-  console.log('55')
+      confirmButtonText: 'ยืนยัน'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        closef1refresh(1)
+      }
+    })
+  }
+ 
+ 
+
 }
 })
   }
 }
   else{
-    console.log('555')
+    console.log('ผิดผลาด')
   }
   }
 })
@@ -720,9 +864,9 @@ console.log(mapp,mapp.length)
                         </td>
 
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <button onClick={()=>handleedit(data.invoicE_NO)}>
+                          <button onClick={()=>handleedit(data.invoicE_NO) } class="rounded-full bg-pink-500 text-white h-9 w-9 flex-row items-center justify-center">
                             <svg 
-                              className="text-pink-800  w-6 h-6"
+                              className="  w-7 h-7 ml-1"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -742,6 +886,8 @@ console.log(mapp,mapp.length)
                               ></path>
                             </svg>
                           </button>{" "}
+                          <button onClick={(e)=>deleteinvoietable(data.invoicE_NO,data.id)} class="rounded-full bg-red-400 text-white h-9 w-9 flex-row items-center justify-center" >
+                         <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
                         </td>
                       </tr>
             </>
@@ -1554,7 +1700,7 @@ console.log(mapp,mapp.length)
                            <td className="px-6 py-4   whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
-                         <button onClick={(e)=>handleRemoveItem(index)} className="rounded-full bg-red-400 text-white h-9 w-9 flex items-center justify-center" >
+                         <button onClick={(e)=>handleRemoveItem2(index,data.id)} className="rounded-full bg-red-400 text-white h-9 w-9 flex items-center justify-center" >
                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button> </td>
                            </tr>
   ))

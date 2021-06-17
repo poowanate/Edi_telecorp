@@ -14,11 +14,6 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/index.js"
-    ],
     "/_app": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
@@ -34,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/components/invoicelistsell.js"
     ],
-    "/next/dist/pages/_error": [
+    "/components/polistsell": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/next/dist/pages/_error.js"
+      "static/chunks/pages/components/polistsell.js"
     ]
   },
   "ampFirstPages": []
