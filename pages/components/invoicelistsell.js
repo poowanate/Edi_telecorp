@@ -1,4 +1,4 @@
-import Layout from "../Layout/Layout";
+import Layout from "../Layoutfile/Layout";
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
 import {edi_po,getedi_po,GETEDI_ASN} from '../api/api_po'
