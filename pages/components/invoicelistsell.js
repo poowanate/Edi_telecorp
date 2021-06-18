@@ -1,4 +1,4 @@
-import Layout from "../Layoutfile/Layout";
+import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
 import {edi_po,getedi_po,GETEDI_ASN} from '../api/api_po'
@@ -6,7 +6,7 @@ import {edi_asn,ediproduct,getediasn,getediasnbyinvoice,asnupdate,deleteasn} fro
 import * as XLSX from 'xlsx';
 import moment from "moment";
 import Swal from 'sweetalert2'
-
+// import template from '../../public/download/template.xlsx';
  
 function table() {
   const [isClose, setisClose] = useState(false);
@@ -1174,9 +1174,10 @@ console.log(mapp,mapp.length)
     </label>) : ''}
    
 </div>
-<a id="downloadexcel" href="http://localhost:3000/download/template.xlsx" hidden download> file_name </a>  
+
+<a id="downloadexcel" href="../download/template.xlsx" hidden download> file_name </a>  
                 <button id="my_iframe"  onClick={Download} className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
-                  ดาวห์โหลด
+                ดาวน์โหลด
                 </button>
               </div>
               <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-800 ">

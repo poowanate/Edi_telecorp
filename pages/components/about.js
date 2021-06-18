@@ -40,7 +40,7 @@ function about() {
         if(result != ''){
             setmapp(result[0].descripcion)
         }
-       
+             
       } 
 
     return (

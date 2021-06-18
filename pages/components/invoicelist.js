@@ -1,4 +1,4 @@
-import Layout from "../Layout/Layout";
+import Layout from "../Layoutza/Layout"
 import React,{useMemo,useState,useEffect,useRef} from 'react'
 function table() {
     const [isClose,setisClose] = useState(true);

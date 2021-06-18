@@ -28,11 +28,6 @@
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/components/invoicelistsell.js"
-    ],
-    "/components/polistsell": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/components/polistsell.js"
     ]
   },
   "ampFirstPages": []
