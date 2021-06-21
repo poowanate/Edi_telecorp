@@ -2,5 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/components/invoicelistsell": "pages/components/invoicelistsell.js"
+  "/components/invoicelistsell": "pages/components/invoicelistsell.js",
+  "/Login": "pages/Login.js"
 }

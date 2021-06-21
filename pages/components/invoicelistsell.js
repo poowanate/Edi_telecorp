@@ -66,7 +66,7 @@ const fetchData = async ()=>{
         remark: "" ,
         discounT_PERCENTAGE: null ,
         discounT_BAHT: null ,
-        vat: null ,
+        vat: 7 ,
         totaL_AMOUNT: null ,
         producT_NO: "" ,
         pO_NO: "" ,
@@ -116,7 +116,7 @@ const data = {
   ship_to: itemdata.location,
   discounT_PERCENTAGE: itemdata.discounT_PERCENTAGE,
   discounT_BAHT: itemdata.discounT_BAHT,
-  vat: itemdata.value,
+  vat: 7,
   totaL_AMOUNT: itemdata.totaL_AMOUNT,
   remark: itemdata.remark,
   total: itemdata.total,
@@ -196,7 +196,7 @@ console.log(event)
                   itemdata['totaL_AMOUNT'] =  data[0].totaL_AMOUNT
                   itemdata['discounT_PERCENTAGE'] =  data[0].discounT_PERCENTAGE
                   itemdata['discounT_BAHT'] =  data[0].discounT_BAHT
-                  itemdata['vat'] =   data[0].vat
+                  itemdata['vat'] =   7
                   itemdata['total'] =   data[0].total
                   itemdata['id'] =   data[0].id
                   
@@ -327,7 +327,12 @@ console.log(event)
         fileData.splice(0,1)
         const dataheader = fileData[0]
             var edataheader =deleteempty(dataheader)
-   
+  //  console.log(edataheader)
+  //  const value = moment(edataheader[3],'DD-MM-YYYY').format('YYYY-MM-DD')
+  //  console.log(edataheader[3])
+  //  var date = Date.parse(edataheader[3].toString());
+  //  var datez = new Date(edataheader[3]); 
+  //  console.log(value,date,datez)
       if(edataheader.length>0){
         itemdata['invoicE_NO'] = edataheader[0]
         itemdata['producT_NO'] = edataheader[1]
@@ -412,7 +417,7 @@ for (let index = 0; index < tabledata.length; index++) {
       itemdata['discounT_BAHT'] = tabledata[index][11]
     }
     if(tabledata[index][9] == 'VAT'){
-      itemdata['vat'] = tabledata[index][11]
+      itemdata['vat'] = 7
     }
     if(tabledata[index][9] == 'ราคารวม'){
       itemdata['total'] = tabledata[index][11]
@@ -470,12 +475,26 @@ function Download() {
       console.log(ggwp)
      setdeletedOrderItemIds(ggwp)
     }
-    console.log(deletedOrderItemIds)
+  
     // removing the element using splice
     temp.splice(idx, 1);
 
     // updating the list
-    setmapp(temp);
+    console.log(temp)
+    setmapp(temp)
+
+       itemdata['totaL_AMOUNT'] =  itemdata['totaL_AMOUNT'] - mapp[idx].c12
+        
+      
+        setitemdata({ ...itemdata })
+        console.log( itemdata['totaL_AMOUNT'])
+      
+      
+     
+    
+
+    
+  
   };
 
   const deleteinvoietable =(invoice,id) =>{
@@ -524,12 +543,14 @@ console.log(id)
 
   const savetable = async (e) => {
     e.preventDefault();
+    
     console.log(e);
 
     // valuechk = getRandomInt(3000)
     let zaza = itemtable;
+  
     // settable(itemtable)
-    setmapp([...mapp,itemtable]);
+   await setmapp([...mapp,itemtable]);
     setitemtable({
       c1: "",
       c2: "",
@@ -545,20 +566,48 @@ console.log(id)
       c12: "",
       id: 0,
     })
+ 
+    if(mapp.length>0){
+    
+       itemdata['totaL_AMOUNT'] = itemdata['totaL_AMOUNT'] + itemtable.c12
+      setitemdata({...itemdata})
+      
+    }
+    else{
+      itemdata['totaL_AMOUNT'] = 0
+      itemdata['totaL_AMOUNT'] = itemtable.c12
+      setitemdata({...itemdata})
+    }
     setisClose(false)
-    console.log(mapp);
+
   };
   const [tableza, settable] = useState([]);
 
+
   const handleChange = (name, e) => {
     itemtable[name] = e.target.value;
-    console.log(itemtable);
- 
+    
+    if(name = 'c10' !='' && itemtable[name]!=''){
+      itemtable['c12'] = itemtable['c10'] * itemtable['c11']
+      setitemtable({ ...itemtable })
+    }
+    console.log(mapp);
   };
  
   const handleChangedata = (name, e) => {
+    console.log(e)
     itemdata[name] = e.target.value;
     console.log(itemdata);
+    if(name =="discounT_BAHT"){
+      itemdata['discounT_PERCENTAGE'] =  (e.target.value*100) /  itemdata['totaL_AMOUNT'] 
+      let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
+      itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
+    } 
+    if(name =="discounT_PERCENTAGE"){
+      itemdata['discounT_BAHT'] =  itemdata['totaL_AMOUNT'] * e.target.value /100
+      let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
+      itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
+    }  //มา
     setitemdata({ ...itemdata })
   };
 const cleardata = () => {
@@ -569,7 +618,7 @@ const cleardata = () => {
   remark: "" ,
   discounT_PERCENTAGE: "" ,
   discounT_BAHT: "" ,
-  vat: "" ,
+  vat: 7 ,
   totaL_AMOUNT: "" ,
   producT_NO: "" ,
   pO_NO: "" ,
@@ -585,7 +634,7 @@ setmapp([])
     var date = moment(itemdata.invoicE_DATE, 'DD-MM-YYYY')
     let discounT_BAHT = itemdata.discounT_BAHT
     let discounT_PERCENTAGE = itemdata.discounT_PERCENTAGE
-    let vat =itemdata.vat
+    let vat =7
     let totaL_AMOUNT = itemdata.totaL_AMOUNT
     let total = itemdata.total
     if (isNaN(discounT_PERCENTAGE)) {
@@ -602,7 +651,7 @@ setmapp([])
       remark: String(itemdata.remark),
       discounT_PERCENTAGE: Number(discounT_PERCENTAGE),
       discounT_BAHT: Number(discounT_BAHT),
-      vat: Number(vat),
+      vat: 7,
       totaL_AMOUNT: Number(totaL_AMOUNT),
       producT_NO: String(itemdata.producT_NO),
       pO_NO:  String(itemdata.pO_NO),
@@ -1213,8 +1262,8 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   วันที่ใบส่งของ{" "}
-                  <input   value={itemdata.invoicE_DATE} 
-                    id="วันที่ใบส่งของ"    onChange={(e) => handleChangedata("invoicE_DATE", e)}
+                  <input   value={moment(itemdata.invoicE_DATE,'DD-MM-YYYY').format('YYYY-MM-DD')} 
+                    id="วันที่ใบส่งของ" type="date"    onChange={(e) => handleChangedata("invoicE_DATE", e)}
                     autoComplete="false"
                     className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
                   />
@@ -1421,7 +1470,7 @@ console.log(mapp,mapp.length)
                   <div className="col-span-1">
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม (ไม่รวม VAT){" "}
-                      <input    value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
+                      <input type="number" disabled    value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1429,7 +1478,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - เปอร์เซ็นต์{" "}
-                      <input    value={itemdata.discounT_PERCENTAGE}
+                      <input type="number"   value={itemdata.discounT_PERCENTAGE}
                         id="เลขที่ใบสั่งซื้อ"  onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1437,7 +1486,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - บาท
-                      <input   value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
+                      <input  type="number"  value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1445,7 +1494,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       VAT{" "}
-                      <input   value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
+                      <input type="number"   value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1453,7 +1502,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม{" "}
-                      <input   value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
+                      <input disabled type="number"  value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1548,8 +1597,8 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   วันที่ใบส่งของ{" "}
-                  <input   value={itemdata.invoicE_DATE} 
-                    id="วันที่ใบส่งของ"    onChange={(e) => handleChangedata("invoicE_DATE", e)}
+                  <input   value={moment(itemdata.invoicE_DATE,'DD-MM-YYYY').format('YYYY-MM-DD')}
+                    id="วันที่ใบส่งของ"  type="date"   onChange={(e) => handleChangedata("invoicE_DATE", e)}
                     autoComplete="false"
                     className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
                   />
@@ -1765,7 +1814,7 @@ console.log(mapp,mapp.length)
                   <div className="col-span-1">
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม (ไม่รวม VAT){" "}
-                      <input    value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
+                      <input type="number"  disabled  value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1773,7 +1822,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - เปอร์เซ็นต์{" "}
-                      <input    value={itemdata.discounT_PERCENTAGE}
+                      <input  type="number"  value={itemdata.discounT_PERCENTAGE}
                         id="เลขที่ใบสั่งซื้อ"  onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1781,7 +1830,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - บาท
-                      <input   value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
+                      <input type="number"  value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1789,7 +1838,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       VAT{" "}
-                      <input   value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
+                      <input type="number"  value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1797,7 +1846,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม{" "}
-                      <input   value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
+                      <input  disabled type="number" value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
@@ -1908,7 +1957,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     จำนวน
-                    <input
+                    <input type="number"
                       onChange={(e) => handleChange("c9", e)}
                       id="cout"
                       autoComplete="false"
@@ -1917,7 +1966,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     หน่วย
-                    <input
+                    <input type="number"
                       onChange={(e) => handleChange("c10", e)}
                       id="ex"
                       autoComplete="false"
@@ -1926,7 +1975,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     ราคาต่อหน่วย
-                    <input
+                    <input type="number"
                       onChange={(e) => handleChange("c11", e)}
                       id="extcount "
                       autoComplete="false"
@@ -1936,14 +1985,14 @@ console.log(mapp,mapp.length)
 
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   จำนวนเงิน
-                    <input
+                    <input  disabled value={itemtable.c12}
                       onChange={(e) => handleChange("c12", e)}
                       id="extcount "
                       autoComplete="false"
                       className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
                     />
                   </div>
-                </div>
+                </div>  
 
                 <div className="flex justify-center mt-6">
                   <button
