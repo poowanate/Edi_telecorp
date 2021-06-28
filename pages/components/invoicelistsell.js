@@ -587,8 +587,12 @@ console.log(id)
   const handleChange = (name, e) => {
     itemtable[name] = e.target.value;
     
-    if(name = 'c10' !='' && itemtable[name]!=''){
-      itemtable['c12'] = itemtable['c10'] * itemtable['c11']
+    if(name = 'c9' !='' && itemtable[name]!=''){
+      itemtable['c12'] = itemtable['c9'] * itemtable['c11']
+      setitemtable({ ...itemtable })
+    }
+    if(name = '11' !='' && itemtable[name]!=''){
+      itemtable['c12'] = itemtable['c9'] * itemtable['c11']
       setitemtable({ ...itemtable })
     }
     console.log(mapp);
@@ -1966,7 +1970,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     หน่วย
-                    <input type="number"
+                    <input
                       onChange={(e) => handleChange("c10", e)}
                       id="ex"
                       autoComplete="false"
