@@ -566,12 +566,27 @@ console.log(id)
       c12: "",
       id: 0,
     })
- 
+ //แก้บัน
     if(mapp.length>0){
-    
        itemdata['totaL_AMOUNT'] = itemdata['totaL_AMOUNT'] + itemtable.c12
+     
+       if(itemdata['discounT_PERCENTAGE']!=''){
+       
+       
+       
+     
+          itemdata['discounT_BAHT'] =  itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] /100
+          let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
+          itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
+        }  //มา
+        if(itemdata['discounT_BAHT']!=''){
+        itemdata['discounT_PERCENTAGE'] =  (itemdata['discounT_BAHT']*100) /  itemdata['totaL_AMOUNT'] 
+        let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
+        itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
+        //มา
+       }
+   
       setitemdata({...itemdata})
-      
     }
     else{
       itemdata['totaL_AMOUNT'] = 0
