@@ -76,6 +76,41 @@ const fetchData = async ()=>{
 })
 }
 
+const callmoney = (item)=>{
+  
+  let totalamount=0
+  let asdsa = item
+  console.log(asdsa,item.length)
+  if(item.length>0){
+    for (let index = 0; index <   item.length; index++) {
+      totalamount = totalamount + Number(item[index].c12)
+     
+    }
+    console.log(totalamount)
+    itemdata['totaL_AMOUNT'] = totalamount
+     
+     if(itemdata['discounT_PERCENTAGE']!=''){
+    
+    
+    
+  
+       itemdata['discounT_BAHT'] =  itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] /100
+       let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
+       itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
+     }  //มา
+     if(itemdata['discounT_BAHT']!=''){
+     itemdata['discounT_PERCENTAGE'] =  (itemdata['discounT_BAHT']*100) /  itemdata['totaL_AMOUNT'] 
+     let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
+     itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
+     //มา
+    }
+
+   setitemdata({...itemdata})
+
+  }
+
+}
+
 const setChecked =(e,index,g)=>{
   console.log(g,index)
   if(e == undefined){
@@ -152,10 +187,12 @@ id:0
       
         gebvalue.push(ggwp)
         setmapp(mapp => [...mapp, ggwp]); 
+        callmoney([...mapp, ggwp])
     }
     console.log(gebvalue)  
    
     console.log(mapp)  
+  
   }
   else if(checklength.length == 0){
     console.log('non')
@@ -587,12 +624,14 @@ function Download() {
     // updating the list
     console.log(temp)
     setmapp(temp)
+    callmoney([...temp])
 
-       itemdata['totaL_AMOUNT'] =  itemdata['totaL_AMOUNT'] - mapp[idx].c12
+    
+      //  itemdata['totaL_AMOUNT'] =  itemdata['totaL_AMOUNT'] - mapp[idx].c12
         
       
-        setitemdata({ ...itemdata })
-        console.log( itemdata['totaL_AMOUNT'])
+      //   setitemdata({ ...itemdata })
+      //   console.log( itemdata['totaL_AMOUNT'])
       
       
      
@@ -664,12 +703,12 @@ console.log(id)
       id: 0,
       idx:"",
     })
-    
+    setchecklength([])
   }
 
 
 
-  
+
   const savetableedit = async (e) => {
     e.preventDefault();
     
@@ -692,9 +731,10 @@ console.log(id)
 
   
     // settable(itemtable)
-   await setmapp([...mapp]);
+ 
    
     cleardataedit()
+    callmoney([...mapp])
   }
 
 
@@ -705,51 +745,57 @@ console.log(id)
 
     // valuechk = getRandomInt(3000)
     let zaza = itemtable;
-  
+  console.log(zaza)
+ 
     // settable(itemtable)
-   await setmapp([...mapp,itemtable]);
-    setitemtable({
-      c1: "",
-      c2: "",
-      c3: "",
-      c4: "",
-      c5: "",
-      c6: "",
-      c7: "",
-      c8: "",
-      c9: "",
-      c10: "",
-      c11: "",
-      c12: "",
-      id: 0,
-    })
+  //  await setmapp([...mapp,itemtable]);
+  await setmapp([...mapp, itemtable]); 
+   let forcalsave = [...mapp, itemtable]
+   await callmoney(forcalsave)
+    // setitemtable({
+    //   c1: "",
+    //   c2: "",
+    //   c3: "",
+    //   c4: "",
+    //   c5: "",
+    //   c6: "",
+    //   c7: "",
+    //   c8: "",
+    //   c9: "",
+    //   c10: "",
+    //   c11: "",
+    //   c12: "",
+    //   id: 0,
+    // })
  //แก้บัน
-    if(mapp.length>0){
-       itemdata['totaL_AMOUNT'] = itemdata['totaL_AMOUNT'] + itemtable.c12
+
+
+    // if(mapp.length>0){
+    //    itemdata['totaL_AMOUNT'] = itemdata['totaL_AMOUNT'] + itemtable.c12
      
-       if(itemdata['discounT_PERCENTAGE']!=''){
+    //    if(itemdata['discounT_PERCENTAGE']!=''){
        
        
        
      
-          itemdata['discounT_BAHT'] =  itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] /100
-          let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
-          itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
-        }  //มา
-        if(itemdata['discounT_BAHT']!=''){
-        itemdata['discounT_PERCENTAGE'] =  (itemdata['discounT_BAHT']*100) /  itemdata['totaL_AMOUNT'] 
-        let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
-        itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
-        //มา
-       }
+    //       itemdata['discounT_BAHT'] =  itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] /100
+    //       let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
+    //       itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
+    //     }  //มา
+    //     if(itemdata['discounT_BAHT']!=''){
+    //     itemdata['discounT_PERCENTAGE'] =  (itemdata['discounT_BAHT']*100) /  itemdata['totaL_AMOUNT'] 
+    //     let i =  ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT'])*  itemdata['vat'] /100
+    //     itemdata['total'] =   ( itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
+    //     //มา
+    //    }
    
-      setitemdata({...itemdata})
-    }
-    else{
-      itemdata['totaL_AMOUNT'] = 0
-      itemdata['totaL_AMOUNT'] = itemtable.c12
-      setitemdata({...itemdata})
-    }
+    //   setitemdata({...itemdata})
+    // }
+    // else{
+    //   itemdata['totaL_AMOUNT'] = 0
+    //   itemdata['totaL_AMOUNT'] = itemtable.c12
+    //   setitemdata({...itemdata})
+    // }
     setisClose(false)
 
   };
@@ -802,7 +848,7 @@ const cleardata = () => {
   vendoR_NAME: "" ,
   location: "" })
 setmapp([])
-
+setchecklength([])
 }
 
 const cleardataback = () => {
