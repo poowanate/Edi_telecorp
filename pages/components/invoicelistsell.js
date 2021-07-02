@@ -9,7 +9,24 @@ import Swal from 'sweetalert2'
 // import template from '../../public/download/template.xlsx';
  
 function table() {
+
+  const [isCheck, setIsCheck] = useState([]);
+  const handleClick = e => {
+    
+    const { id, checked } = e.target;
+    console.log(checked)
+    console.log(id)
+    console.log(isCheck.includes(id))
+    setIsCheck([...isCheck, id]);
+    console.log(isCheck)
+    if (!checked) {
+      setIsCheck(isCheck.filter(item => item !== id));
+    }
+  };
+  const [checklength,setchecklength] = useState([
+  ])
   const [isClose, setisClose] = useState(false);
+  const [isCloseedit, setisCloseedit] = useState(false);
   const [upload, setupload] = useState(true);
   const [isClosef, setisClosef] = useState(1);
   const [mapp, setmapp] = useState([]);
@@ -58,6 +75,94 @@ const fetchData = async ()=>{
   
 })
 }
+
+const setChecked =(e,index,g)=>{
+  console.log(g,index)
+  if(e == undefined){
+  
+    mapp[index].checked = true
+
+ 
+
+    setchecklength( [...checklength,{id:index}]); 
+  }
+  if(e){
+    mapp[index].checked = false
+   
+
+    
+    setchecklength(checklength.filter(({ id }) => id !== index));
+  
+   
+  }
+  if(!e){
+    mapp[index].checked = true
+    setchecklength( [...checklength,{id:index}]); //เอาไปเช็คทำซ้ำ
+  
+
+
+  }
+  setmapp([...mapp])
+  console.log(checklength)
+}
+
+const edittable = (idx,id)=>{
+  setisCloseedit(true)
+const temp = [...mapp];
+console.log(idx,id,temp[idx])
+itemtable['c1'] = temp[idx].c1
+itemtable['c2'] = temp[idx].c2
+itemtable['c3'] = temp[idx].c3
+itemtable['c4'] = temp[idx].c4
+itemtable['c5'] = temp[idx].c5
+itemtable['c6'] = temp[idx].c6
+itemtable['c7'] = temp[idx].c7
+itemtable['c8'] = temp[idx].c8
+itemtable['c9'] = temp[idx].c9
+itemtable['c10'] = temp[idx].c10
+itemtable['c11'] = temp[idx].c11
+itemtable['c12'] = temp[idx].c12
+itemtable['id'] = temp[idx].id
+itemtable['idx']= idx
+}
+
+const dupplicate = async()=>{
+  
+  let gebvalue = []
+  let gebcodevalue = []
+  if(checklength.length>0){
+    for (let index = 0; index < checklength.length; index++) {
+      console.log(mapp[checklength[index].id].c1,checklength[index])
+const ggwp = {
+c1:  mapp[checklength[index].id].c1,
+c2: mapp[checklength[index].id].c2,
+c3: mapp[checklength[index].id].c3,
+c4: mapp[checklength[index].id].c4,
+c5: mapp[checklength[index].id].c5,
+c6: mapp[checklength[index].id].c6,
+c7: mapp[checklength[index].id].c7,
+c8: mapp[checklength[index].id].c8,
+c9: mapp[checklength[index].id].c9,
+c10: mapp[checklength[index].id].c10,
+c11: mapp[checklength[index].id].c11,
+c12: mapp[checklength[index].id].c12,
+checked: false,
+id:0
+        }
+      
+        gebvalue.push(ggwp)
+        setmapp(mapp => [...mapp, ggwp]); 
+    }
+    console.log(gebvalue)  
+   
+    console.log(mapp)  
+  }
+  else if(checklength.length == 0){
+    console.log('non')
+  }
+
+}
+
 
   const [itemdata, setitemdata] = useState({
     id:null,
@@ -541,6 +646,58 @@ console.log(id)
     fetchData();
   }, []);
 
+   const cleardataedit = ()=>{
+    setisCloseedit(false)
+    setitemtable({
+      c1: "",
+      c2: "",
+      c3: "",
+      c4: "",
+      c5: "",
+      c6: "",
+      c7: "",
+      c8: "",
+      c9: "",
+      c10: "",
+      c11: "",
+      c12: "",
+      id: 0,
+      idx:"",
+    })
+    
+  }
+
+
+
+  
+  const savetableedit = async (e) => {
+    e.preventDefault();
+    
+    console.log(itemtable.idx);
+    mapp[itemtable.idx].c1 = itemtable.c1 
+    mapp[itemtable.idx].c2 = itemtable.c2 
+    mapp[itemtable.idx].c3 = itemtable.c3 
+    mapp[itemtable.idx].c4 = itemtable.c4 
+    mapp[itemtable.idx].c5 = itemtable.c5 
+    mapp[itemtable.idx].c6 = itemtable.c6 
+    mapp[itemtable.idx].c7 = itemtable.c7 
+    mapp[itemtable.idx].c8 = itemtable.c8 
+    mapp[itemtable.idx].c9 = itemtable.c9 
+    mapp[itemtable.idx].c10 = itemtable.c10
+    mapp[itemtable.idx].c11 = itemtable.c11
+    mapp[itemtable.idx].c12 = itemtable.c12
+    mapp[itemtable.idx].id = itemtable.id 
+   
+    // valuechk = getRandomInt(3000)
+
+  
+    // settable(itemtable)
+   await setmapp([...mapp]);
+   
+    cleardataedit()
+  }
+
+
   const savetable = async (e) => {
     e.preventDefault();
     
@@ -630,6 +787,25 @@ console.log(id)
     setitemdata({ ...itemdata })
   };
 const cleardata = () => {
+  setupload(true)
+  setitemdata( {invoicE_NO: ""  ,
+  itemdata:"",
+  invoicE_DATE: "" ,
+  remark: "" ,
+  discounT_PERCENTAGE: "" ,
+  discounT_BAHT: "" ,
+  vat: 7 ,
+  totaL_AMOUNT: "" ,
+  producT_NO: "" ,
+  pO_NO: "" ,
+  total: "" ,
+  vendoR_NAME: "" ,
+  location: "" })
+setmapp([])
+
+}
+
+const cleardataback = () => {
   setupload(true)
   setitemdata( {invoicE_NO: ""  ,
   itemdata:"",
@@ -1028,12 +1204,7 @@ console.log(mapp,mapp.length)
               {/* kkkk */}
                 <div className=" ">
                 <div className=" flex justify-end  mr-10 mt-5">
-                    <button
-                      onClick={() => setisClose(true)}
-                      className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                      ทำซ้ำ
-                    </button>
+                  
                     <button
                        onClick={() => setisClosef(4)}
                       className="bg-pink-500 ml-2  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
@@ -1128,6 +1299,7 @@ console.log(mapp,mapp.length)
                             >
                               จำนวนเงิน
                             </th>
+                            
                           </tr>
                        
                        
@@ -1396,6 +1568,7 @@ console.log(mapp,mapp.length)
                             >
                               จำนวนเงิน
                             </th>
+                      
                           </tr>
                        
                        
@@ -1644,9 +1817,17 @@ console.log(mapp,mapp.length)
               <div className="flex flex-col mt-10">
                 <div className=" ">
                   <div className=" flex justify-end  mr-10 mt-5">
+               
+
+                  <button
+                      onClick={() => dupplicate()}
+                      className="bg-pink-500 ml-3  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      ทำซ้ำ
+                    </button>
                     <button
                       onClick={() => setisClose(true)}
-                      className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-pink-500 ml-3  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
                     >
                       เพิ่มข้อมูลตาราง
                     </button>
@@ -1655,6 +1836,12 @@ console.log(mapp,mapp.length)
                     <div className="shadow overflow-hidden border-gray-200 sm:rounded-lg">
                       <table className="min-w-full w-full">
                           <tr className="bg-gray-50">
+                          <th
+                              scope="col"
+                              className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider"
+                            >
+                           
+                            </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider"
@@ -1731,23 +1918,31 @@ console.log(mapp,mapp.length)
                             >
                               จำนวนเงิน
                             </th>
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
-                            >
-                              ลบ
-                            </th>
+                            <th scope="col" className="relative px-6 py-3">
+                            
+                              </th>
                           </tr>
-                       
+                          
+                    
                        
                          
+
 {
   mapp.map((data,index)=>(
 <tr key={index} className="bg-white ">
 <td className="px-6 py-4  border-r whitespace-nowrap">
+<label class="inline-flex items-center mt-3"> 
+                <input type="checkbox" id={data.id}     checked={data.checked}
+        onChange={(e) => setChecked(data.checked,index,e)} class="form-checkbox h-6 w-6 text-gray-600" />
+            </label>
+                       </td>
+<td className="px-6 py-4  border-r whitespace-nowrap">
+
                            <div className="text-center text-sm text-gray-900">{data.c1} </div>   </td>
                            <td className="px-6 py-4  border-r whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c2} </div>   </td>
+                   
+                       
                            <td className="px-6 py-4  border-r whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>
                            <td className="px-6 py-4  border-r whitespace-nowrap">
@@ -1768,9 +1963,19 @@ console.log(mapp,mapp.length)
                            <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
-                           <td className="px-6 py-4   whitespace-nowrap">
-                         <button onClick={(e)=>handleRemoveItem2(index,data.id)} className="rounded-full bg-red-400 text-white h-9 w-9 flex items-center justify-center" >
-                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button> </td>
+                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+
+                           <button onClick={(e)=>handleRemoveItem2(index,data.id)} className="rounded-full bg-red-400 text-white h-9 w-9 flex items-center justify-center" >
+                         <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button> 
+                      
+                      
+                          <button onClick={(e)=>edittable(index,data.id)} class="rounded-full bg-green-400 text-white h-9 w-9 flex-row items-center justify-center" >
+                          <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                       </button>
+                        </td>
+                   
+                         
+                       
                            </tr>
   ))
 }
@@ -1877,7 +2082,7 @@ console.log(mapp,mapp.length)
                   <button onClick={(e)=>editall(itemdata.id)} className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     บันทึก
                   </button>
-                  <button onClick={(e)=>cleardata()}  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                  <button onClick={() => closef1refresh(1) }  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                     ยกเลิก
                   </button>
                 </div>
@@ -2022,6 +2227,165 @@ console.log(mapp,mapp.length)
                   </button>
                   <button
                     onClick={() => setisClose(false)}
+                    className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    ยกเลิก
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>{" "}
+        </>
+      ) : (
+        ""
+      )}
+          {isCloseedit ? (
+        <>
+          <div id="myModal" className="modal">
+            <form >
+              <div className="modal-content">
+                <span className="close" onClick={() => cleardataedit()}>
+                  &times;
+                </span>
+
+                <div className="content-center text-center justify-items-center text-3xl mt-5 text-pink-800 ">
+                  แก้ไขข้อมูลตาราง
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    รหัส GPU
+                    <input
+                      onChange={(e) => handleChange("c1", e)}
+                      id="GPU"
+                      value = {itemtable.c1}
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    รหัส UNSPSC
+                    <input
+                      onChange={(e) => handleChange("c2", e)}
+                      value = {itemtable.c2}
+                      id="UNSPSC"
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    รหัส TMT
+                    <input
+                      onChange={(e) => handleChange("c3", e)}
+                      value = {itemtable.c3}
+                      id="TMT"
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    BAR CODE
+                    <input
+                      onChange={(e) => handleChange("c4", e)}
+                      value = {itemtable.c4}
+                      id="BAR_CODE"
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    ชื่อยา / เวชภัณท์
+                    <input
+                      onChange={(e) => handleChange("c5", e)}
+                      value = {itemtable.c5}
+                      id="namemedi"
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    รหัสผลิต
+                    <input
+                      onChange={(e) => handleChange("c6", e)}
+                      value = {itemtable.c6}
+                      id="codeex"
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    วันที่ผลิต
+                    <input
+                      onChange={(e) => handleChange("c7", e)}
+                      value = {   moment(itemtable.c7).format("YYYY-MM-DD")}
+                      type="date"
+                      id="dateex"
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    วันที่หมดอายุ
+                    <input
+                      onChange={(e) => handleChange("c8", e)}
+                      value = {   moment(itemtable.c8).format("YYYY-MM-DD")}
+                      type="date"
+                      id="dateendex"
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    จำนวน
+                    <input type="number"
+                      onChange={(e) => handleChange("c9", e)}
+                      value = {itemtable.c9}
+                      id="cout"
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    หน่วย
+                    <input
+                      onChange={(e) => handleChange("c10", e)}
+                      value = {itemtable.c10}
+                      id="ex"
+                      autoComplete="false"
+                      className=" w-full  bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    ราคาต่อหน่วย
+                    <input type="number"
+                      onChange={(e) => handleChange("c11", e)}
+                      value = {itemtable.c11}
+                      id="extcount "
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  จำนวนเงิน
+                    <input  disabled value={itemtable.c12}
+                      onChange={(e) => handleChange("c12", e)}
+                      value = {itemtable.c12}
+                      id="extcount "
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                </div>  
+
+                <div className="flex justify-center mt-6">
+                  <button 
+                     onClick={(e) => savetableedit(e)}
+                    className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    บันทึก
+                  </button>
+                  <button
+                    onClick={() => cleardataedit()}
                     className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                   >
                     ยกเลิก
