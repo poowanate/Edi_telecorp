@@ -1,8 +1,19 @@
 {
+  "/Layoutza/Layout": "pages/Layoutza/Layout.html",
+  "/Login": "pages/Login.html",
   "/_app": "pages/_app.js",
+  "/api/api_asn": "pages/api/api_asn.js",
+  "/api/api_po": "pages/api/api_po.js",
+  "/api/auth": "pages/api/auth.js",
+  "/api/login": "pages/api/login.js",
+  "/components/about": "pages/components/about.html",
+  "/components/invoicelist": "pages/components/invoicelist.html",
+  "/components/invoicelistsell": "pages/components/invoicelistsell.html",
+  "/components/polist": "pages/components/polist.html",
+  "/components/polistsell": "pages/components/polistsell.html",
+  "/components/popickup": "pages/components/popickup.html",
+  "/": "pages/index.html",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/components/popickup": "pages/components/popickup.js",
-  "/Login": "pages/Login.js",
-  "/": "pages/index.js"
+  "/404": "pages/404.html"
 }
