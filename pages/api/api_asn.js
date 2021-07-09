@@ -45,7 +45,7 @@ export const edi_asn = data => {
 
   export const getediasn = data => {
 
-    return axios({
+    return axios({ 
         method: 'GET',  
         url: `http://192.168.7.15:5555/api/EDI_ASN`,
         headers: {
@@ -64,10 +64,52 @@ export const edi_asn = data => {
   }
 
 
+
+export const getediasn1 = data => {
+
+    return axios({ 
+        method: 'GET',  
+        url: `http://192.168.7.15:5555/api/EDI_ASN/GETEDI_ASN_list`,
+        headers: {
+      
+            'Content-Type': 'application/json'
+        },
+   
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
+
+
+  export const getediasnbyinvoice1 = data => {
+
+    return axios({
+        method: 'GET',   
+        url: `   http://192.168.7.15:5555/api/EDI_ASN/GETEDI_ASN_Detail?INVOICE_NO=`+data,
+        headers: {
+      
+            'Content-Type': 'application/json'
+        },
+   
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
+
   export const getediasnbyinvoice = data => {
 
     return axios({
-        method: 'GET',  
+        method: 'GET',   
         url: `  http://192.168.7.15:5555/api/EDI_ASN/GETBYINVOICE_NO?INVOICE_NO=`+data,
         headers: {
       

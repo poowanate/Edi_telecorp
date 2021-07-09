@@ -46,6 +46,7 @@ function table() {
     c10: "",
     c11: "",
     c12: "",
+    c13: "",
     id: 0,
   });
 
@@ -157,6 +158,8 @@ itemtable['c9'] = temp[idx].c9
 itemtable['c10'] = temp[idx].c10
 itemtable['c11'] = temp[idx].c11
 itemtable['c12'] = temp[idx].c12
+itemtable['c13'] = temp[idx].c13
+
 itemtable['id'] = temp[idx].id
 itemtable['idx']= idx
 }
@@ -181,6 +184,7 @@ c9: mapp[checklength[index].id].c9,
 c10: mapp[checklength[index].id].c10,
 c11: mapp[checklength[index].id].c11,
 c12: mapp[checklength[index].id].c12,
+c13: mapp[checklength[index].id].c13,
 checked: false,
 id:0
         }
@@ -241,7 +245,9 @@ let mo = []
     batcH_LOT_NO: 1 , 
     mfG_DATE: c7,
     exP_DATE: c8,
+ 
     amount: Number(mapp[index].c12) ,
+    total: Number(mapp[index].c13) ,
     id : Number(mapp[index].id) , 
       }
       mo.push(datatable)
@@ -319,10 +325,10 @@ console.log(JSON.stringify(data))
   } 
 
 // edit3
-  const handleedit =async (event)  => {
+  const handleedit =async (invoice,product)  => {
     setisClosef(2)
-console.log(event)
-    GETEDI_ASN(event).then(async data=>{
+
+    GETEDI_ASN(invoice,product).then(async data=>{
       console.log(data)
 
       if(data.length>0){
@@ -360,6 +366,7 @@ console.log(event)
                 c7 :data[0].orderdetails[index].mfG_DATE,
                 c8 :data[0].orderdetails[index].exP_DATE,
                 c12 :data[0].orderdetails[index].amount,
+                c13 :data[0].orderdetails[index].total,
                 id :data[0].orderdetails[index].id,
                 
     }
@@ -541,7 +548,8 @@ for (let index = 0; index < tabledata.length; index++) {
           c9: tabledata[index][8],
           c10: tabledata[index][9],
           c11: tabledata[index][10], 
-          c12: tabledata[index][11]
+          c12: tabledata[index][11],
+          c13: tabledata[index][12]
     }
     
     ggwp.push(form)
@@ -700,6 +708,7 @@ console.log(id)
       c10: "",
       c11: "",
       c12: "",
+      c13: "",
       id: 0,
       idx:"",
     })
@@ -725,6 +734,7 @@ console.log(id)
     mapp[itemtable.idx].c10 = itemtable.c10
     mapp[itemtable.idx].c11 = itemtable.c11
     mapp[itemtable.idx].c12 = itemtable.c12
+    mapp[itemtable.idx].c13 = itemtable.c13
     mapp[itemtable.idx].id = itemtable.id 
    
     // valuechk = getRandomInt(3000)
@@ -931,6 +941,7 @@ setmapp([])
       exP_DATE: c8.format('YYYY-MM-DD'),
      
       amount: Number(mapp[index].c12) ,
+      total: Number(mapp[index].c13) ,
         }
         console.log(JSON.stringify(datatable))
        await ediproduct(datatable).then(async data => {
@@ -1154,7 +1165,7 @@ console.log(mapp,mapp.length)
                         </td>
 
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <button onClick={()=>handleedit(data.invoicE_NO) } class="rounded-full bg-pink-500 text-white h-9 w-9 flex-row items-center justify-center">
+                          <button onClick={()=>handleedit(data.invoicE_NO,data.producT_NO) } class="rounded-full bg-pink-500 text-white h-9 w-9 flex-row items-center justify-center">
                             <svg 
                               className="  w-7 h-7 ml-1"
                               fill="none"
@@ -1265,8 +1276,8 @@ console.log(mapp,mapp.length)
                     </button>
                   </div>
                   
-                  <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div className="shadow overflow-hidden border-gray-200 sm:rounded-lg">
+                  <div className="py-2 overflow-x-auto  ">
+                    <div className="shadow  border-gray-200 sm:rounded-lg">
                       <table className="min-w-full w-full">
                     <tr className="bg-gray-50">
                             <th
@@ -1345,7 +1356,12 @@ console.log(mapp,mapp.length)
                             >
                               จำนวนเงิน
                             </th>
-                            
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              จำนวนที่สั่งซื้อ
+                            </th>
                           </tr>
                        
                        
@@ -1377,6 +1393,8 @@ console.log(mapp,mapp.length)
                                                            <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
                                                            <td className="px-6 py-4   whitespace-nowrap">
                                                            <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
+                                                           <td className="px-6 py-4   whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td>
                                                            </tr>
                                   ))
                                 
@@ -1534,8 +1552,8 @@ console.log(mapp,mapp.length)
                       เพิ่มข้อมูลตาราง
                     </button>
                   </div>
-                  <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div className="shadow overflow-hidden border-gray-200 sm:rounded-lg">
+                  <div className="py-2 overflow-x-auto  ">
+                    <div className="shadow  border-gray-200 sm:rounded-lg">
                       <table className="min-w-full w-full">
                           <tr className="bg-gray-50">
                             <th
@@ -1614,7 +1632,12 @@ console.log(mapp,mapp.length)
                             >
                               จำนวนเงิน
                             </th>
-                      
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              จำนวนที่สั่งซื้อ
+                            </th>
                           </tr>
                        
                        
@@ -1646,6 +1669,8 @@ console.log(mapp,mapp.length)
                            <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td>
                            </tr>
   ))
 }
@@ -1878,8 +1903,8 @@ console.log(mapp,mapp.length)
                       เพิ่มข้อมูลตาราง
                     </button>
                   </div>
-                  <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div className="shadow overflow-hidden border-gray-200 sm:rounded-lg">
+                  <div className="py-2 overflow-x-auto  ">
+                    <div className="shadow  border-gray-200 sm:rounded-lg">
                       <table className="min-w-full w-full">
                           <tr className="bg-gray-50">
                           <th
@@ -1964,6 +1989,12 @@ console.log(mapp,mapp.length)
                             >
                               จำนวนเงิน
                             </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
+                              จำนวนที่สั่งซื้อ
+                            </th>
                             <th scope="col" className="relative px-6 py-3">
                             
                               </th>
@@ -2009,6 +2040,8 @@ console.log(mapp,mapp.length)
                            <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
+                           <td className="px-6 py-4   whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td>
                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
                            <button onClick={(e)=>handleRemoveItem2(index,data.id)} className="rounded-full bg-red-400 text-white h-9 w-9 flex items-center justify-center" >
@@ -2262,6 +2295,15 @@ console.log(mapp,mapp.length)
                       className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
                     />
                   </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  จำนวนที่สั่งซื้อ
+                    <input  
+                      onChange={(e) => handleChange("c13", e)}
+                      id="extcount "
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
                 </div>  
 
                 <div className="flex justify-center mt-6">
@@ -2416,6 +2458,16 @@ console.log(mapp,mapp.length)
                     <input  disabled value={itemtable.c12}
                       onChange={(e) => handleChange("c12", e)}
                       value = {itemtable.c12}
+                      id="extcount "
+                      autoComplete="false"
+                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  จำนวนที่สั่งซื้อ
+                    <input  
+                      onChange={(e) => handleChange("c13", e)}
+                      value = {itemtable.c13}
                       id="extcount "
                       autoComplete="false"
                       className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "

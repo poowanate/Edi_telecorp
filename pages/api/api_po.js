@@ -45,13 +45,14 @@ export const edi_po = data => {
 
 
 
-  export const GETEDI_ASN = data => {
-
+  export const GETEDI_ASN = (invoice,product) => {
+  
     return axios({
         method: 'GET',
-        url: `  http://192.168.7.15:5555/api/EDI_ASN/GETEDI_ASN?INVOICE_NO=` +data,
+        url: `   http://192.168.7.15:5555/api/EDI_ASN/GETEDI_ASN_PO?INVOICE_NO=`+invoice+`&PRODUCT_NO=`+product,
+        // url: `  http://192.168.7.15:5555/api/EDI_ASN/GETEDI_ASN?INVOICE_NO=` +data,
         headers: {
-      
+          
             'Content-Type': 'application/json'
         },
      

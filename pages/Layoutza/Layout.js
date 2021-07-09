@@ -10,7 +10,7 @@ const Layout =(props) => {
     
  
   const [closeprofile,setcloseprofile] =  useState(false);
-  const [nameuser,setnameuser] =  useState('2');
+  const [nameuser,setnameuser] =  useState('1');
   const [role,setrole] =  useState(0);
   const Router = useRouter();
   const fetchData = async () => {
@@ -27,8 +27,8 @@ console.log(jscookie.get('role'))
       setrole(3)
     }
     else if(jscookie.get('role')=='1'){
-      setrole(2)
-    }
+      setrole(1)
+    }   
     else if(jscookie.get('role')=='2'){
       setrole(1)
     }
@@ -134,6 +134,9 @@ var color =''
 <Link href="/components/invoicelist">
    <a className={classnameinvoice}>รายการรับของ</a>
    </Link>
+   <Link href="/components/popickup">
+   <a className={classnameinvoice}>ภาพรวมรับสินค้า</a>
+   </Link>
  
  </div>    </div>
       </div>
@@ -209,11 +212,11 @@ var color =''
 <div className={''+color+' opacity-95 w-72   relative  space-y-6 '} >
 <label className="text-white block px-4 text-center">Supplier's profile</label>
 
-<label className="text-white block  px-4">บริษัท Supplier จำกัดบริษัท Supplier จำกัดบริษัท Supplier จำกัดบริษัท Supplier จำกัดบริษัท Supplier จำกัดบริษัท Supplier จำกัดบริษัท Supplier จำกัด.</label>
+<label className="text-white block  px-4">บริษัท เจริญการยา จำกัดบริษัท   ผู้จำหนายยา ID.00001 </label>
 
-<label className="text-white block  px-4">ที่อยู่ ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ที่อยู่ </label>
+<label className="text-white block  px-4">ที่อยู่ กรุงเทพมหานคร 173 ถนนดินสอ แขวงเสาชิงช้า เขตพระนคร กรุงเทพฯ 10200  </label>
 
-<label className="text-white block  px-4">ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ ติดต่อ  </label>
+<label className="text-white block  px-4">ติดต่อ โทรศัพท์กลาง : 0-2221-2141-69 โทรสาร 0-2221-2170 </label>
 
 </div>
   
