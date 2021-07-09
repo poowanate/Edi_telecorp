@@ -10,7 +10,7 @@ const Layout =(props) => {
     
  
   const [closeprofile,setcloseprofile] =  useState(false);
-  const [nameuser,setnameuser] =  useState('1');
+  const [nameuser,setnameuser] =  useState('');
   const [role,setrole] =  useState(0);
   const Router = useRouter();
   const fetchData = async () => {
@@ -27,7 +27,7 @@ console.log(jscookie.get('role'))
       setrole(3)
     }
     else if(jscookie.get('role')=='1'){
-      setrole(1)
+      setrole(2)
     }   
     else if(jscookie.get('role')=='2'){
       setrole(1)

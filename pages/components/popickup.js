@@ -216,7 +216,7 @@ Search</button></div>
      <tbody className="bg-white ">
      { showtable.map((data,index)=>(
 < >   
-   <tr onClick={()=>   asnbyinvoice(data.invoicE_NO)} key={index} className="bg-white divide-y divide-gray-200">
+   <tr onClick={()=>   asnbyinvoice(data.invoicE_NO)} key={index} className="bg-white divide-y pointer hover:bg-blue-200  divide-gray-200">
 
                             <td className="px-6 py-4 whitespace-nowrap">
            <div className="text-center text-sm text-gray-900">  {data.invoicE_NO}</div>   </td>
@@ -342,7 +342,7 @@ Search</button></div>
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">สถานที่ส่งมอบ</th>
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">ลำดับ</th>
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">รหัสสินค้า</th>
- <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">ชือเวชภัณท์</th>
+ <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">ชื่อเวชภัณท์</th>
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">จำนวนรับ</th>
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">จำนวนทั้งหมด</th>
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">ราคา</th>

@@ -74,14 +74,10 @@ function sweeterror(){
 
               if(data.name!=null){
                 Authenticate(data, () => {
-                  if(data.name =='ธนกร นาคสาร'){
-                    setCookie('name',data.name)
-                    setCookie('role',data.useR_ROLE+'asn')
-                  }
-                  else{
+                
                     setCookie('name',data.name)
                     setCookie('role',data.useR_ROLE)
-                  }
+                  
                    Router.push('/')
 
        
