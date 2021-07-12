@@ -8,7 +8,7 @@ function table() {
             <div className="content-center text-center justify-items-center text-4xl mt-5 text-blue-800 ">
         รายการรับของ
       </div>
-      <div className="content-center text-center justify-items-center text-3xl mt-2 text-gray-600 ">
+      <div className="content-center text-center justify-items-center text-3xl mt-1 text-gray-600 ">
       
      Invoice list
       </div>
@@ -19,32 +19,32 @@ function table() {
             <div className="flex ">
               <div className="flex-grow">
                   
-              <div className="mt-2">
+              <div className="mt-1">
     <label className="inline-flex items-center">
       <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
       <span className="ml-2 text-blue-800">Current data</span>
     </label>
-  <input className="ml-3" type="date"></input>
+  <input className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
     </div>
               </div>
-              <div className="flex-grow">  <div className="mt-2">
+              <div className="flex-grow">  <div className="mt-1">
     <label className="inline-flex items-center">
       <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
       <span className="ml-2 text-blue-800">from</span>
     </label>
-  <input className="ml-3" type="date"></input>
+  <input className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
   <label className="inline-flex items-center ml-2 text-blue-800">to </label>
-  <input className="ml-3" type="date"></input>
+  <input className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
     </div></div>
               <div className="flex-grow"> 
-               <div className="mt-2">
+               <div className="mt-1">
                <label className="inline-flex items-center  text-blue-800">Status </label>
-               <select className="form-select ml-2 ">
+               <select className="form-select ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ">
     <option>Active</option>
     <option>Inactive</option>
   </select>
   <label className="inline-flex items-center ml-2 text-blue-800">Place</label>
-  <select className="form-select   ml-2">
+  <select className="form-select   ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
     <option>No data</option>
     <option>No data</option>
   </select>

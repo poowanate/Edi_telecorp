@@ -30,7 +30,7 @@ function table() {
  <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
  <span className="ml-2 text-pink-700">Current data</span>
 </label>
-<input className="ml-3" type="date"></input>
+<input className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
 </div>
          </div>
          <div className="flex-grow">  <div className="mt-2">
@@ -38,19 +38,19 @@ function table() {
  <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
  <span className="ml-2 text-pink-700">from</span>
 </label>
-<input className="ml-3" type="date"></input>
+<input className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
 <label className="inline-flex items-center ml-2 text-pink-700">to </label>
-<input className="ml-3" type="date"></input>
+<input className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
 </div></div>
          <div className="flex-grow"> 
           <div className="mt-2">
           <label className="inline-flex items-center  text-pink-700">Status </label>
-          <select className="form-select ml-2 ">
+          <select className="form-select ml-2  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 ">
 <option>Active</option>
 <option>Inactive</option>
 </select>
 <label className="inline-flex items-center ml-2 text-pink-700">Place</label>
-<select className="form-select   ml-2">
+<select className="form-select   ml-2 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 ">
 <option>No data</option>
 <option>No data</option>
 </select>

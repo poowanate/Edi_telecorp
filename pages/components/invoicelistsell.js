@@ -1020,7 +1020,7 @@ console.log(mapp,mapp.length)
                               Current data
                             </span>
                           </label>
-                          <input className="ml-3" type="date"></input>
+                          <input className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
                         </div>
                       </div>
                       <div className="flex-grow">
@@ -1035,11 +1035,11 @@ console.log(mapp,mapp.length)
                             />
                             <span className="ml-2 text-pink-800">from</span>
                           </label>
-                          <input className="ml-3" type="date"></input>
+                          <input className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
                           <label className="inline-flex items-center ml-2 text-pink-800">
                             to{" "}
                           </label>
-                          <input className="ml-3" type="date"></input>
+                          <input className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
                         </div>
                       </div>
                       <div className="flex-grow">
@@ -1047,14 +1047,14 @@ console.log(mapp,mapp.length)
                           <label className="inline-flex items-center  text-pink-800">
                             Status{" "}
                           </label>
-                          <select className="form-select ml-2 ">
+                          <select className="form-select ml-2 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 ">
                             <option>Active</option>
                             <option>Inactive</option>
                           </select>
                           <label className="inline-flex items-center ml-2 text-pink-800">
                             Place
                           </label>
-                          <select className="form-select   ml-2">
+                          <select className="form-select   ml-2 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 ">
                             <option>No data</option>
                             <option>No data</option>
                           </select>
@@ -1495,7 +1495,7 @@ console.log(mapp,mapp.length)
                   <input          onChange={(e) => handleChangedata("invoicE_NO", e)}
                     id="เลขที่ใบสั่งซื้อ" 
                     value={itemdata.invoicE_NO} 
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
               
@@ -1504,7 +1504,7 @@ console.log(mapp,mapp.length)
                   <input      value={itemdata.producT_NO} 
                     id="เลขที่ใบส่งของ"  onChange={(e) => handleChangedata("producT_NO", e)}
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -1512,7 +1512,7 @@ console.log(mapp,mapp.length)
                   <input   value={itemdata.pO_NO} 
                     id="รหัสผู้จำหน่าย"  onChange={(e) => handleChangedata("pO_NO", e)}
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -1520,7 +1520,7 @@ console.log(mapp,mapp.length)
                   <input   value={moment(itemdata.invoicE_DATE,'DD-MM-YYYY').format('YYYY-MM-DD')} 
                     id="วันที่ใบส่งของ" type="date"    onChange={(e) => handleChangedata("invoicE_DATE", e)}
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -1528,7 +1528,7 @@ console.log(mapp,mapp.length)
                   <input   value={itemdata.vendoR_NAME}   onChange={(e) => handleChangedata("vendoR_NAME", e)}
                     id="ชื่อผู้จำหน่าย"
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
 
@@ -1537,7 +1537,7 @@ console.log(mapp,mapp.length)
                   <input  value={itemdata.location}  
                     id="สถาที่ส่งมอบ"  onChange={(e) => handleChangedata("location", e)}
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
               </div>
@@ -1722,7 +1722,7 @@ console.log(mapp,mapp.length)
                       <textarea
                         cols="60"   value={itemdata.remark} 
                         rows="5"
-                        className="w-full border-pink-700 border bg-white shadow-md rounded "
+                        className="w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                         onChange={(e) => handleChangedata("remark", e)}
                      
                      >
@@ -1736,7 +1736,7 @@ console.log(mapp,mapp.length)
                       <input type="number" disabled    value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -1744,7 +1744,7 @@ console.log(mapp,mapp.length)
                       <input type="number"   value={itemdata.discounT_PERCENTAGE}
                         id="เลขที่ใบสั่งซื้อ"  onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -1752,7 +1752,7 @@ console.log(mapp,mapp.length)
                       <input  type="number"  value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -1760,7 +1760,7 @@ console.log(mapp,mapp.length)
                       <input type="number"   value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -1768,7 +1768,7 @@ console.log(mapp,mapp.length)
                       <input disabled type="number"  value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                   </div>
@@ -1838,7 +1838,7 @@ console.log(mapp,mapp.length)
                   <input          onChange={(e) => handleChangedata("invoicE_NO", e)}
                     id="เลขที่ใบสั่งซื้อ" 
                     value={itemdata.invoicE_NO} 
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
               
@@ -1847,7 +1847,7 @@ console.log(mapp,mapp.length)
                   <input      value={itemdata.producT_NO} 
                     id="เลขที่ใบส่งของ"  onChange={(e) => handleChangedata("producT_NO", e)}
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -1855,7 +1855,7 @@ console.log(mapp,mapp.length)
                   <input   value={itemdata.pO_NO} 
                     id="รหัสผู้จำหน่าย"  onChange={(e) => handleChangedata("pO_NO", e)}
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -1863,7 +1863,7 @@ console.log(mapp,mapp.length)
                   <input   value={moment(itemdata.invoicE_DATE,'DD-MM-YYYY').format('YYYY-MM-DD')}
                     id="วันที่ใบส่งของ"  type="date"   onChange={(e) => handleChangedata("invoicE_DATE", e)}
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -1871,7 +1871,7 @@ console.log(mapp,mapp.length)
                   <input   value={itemdata.vendoR_NAME}   onChange={(e) => handleChangedata("vendoR_NAME", e)}
                     id="ชื่อผู้จำหน่าย"
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
 
@@ -1880,7 +1880,7 @@ console.log(mapp,mapp.length)
                   <input  value={itemdata.location}  
                     id="สถาที่ส่งมอบ"  onChange={(e) => handleChangedata("location", e)}
                     autoComplete="false"
-                    className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
               </div>
@@ -2106,7 +2106,7 @@ console.log(mapp,mapp.length)
                       <textarea
                         cols="60"   value={itemdata.remark} 
                         rows="5"
-                        className="w-full border-pink-700 border bg-white shadow-md rounded "
+                        className="w-full bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                         onChange={(e) => handleChangedata("remark", e)}
                      
                      >
@@ -2120,7 +2120,7 @@ console.log(mapp,mapp.length)
                       <input type="number"  disabled  value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2128,7 +2128,7 @@ console.log(mapp,mapp.length)
                       <input  type="number"  value={itemdata.discounT_PERCENTAGE}
                         id="เลขที่ใบสั่งซื้อ"  onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2136,7 +2136,7 @@ console.log(mapp,mapp.length)
                       <input type="number"  value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2144,7 +2144,7 @@ console.log(mapp,mapp.length)
                       <input type="number"  value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2152,7 +2152,7 @@ console.log(mapp,mapp.length)
                       <input  disabled type="number" value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
-                        className="ml-4 border-pink-700 border bg-white shadow-md rounded   text-gray-900  "
+                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                       />
                     </div>
                   </div>
@@ -2190,7 +2190,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c1", e)}
                       id="GPU"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded border-pink-700 border  text-gray-900  "
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2199,7 +2199,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c2", e)}
                       id="UNSPSC"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2208,7 +2208,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c3", e)}
                       id="TMT"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2217,7 +2217,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c4", e)}
                       id="BAR_CODE"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2226,7 +2226,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c5", e)}
                       id="namemedi"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2235,7 +2235,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c6", e)}
                       id="codeex"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2245,7 +2245,7 @@ console.log(mapp,mapp.length)
                       type="date"
                       id="dateex"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2255,7 +2255,7 @@ console.log(mapp,mapp.length)
                       type="date"
                       id="dateendex"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2264,7 +2264,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c9", e)}
                       id="cout"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2273,7 +2273,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c10", e)}
                       id="ex"
                       autoComplete="false"
-                      className=" w-full  bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700   "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2282,7 +2282,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c11", e)}
                       id="extcount "
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
 
@@ -2292,7 +2292,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c12", e)}
                       id="extcount "
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2301,7 +2301,7 @@ console.log(mapp,mapp.length)
                       onChange={(e) => handleChange("c13", e)}
                       id="extcount "
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                 </div>  
@@ -2357,7 +2357,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c2}
                       id="UNSPSC"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2367,7 +2367,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c3}
                       id="TMT"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2377,7 +2377,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c4}
                       id="BAR_CODE"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2387,7 +2387,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c5}
                       id="namemedi"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2397,7 +2397,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c6}
                       id="codeex"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2408,7 +2408,7 @@ console.log(mapp,mapp.length)
                       type="date"
                       id="dateex"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2419,7 +2419,7 @@ console.log(mapp,mapp.length)
                       type="date"
                       id="dateendex"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2429,7 +2429,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c9}
                       id="cout"
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2439,7 +2439,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c10}
                       id="ex"
                       autoComplete="false"
-                      className=" w-full  bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700   "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2449,7 +2449,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c11}
                       id="extcount "
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
 
@@ -2460,7 +2460,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c12}
                       id="extcount "
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2470,7 +2470,7 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c13}
                       id="extcount "
                       autoComplete="false"
-                      className=" w-full bg-white shadow-md rounded  border-pink-700 border  text-gray-900  "
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
                 </div>  
