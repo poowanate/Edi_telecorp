@@ -1149,7 +1149,7 @@ console.log(mapp,mapp.length)
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900">
-                          {data.invoicE_DATE}
+                          {moment(data.invoicE_DATE).format('DD/MM/yyyy') } 
                           </div>{" "}
                         </td>
 
@@ -1246,7 +1246,7 @@ console.log(mapp,mapp.length)
                   รหัสผู้จำหน่าย <label className="ml-5">{itemdata.pO_NO}</label>
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  วันที่ใบส่งของ <label className="ml-5">{itemdata.invoicE_DATE}</label>
+                  วันที่ใบส่งของ <label className="ml-5"> {moment(itemdata.invoicE_DATE).format('DD/MM/yyyy') }</label>
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   ชื่อผู้จำหน่าย <label className="ml-5">{itemdata.vendoR_NAME}</label>
@@ -1382,9 +1382,9 @@ console.log(mapp,mapp.length)
                                                            <td className="px-6 py-4  border-r whitespace-nowrap">
                                                            <div className="text-center text-sm text-gray-900">{data.c6} </div>   </td>
                                                            <td className="px-6 py-4   whitespace-nowrap">
-                                                           <div className="text-center text-sm text-gray-900">{data.c7} </div>   </td>
+                                                           <div className="text-center text-sm text-gray-900">{moment(data.c7).format('DD/MM/yyyy') } </div>   </td>
                                                            <td className="px-6 py-4   whitespace-nowrap">
-                                                           <div className="text-center text-sm text-gray-900">{data.c8} </div>   </td>
+                                                           <div className="text-center text-sm text-gray-900">{moment(data.c8).format('DD/MM/yyyy') } </div>   </td>
                                                            <td className="px-6 py-4   whitespace-nowrap">
                                                            <div className="text-center text-sm text-gray-900">{data.c9}</div>   </td>
                                                            <td className="px-6 py-4   whitespace-nowrap">
@@ -1658,9 +1658,9 @@ console.log(mapp,mapp.length)
                            <td className="px-6 py-4  border-r whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c6} </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
-                           <div className="text-center text-sm text-gray-900">{data.c7} </div>   </td>
+                           <div className="text-center text-sm text-gray-900">{moment(data.c7).format('DD/MM/yyyy') } </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
-                           <div className="text-center text-sm text-gray-900">{data.c8} </div>   </td>
+                           <div className="text-center text-sm text-gray-900">{moment(data.c8).format('DD/MM/yyyy') } </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c9}</div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
@@ -2029,9 +2029,9 @@ console.log(mapp,mapp.length)
                            <td className="px-6 py-4  border-r whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c6} </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
-                           <div className="text-center text-sm text-gray-900">{data.c7} </div>   </td>
+                           <div className="text-center text-sm text-gray-900">{moment(data.c7).format('DD/MM/yyyy') } </div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
-                           <div className="text-center text-sm text-gray-900">{data.c8} </div>   </td>
+                           <div className="text-center text-sm text-gray-900">{moment(data.c8).format('DD/MM/yyyy') }</div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c9}</div>   </td>
                            <td className="px-6 py-4   whitespace-nowrap">
