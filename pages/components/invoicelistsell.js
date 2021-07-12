@@ -1020,7 +1020,7 @@ console.log(mapp,mapp.length)
                               Current data
                             </span>
                           </label>
-                          <input className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
+                          <input  autoComplete="off"   className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
                         </div>
                       </div>
                       <div className="flex-grow">
@@ -1035,11 +1035,11 @@ console.log(mapp,mapp.length)
                             />
                             <span className="ml-2 text-pink-800">from</span>
                           </label>
-                          <input className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
+                          <input  autoComplete="off"   className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
                           <label className="inline-flex items-center ml-2 text-pink-800">
                             to{" "}
                           </label>
-                          <input className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
+                          <input  autoComplete="off"   className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
                         </div>
                       </div>
                       <div className="flex-grow">
@@ -1474,7 +1474,7 @@ console.log(mapp,mapp.length)
             <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
         </svg>
         <span className="ml-2 text-base leading-normal">อัพโหลด</span>
-        <input type='file' onChange={handleUpload} className="hidden" />
+        <input  autoComplete="off"   type='file' onChange={handleUpload} className="hidden" />
     </label>) : ''}
    
 </div>
@@ -1492,7 +1492,7 @@ console.log(mapp,mapp.length)
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบสั่งซื้อ
               
-                  <input          onChange={(e) => handleChangedata("invoicE_NO", e)}
+                  <input  autoComplete="off"        onChange={(e) => handleChangedata("invoicE_NO", e)}
                     id="เลขที่ใบสั่งซื้อ" 
                     value={itemdata.invoicE_NO} 
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1501,7 +1501,7 @@ console.log(mapp,mapp.length)
               
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบส่งของ{" "}
-                  <input      value={itemdata.producT_NO} 
+                  <input  autoComplete="off"        value={itemdata.producT_NO} 
                     id="เลขที่ใบส่งของ"  onChange={(e) => handleChangedata("producT_NO", e)}
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1509,7 +1509,7 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   รหัสผู้จำหน่าย{" "}
-                  <input   value={itemdata.pO_NO} 
+                  <input  autoComplete="off"     value={itemdata.pO_NO} 
                     id="รหัสผู้จำหน่าย"  onChange={(e) => handleChangedata("pO_NO", e)}
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1517,7 +1517,7 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   วันที่ใบส่งของ{" "}
-                  <input   value={moment(itemdata.invoicE_DATE,'DD-MM-YYYY').format('YYYY-MM-DD')} 
+                  <input  autoComplete="off"     value={moment(itemdata.invoicE_DATE,'DD-MM-YYYY').format('YYYY-MM-DD')} 
                     id="วันที่ใบส่งของ" type="date"    onChange={(e) => handleChangedata("invoicE_DATE", e)}
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1525,7 +1525,7 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   ชื่อผู้จำหน่าย{" "}
-                  <input   value={itemdata.vendoR_NAME}   onChange={(e) => handleChangedata("vendoR_NAME", e)}
+                  <input  autoComplete="off"     value={itemdata.vendoR_NAME}   onChange={(e) => handleChangedata("vendoR_NAME", e)}
                     id="ชื่อผู้จำหน่าย"
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1534,7 +1534,7 @@ console.log(mapp,mapp.length)
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   สถาที่ส่งมอบ{" "}
-                  <input  value={itemdata.location}  
+                  <input  autoComplete="off"    value={itemdata.location}  
                     id="สถาที่ส่งมอบ"  onChange={(e) => handleChangedata("location", e)}
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1733,7 +1733,7 @@ console.log(mapp,mapp.length)
                   <div className="col-span-1">
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม (ไม่รวม VAT){" "}
-                      <input type="number" disabled    value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
+                      <input  autoComplete="off"   type="number" disabled    value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1741,7 +1741,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - เปอร์เซ็นต์{" "}
-                      <input type="number"   value={itemdata.discounT_PERCENTAGE}
+                      <input  autoComplete="off"   type="number"   value={itemdata.discounT_PERCENTAGE}
                         id="เลขที่ใบสั่งซื้อ"  onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1749,7 +1749,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - บาท
-                      <input  type="number"  value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
+                      <input  autoComplete="off"    type="number"  value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1757,7 +1757,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       VAT{" "}
-                      <input type="number"   value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
+                      <input  autoComplete="off"   type="number"   value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1765,7 +1765,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม{" "}
-                      <input disabled type="number"  value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
+                      <input  autoComplete="off"   disabled type="number"  value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1818,7 +1818,7 @@ console.log(mapp,mapp.length)
             <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
         </svg>
         <span className="ml-2 text-base leading-normal">อัพโหลด</span>
-        <input type='file' onChange={handleUpload} className="hidden" />
+        <input  autoComplete="off"   type='file' onChange={handleUpload} className="hidden" />
     </label>) : ''} */}
    
 </div>
@@ -1835,7 +1835,7 @@ console.log(mapp,mapp.length)
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบสั่งซื้อ
               
-                  <input          onChange={(e) => handleChangedata("invoicE_NO", e)}
+                  <input  autoComplete="off"            onChange={(e) => handleChangedata("invoicE_NO", e)}
                     id="เลขที่ใบสั่งซื้อ" 
                     value={itemdata.invoicE_NO} 
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1844,7 +1844,7 @@ console.log(mapp,mapp.length)
               
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบส่งของ{" "}
-                  <input      value={itemdata.producT_NO} 
+                  <input  autoComplete="off"        value={itemdata.producT_NO} 
                     id="เลขที่ใบส่งของ"  onChange={(e) => handleChangedata("producT_NO", e)}
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1852,7 +1852,7 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   รหัสผู้จำหน่าย{" "}
-                  <input   value={itemdata.pO_NO} 
+                  <input  autoComplete="off"     value={itemdata.pO_NO} 
                     id="รหัสผู้จำหน่าย"  onChange={(e) => handleChangedata("pO_NO", e)}
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1860,7 +1860,7 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   วันที่ใบส่งของ{" "}
-                  <input   value={moment(itemdata.invoicE_DATE,'DD-MM-YYYY').format('YYYY-MM-DD')}
+                  <input  autoComplete="off"     value={moment(itemdata.invoicE_DATE,'DD-MM-YYYY').format('YYYY-MM-DD')}
                     id="วันที่ใบส่งของ"  type="date"   onChange={(e) => handleChangedata("invoicE_DATE", e)}
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1868,7 +1868,7 @@ console.log(mapp,mapp.length)
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   ชื่อผู้จำหน่าย{" "}
-                  <input   value={itemdata.vendoR_NAME}   onChange={(e) => handleChangedata("vendoR_NAME", e)}
+                  <input  autoComplete="off"     value={itemdata.vendoR_NAME}   onChange={(e) => handleChangedata("vendoR_NAME", e)}
                     id="ชื่อผู้จำหน่าย"
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -1877,7 +1877,7 @@ console.log(mapp,mapp.length)
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   สถาที่ส่งมอบ{" "}
-                  <input  value={itemdata.location}  
+                  <input  autoComplete="off"    value={itemdata.location}  
                     id="สถาที่ส่งมอบ"  onChange={(e) => handleChangedata("location", e)}
                     autoComplete="false"
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -2009,7 +2009,7 @@ console.log(mapp,mapp.length)
 <tr key={index} className="bg-white ">
 <td className="px-6 py-4  border-r whitespace-nowrap">
 <label class="inline-flex items-center mt-3"> 
-                <input type="checkbox" id={data.id}     checked={data.checked}
+                <input  autoComplete="off"   type="checkbox" id={data.id}     checked={data.checked}
         onChange={(e) => setChecked(data.checked,index,e)} class="form-checkbox h-6 w-6 text-gray-600" />
             </label>
                        </td>
@@ -2117,7 +2117,7 @@ console.log(mapp,mapp.length)
                   <div className="col-span-1">
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม (ไม่รวม VAT){" "}
-                      <input type="number"  disabled  value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
+                      <input  autoComplete="off"   type="number"  disabled  value={itemdata.totaL_AMOUNT}   onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -2125,7 +2125,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - เปอร์เซ็นต์{" "}
-                      <input  type="number"  value={itemdata.discounT_PERCENTAGE}
+                      <input  autoComplete="off"    type="number"  value={itemdata.discounT_PERCENTAGE}
                         id="เลขที่ใบสั่งซื้อ"  onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -2133,7 +2133,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ส่วนลด - บาท
-                      <input type="number"  value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
+                      <input  autoComplete="off"   type="number"  value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -2141,7 +2141,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       VAT{" "}
-                      <input type="number"  value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
+                      <input  autoComplete="off"   type="number"  value={itemdata.vat}  onChange={(e) => handleChangedata("vat", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -2149,7 +2149,7 @@ console.log(mapp,mapp.length)
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
                       ราคารวม{" "}
-                      <input  disabled type="number" value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
+                      <input  autoComplete="off"    disabled type="number" value={itemdata.total}    onChange={(e) => handleChangedata("total", e)}
                         id="เลขที่ใบสั่งซื้อ"
                         autoComplete="false"
                         className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
@@ -2260,7 +2260,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     จำนวน
-                    <input type="number"
+                    <input  autoComplete="off"   type="number"
                       onChange={(e) => handleChange("c9", e)}
                       id="cout"
                       autoComplete="false"
@@ -2278,7 +2278,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     ราคาต่อหน่วย
-                    <input type="number"
+                    <input  autoComplete="off"   type="number"
                       onChange={(e) => handleChange("c11", e)}
                       id="extcount "
                       autoComplete="false"
@@ -2288,7 +2288,7 @@ console.log(mapp,mapp.length)
 
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   จำนวนเงิน
-                    <input  disabled value={itemtable.c12}
+                    <input  autoComplete="off"    disabled value={itemtable.c12}
                       onChange={(e) => handleChange("c12", e)}
                       id="extcount "
                       autoComplete="false"
@@ -2297,7 +2297,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   จำนวนที่สั่งซื้อ
-                    <input  
+                    <input  autoComplete="off"    
                       onChange={(e) => handleChange("c13", e)}
                       id="extcount "
                       autoComplete="false"
@@ -2424,7 +2424,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     จำนวน
-                    <input type="number"
+                    <input  autoComplete="off"   type="number"
                       onChange={(e) => handleChange("c9", e)}
                       value = {itemtable.c9}
                       id="cout"
@@ -2444,7 +2444,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     ราคาต่อหน่วย
-                    <input type="number"
+                    <input  autoComplete="off"   type="number"
                       onChange={(e) => handleChange("c11", e)}
                       value = {itemtable.c11}
                       id="extcount "
@@ -2455,7 +2455,7 @@ console.log(mapp,mapp.length)
 
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   จำนวนเงิน
-                    <input  disabled value={itemtable.c12}
+                    <input  autoComplete="off"    disabled value={itemtable.c12}
                       onChange={(e) => handleChange("c12", e)}
                       value = {itemtable.c12}
                       id="extcount "
@@ -2465,7 +2465,7 @@ console.log(mapp,mapp.length)
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   จำนวนที่สั่งซื้อ
-                    <input  
+                    <input  autoComplete="off"    
                       onChange={(e) => handleChange("c13", e)}
                       value = {itemtable.c13}
                       id="extcount "

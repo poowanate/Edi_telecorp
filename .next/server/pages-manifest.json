@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/components/polistsell": "pages/components/polistsell.js",
-  "/components/invoicelistsell": "pages/components/invoicelistsell.js"
+  "/components/invoicelistsell": "pages/components/invoicelistsell.js",
+  "/components/polistsell": "pages/components/polistsell.js"
 }
