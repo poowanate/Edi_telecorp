@@ -47,6 +47,7 @@ function table() {
     c11: "",
     c12: "",
     c13: "",
+    c14: "",
     id: 0,
   });
 
@@ -159,7 +160,7 @@ itemtable['c10'] = temp[idx].c10
 itemtable['c11'] = temp[idx].c11
 itemtable['c12'] = temp[idx].c12
 itemtable['c13'] = temp[idx].c13
-
+itemtable['c14'] = temp[idx].c14
 itemtable['id'] = temp[idx].id
 itemtable['idx']= idx
 }
@@ -185,6 +186,7 @@ c10: mapp[checklength[index].id].c10,
 c11: mapp[checklength[index].id].c11,
 c12: mapp[checklength[index].id].c12,
 c13: mapp[checklength[index].id].c13,
+c14: mapp[checklength[index].id].c14,
 checked: false,
 id:0
         }
@@ -245,9 +247,10 @@ let mo = []
     batcH_LOT_NO: 1 , 
     mfG_DATE: c7,
     exP_DATE: c8,
- 
+  
     amount: Number(mapp[index].c12) ,
     total: Number(mapp[index].c13) ,
+    producT_CODE: String(mapp[index].c14) ,
     id : Number(mapp[index].id) , 
       }
       mo.push(datatable)
@@ -367,6 +370,8 @@ console.log(JSON.stringify(data))
                 c8 :data[0].orderdetails[index].exP_DATE,
                 c12 :data[0].orderdetails[index].amount,
                 c13 :data[0].orderdetails[index].total,
+                c14 :data[0].orderdetails[index].producT_CODE,
+               
                 id :data[0].orderdetails[index].id,
                 
     }
@@ -549,7 +554,8 @@ for (let index = 0; index < tabledata.length; index++) {
           c10: tabledata[index][9],
           c11: tabledata[index][10], 
           c12: tabledata[index][11],
-          c13: tabledata[index][12]
+          c13: tabledata[index][12],
+          c14: tabledata[index][13]
     }
     
     ggwp.push(form)
@@ -709,6 +715,7 @@ console.log(id)
       c11: "",
       c12: "",
       c13: "",
+      c14: "",
       id: 0,
       idx:"",
     })
@@ -735,6 +742,7 @@ console.log(id)
     mapp[itemtable.idx].c11 = itemtable.c11
     mapp[itemtable.idx].c12 = itemtable.c12
     mapp[itemtable.idx].c13 = itemtable.c13
+    mapp[itemtable.idx].c14 = itemtable.c14
     mapp[itemtable.idx].id = itemtable.id 
    
     // valuechk = getRandomInt(3000)
@@ -942,6 +950,7 @@ setmapp([])
      
       amount: Number(mapp[index].c12) ,
       total: Number(mapp[index].c13) ,
+      producT_CODE: Number(mapp[index].c14) ,
         }
         console.log(JSON.stringify(datatable))
        await ediproduct(datatable).then(async data => {
@@ -1302,6 +1311,13 @@ console.log(mapp,mapp.length)
                               scope="col"
                               className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
                             >
+                              รหัสสินค้า
+                            </th>
+                            
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
                               Bar code
                             </th>
                             <th
@@ -1375,6 +1391,9 @@ console.log(mapp,mapp.length)
                                                            <div className="text-center text-sm text-gray-900">{data.c2} </div>   </td>
                                                            <td className="px-6 py-4  border-r whitespace-nowrap">
                                                            <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>
+                                                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                                                           <div className="text-center text-sm text-gray-900">{data.c14} </div>   </td>
+                                                  
                                                            <td className="px-6 py-4  border-r whitespace-nowrap">
                                                            <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td>
                                                            <td className="px-6 py-4  border-r whitespace-nowrap">
@@ -1578,6 +1597,12 @@ console.log(mapp,mapp.length)
                               scope="col"
                               className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
                             >
+                              รหัสสินค้า
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
                               Bar code
                             </th>
                             <th
@@ -1651,6 +1676,8 @@ console.log(mapp,mapp.length)
                            <div className="text-center text-sm text-gray-900">{data.c2} </div>   </td>
                            <td className="px-6 py-4  border-r whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c14} </div>   </td>
                            <td className="px-6 py-4  border-r whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td>
                            <td className="px-6 py-4  border-r whitespace-nowrap">
@@ -1935,6 +1962,12 @@ console.log(mapp,mapp.length)
                               scope="col"
                               className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
                             >
+                              รหัสสินค้า
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            >
                               Bar code
                             </th>
                             <th
@@ -2022,6 +2055,8 @@ console.log(mapp,mapp.length)
                        
                            <td className="px-6 py-4  border-r whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>
+                           <td className="px-6 py-4  border-r whitespace-nowrap">
+                           <div className="text-center text-sm text-gray-900">{data.c14} </div>   </td>
                            <td className="px-6 py-4  border-r whitespace-nowrap">
                            <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td>
                            <td className="px-6 py-4  border-r whitespace-nowrap">
@@ -2212,6 +2247,15 @@ console.log(mapp,mapp.length)
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                    รหัสสินค้า
+                    <input
+                      onChange={(e) => handleChange("c14", e)}
+                      id="BAR_CODE"
+                      
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     BAR CODE
                     <input
                       onChange={(e) => handleChange("c4", e)}
@@ -2367,6 +2411,15 @@ console.log(mapp,mapp.length)
                       value = {itemtable.c3}
                       id="TMT"
                       
+                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                   รหัสสินค้า
+                    <input
+                      onChange={(e) => handleChange("c14", e)}
+                      id="BAR_CODE"
+                      value = {itemtable.c14}
                       className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                     />
                   </div>
