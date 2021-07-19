@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/components/invoicelistsell.js"
     ],
-    "/components/popickup": [
+    "/components/polistsell": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/components/popickup.js"
+      "static/chunks/pages/components/polistsell.js"
     ]
   },
   "ampFirstPages": []
