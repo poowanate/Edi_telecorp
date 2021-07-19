@@ -2,7 +2,7 @@ import Layout from "../Layoutza/Layout"
 import React,{useMemo,useState,useEffect,useRef} from 'react'
 import {getediasn1,getediasnbyinvoice1} from "../api/api_asn"
 import { data } from "autoprefixer";
-
+import moment  from "moment";
 
 function table() {
   const [isClose,setisClose] = useState(true);
@@ -223,28 +223,28 @@ Search</button></div>
 
 
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.pO_NO}
                           </div>{" "}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.vendoR_NAME}
                           </div>{" "}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.producT_NO}
                           </div>{" "}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.invoicE_DATE}
                           </div>{" "}
                         </td>
 
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.location}
                           </div>{" "}
                         </td>
@@ -314,7 +314,7 @@ Search</button></div>
 </a>
    </div>
 </div>
-<button onClick={()=>console.log(itemtablez)}>ss</button>
+{/* <button onClick={()=>console.log(itemtablez)}>ss</button> */}
 <div className="content-center text-center justify-items-center text-4xl mt-5 text-blue-800 ">
         รายละเอียดรับสินค้า
       </div>
@@ -323,7 +323,7 @@ Search</button></div>
   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่ใบสั่งซื้อ <label className="ml-5">{itemtable[0].invoicE_NO}</label></div>
 
   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่สัญญา <label className="ml-5">{itemtable[0].invoicE_NO}</label></div>
-  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">กำหนดส่งมอบ <label className="ml-5">{itemtable[0].invoicE_DATE}</label></div>
+  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">กำหนดส่งมอบ <label className="ml-5">  {   moment(itemtable[0].invoicE_DATE).format("YYYY-MM-DD")}</label></div>
   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">รหัสผู้จำหน่าย <label className="ml-5">ไม่มี</label></div>
   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ชื่อผู้จำหน่าย <label className="ml-5">{itemtable[0].vendoR_NAME}</label></div>
 </div>
@@ -345,7 +345,7 @@ Search</button></div>
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">ชื่อเวชภัณท์</th>
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">จำนวนรับ</th>
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">จำนวนทั้งหมด</th>
- <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">ราคา</th>
+ {/* <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">ราคา</th> */}
  <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">สถานะ</th>
             </tr>
           </thead>
@@ -360,50 +360,51 @@ Search</button></div>
 
 
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
-                          {data.invoicE_DATE}
+                          <div className="text-center text-sm text-gray-900">
+        
+                          {   moment(data.invoicE_DATE).format("YYYY-MM-DD")}
                           </div>{" "}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.location}
                           </div>{" "}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.batcH_LOT_NO} 
                           </div>{" "}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.producT_CODE}
                           </div>{" "}
                         </td>
 
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.producT_NAME}
                           </div>{" "}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.qty}
                           </div>{" "}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           {data.total}
                           </div>{" "}
                         </td>
 
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                        {/* <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-center text-sm text-gray-900">
                           {data.balance}
                           </div>{" "}
-                        </td>
+                        </td> */}
                         
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-center text-sm text-gray-900">
                           ไม่มี status
                           </div>{" "}
                         </td>

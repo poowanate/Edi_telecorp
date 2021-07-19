@@ -1277,12 +1277,7 @@ console.log(mapp,mapp.length)
                     >
                       แก้ไข
                     </button>
-                    <button
-                      onClick={() => setisClosef(4)}
-                      className="bg-pink-500 ml-2  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                      ลบ
-                    </button>
+               
                   </div>
                   
                   <div className="py-2 overflow-x-auto  ">
@@ -2196,9 +2191,9 @@ console.log(mapp,mapp.length)
                   <button onClick={(e)=>editall(itemdata.id)} className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     บันทึก
                   </button>
-                  <button onClick={() => closef1refresh(1) }  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                  <button onClick={() =>  setisClosef(2) }  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                     ยกเลิก
-                  </button>
+                  </button>    
                 </div>
               </div>
             </>

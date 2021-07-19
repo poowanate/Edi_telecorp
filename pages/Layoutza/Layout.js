@@ -120,14 +120,14 @@ var color =''
     
         {(role == 1) && (
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex-shrink-0 flex items-center">
+            {/* <div className="flex-shrink-0 flex items-center ">
             <a className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
-            </div>
+            </div> */}
             <div className="hidden sm:block sm:ml-6">
- <div className="flex space-x-4">
+ <div className="flex flex-shrink-0  space-x-4">
  <Link href="/components/polist">
 
- <a className={classnamepo} aria-current="page">รายการสั่งซื้อทั้งหมด</a>
+ <a className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} aria-current="page">รายการสั่งซื้อทั้งหมด</a>
 
 
 </Link>
