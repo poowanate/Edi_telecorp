@@ -1,9 +1,12 @@
 import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from 'react'
 import moment from 'moment';
-
+import ReactExport from "react-data-export";
 
 function table() {
+  const [excelEX, setexcelEX] = useState({ excelHead: null });
+  const ExcelFile = ReactExport.ExcelFile;
+  const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
   const [isClose, setisClose] = useState(true);
   const [date, setdate] = useState({
     Ddate: moment(new Date()).format("YYYY-MM-DD"),
@@ -15,7 +18,34 @@ function table() {
     console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
+  useEffect(() => {
+    let data = [];
+    for (let index = 0; index < 3; index++) {
 
+      var arr = [
+        { value: "aaaa" },
+        { value: "bbbb" },
+        { value: "cccc" },
+        { value: "dddd" },
+      ];
+      data.push(arr);
+    }
+    var excelHead = [
+      {
+        columns: [
+          { title: "Date", style: { font: { sz: "12", bold: true }, fill: { patternType: "solid", fgColor: { rgb: "657DA1" } } } },//pixels width 
+          { title: "Time", style: { font: { sz: "12", bold: true }, fill: { patternType: "solid", fgColor: { rgb: "657DA1" } } } },//char width 
+          { title: "DTX", style: { font: { sz: "12", bold: true }, fill: { patternType: "solid", fgColor: { rgb: "657DA1" } } } },
+          { title: "Detail", style: { font: { sz: "12", bold: true }, fill: { patternType: "solid", fgColor: { rgb: "657DA1" } } } },
+        ],
+        data: data
+
+      }
+    ];
+    excelEX.excelHead = excelHead;
+    setexcelEX(excelEX);
+
+  }, [])
   return (
     <Layout>
       {isClose ? (
@@ -159,10 +189,16 @@ function table() {
               </a>
             </div>
           </div>
-          <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-700 ">
-            ใบสั่งซื้อ (PO)
+          <div className="flex flex-row">
+            <div className="w-1/3"></div>
+            <div className="content-center w-1/3 text-center flex justify-center items-center text-4xl mt-5 text-pink-700 ">
+              ใบสั่งซื้อ (PO)
+            </div>
+            <div className="flex w-1/3 justify-end items-end mr-5">
+              <ExcelFile element={<button className="bk_blue ct br_1 py-1 px-3 btn_h ml-3 text-white bg-pink-700">Download</button>}>
+                <ExcelSheet dataSet={excelEX.excelHead} name="report" />
+              </ExcelFile></div>
           </div>
-
           <div class="grid grid-cols-2 gap-3">
             <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่ใบสั่งซื้อ <label className="ml-5">00001</label></div>
 
@@ -198,7 +234,6 @@ function table() {
                     </thead>
                     <tbody className="bg-white ">
                       <tr>
-
                         <td className="px-6 py-4  border-r whitespace-nowrap">
                           <div className="text-center text-sm text-gray-900">00001 </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
@@ -213,11 +248,6 @@ function table() {
                           <div className="text-center text-sm text-gray-900">1000 </div>   </td>
                         <td className="px-6 py-4   whitespace-nowrap">
                           <div className="text-center text-sm text-gray-900">2 </div>   </td>
-
-
-
-
-
                       </tr>
                       <tr>
 
