@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
-import {EDI_COMPANYinfo} from '../api/api_company'
+import {EDI_COMPANYinfo,deleteEDI_COMPANYinfo} from '../api/api_company'
 
-
+import Swal from 'sweetalert2'
 
 const setuplocal = () => {
 
@@ -28,7 +28,35 @@ const setuplocal = () => {
     }, [])
 
 
+    const confirmdelete =(e)=>{
 
+      Swal.fire({
+        title: 'ยืนยันการลบข้อมูลใช่หรือไม่ ?',
+        showDenyButton: true,
+        showConfirmButton: false,
+        showCancelButton: true,
+        denyButtonText: `ลบ`,
+        
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+       
+     if (result.isDenied) {
+      deleteEDI_COMPANYinfo(e).then(async result=>{
+        if (result.error) {
+          Swal.fire('ทำการลบไม่สำเร็จ', '', 'info')
+        } else {
+         await fetchdata()
+         await Swal.fire('ลบข้อมูลสำเร็จ', '', 'success')
+        }
+
+      
+      })
+         
+        }
+      })
+      
+    }
+  
 
     return (
         <div>
@@ -67,26 +95,26 @@ const setuplocal = () => {
                             scope="col"
                             className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
                           >
-                           BUILDING
+                           vendoR_NO
                           </th>
                           <th
                             scope="col"
                             className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
                           >
-                           FLOOR
+                           vendoR_NAME
                           </th>
                           <th
                             scope="col"
                             className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
                           >
-                         LOCATION_ID
+                         shipto
                           </th>
 
                           <th
                             scope="col"
                             className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
                           >
-                         LOCATION_NAME
+                         address
                           </th>
                        
                         
@@ -96,7 +124,7 @@ const setuplocal = () => {
                             scope="col"
                             className="px-6 py-3 text-center bg-indigo-800 text-base font-medium   text-white uppercase tracking-wider"
                           >
-                           พิมพ์
+                           taxid
                           </th>
                      
                           <th
@@ -145,7 +173,7 @@ const setuplocal = () => {
            </div>   </td>
                                 <td className="px-6 py-4  border-r whitespace-nowrap">
               <div className="text-center text-sm text-gray-900">
-              <button  class="rounded-full bg-red-400 text-white h-9 w-9 flex-row items-center justify-center" >
+              <button onClick={()=>confirmdelete(data.id)}  class="rounded-full bg-red-400 text-white h-9 w-9 flex-row items-center justify-center" >
                                   <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
                   </div>   </td>
               </tr>
