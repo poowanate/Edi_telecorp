@@ -131,7 +131,7 @@ function table() {
 
 
 
-      setchecklength([...checklength, { id: index }]);
+      setchecklength([...checklength, { id: index ,dataid:g}]);
     }
     if (e) {
       mapp[index].checked = false
@@ -144,7 +144,7 @@ function table() {
     }
     if (!e) {
       mapp[index].checked = true
-      setchecklength([...checklength, { id: index }]); //เอาไปเช็คทำซ้ำ
+      setchecklength([...checklength, { id: index ,dataid:g}]); //เอาไปเช็คทำซ้ำ
 
 
 
@@ -174,7 +174,51 @@ function table() {
     itemtable['id'] = temp[idx].id
     itemtable['idx'] = idx
   }
+  const deletecheckbox = async () => {
+    console.log(checklength.length,checklength)
 
+
+    const temp = [...mapp];
+
+    let ggwp = deletedOrderItemIds
+
+    checklength.sort((a, b) => (a.id < b.id) ? 1 : -1)
+    console.log(checklength)
+    
+    for (let index = 0; index < checklength.length; index++) {
+      // const element = array[index];
+     
+      if (checklength[index].dataid != 0) {
+      ggwp = ggwp + ',' + checklength[index].dataid
+    
+      setdeletedOrderItemIds(ggwp)
+      temp.splice(checklength[index].id, 1);
+      
+      setmapp(temp)
+    callmoney([...temp])
+    }
+
+    }
+    // if (id != 0) {
+    //   ggwp = ggwp + ',' + id
+    //   console.log(ggwp)
+    //   setdeletedOrderItemIds(ggwp)
+    // }
+
+  
+    // temp.splice(idx, 1);
+
+  
+    // console.log(temp)
+    // setmapp(temp)
+    // callmoney([...temp])
+
+
+
+
+
+
+  }
   const dupplicate = async () => {
 
     let gebvalue = []
@@ -1354,7 +1398,7 @@ function table() {
                           >
                             วันที่หมดอายุ
                           </th>
-
+                     
                           <th
                             scope="col"
                             className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
@@ -1374,6 +1418,12 @@ function table() {
                             className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
                           >
                             ราคาต่อหน่วย
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                          >
+                            ราคารวม vat
                           </th>
                           <th
                             scope="col"
@@ -1419,6 +1469,8 @@ function table() {
                                   <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
                                 <td className="px-6 py-4   whitespace-nowrap">
                                   <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
+                                  <td className="px-6 py-4   whitespace-nowrap">
+                                  <div className="text-center text-sm text-gray-900">{((data.c12*7)/100+data.c12).toFixed(2)}</div>   </td>
                                 <td className="px-6 py-4   whitespace-nowrap">
                                   <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                                 <td className="px-6 py-4   whitespace-nowrap">
@@ -1433,6 +1485,7 @@ function table() {
                       </table>
                     </div>
                   </div>
+              
                 </div>
               </div>
               <div className="flex flex-col mb-10">
@@ -1639,7 +1692,7 @@ function table() {
                           >
                             วันที่หมดอายุ
                           </th>
-
+                       
                           <th
                             scope="col"
                             className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
@@ -1659,6 +1712,12 @@ function table() {
                             className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
                           >
                             ราคาต่อหน่วย
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                          >
+                            ราคารวม vat
                           </th>
                           <th
                             scope="col"
@@ -1703,6 +1762,8 @@ function table() {
                                 <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
+                                <td className="px-6 py-4   whitespace-nowrap">
+                                  <div className="text-center text-sm text-gray-900">{((data.c12*7)/100+data.c12).toFixed(2)}</div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
@@ -1933,6 +1994,12 @@ function table() {
                       ทำซ้ำ
                     </button>
                     <button
+                      onClick={() => deletecheckbox()}
+                      className="bg-pink-500 ml-3  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      ลบ
+                    </button>
+                    <button
                       onClick={() => setisClose(true)}
                       className="bg-pink-500 ml-3  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
                     >
@@ -2004,7 +2071,7 @@ function table() {
                           >
                             วันที่หมดอายุ
                           </th>
-
+                         
                           <th
                             scope="col"
                             className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
@@ -2024,6 +2091,12 @@ function table() {
                             className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
                           >
                             ราคาต่อหน่วย
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                          >
+                            ราคารวม vat
                           </th>
                           <th
                             scope="col"
@@ -2052,7 +2125,7 @@ function table() {
                               <td className="px-6 py-4  border-r whitespace-nowrap">
                                 <label class="inline-flex items-center mt-3">
                                   <input autoComplete="off" type="checkbox" id={data.id} checked={data.checked}
-                                    onChange={(e) => setChecked(data.checked, index, e)} class="form-checkbox h-6 w-6 text-gray-600" />
+                                    onChange={(e) => setChecked(data.checked, index, data.id)} class="form-checkbox h-6 w-6 text-gray-600" />
                                 </label>
                               </td>
                               <td className="px-6 py-4  border-r whitespace-nowrap">
@@ -2082,6 +2155,8 @@ function table() {
                                 <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
+                                <td className="px-6 py-4   whitespace-nowrap">
+                                  <div className="text-center text-sm text-gray-900">{((data.c12*7)/100+data.c12).toFixed(2)}</div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
