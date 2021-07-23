@@ -1,7 +1,29 @@
 {
+  "/Layoutza/Layout": "pages/Layoutza/Layout.js",
+  "/Login": "pages/Login.js",
   "/_app": "pages/_app.js",
+<<<<<<< HEAD
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/edivtadmin/setuplocal": "pages/edivtadmin/setuplocal.js",
   "/components/polistsell": "pages/components/polistsell.js"
+=======
+  "/api/api_asn": "pages/api/api_asn.js",
+  "/api/api_company": "pages/api/api_company.js",
+  "/api/api_po": "pages/api/api_po.js",
+  "/api/auth": "pages/api/auth.js",
+  "/api/login": "pages/api/login.js",
+  "/components/about": "pages/components/about.js",
+  "/components/invoicelist": "pages/components/invoicelist.js",
+  "/components/invoicelistsell": "pages/components/invoicelistsell.js",
+  "/components/polist": "pages/components/polist.js",
+  "/components/polistsell": "pages/components/polistsell.js",
+  "/components/popickup": "pages/components/popickup.js",
+  "/edivtadmin/login": "pages/edivtadmin/login.js",
+  "/edivtadmin/setuplocal": "pages/edivtadmin/setuplocal.js",
+  "/": "pages/index.js",
+  "/testp": "pages/testp.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js"
+>>>>>>> 905e52d92974c793fb3e89e433aac0361788a320
 }
