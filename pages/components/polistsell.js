@@ -1,9 +1,12 @@
 import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from 'react'
 import moment from 'moment';
-
+import ReactExport from "react-data-export";
 
 function table() {
+  const [excelEX, setexcelEX] = useState({ excelHead: null });
+  const ExcelFile = ReactExport.ExcelFile;
+  const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
   const [isClose, setisClose] = useState(true);
   const [date, setdate] = useState({
     Ddate: moment(new Date()).format("YYYY-MM-DD"),
@@ -15,7 +18,172 @@ function table() {
     console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
+  useEffect(() => {
+    let data = [];
+    let datasum = [];
+    var head = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head);
+    var head1 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "เลขที่ใบสั่งซื้อ", style: { font: { bold: true } } },
+      { value: "00001", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "กำหนดส่งมอบ", style: { font: { bold: true } } },
+      { value: "12/03/63", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head1);
+    var head2 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "วันที่ออกใบสั่งซื้อ", style: { font: { bold: true } } },
+      { value: "13/04/63", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "สถาที่ส่งมอบ", style: { font: { bold: true } } },
+      { value: "อาคารสะอาด", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head2);
+    var head3 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "เลขที่สัญญา", style: { font: { bold: true } } },
+      { value: "00001", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "รหัสผู้จำหน่าย", style: { font: { bold: true } } },
+      { value: "00001", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head3);
+    var head4 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "ใบขออนุมัติซื้อ", style: { font: { bold: true } } },
+      { value: "00001", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ชื่อผู้จำหน่าย", style: { font: { bold: true } } },
+      { value: "สมศักดิ์", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head4);
+    var head5 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head5);
+    var arr1 = [
+      { value: "รหัสGPU", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัสUNSPSC", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัสTMT", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "BARCODE", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ชื่อยา /เวชภัณท์", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "จำนวน", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ราคาต่อหน่วย", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+    ];
+    datasum.push(arr1);
+    for (let index = 0; index < 3; index++) {
 
+      var arr2 = [
+        { value: "aaaa" },
+        { value: "bbbb" },
+        { value: "cccc" },
+        { value: "dddd" },
+        { value: "eeee" },
+        { value: "ffff" },
+        { value: "gggg" },
+      ];
+      datasum.push(arr2);
+    }
+    var foot = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot);
+    var foot1 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ราคารวม(ไม่รวม VAT)", style: { font: { bold: true } } },
+      { value: "3000", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot1);
+    var foot2 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ส่วนลด-เปอร์เซ็นต์ ", style: { font: { bold: true } } },
+      { value: "10%", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot2);
+    var foot3 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ส่วนลด-บาท", style: { font: { bold: true } } },
+      { value: "5", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot3);
+    var foot4 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "VAT", style: { font: { bold: true } } },
+      { value: "30", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot4);
+    var foot5 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ราคารวม", style: { font: { bold: true } } },
+      { value: "3030", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot5);
+    data = datasum
+    var excelHead = [
+      {
+        columns: [
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "ใบสั่งซื้อ (PO)", style: { font: { sz: "28", bold: true, color: { rgb: "BE185D" } } } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+        ],
+        data: data
+
+      }
+    ];
+    excelEX.excelHead = excelHead;
+    setexcelEX(excelEX);
+
+  }, [])
   return (
     <Layout>
       {isClose ? (
@@ -159,10 +327,16 @@ function table() {
               </a>
             </div>
           </div>
-          <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-700 ">
-            ใบสั่งซื้อ (PO)
+          <div className="flex flex-row">
+            <div className="w-1/3"></div>
+            <div className="content-center w-1/3 text-center flex justify-center items-center text-4xl mt-5 text-pink-700 ">
+              ใบสั่งซื้อ (PO)
+            </div>
+            <div className="flex w-1/3 justify-end items-end mr-5">
+              <ExcelFile element={<button className="bk_blue ct br_1 py-1 px-3 btn_h ml-3 text-white bg-pink-700">Download</button>}>
+                <ExcelSheet dataSet={excelEX.excelHead} name="report" />
+              </ExcelFile></div>
           </div>
-
           <div class="grid grid-cols-2 gap-3">
             <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่ใบสั่งซื้อ <label className="ml-5">00001</label></div>
 
@@ -198,7 +372,6 @@ function table() {
                     </thead>
                     <tbody className="bg-white ">
                       <tr>
-
                         <td className="px-6 py-4  border-r whitespace-nowrap">
                           <div className="text-center text-sm text-gray-900">00001 </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
@@ -213,11 +386,6 @@ function table() {
                           <div className="text-center text-sm text-gray-900">1000 </div>   </td>
                         <td className="px-6 py-4   whitespace-nowrap">
                           <div className="text-center text-sm text-gray-900">2 </div>   </td>
-
-
-
-
-
                       </tr>
                       <tr>
 
