@@ -10,7 +10,7 @@ package-lock.json
 yarn.lock
 !/yarn.lock
 test/node_modules
-
+checkout -f
 # logs & pids
 *.log
 pids
