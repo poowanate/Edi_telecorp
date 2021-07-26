@@ -47,28 +47,49 @@ const binddatapo = (e) => {
     }else{
   
         setisClose(false)
-        datapodetail
-        if(data[0].pO_DETAILs.length>0){
-let datapush = []
-for (let index = 0; index < data[0].pO_DETAILs.length; index++) {
-  let datatable = {
-    amount: Number(data[0].pO_DETAILs[index].amount),
-    baR_CODE: String(data[0].pO_DETAILs[index].baR_CODE),
-    codE_GPU: String(data[0].pO_DETAILs[index].codE_GPU),
-    codE_TMT: String(data[0].pO_DETAILs[index].codE_TMT),
-    codE_UNSPSC: String(data[0].pO_DETAILs[index].codE_UNSPSC),
-    producT_CODE: String(data[0].pO_DETAILs[index].producT_CODE),
-    producT_NAME: String(data[0].pO_DETAILs[index].producT_NAME),
-    qty: Number(data[0].pO_DETAILs[index].qty),
-    uniT_PRICE: Number(data[0].pO_DETAILs[index].uniT_PRICE),
-  }  
-  datapush.push(datatable)
-}
+        if(data.length>0){
+          datapodetail['contracT_NO']= data[0].contracT_NO
+          datapodetail['deliveR_DATE']= data[0].deliveR_DATE
+          datapodetail['discounT_BAHT']= data[0].discounT_BAHT
+          datapodetail['discounT_PERCENTAGE']= data[0].discounT_PERCENTAGE
+          datapodetail['pO_DATE']= data[0].pO_DATE
+          datapodetail['pO_NO']= data[0].pO_NO
+          datapodetail['pO_TYPE']= data[0].pO_TYPE
+          datapodetail['referencE1']= data[0].referencE1
+          datapodetail['referencE2']= data[0].referencE2
+          datapodetail['referencE3']= data[0].referencE3
+          datapodetail['requesT_DATE']= data[0].requesT_DATE
+          datapodetail['requesT_NO']= data[0].requesT_NO
+          datapodetail['shiP_TO']= data[0].shiP_TO
+          datapodetail['totaL_AMOUNT']= data[0].totaL_AMOUNT
+          datapodetail['vat']= data[0].vat
+          datapodetail['vendoR_NAME']= data[0].vendoR_NAME
+          datapodetail['vendoR_NO']= data[0].vendoR_NO
 
-setdatapodetailtable(datapush)
-
-
+          if(data[0].pO_DETAILs.length>0){
+            let datapush = []
+            for (let index = 0; index < data[0].pO_DETAILs.length; index++) {
+              let datatable = {
+                amount: Number(data[0].pO_DETAILs[index].amount),
+                baR_CODE: String(data[0].pO_DETAILs[index].baR_CODE),
+                codE_GPU: String(data[0].pO_DETAILs[index].codE_GPU),
+                codE_TMT: String(data[0].pO_DETAILs[index].codE_TMT),
+                codE_UNSPSC: String(data[0].pO_DETAILs[index].codE_UNSPSC),
+                producT_CODE: String(data[0].pO_DETAILs[index].producT_CODE),
+                producT_NAME: String(data[0].pO_DETAILs[index].producT_NAME),
+                qty: Number(data[0].pO_DETAILs[index].qty),
+                uniT_PRICE: Number(data[0].pO_DETAILs[index].uniT_PRICE),
+              }  
+              datapush.push(datatable)
+            }
+            
+            setdatapodetailtable(datapush)
+            
+            
+                    }
+          
         }
+    
     }
 
    
@@ -396,14 +417,14 @@ setdatapodetailtable(datapush)
           <div class="grid grid-cols-2 gap-3">
             <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่ใบสั่งซื้อ <label className="ml-5">{datapodetail.pO_NO}</label></div>
 
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">กำหนดส่งมอบ <label className="ml-5">12/03/63</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">วันที่ออกใบสั่งซื้อ <label className="ml-5">13/04/63</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถาที่ส่งมอบ <label className="ml-5">อาคารสะอาด</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่สัญญา <label className="ml-5">00001</label></div>
+            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">กำหนดส่งมอบ <label className="ml-5">{datapodetail.requesT_DATE}</label></div>
+            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">วันที่ออกใบสั่งซื้อ <label className="ml-5">{datapodetail.pO_DATE}</label></div>
+            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถาที่ส่งมอบ <label className="ml-5">{datapodetail.shiP_TO}</label></div>
+            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่สัญญา <label className="ml-5">{datapodetail.requesT_NO}</label></div>
 
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">รหัสผู้จำหน่าย <label className="ml-5">00001</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ใบขออนุมัติซื้อ <label className="ml-5">00001</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ชื่อผู้จำหน่าย <label className="ml-5">สมศักดิ์</label></div>
+            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">รหัสผู้จำหน่าย <label className="ml-5">{datapodetail.vendoR_NO}</label></div>
+            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ใบขออนุมัติซื้อ <label className="ml-5">ไม่ทราบ</label></div>
+            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ชื่อผู้จำหน่าย <label className="ml-5">{datapodetail.vendoR_NAME}</label></div>
           </div>
 
 
@@ -459,15 +480,15 @@ setdatapodetailtable(datapush)
           </div>
           <div className="flex flex-col mb-10">
             <div class="grid grid-cols-1 gap-3 mt-5 mr-10">
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ราคารวม (ไม่รวม VAT) <input id="VAT_AMOUNT" value="3000" autoComplete="false" className="ml-4 bg-white shadow-md rounded   text-gray-900  " />
+              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ราคารวม (ไม่รวม VAT)<label className="ml-5">{datapodetail.totaL_AMOUNT-datapodetail.vat}</label> 
               </div>
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ส่วนลด - เปอร์เซ็นต์ <input id="VAT_AMOUNT" autoComplete="false" className="ml-4 bg-white shadow-md rounded   text-gray-900  " />
+              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ส่วนลด - เปอร์เซ็นต์<label className="ml-5">{datapodetail.discounT_PERCENTAGE}</label> 
               </div>
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ส่วนลด - บาท <input id="VAT_AMOUNT" autoComplete="false" className="ml-4 bg-white shadow-md rounded   text-gray-900  " />
+              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ส่วนลด - บาท<label className="ml-5">{datapodetail.discounT_BAHT}</label>  
               </div>
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">VAT <input id="VAT_AMOUNT" value="30" autoComplete="false" className="ml-4 bg-white shadow-md rounded   text-gray-900  " />
+              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">VAT<label className="ml-5">{datapodetail.vat}</label> 
               </div>
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ราคารวม <input id="VAT_AMOUNT" value="3030" autoComplete="false" className="ml-4 bg-white shadow-md rounded   text-gray-900  " />
+              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ราคารวม <label className="ml-5">{datapodetail.totaL_AMOUNT}</label> 
               </div>
             </div> </div></>
       }
