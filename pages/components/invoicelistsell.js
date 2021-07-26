@@ -685,8 +685,9 @@ function table() {
 
 
             }
+            
             // console.log(ggwp)
-
+            ggwp.push(form)
 
 
           }
@@ -700,7 +701,7 @@ function table() {
             requesT_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
             deliveR_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
             shiP_TO: String(data[0].ship_to),
-            vendoR_NO: String(data[0].vendoR_NO),
+            vendoR_NO: String(data[0].producT_NO),
             vendoR_NAME: String(data[0].vendoR_NAME),
             discounT_PERCENTAGE: Number(data[0].discounT_PERCENTAGE),
             discounT_BAHT: Number(data[0].discounT_BAHT),
