@@ -454,13 +454,13 @@ const binddatapo = (e) => {
 
                               <tr key={index} className="bg-white ">
                         <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">{data.codE_GPU} </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">{data.codE_UNSPSC}  </div>   </td>
+                          <div className="text-center text-sm text-gray-900">{data.codE_GPU } </div>   </td>
+                        <td className="px-6 py-4  border-r whitespace-nowrap">   
+                          <div className="text-center text-sm text-gray-900" >{data.codE_UNSPSC ==null && <span>{data.codE_UNSPSC}</span> }  </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
                           <div className="text-center text-sm text-gray-900">{data.codE_TMT}  </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">{data.baR_CODE}  </div>   </td>
+                          <div className="text-center text-sm text-gray-900">{data.baR_CODE ==null && <span>{data.baR_CODE}</span> } </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
                           <div className="text-center text-sm text-gray-900">{data.producT_NAME}  </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
