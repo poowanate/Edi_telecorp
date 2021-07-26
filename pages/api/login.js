@@ -11,7 +11,7 @@ export const login = data => {
 
   return axios({
       method: 'POST',
-      url: `http://192.168.7.15:5555/api/EMPLOYEE_AUTHORIZED_CENTER/login`,
+      url: `http://103.245.164.54:5003/api/EMPLOYEE_AUTHORIZED_CENTER/login`,
       headers: {
     
           'Content-Type': 'application/json'

@@ -6,7 +6,7 @@ import axios from 'axios';
 
     return axios({
         method: 'GET',   
-        url: `http://192.168.7.15:5555/api/EDI_COMPANY_INFORMATION`,
+        url: `http://103.245.164.54:5003/api/EDI_COMPANY_INFORMATION`,
         headers: {
       
             'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ import axios from 'axios';
 
     return axios({
         method: 'DELETE',   
-        url: `http://192.168.7.15:5555/api/EDI_COMPANY_INFORMATION/`+data,
+        url: `http://103.245.164.54:5003/api/EDI_COMPANY_INFORMATION/`+data,
         headers: {
       
             'Content-Type': 'application/json'
@@ -42,3 +42,26 @@ import axios from 'axios';
         return { error: 'Error......' }
     });
   }
+
+
+
+  export const postapicompany = data => {
+
+    return axios({
+        method: 'post',   
+        url: `http://203.154.39.28:5000/api/APIEDI/EDIToDrug_InvoiceDocument`,
+        headers: {
+          
+            'Content-Type':'application/json'
+        },
+        data: data
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
+

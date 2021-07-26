@@ -2,8 +2,9 @@ import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from 'react'
 import moment from 'moment';
 import ReactExport from "react-data-export";
-
+import {edi_po} from '../api/api_po'
 function table() {
+  const [datatable,setdatatable] = useState()
   const [excelEX, setexcelEX] = useState({ excelHead: null });
   const ExcelFile = ReactExport.ExcelFile;
   const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -18,6 +19,21 @@ function table() {
     console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
+
+  const fetchdata = ()=>{
+    edi_po().then(async data=>{
+      if (data.error) {
+
+      } else {
+
+       await setdatatable(data)
+      }
+    })
+  }
+useEffect(async() => {
+ await fetchdata()
+}, [])
+
   useEffect(() => {
     let data = [];
     let datasum = [];

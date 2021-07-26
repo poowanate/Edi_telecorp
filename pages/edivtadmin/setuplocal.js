@@ -81,7 +81,7 @@ const setuplocal = () => {
 </div> 
 
 
-<div className="py-2 overflow-x-auto  mt-5 ">
+<div className="py-2 w-full  mt-5 ">
                     <div className="shadow  border-gray-200 sm:rounded-lg">
                       <table className="min-w-full w-full">
                         <tr className="bg-gray-50">

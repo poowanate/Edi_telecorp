@@ -1,5 +1,6 @@
 import Layout from "../Layoutza/Layout"
 import React,{useMemo,useState,useEffect,useRef} from 'react'
+import moment from "moment";
 function table() {
     const [isClose,setisClose] = useState(true);
     const [date, setdate] = useState({

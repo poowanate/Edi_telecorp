@@ -6,6 +6,7 @@ import { edi_asn, ediproduct, getediasn, getediasnbyinvoice, asnupdate, deleteas
 import * as XLSX from 'xlsx';
 import moment from "moment";
 import Swal from 'sweetalert2'
+import {postapicompany} from '../api/api_company'
 // import template from '../../public/download/template.xlsx';
 
 function table() {
@@ -268,7 +269,7 @@ function table() {
     remark: "",
     discounT_PERCENTAGE: null,
     discounT_BAHT: null,
-    vat: 7,
+    vat: "",
     totaL_AMOUNT: null,
     producT_NO: "",
     pO_NO: "",
@@ -280,6 +281,8 @@ function table() {
 
 
   const editall = async (e) => {
+
+    console.log(itemdata)
     console.log(mapp)
     let mo = []
     for (let index = 0; index < mapp.length; index++) {
@@ -293,12 +296,12 @@ function table() {
         codE_UNSPSC: String(mapp[index].c2),
         codE_TMT: String(mapp[index].c3),
         baR_CODE: String(mapp[index].c4),
-        producT_NO: String(itemdata.producT_NO),
+        producT_NO: String(itemdata.invoicE_NO),
         producT_NAME: String(mapp[index].c5),
         qty: Number(mapp[index].c9),
         uom: String(mapp[index].c10),
         uniT_PRICE: Number(mapp[index].c11),
-        batcH_LOT_NO: 1,
+        batcH_LOT_NO: String(mapp[index].c6),
         mfG_DATE: c7,
         exP_DATE: c8,
 
@@ -321,7 +324,7 @@ function table() {
       ship_to: itemdata.location,
       discounT_PERCENTAGE: itemdata.discounT_PERCENTAGE,
       discounT_BAHT: itemdata.discounT_BAHT,
-      vat: 7,
+      vat: itemdata.vat,
       totaL_AMOUNT: itemdata.totaL_AMOUNT,
       remark: itemdata.remark,
       total: itemdata.total,
@@ -380,11 +383,119 @@ function table() {
       await fetchData()
     }
   }
+const tosendapianother = async (invoice, product) =>{
+  console.log(invoice,product)
 
+  
+  GETEDI_ASN(invoice, product).then(async data => {
+    console.log(data)
+    if (data.length > 0) {
+      let ggwp = []
+      if (data[0].orderdetails.length > 0) {
+     
+        for (let index = 0; index < data[0].orderdetails.length; index++) {
+          const form = {
+            codE_GPU: data[0].orderdetails[index].codE_GPU,
+            codE_UNSPSC: data[0].orderdetails[index].codE_UNSPSC,
+            codE_TMT: data[0].orderdetails[index].codE_TMT,
+            baR_CODE: data[0].orderdetails[index].baR_CODE,
+            producT_CODE: data[0].orderdetails[index].producT_NO,
+            producT_NAME: data[0].orderdetails[index].producT_NAME,
+            mfG_DATE:data[0].orderdetails[index].mfG_DATE,
+            exP_DATE:data[0].orderdetails[index].exP_DATE,
+            batcH_LOT_NO:data[0].orderdetails[index].batcH_LOT_NO,
+            qty: data[0].orderdetails[index].qty,
+         
+            uniT_PRICE: data[0].orderdetails[index].uniT_PRICE,
+     
+            amount: data[0].orderdetails[index].amount,
+          }
+          ggwp.push(form)
+          console.log(form)
+        }
+// console.log(ggwp)
+
+
+      
+    }
+    const form = { 
+      deliverY_ORDER : data[0].invoicE_NO,
+      deliverY_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+      pO_NO : data[0].pO_NO,
+      pO_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+      contracT_NO : "",
+      requesT_NO : "",
+      requesT_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+      deliveR_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+      shiP_TO : data[0].location,
+      vendoR_NO : data[0].vendoR_NAME,
+      vendoR_NAME : data[0].vendoR_NAME,
+      discounT_PERCENTAGE : Number(data[0].discounT_PERCENTAGE),
+      discounT_BAHT : Number(data[0].discounT_BAHT),
+      vat : Number((data[0].totaL_AMOUNT*7)/100).toFixed(2),
+      totaL_AMOUNT : Number(data[0].totaL_AMOUNT),
+      remark: data[0].remark,
+      pO_TYPE : "",
+      referencE1 : "",  
+      referencE2 : "",
+      referencE3 : "",
+      pO_DETAILs: ggwp
+}
+// เทส
+// let ggwpz = []
+//         const formz = {codE_GPU: "1164842",
+//         codE_UNSPSC: "",
+//         codE_TMT: "1164928",
+//         baR_CODE: "",
+//         producT_CODE: "2307074",
+//         producT_NAME: "REMDESIVIR (DESREM) 100 MG INJ.",
+//         qty: 140,
+//         uniT_PRICE: 3300,
+//         amount: 462000
+//                 }
+//         ggwpz.push(formz)
+// const form = { 
+//   deliverY_ORDER: "iv0001",
+//    deliverY_DATE: "2021-07-24T10:43:37.830Z",
+// pO_NO: "ย03350/2564",
+// pO_DATE: "2021-07-15T00:00:00",
+// contracT_NO: "",
+// requesT_NO: "640004227",
+// requesT_DATE: "2021-07-24T10:43:37.830Z",
+// deliveR_DATE: "2021-07-24T10:43:37.830Z",
+// shiP_TO: "รพ ราชวิถี",
+// vendoR_NO: "0105523002118",
+// vendoR_NAME: "บริษัท ดีเคเอสเอช (ประเทศไทย) จำกัด",
+// discounT_PERCENTAGE: 0,
+// discounT_BAHT: 0,
+// vat: 32340,
+// totaL_AMOUNT: 494340,
+// pO_TYPE: "40",
+// referencE1: "ข03999/2564",
+// referencE2: "",
+// referencE3: "",
+// pO_DETAILs:  ggwp
+   
+//     }
+
+//  console.log(JSON.stringify('['+form+']'))
+let dsadsa = '['+JSON.stringify(form)+']'
+console.log(dsadsa)
+// postapicompany(dsadsa).then(data=>{
+//   console.log(data)
+//   if(data.error){
+//     Swal.fire('ทำการลบไม่สำเร็จ', '', 'info')
+//   }
+//   else{
+//     Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
+//   }
+// })
+  }})
+}
   // edit3
   const handleedit = async (invoice, product) => {
     setisClosef(2)
-
+    console.log(invoice,product)
     GETEDI_ASN(invoice, product).then(async data => {
       console.log(data)
 
@@ -401,7 +512,7 @@ function table() {
         itemdata['totaL_AMOUNT'] = data[0].totaL_AMOUNT
         itemdata['discounT_PERCENTAGE'] = data[0].discounT_PERCENTAGE
         itemdata['discounT_BAHT'] = data[0].discounT_BAHT
-        itemdata['vat'] = 7
+        itemdata['vat'] = data[0].vat
         itemdata['total'] = data[0].total
         itemdata['id'] = data[0].id
 
@@ -415,7 +526,7 @@ function table() {
               c2: data[0].orderdetails[index].codE_UNSPSC,
               c3: data[0].orderdetails[index].codE_TMT,
               c4: data[0].orderdetails[index].baR_CODE,
-              c6: data[0].orderdetails[index].producT_NO,
+              c6: data[0].orderdetails[index].batcH_LOT_NO,
               c5: data[0].orderdetails[index].producT_NAME,
               c9: data[0].orderdetails[index].qty,
               c10: data[0].orderdetails[index].uom,
@@ -442,70 +553,7 @@ function table() {
     })
 
 
-    //  getedi_po(event).then(async data1  => {
-    //   if(data1.error){
-
-    //   }
-    //   else{
-    //     await  getediasnbyinvoice(event).then(data2=>{
-    //       if(data2.error){
-
-    //       }
-    //       else{
-    //         if(data2.length>0){
-    //           itemdata['invoicE_NO'] =  data2[0].invoicE_NO
-    //           itemdata['producT_NO'] =  data2[0].producT_NO
-    //           itemdata['pO_NO'] =  data2[0].pO_NO
-    //           itemdata['invoicE_DATE'] =  data2[0].invoicE_DATE
-    //           itemdata['vendoR_NAME'] =  data2[0].vendoR_NAME
-    //           itemdata['location'] =  data2[0].location
-    //           itemdata['remark'] =  data2[0].remark
-    //           itemdata['totaL_AMOUNT'] =  data2[0].totaL_AMOUNT
-    //           itemdata['discounT_PERCENTAGE'] =  data2[0].discounT_PERCENTAGE
-    //           itemdata['discounT_BAHT'] =  data2[0].discounT_BAHT
-    //           itemdata['vat'] =   data2[0].vat
-    //           itemdata['total'] =   data2[0].total
-    //         setitemdata({ ...itemdata })
-    //         let ggwp=[]
-    //           if(data1.length>0){
-    //             for (let index = 0; index < data1.length; index++) {
-    //                const form = {
-    //                 c1 :data1[index].codE_GPU,
-    //                 c2 :data1[index].codE_UNSPSC,
-    //                 c3 :data1[index].codE_TMT,
-    //                 c4 :data1[index].baR_CODE,
-    //                 c6 :data1[index].producT_NO,
-    //                 c5 :data1[index].producT_NAME,
-    //                 c9 :data1[index].qty,
-    //                 c10 :data1[index].uom,
-    //                 c11 :data1[index].uniT_PRICE,
-    //                 c7 :data1[index].mfG_DATE,
-    //                 c8 :data1[index].exP_DATE,
-    //                 c12 :data1[index].amount,
-
-
-    //     }
-    //     ggwp.push(form)
-    //     console.log(form)   
-    //             }
-    //             setmapp(mapp.concat(ggwp))
-    //             console.log(mapp)   
-    //           }
-
-
-
-
-
-    //         }
-
-
-    //         console.log(itemdata)
-    //       }
-    //     })
-    //   }
-    //  }
-
-    //   )
+   
   }
 
 
@@ -902,6 +950,7 @@ function table() {
       let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * itemdata['vat'] / 100
       itemdata['total'] = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
     }  //มา
+ 
     setitemdata({ ...itemdata })
   };
   const cleardata = () => {
@@ -913,7 +962,7 @@ function table() {
       remark: "",
       discounT_PERCENTAGE: "",
       discounT_BAHT: "",
-      vat: 7,
+      vat: "",
       totaL_AMOUNT: "",
       producT_NO: "",
       pO_NO: "",
@@ -934,7 +983,7 @@ function table() {
       remark: "",
       discounT_PERCENTAGE: "",
       discounT_BAHT: "",
-      vat: 7,
+      vat: "",
       totaL_AMOUNT: "",
       producT_NO: "",
       pO_NO: "",
@@ -951,7 +1000,7 @@ function table() {
     var date = moment(itemdata.invoicE_DATE, 'DD-MM-YYYY')
     let discounT_BAHT = itemdata.discounT_BAHT
     let discounT_PERCENTAGE = itemdata.discounT_PERCENTAGE
-    let vat = 7
+    let vat = itemdata.vat
     let totaL_AMOUNT = itemdata.totaL_AMOUNT
     let total = itemdata.total
     if (isNaN(discounT_PERCENTAGE)) {
@@ -968,7 +1017,7 @@ function table() {
       remark: String(itemdata.remark),
       discounT_PERCENTAGE: Number(discounT_PERCENTAGE),
       discounT_BAHT: Number(discounT_BAHT),
-      vat: 7,
+      vat: Number(vat),
       totaL_AMOUNT: Number(totaL_AMOUNT),
       producT_NO: String(itemdata.producT_NO),
       pO_NO: String(itemdata.pO_NO),
@@ -997,18 +1046,18 @@ function table() {
               codE_UNSPSC: String(mapp[index].c2),
               codE_TMT: String(mapp[index].c3),
               baR_CODE: String(mapp[index].c4),
-              producT_NO: String(itemdata.producT_NO),
+              producT_NO: String(itemdata.invoicE_NO),
               producT_NAME: String(mapp[index].c5),
               qty: Number(mapp[index].c9),
               uom: String(mapp[index].c10),
               uniT_PRICE: Number(mapp[index].c11),
-              batcH_LOT_NO: 1,
+              batcH_LOT_NO: String(mapp[index].c6),
               mfG_DATE: c7.format('YYYY-MM-DD'),
               exP_DATE: c8.format('YYYY-MM-DD'),
 
               amount: Number(mapp[index].c12),
               total: Number(mapp[index].c13),
-              producT_CODE: Number(mapp[index].c14),
+              producT_CODE: String(mapp[index].c14),
             }
             console.log(JSON.stringify(datatable))
             await ediproduct(datatable).then(async data => {
@@ -1232,7 +1281,11 @@ function table() {
                               </td>
 
                               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <button onClick={() => handleedit(data.invoicE_NO, data.producT_NO)} class="rounded-full bg-pink-500 text-white h-9 w-9 flex-row items-center justify-center">
+                              <button onClick={() => tosendapianother(data.pO_NO, data.invoicE_NO)} class="rounded-full bg-indigo-500 text-white h-9 w-9 flex-row items-center justify-center">
+                              <svg class="w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                               
+                                     </button>{" "}
+                                <button onClick={() => handleedit(data.pO_NO, data.invoicE_NO)} class="rounded-full bg-pink-500 text-white h-9 w-9 flex-row items-center justify-center">
                                   <svg
                                     className="  w-7 h-7 ml-1"
                                     fill="none"
@@ -1303,14 +1356,14 @@ function table() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  เลขที่ใบสั่งซื้อ <label className="ml-5">{itemdata.invoicE_NO}</label>
+                  เลขที่ใบสั่งซื้อ <label className="ml-5">{itemdata.pO_NO}</label>
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  เลขที่ใบส่งของ <label className="ml-5">{itemdata.producT_NO}</label>
+                  เลขที่ใบส่งของ <label className="ml-5">{itemdata.invoicE_NO}</label>
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  รหัสผู้จำหน่าย <label className="ml-5">{itemdata.pO_NO}</label>
+                  รหัสผู้จำหน่าย <label className="ml-5">{itemdata.producT_NO}</label>
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   วันที่ใบส่งของ <label className="ml-5"> {moment(itemdata.invoicE_DATE).format('DD/MM/yyyy')}</label>
@@ -1573,25 +1626,25 @@ function table() {
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบสั่งซื้อ
 
-                  <input autoComplete="off" onChange={(e) => handleChangedata("invoicE_NO", e)}
+                  <input autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
                     id="เลขที่ใบสั่งซื้อ"
-                    value={itemdata.invoicE_NO}
+                    value={itemdata.pO_NO}
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบส่งของ{" "}
-                  <input autoComplete="off" value={itemdata.producT_NO}
-                    id="เลขที่ใบส่งของ" onChange={(e) => handleChangedata("producT_NO", e)}
+                  <input autoComplete="off" value={itemdata.invoicE_NO}
+                    id="เลขที่ใบส่งของ" onChange={(e) => handleChangedata("invoicE_NO", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   รหัสผู้จำหน่าย{" "}
-                  <input autoComplete="off" value={itemdata.pO_NO}
-                    id="รหัสผู้จำหน่าย" onChange={(e) => handleChangedata("pO_NO", e)}
+                  <input autoComplete="off" value={itemdata.producT_NO}
+                    id="รหัสผู้จำหน่าย" onChange={(e) => handleChangedata("producT_NO", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
@@ -1932,25 +1985,25 @@ function table() {
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบสั่งซื้อ
 
-                  <input autoComplete="off" onChange={(e) => handleChangedata("invoicE_NO", e)}
+                  <input autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
                     id="เลขที่ใบสั่งซื้อ"
-                    value={itemdata.invoicE_NO}
+                    value={itemdata.pO_NO}
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบส่งของ{" "}
-                  <input autoComplete="off" value={itemdata.producT_NO}
-                    id="เลขที่ใบส่งของ" onChange={(e) => handleChangedata("producT_NO", e)}
+                  <input autoComplete="off" value={itemdata.invoicE_NO}
+                    id="เลขที่ใบส่งของ" onChange={(e) => handleChangedata("invoicE_NO", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   รหัสผู้จำหน่าย{" "}
-                  <input autoComplete="off" value={itemdata.pO_NO}
-                    id="รหัสผู้จำหน่าย" onChange={(e) => handleChangedata("pO_NO", e)}
+                  <input autoComplete="off" value={itemdata.producT_NO}
+                    id="รหัสผู้จำหน่าย" onChange={(e) => handleChangedata("producT_NO", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
