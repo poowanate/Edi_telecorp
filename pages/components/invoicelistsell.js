@@ -2,15 +2,18 @@ import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
 import { edi_po, getedi_po, GETEDI_ASN } from '../api/api_po'
+import ReactExport from "react-data-export";
 import { edi_asn, ediproduct, getediasn, getediasnbyinvoice, asnupdate, deleteasn } from '../api/api_asn'
 import * as XLSX from 'xlsx';
 import moment from "moment";
 import Swal from 'sweetalert2'
-import {postapicompany} from '../api/api_company'
+import { postapicompany } from '../api/api_company'
 // import template from '../../public/download/template.xlsx';
 
 function table() {
-
+  const [excelEX, setexcelEX] = useState({ excelHead: null });
+  const ExcelFile = ReactExport.ExcelFile;
+  const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
   const [isCheck, setIsCheck] = useState([]);
   const [date, setdate] = useState({
     Ddate: moment(new Date()).format("YYYY-MM-DD"),
@@ -61,11 +64,274 @@ function table() {
     c14: "",
     id: 0,
   });
+  const exceldownload = async (ex) => {
+    let exhead = ex[0]
+    let exdetail = ex[0].orderdetails
+    console.log(exhead)
+    console.log(exdetail)
+    let data = [];
+    let datasum = [];
+    var head = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head);
+    var head1 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "เลขที่ใบสั่งซื้อ", style: { font: { bold: true } } },
+      { value: exhead.pO_NO, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "เลขที่ใบส่งของ", style: { font: { bold: true } } },
+      { value: exhead.invoicE_NO, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head1);
+    var head2 = [
 
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "รหัสผู้จำหน่าย", style: { font: { bold: true } } },
+      { value: exhead.producT_NO, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "วันที่ใบส่งของ ", style: { font: { bold: true } } },
+      { value: moment(exhead.invoicE_DATE).format('DD-MM-yyyy'), style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head2);
+    var head3 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ชื่อผู้จำหน่าย", style: { font: { bold: true } } },
+      { value: exhead.vendoR_NAME, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "สถานที่ส่งมอบ", style: { font: { bold: true } } },
+      { value: exhead.ship_to, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head3);
+    var head5 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head5);
+    var arr1 = [
+      { value: "รหัส GPU", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัส UNSPSC", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัส TMT", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัส สินค้า", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "BAR CODE", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ชื่อยา / เวชภัณท์", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัส ผลิต", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "วันที่ผลิต", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "วันที่หมดอายุ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "จำนวน", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "หน่วย", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ราคาต่อหน่วย", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ราคารวม VAT", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "จำนวนเงิน", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "จำนวนที่สั่งซื้อ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+    ];
+    datasum.push(arr1);
+    for (let index = 0; index < exdetail.length; index++) {
+
+      var arr2 = [
+        { value: exdetail[index].codE_GPU },
+        { value: exdetail[index].codE_UNSPSC },
+        { value: exdetail[index].codE_TMT },
+        { value: exdetail[index].producT_CODE },
+        { value: exdetail[index].baR_CODE },
+        { value: exdetail[index].producT_NAME },
+        { value: exdetail[index].producT_ID },
+        { value: moment(exdetail[index].mfG_DATE).format('DD/MM/yyyy') },
+        { value: moment(exdetail[index].exP_DATE).format('DD/MM/yyyy') },
+        { value: exdetail[index].qty },
+        { value: exdetail[index].uom },
+        { value: exdetail[index].uniT_PRICE },
+        { value: ((exdetail[index].amount * 7) / 100 + exdetail[index].amount).toFixed(2)},
+        { value: exdetail[index].amount },
+        { value: exdetail[index].total },
+      ];
+      datasum.push(arr2);
+    }
+    var foot = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot);
+    var foot1 = [
+      { value: "หมายเหตุ", style: { font: { bold: true } } },
+      { value: exhead.remark, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ราคารวม(ไม่รวม VAT)", style: { font: { bold: true } } },
+      { value: exhead.totaL_AMOUNT, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot1);
+    var foot2 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ส่วนลด-เปอร์เซ็นต์ ", style: { font: { bold: true } } },
+      { value: exhead.discounT_PERCENTAGE, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot2);
+    var foot3 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ส่วนลด-บาท", style: { font: { bold: true } } },
+      { value: exhead.discounT_BAHT, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot3);
+    var foot4 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "VAT", style: { font: { bold: true } } },
+      { value: exhead.vat, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot4);
+    var foot5 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ราคารวม", style: { font: { bold: true } } },
+      { value: exhead.total, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot5);
+    data = datasum
+    var excelHead = [
+      {
+        columns: [
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "ใบรับของ (IN)", style: { font: { sz: "28", bold: true, color: { rgb: "BE185D" } } } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+        ],
+        data: data
+
+      }
+    ];
+    excelEX.excelHead = excelHead;
+    setexcelEX(excelEX);
+
+  }
   useEffect(async () => {
     setitemdata({ ...itemdata })
     fetchData()
-
   }, [])
 
   const fetchData = async () => {
@@ -132,7 +398,7 @@ function table() {
 
 
 
-      setchecklength([...checklength, { id: index ,dataid:g}]);
+      setchecklength([...checklength, { id: index, dataid: g }]);
     }
     if (e) {
       mapp[index].checked = false
@@ -145,7 +411,7 @@ function table() {
     }
     if (!e) {
       mapp[index].checked = true
-      setchecklength([...checklength, { id: index ,dataid:g}]); //เอาไปเช็คทำซ้ำ
+      setchecklength([...checklength, { id: index, dataid: g }]); //เอาไปเช็คทำซ้ำ
 
 
 
@@ -176,7 +442,7 @@ function table() {
     itemtable['idx'] = idx
   }
   const deletecheckbox = async () => {
-    console.log(checklength.length,checklength)
+    console.log(checklength.length, checklength)
 
 
     const temp = [...mapp];
@@ -185,19 +451,19 @@ function table() {
 
     checklength.sort((a, b) => (a.id < b.id) ? 1 : -1)
     console.log(checklength)
-    
+
     for (let index = 0; index < checklength.length; index++) {
       // const element = array[index];
-     
+
       if (checklength[index].dataid != 0) {
-      ggwp = ggwp + ',' + checklength[index].dataid
-    
-      setdeletedOrderItemIds(ggwp)
-      temp.splice(checklength[index].id, 1);
-      
-      setmapp(temp)
-    callmoney([...temp])
-    }
+        ggwp = ggwp + ',' + checklength[index].dataid
+
+        setdeletedOrderItemIds(ggwp)
+        temp.splice(checklength[index].id, 1);
+
+        setmapp(temp)
+        callmoney([...temp])
+      }
 
     }
     // if (id != 0) {
@@ -206,10 +472,10 @@ function table() {
     //   setdeletedOrderItemIds(ggwp)
     // }
 
-  
+
     // temp.splice(idx, 1);
 
-  
+
     // console.log(temp)
     // setmapp(temp)
     // callmoney([...temp])
@@ -383,122 +649,123 @@ function table() {
       await fetchData()
     }
   }
-const tosendapianother = async (invoice, product) =>{
-  console.log(invoice,product)
+  const tosendapianother = async (invoice, product) => {
+    console.log(invoice, product)
 
-  
-  GETEDI_ASN(invoice, product).then(async data => {
-    console.log(data)
-    if (data.length > 0) {
-      let ggwp = []
-      if (data[0].orderdetails.length > 0) {
-     
-        for (let index = 0; index < data[0].orderdetails.length; index++) {
-          const form = {
-            codE_GPU: data[0].orderdetails[index].codE_GPU,
-            codE_UNSPSC: data[0].orderdetails[index].codE_UNSPSC,
-            codE_TMT: data[0].orderdetails[index].codE_TMT,
-            baR_CODE: data[0].orderdetails[index].baR_CODE,
-            producT_CODE: data[0].orderdetails[index].producT_NO,
-            producT_NAME: data[0].orderdetails[index].producT_NAME,
-            mfG_DATE:data[0].orderdetails[index].mfG_DATE,
-            exP_DATE:data[0].orderdetails[index].exP_DATE,
-            batcH_LOT_NO:data[0].orderdetails[index].batcH_LOT_NO,
-            qty: data[0].orderdetails[index].qty,
-         
-            uniT_PRICE: data[0].orderdetails[index].uniT_PRICE,
-     
-            amount: data[0].orderdetails[index].amount,
+
+    GETEDI_ASN(invoice, product).then(async data => {
+      console.log(data)
+      if (data.length > 0) {
+        let ggwp = []
+        if (data[0].orderdetails.length > 0) {
+
+          for (let index = 0; index < data[0].orderdetails.length; index++) {
+            const form = {
+              codE_GPU: data[0].orderdetails[index].codE_GPU,
+              codE_UNSPSC: data[0].orderdetails[index].codE_UNSPSC,
+              codE_TMT: data[0].orderdetails[index].codE_TMT,
+              baR_CODE: data[0].orderdetails[index].baR_CODE,
+              producT_CODE: data[0].orderdetails[index].producT_NO,
+              producT_NAME: data[0].orderdetails[index].producT_NAME,
+              mfG_DATE: data[0].orderdetails[index].mfG_DATE,
+              exP_DATE: data[0].orderdetails[index].exP_DATE,
+              batcH_LOT_NO: data[0].orderdetails[index].batcH_LOT_NO,
+              qty: data[0].orderdetails[index].qty,
+
+              uniT_PRICE: data[0].orderdetails[index].uniT_PRICE,
+
+              amount: data[0].orderdetails[index].amount,
+            }
+            ggwp.push(form)
+            console.log(form)
           }
-          ggwp.push(form)
-          console.log(form)
+          // console.log(ggwp)
+
+
+
         }
-// console.log(ggwp)
+        const form = {
+          deliverY_ORDER: data[0].invoicE_NO,
+          deliverY_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+          pO_NO: data[0].pO_NO,
+          pO_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+          contracT_NO: "",
+          requesT_NO: "",
+          requesT_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+          deliveR_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+          shiP_TO: data[0].location,
+          vendoR_NO: data[0].vendoR_NAME,
+          vendoR_NAME: data[0].vendoR_NAME,
+          discounT_PERCENTAGE: Number(data[0].discounT_PERCENTAGE),
+          discounT_BAHT: Number(data[0].discounT_BAHT),
+          vat: Number((data[0].totaL_AMOUNT * 7) / 100).toFixed(2),
+          totaL_AMOUNT: Number(data[0].totaL_AMOUNT),
+          remark: data[0].remark,
+          pO_TYPE: "",
+          referencE1: "",
+          referencE2: "",
+          referencE3: "",
+          pO_DETAILs: ggwp
+        }
+        // เทส
+        // let ggwpz = []
+        //         const formz = {codE_GPU: "1164842",
+        //         codE_UNSPSC: "",
+        //         codE_TMT: "1164928",
+        //         baR_CODE: "",
+        //         producT_CODE: "2307074",
+        //         producT_NAME: "REMDESIVIR (DESREM) 100 MG INJ.",
+        //         qty: 140,
+        //         uniT_PRICE: 3300,
+        //         amount: 462000
+        //                 }
+        //         ggwpz.push(formz)
+        // const form = { 
+        //   deliverY_ORDER: "iv0001",
+        //    deliverY_DATE: "2021-07-24T10:43:37.830Z",
+        // pO_NO: "ย03350/2564",
+        // pO_DATE: "2021-07-15T00:00:00",
+        // contracT_NO: "",
+        // requesT_NO: "640004227",
+        // requesT_DATE: "2021-07-24T10:43:37.830Z",
+        // deliveR_DATE: "2021-07-24T10:43:37.830Z",
+        // shiP_TO: "รพ ราชวิถี",
+        // vendoR_NO: "0105523002118",
+        // vendoR_NAME: "บริษัท ดีเคเอสเอช (ประเทศไทย) จำกัด",
+        // discounT_PERCENTAGE: 0,
+        // discounT_BAHT: 0,
+        // vat: 32340,
+        // totaL_AMOUNT: 494340,
+        // pO_TYPE: "40",
+        // referencE1: "ข03999/2564",
+        // referencE2: "",
+        // referencE3: "",
+        // pO_DETAILs:  ggwp
 
+        //     }
 
-      
-    }
-    const form = { 
-      deliverY_ORDER : data[0].invoicE_NO,
-      deliverY_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-      pO_NO : data[0].pO_NO,
-      pO_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-      contracT_NO : "",
-      requesT_NO : "",
-      requesT_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-      deliveR_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-      shiP_TO : data[0].location,
-      vendoR_NO : data[0].vendoR_NAME,
-      vendoR_NAME : data[0].vendoR_NAME,
-      discounT_PERCENTAGE : Number(data[0].discounT_PERCENTAGE),
-      discounT_BAHT : Number(data[0].discounT_BAHT),
-      vat : Number((data[0].totaL_AMOUNT*7)/100).toFixed(2),
-      totaL_AMOUNT : Number(data[0].totaL_AMOUNT),
-      remark: data[0].remark,
-      pO_TYPE : "",
-      referencE1 : "",  
-      referencE2 : "",
-      referencE3 : "",
-      pO_DETAILs: ggwp
-}
-// เทส
-// let ggwpz = []
-//         const formz = {codE_GPU: "1164842",
-//         codE_UNSPSC: "",
-//         codE_TMT: "1164928",
-//         baR_CODE: "",
-//         producT_CODE: "2307074",
-//         producT_NAME: "REMDESIVIR (DESREM) 100 MG INJ.",
-//         qty: 140,
-//         uniT_PRICE: 3300,
-//         amount: 462000
-//                 }
-//         ggwpz.push(formz)
-// const form = { 
-//   deliverY_ORDER: "iv0001",
-//    deliverY_DATE: "2021-07-24T10:43:37.830Z",
-// pO_NO: "ย03350/2564",
-// pO_DATE: "2021-07-15T00:00:00",
-// contracT_NO: "",
-// requesT_NO: "640004227",
-// requesT_DATE: "2021-07-24T10:43:37.830Z",
-// deliveR_DATE: "2021-07-24T10:43:37.830Z",
-// shiP_TO: "รพ ราชวิถี",
-// vendoR_NO: "0105523002118",
-// vendoR_NAME: "บริษัท ดีเคเอสเอช (ประเทศไทย) จำกัด",
-// discounT_PERCENTAGE: 0,
-// discounT_BAHT: 0,
-// vat: 32340,
-// totaL_AMOUNT: 494340,
-// pO_TYPE: "40",
-// referencE1: "ข03999/2564",
-// referencE2: "",
-// referencE3: "",
-// pO_DETAILs:  ggwp
-   
-//     }
-
-//  console.log(JSON.stringify('['+form+']'))
-let dsadsa = '['+JSON.stringify(form)+']'
-console.log(dsadsa)
-// postapicompany(dsadsa).then(data=>{
-//   console.log(data)
-//   if(data.error){
-//     Swal.fire('ทำการลบไม่สำเร็จ', '', 'info')
-//   }
-//   else{
-//     Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
-//   }
-// })
-  }})
-}
+        //  console.log(JSON.stringify('['+form+']'))
+        let dsadsa = '[' + JSON.stringify(form) + ']'
+        console.log(dsadsa)
+        // postapicompany(dsadsa).then(data=>{
+        //   console.log(data)
+        //   if(data.error){
+        //     Swal.fire('ทำการลบไม่สำเร็จ', '', 'info')
+        //   }
+        //   else{
+        //     Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
+        //   }
+        // })
+      }
+    })
+  }
   // edit3
   const handleedit = async (invoice, product) => {
     setisClosef(2)
-    console.log(invoice,product)
+    console.log(invoice, product)
     GETEDI_ASN(invoice, product).then(async data => {
       console.log(data)
-
+      exceldownload(data)
       if (data.length > 0) {
         console.log(data[0].invoicE_NO)
         console.log(data[0].orderdetails.length)
@@ -553,7 +820,6 @@ console.log(dsadsa)
     })
 
 
-   
   }
 
 
@@ -950,7 +1216,7 @@ console.log(dsadsa)
       let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * itemdata['vat'] / 100
       itemdata['total'] = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) + i
     }  //มา
- 
+
     setitemdata({ ...itemdata })
   };
   const cleardata = () => {
@@ -1161,14 +1427,14 @@ console.log(dsadsa)
                       <div className="flex-grow">
                         <div className="mt-2">
                           <label className="inline-flex items-center  text-pink-800">
-                          สถานะ{" "}
+                            สถานะ{" "}
                           </label>
                           <select className="form-select ml-2 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 ">
                             <option>Active</option>
                             <option>Inactive</option>
                           </select>
                           <label className="inline-flex items-center ml-2 text-pink-800">
-                          คลัง
+                            คลัง
                           </label>
                           <select className="form-select   ml-2 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 ">
                             <option>No data</option>
@@ -1178,7 +1444,7 @@ console.log(dsadsa)
                       </div>
                       <div className="flex-grow-0">
                         <button className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
-                        ค้นหา
+                          ค้นหา
                         </button>
                       </div>
                     </div>
@@ -1281,10 +1547,10 @@ console.log(dsadsa)
                               </td>
 
                               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                              <button onClick={() => tosendapianother(data.pO_NO, data.invoicE_NO)} class="rounded-full bg-indigo-500 text-white h-9 w-9 flex-row items-center justify-center">
-                              <svg class="w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                               
-                                     </button>{" "}
+                                <button onClick={() => tosendapianother(data.pO_NO, data.invoicE_NO)} class="rounded-full bg-indigo-500 text-white h-9 w-9 flex-row items-center justify-center">
+                                  <svg class="w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+
+                                </button>{" "}
                                 <button onClick={() => handleedit(data.pO_NO, data.invoicE_NO)} class="rounded-full bg-pink-500 text-white h-9 w-9 flex-row items-center justify-center">
                                   <svg
                                     className="  w-7 h-7 ml-1"
@@ -1350,10 +1616,19 @@ console.log(dsadsa)
                   </a>
                 </div>
               </div>
-              <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-800 ">
+              {/* <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-800 ">
                 ใบรับของ (IN)
+              </div> */}
+              <div className="flex flex-row">
+                <div className="w-1/3"></div>
+                <div className="content-center w-1/3 text-center flex justify-center items-center text-4xl mt-5 text-pink-700 ">
+                  ใบรับของ (IN)
+                </div>
+                <div className="flex w-1/3 justify-end items-end mr-5">
+                  <ExcelFile element={<button className="bk_blue ct br_1 py-1 px-3 btn_h ml-3 text-white bg-pink-700">Download</button>}>
+                    <ExcelSheet dataSet={excelEX.excelHead} name="report" />
+                  </ExcelFile></div>
               </div>
-
               <div className="grid grid-cols-2 gap-3">
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบสั่งซื้อ <label className="ml-5">{itemdata.pO_NO}</label>
@@ -1388,7 +1663,7 @@ console.log(dsadsa)
                     >
                       แก้ไข
                     </button>
-               
+
                   </div>
 
                   <div className="py-2 overflow-x-auto  ">
@@ -1451,7 +1726,7 @@ console.log(dsadsa)
                           >
                             วันที่หมดอายุ
                           </th>
-                     
+
                           <th
                             scope="col"
                             className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
@@ -1522,8 +1797,8 @@ console.log(dsadsa)
                                   <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
                                 <td className="px-6 py-4   whitespace-nowrap">
                                   <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
-                                  <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{((data.c12*7)/100+data.c12).toFixed(2)}</div>   </td>
+                                <td className="px-6 py-4   whitespace-nowrap">
+                                  <div className="text-center text-sm text-gray-900">{((data.c12 * 7) / 100 + data.c12).toFixed(2)}</div>   </td>
                                 <td className="px-6 py-4   whitespace-nowrap">
                                   <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                                 <td className="px-6 py-4   whitespace-nowrap">
@@ -1538,7 +1813,7 @@ console.log(dsadsa)
                       </table>
                     </div>
                   </div>
-              
+
                 </div>
               </div>
               <div className="flex flex-col mb-10">
@@ -1745,7 +2020,7 @@ console.log(dsadsa)
                           >
                             วันที่หมดอายุ
                           </th>
-                       
+
                           <th
                             scope="col"
                             className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
@@ -1815,8 +2090,8 @@ console.log(dsadsa)
                                 <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{((data.c12*7)/100+data.c12).toFixed(2)}</div>   </td>
+                              <td className="px-6 py-4   whitespace-nowrap">
+                                <div className="text-center text-sm text-gray-900">{((data.c12 * 7) / 100 + data.c12).toFixed(2)}</div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
@@ -2124,7 +2399,7 @@ console.log(dsadsa)
                           >
                             วันที่หมดอายุ
                           </th>
-                         
+
                           <th
                             scope="col"
                             className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
@@ -2208,8 +2483,8 @@ console.log(dsadsa)
                                 <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{((data.c12*7)/100+data.c12).toFixed(2)}</div>   </td>
+                              <td className="px-6 py-4   whitespace-nowrap">
+                                <div className="text-center text-sm text-gray-900">{((data.c12 * 7) / 100 + data.c12).toFixed(2)}</div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
@@ -2333,9 +2608,9 @@ console.log(dsadsa)
                   <button onClick={(e) => editall(itemdata.id)} className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     บันทึก
                   </button>
-                  <button onClick={() =>  setisClosef(2) }  className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                  <button onClick={() => setisClosef(2)} className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                     ยกเลิก
-                  </button>    
+                  </button>
                 </div>
               </div>
             </>
