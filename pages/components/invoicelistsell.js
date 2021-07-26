@@ -391,24 +391,33 @@ const tosendapianother = async (invoice, product) =>{
     console.log(data)
     if (data.length > 0) {
       let ggwp = []
-      if (data[0].orderdetails.length > 0) {
+      if (data[0].orderdetails.length > 0) {  //ใครทำต่อตายแน่
      
         for (let index = 0; index < data[0].orderdetails.length; index++) {
           const form = {
-            codE_GPU: data[0].orderdetails[index].codE_GPU,
-            codE_UNSPSC: data[0].orderdetails[index].codE_UNSPSC,
-            codE_TMT: data[0].orderdetails[index].codE_TMT,
-            baR_CODE: data[0].orderdetails[index].baR_CODE,
-            producT_CODE: data[0].orderdetails[index].producT_NO,
+            id: Number(0),
+           
+            loT_NO: String(data[0].orderdetails[index].batcH_LOT_NO),
+            codE_GPU: String(data[0].orderdetails[index].codE_GPU),
+            codE_UNSPSC: String(data[0].orderdetails[index].codE_UNSPSC),
+            codE_TMT: String(data[0].orderdetails[index].codE_TMT),
+            baR_CODE: String(data[0].orderdetails[index].baR_CODE),
+            producT_ID: "",
+            producT_NO: "",
+            producT_CODE: data[0].orderdetails[index].producT_CODE,
             producT_NAME: data[0].orderdetails[index].producT_NAME,
             mfG_DATE:data[0].orderdetails[index].mfG_DATE,
             exP_DATE:data[0].orderdetails[index].exP_DATE,
-            batcH_LOT_NO:data[0].orderdetails[index].batcH_LOT_NO,
-            qty: data[0].orderdetails[index].qty,
-         
-            uniT_PRICE: data[0].orderdetails[index].uniT_PRICE,
+            // batcH_LOT_NO:data[0].orderdetails[index].batcH_LOT_NO,
+            qty: Number(data[0].orderdetails[index].qty),
+            uom: String(data[0].orderdetails[index].uom),
+            uniT_PRICE: Number(data[0].orderdetails[index].uniT_PRICE),
      
-            amount: data[0].orderdetails[index].amount,
+            amount:Number(data[0].orderdetails[index].amount),
+            total:Number(data[0].orderdetails[index].total),
+
+           
+            
           }
           ggwp.push(form)
           console.log(form)
@@ -419,17 +428,17 @@ const tosendapianother = async (invoice, product) =>{
       
     }
     const form = { 
-      deliverY_ORDER : data[0].invoicE_NO,
+      deliverY_ORDER : String(data[0].invoicE_NO),
       deliverY_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-      pO_NO : data[0].pO_NO,
+      pO_NO : String(data[0].pO_NO),
       pO_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
       contracT_NO : "",
       requesT_NO : "",
       requesT_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
       deliveR_DATE : moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-      shiP_TO : data[0].location,
-      vendoR_NO : data[0].vendoR_NAME,
-      vendoR_NAME : data[0].vendoR_NAME,
+      shiP_TO : String(data[0].ship_to),
+      vendoR_NO : String(data[0].vendoR_NO),
+      vendoR_NAME : String(data[0].vendoR_NAME),
       discounT_PERCENTAGE : Number(data[0].discounT_PERCENTAGE),
       discounT_BAHT : Number(data[0].discounT_BAHT),
       vat : Number((data[0].totaL_AMOUNT*7)/100).toFixed(2),
@@ -439,7 +448,10 @@ const tosendapianother = async (invoice, product) =>{
       referencE1 : "",  
       referencE2 : "",
       referencE3 : "",
-      pO_DETAILs: ggwp
+      orderdetails: ggwp  
+
+
+    
 }
 // เทส
 // let ggwpz = []
@@ -481,15 +493,15 @@ const tosendapianother = async (invoice, product) =>{
 //  console.log(JSON.stringify('['+form+']'))
 let dsadsa = '['+JSON.stringify(form)+']'
 console.log(dsadsa)
-// postapicompany(dsadsa).then(data=>{
-//   console.log(data)
-//   if(data.error){
-//     Swal.fire('ทำการลบไม่สำเร็จ', '', 'info')
-//   }
-//   else{
-//     Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
-//   }
-// })
+postapicompany(dsadsa).then(data=>{
+  console.log(data)
+  if(data.error){
+    Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
+  }
+  else{
+    Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
+  }
+})
   }})
 }
   // edit3

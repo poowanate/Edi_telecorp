@@ -2,9 +2,12 @@ import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from 'react'
 import moment from 'moment';
 import ReactExport from "react-data-export";
-import {edi_po} from '../api/api_po'
+import {getdataedipo,getdataedipobypo} from '../api/api_po'
 function table() {
-  const [datatable,setdatatable] = useState()
+  const [datatable,setdatatable] = useState([])
+  const [datapodetail,setdatapodetail] = useState([])
+  const [datapodetailtable,setdatapodetailtable] = useState([])
+  const [ordertable,setordertable] = useState([])
   const [excelEX, setexcelEX] = useState({ excelHead: null });
   const ExcelFile = ReactExport.ExcelFile;
   const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -21,18 +24,58 @@ function table() {
   }
 
   const fetchdata = ()=>{
-    edi_po().then(async data=>{
+    getdataedipo().then( data=>{
+
       if (data.error) {
 
       } else {
+          
+        setdatatable(data)
 
-       await setdatatable(data)
+        
       }
     })
   }
 useEffect(async() => {
  await fetchdata()
 }, [])
+
+const binddatapo = (e) => {
+  getdataedipobypo(e).then(data=>{
+    if(data.error){
+
+    }else{
+  
+        setisClose(false)
+        datapodetail
+        if(data[0].pO_DETAILs.length>0){
+let datapush = []
+for (let index = 0; index < data[0].pO_DETAILs.length; index++) {
+  let datatable = {
+    amount: Number(data[0].pO_DETAILs[index].amount),
+    baR_CODE: String(data[0].pO_DETAILs[index].baR_CODE),
+    codE_GPU: String(data[0].pO_DETAILs[index].codE_GPU),
+    codE_TMT: String(data[0].pO_DETAILs[index].codE_TMT),
+    codE_UNSPSC: String(data[0].pO_DETAILs[index].codE_UNSPSC),
+    producT_CODE: String(data[0].pO_DETAILs[index].producT_CODE),
+    producT_NAME: String(data[0].pO_DETAILs[index].producT_NAME),
+    qty: Number(data[0].pO_DETAILs[index].qty),
+    uniT_PRICE: Number(data[0].pO_DETAILs[index].uniT_PRICE),
+  }  
+  datapush.push(datatable)
+}
+
+setdatapodetailtable(datapush)
+
+
+        }
+    }
+
+   
+  })
+
+}
+
 
   useEffect(() => {
     let data = [];
@@ -280,45 +323,40 @@ useEffect(async() => {
                         </tr>
                       </thead>
                       <tbody className="bg-white ">
-                        <tr>
-                          {/* <td className="px-6 py-4 whitespace-nowrap">
-           <div className="flex items-center">
-          
-             <div className="ml-4">
-               <div className="text-sm font-medium text-gray-900">
-                 Jane Cooper
-               </div>
-               <div className="text-sm text-gray-500">
-                 jane.cooper@example.com
-               </div>
-             </div>
-           </div>
-         </td> */}
+                        {
+                            datatable.map((data, index) => (
+                              <tr key={index} className="bg-white ">
+     <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-center text-sm text-gray-900">{data.pO_NO} </div>   </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">PO 00001 </div>   </td>
+                            <div className="text-center text-sm text-gray-900">{data.pO_DATE}  </div>   </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">12/03/63  </div>   </td>
+                            <div className="text-center text-sm text-gray-900">{data.contracT_NO} </div>   </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">00000001 </div>   </td>
+                            <div className="text-center text-sm text-gray-900">{data.requesT_NO}</div>   </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">00000001</div>   </td>
+                            <div className="text-center text-sm text-gray-900">{moment(data.requesT_DATE).format("DD-MM-YYYY")}</div>   </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">13/03/63 </div>   </td>
+                            <div className="text-center text-sm text-gray-900">{moment(data.deliveR_DATE).format("DD-MM-YYYY")} </div>   </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">13/04/63  </div>   </td>
+                            <div className="text-center text-sm text-gray-900">{data.shiP_TO}</div>   </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">อาคารสะอาด</div>   </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">สมศักดิ์   </div>   </td>
+                            <div className="text-center text-sm text-gray-900">{data.vendoR_NAME}  </div>   </td>
 
 
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <button onClick={() => setisClose(false)} >
+                            <button onClick={() => binddatapo(data.pO_NO)} >
                               <svg class=" text-pink-700 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
 
                             </button>
                           </td>
-                        </tr>
+                              </tr>
+                            ))
+                        }
+                    
+                          
+                     
+                     
 
 
                       </tbody>
@@ -349,12 +387,14 @@ useEffect(async() => {
               ใบสั่งซื้อ (PO)
             </div>
             <div className="flex w-1/3 justify-end items-end mr-5">
+
+          
               <ExcelFile element={<button className="bk_blue ct br_1 py-1 px-3 btn_h ml-3 text-white bg-pink-700">Download</button>}>
                 <ExcelSheet dataSet={excelEX.excelHead} name="report" />
               </ExcelFile></div>
           </div>
           <div class="grid grid-cols-2 gap-3">
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่ใบสั่งซื้อ <label className="ml-5">00001</label></div>
+            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่ใบสั่งซื้อ <label className="ml-5">{datapodetail.pO_NO}</label></div>
 
             <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">กำหนดส่งมอบ <label className="ml-5">12/03/63</label></div>
             <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">วันที่ออกใบสั่งซื้อ <label className="ml-5">13/04/63</label></div>
@@ -387,66 +427,30 @@ useEffect(async() => {
                       </tr>
                     </thead>
                     <tbody className="bg-white ">
-                      <tr>
+
+                    {
+                            datapodetailtable.map((data, index) => (
+
+                              <tr key={index} className="bg-white ">
                         <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
+                          <div className="text-center text-sm text-gray-900">{data.codE_GPU} </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
+                          <div className="text-center text-sm text-gray-900">{data.codE_UNSPSC}  </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
+                          <div className="text-center text-sm text-gray-900">{data.codE_TMT}  </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
+                          <div className="text-center text-sm text-gray-900">{data.baR_CODE}  </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">ถุงมือ </div>   </td>
+                          <div className="text-center text-sm text-gray-900">{data.producT_NAME}  </div>   </td>
                         <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">1000 </div>   </td>
+                          <div className="text-center text-sm text-gray-900">{data.amount}  </div>   </td>
                         <td className="px-6 py-4   whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">2 </div>   </td>
-                      </tr>
-                      <tr>
+                          <div className="text-center text-sm text-gray-900">{data.qty}  </div>   </td>
+                              </tr>
+                            ))
+                          }
 
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">ถุงมือ </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">1000 </div>   </td>
-                        <td className="px-6 py-4   whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">2 </div>   </td>
-
-
-
-
-
-                      </tr>     <tr>
-
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">00001 </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">ถุงมือ </div>   </td>
-                        <td className="px-6 py-4  border-r whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">1000 </div>   </td>
-                        <td className="px-6 py-4   whitespace-nowrap">
-                          <div className="text-center text-sm text-gray-900">2 </div>   </td>
-
-
-
-
-
-                      </tr>
-
+                  
                     </tbody>
                   </table>
                 </div>
