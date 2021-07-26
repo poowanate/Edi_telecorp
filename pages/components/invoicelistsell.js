@@ -187,7 +187,7 @@ function table() {
         { value: exdetail[index].qty },
         { value: exdetail[index].uom },
         { value: exdetail[index].uniT_PRICE },
-        { value: ((exdetail[index].amount * 7) / 100 + exdetail[index].amount).toFixed(2)},
+        { value: ((exdetail[index].amount * 7) / 100 + exdetail[index].amount).toFixed(2) },
         { value: exdetail[index].amount },
         { value: exdetail[index].total },
       ];
@@ -657,107 +657,116 @@ function table() {
       console.log(data)
       if (data.length > 0) {
         let ggwp = []
-        if (data[0].orderdetails.length > 0) {
+        if (data[0].orderdetails.length > 0) {  //ใครทำต่อตายแน่
 
           for (let index = 0; index < data[0].orderdetails.length; index++) {
             const form = {
-              codE_GPU: data[0].orderdetails[index].codE_GPU,
-              codE_UNSPSC: data[0].orderdetails[index].codE_UNSPSC,
-              codE_TMT: data[0].orderdetails[index].codE_TMT,
-              baR_CODE: data[0].orderdetails[index].baR_CODE,
-              producT_CODE: data[0].orderdetails[index].producT_NO,
+              id: Number(0),
+
+              loT_NO: String(data[0].orderdetails[index].batcH_LOT_NO),
+              codE_GPU: String(data[0].orderdetails[index].codE_GPU),
+              codE_UNSPSC: String(data[0].orderdetails[index].codE_UNSPSC),
+              codE_TMT: String(data[0].orderdetails[index].codE_TMT),
+              baR_CODE: String(data[0].orderdetails[index].baR_CODE),
+              producT_ID: "",
+              producT_NO: "",
+              producT_CODE: data[0].orderdetails[index].producT_CODE,
               producT_NAME: data[0].orderdetails[index].producT_NAME,
               mfG_DATE: data[0].orderdetails[index].mfG_DATE,
               exP_DATE: data[0].orderdetails[index].exP_DATE,
-              batcH_LOT_NO: data[0].orderdetails[index].batcH_LOT_NO,
-              qty: data[0].orderdetails[index].qty,
+              // batcH_LOT_NO:data[0].orderdetails[index].batcH_LOT_NO,
+              qty: Number(data[0].orderdetails[index].qty),
+              uom: String(data[0].orderdetails[index].uom),
+              uniT_PRICE: Number(data[0].orderdetails[index].uniT_PRICE),
 
-              uniT_PRICE: data[0].orderdetails[index].uniT_PRICE,
+              amount: Number(data[0].orderdetails[index].amount),
+              total: Number(data[0].orderdetails[index].total),
 
-              amount: data[0].orderdetails[index].amount,
+
+
             }
-            ggwp.push(form)
-            console.log(form)
+            // console.log(ggwp)
+
+
+
           }
-          // console.log(ggwp)
+          const form = {
+            deliverY_ORDER: String(data[0].invoicE_NO),
+            deliverY_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+            pO_NO: String(data[0].pO_NO),
+            pO_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+            contracT_NO: "",
+            requesT_NO: "",
+            requesT_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+            deliveR_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+            shiP_TO: String(data[0].ship_to),
+            vendoR_NO: String(data[0].vendoR_NO),
+            vendoR_NAME: String(data[0].vendoR_NAME),
+            discounT_PERCENTAGE: Number(data[0].discounT_PERCENTAGE),
+            discounT_BAHT: Number(data[0].discounT_BAHT),
+            vat: Number((data[0].totaL_AMOUNT * 7) / 100).toFixed(2),
+            totaL_AMOUNT: Number(data[0].totaL_AMOUNT),
+            remark: data[0].remark,
+            pO_TYPE: "",
+            referencE1: "",
+            referencE2: "",
+            referencE3: "",
+            orderdetails: ggwp
 
 
 
+          }
+          // เทส
+          // let ggwpz = []
+          //         const formz = {codE_GPU: "1164842",
+          //         codE_UNSPSC: "",
+          //         codE_TMT: "1164928",
+          //         baR_CODE: "",
+          //         producT_CODE: "2307074",
+          //         producT_NAME: "REMDESIVIR (DESREM) 100 MG INJ.",
+          //         qty: 140,
+          //         uniT_PRICE: 3300,
+          //         amount: 462000
+          //                 }
+          //         ggwpz.push(formz)
+          // const form = { 
+          //   deliverY_ORDER: "iv0001",
+          //    deliverY_DATE: "2021-07-24T10:43:37.830Z",
+          // pO_NO: "ย03350/2564",
+          // pO_DATE: "2021-07-15T00:00:00",
+          // contracT_NO: "",
+          // requesT_NO: "640004227",
+          // requesT_DATE: "2021-07-24T10:43:37.830Z",
+          // deliveR_DATE: "2021-07-24T10:43:37.830Z",
+          // shiP_TO: "รพ ราชวิถี",
+          // vendoR_NO: "0105523002118",
+          // vendoR_NAME: "บริษัท ดีเคเอสเอช (ประเทศไทย) จำกัด",
+          // discounT_PERCENTAGE: 0,
+          // discounT_BAHT: 0,
+          // vat: 32340,
+          // totaL_AMOUNT: 494340,
+          // pO_TYPE: "40",
+          // referencE1: "ข03999/2564",
+          // referencE2: "",
+          // referencE3: "",
+          // pO_DETAILs:  ggwp
+
+          //     }
+
+          //  console.log(JSON.stringify('['+form+']'))
+          let dsadsa = '[' + JSON.stringify(form) + ']'
+          console.log(dsadsa)
+          postapicompany(dsadsa).then(data => {
+            console.log(data)
+            if (data.error) {
+              Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
+            }
+            else {
+              Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
+            }
+          })
         }
-        const form = {
-          deliverY_ORDER: data[0].invoicE_NO,
-          deliverY_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-          pO_NO: data[0].pO_NO,
-          pO_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-          contracT_NO: "",
-          requesT_NO: "",
-          requesT_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-          deliveR_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-          shiP_TO: data[0].location,
-          vendoR_NO: data[0].vendoR_NAME,
-          vendoR_NAME: data[0].vendoR_NAME,
-          discounT_PERCENTAGE: Number(data[0].discounT_PERCENTAGE),
-          discounT_BAHT: Number(data[0].discounT_BAHT),
-          vat: Number((data[0].totaL_AMOUNT * 7) / 100).toFixed(2),
-          totaL_AMOUNT: Number(data[0].totaL_AMOUNT),
-          remark: data[0].remark,
-          pO_TYPE: "",
-          referencE1: "",
-          referencE2: "",
-          referencE3: "",
-          pO_DETAILs: ggwp
-        }
-        // เทส
-        // let ggwpz = []
-        //         const formz = {codE_GPU: "1164842",
-        //         codE_UNSPSC: "",
-        //         codE_TMT: "1164928",
-        //         baR_CODE: "",
-        //         producT_CODE: "2307074",
-        //         producT_NAME: "REMDESIVIR (DESREM) 100 MG INJ.",
-        //         qty: 140,
-        //         uniT_PRICE: 3300,
-        //         amount: 462000
-        //                 }
-        //         ggwpz.push(formz)
-        // const form = { 
-        //   deliverY_ORDER: "iv0001",
-        //    deliverY_DATE: "2021-07-24T10:43:37.830Z",
-        // pO_NO: "ย03350/2564",
-        // pO_DATE: "2021-07-15T00:00:00",
-        // contracT_NO: "",
-        // requesT_NO: "640004227",
-        // requesT_DATE: "2021-07-24T10:43:37.830Z",
-        // deliveR_DATE: "2021-07-24T10:43:37.830Z",
-        // shiP_TO: "รพ ราชวิถี",
-        // vendoR_NO: "0105523002118",
-        // vendoR_NAME: "บริษัท ดีเคเอสเอช (ประเทศไทย) จำกัด",
-        // discounT_PERCENTAGE: 0,
-        // discounT_BAHT: 0,
-        // vat: 32340,
-        // totaL_AMOUNT: 494340,
-        // pO_TYPE: "40",
-        // referencE1: "ข03999/2564",
-        // referencE2: "",
-        // referencE3: "",
-        // pO_DETAILs:  ggwp
-
-        //     }
-
-        //  console.log(JSON.stringify('['+form+']'))
-        let dsadsa = '[' + JSON.stringify(form) + ']'
-        console.log(dsadsa)
-        // postapicompany(dsadsa).then(data=>{
-        //   console.log(data)
-        //   if(data.error){
-        //     Swal.fire('ทำการลบไม่สำเร็จ', '', 'info')
-        //   }
-        //   else{
-        //     Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
-        //   }
-        // })
-      }
-    })
+      }})
   }
   // edit3
   const handleedit = async (invoice, product) => {
