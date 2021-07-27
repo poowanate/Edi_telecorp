@@ -126,7 +126,7 @@ const binddatapo = (e) => {
       { value: "วันที่ออกใบสั่งซื้อ", style: { font: { bold: true } } },
       { value: "13/04/63", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
-      { value: "สถาที่ส่งมอบ", style: { font: { bold: true } } },
+      { value: "สถานที่ส่งมอบ", style: { font: { bold: true } } },
       { value: "อาคารสะอาด", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
@@ -335,7 +335,7 @@ const binddatapo = (e) => {
                           <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-700 uppercase tracking-wider">ใบขออนุมัติซื้อ</th>
                           <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-700 uppercase tracking-wider">วันที่ขอซื้อ</th>
                           <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-700 uppercase tracking-wider">กำหนดส่งมอบ</th>
-                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-700 uppercase tracking-wider">สถาที่ส่งมอบ</th>
+                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-700 uppercase tracking-wider">สถานที่ส่งมอบ</th>
                           <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-700 uppercase tracking-wider">ชื่อผู้จำหน่าย</th>
 
                           <th scope="col" className="relative px-6 py-3">
@@ -419,7 +419,7 @@ const binddatapo = (e) => {
 
             <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">กำหนดส่งมอบ <label className="ml-5">{datapodetail.requesT_DATE}</label></div>
             <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">วันที่ออกใบสั่งซื้อ <label className="ml-5">{datapodetail.pO_DATE}</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถาที่ส่งมอบ <label className="ml-5">{datapodetail.shiP_TO}</label></div>
+            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถานที่ส่งมอบ <label className="ml-5">{datapodetail.shiP_TO}</label></div>
             <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่สัญญา <label className="ml-5">{datapodetail.requesT_NO}</label></div>
 
             <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">รหัสผู้จำหน่าย <label className="ml-5">{datapodetail.vendoR_NO}</label></div>

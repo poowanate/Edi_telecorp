@@ -35,7 +35,7 @@ function table() {
       <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
       <span className="ml-2 text-blue-800">เฉพาะวันที่</span>
     </label>
-  <input value={date.Ddate} onChange={(e) => dateChange('Ddate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
+  <input value={date.Ddate} onChange={(e) => dateChange('Ddate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
     </div>
               </div>
               <div className="flex-grow">  <div className="mt-1">
@@ -43,19 +43,19 @@ function table() {
       <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
       <span className="ml-2 text-blue-800">ตั้งแต่วันที่</span>
     </label>
-  <input value={date.Sdate} onChange={(e) => dateChange('Sdate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
+  <input value={date.Sdate} onChange={(e) => dateChange('Sdate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
   <label className="inline-flex items-center ml-2 text-blue-800">ถึงวันที่</label>
-  <input value={date.Edate} onChange={(e) => dateChange('Edate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
+  <input value={date.Edate} onChange={(e) => dateChange('Edate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
     </div></div>
               <div className="flex-grow"> 
                <div className="mt-1">
                <label className="inline-flex items-center  text-blue-800">สถานะ </label>
-               <select className="form-select ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ">
+               <select className="form-select ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ">
     <option>Active</option>
     <option>Inactive</option>
   </select>
   <label className="inline-flex items-center ml-2 text-blue-800">คลัง</label>
-  <select className="form-select   ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+  <select className="form-select   ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
     <option>No data</option>
     <option>No data</option>
   </select>
@@ -81,7 +81,7 @@ function table() {
  <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">ผู้จำหน่าย</th>
  <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">เลขที่ใบส่งของ</th>
  <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">วันที่ใบส่งของ</th>
- <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">สถาที่ส่งมอบ</th>
+ <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">สถานที่ส่งมอบ</th>
  <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">สถานะ</th>
               <th scope="col" className="relative px-6 py-3">
                 <span className="sr-only">Edit</span>
@@ -163,7 +163,7 @@ function table() {
   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">วันที่ใบส่งของ <label className="ml-5">12/12/12</label></div>
   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ชื่อผู้จำหน่าย <label className="ml-5">สมศักดิ์</label></div>
 
-  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถาที่ส่งมอบ <label className="ml-5">ตึกสะอาด</label></div>
+  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถานที่ส่งมอบ <label className="ml-5">ตึกสะอาด</label></div>
 
 </div>
 
@@ -217,7 +217,7 @@ function table() {
                 <td className="px-6 py-4   whitespace-nowrap">
                 <div className="text-center text-sm text-gray-900">1000</div>   </td>
                 <td className="px-6 py-4   whitespace-nowrap">
-                <div className="text-center text-sm text-gray-900">2 </div>   </td>
+                <div className="text-center text-sm text-gray-900">คู่ </div>   </td>
                 <td className="px-6 py-4   whitespace-nowrap">
                 <div className="text-center text-sm text-gray-900">2 </div>   </td>
 
@@ -247,7 +247,7 @@ function table() {
             <td className="px-6 py-4   whitespace-nowrap">
             <div className="text-center text-sm text-gray-900">1000</div>   </td>
             <td className="px-6 py-4   whitespace-nowrap">
-            <div className="text-center text-sm text-gray-900">2 </div>   </td>
+            <div className="text-center text-sm text-gray-900">คู่ </div>   </td>
             <td className="px-6 py-4   whitespace-nowrap">
             <div className="text-center text-sm text-gray-900">2 </div>   </td>
 
@@ -277,7 +277,7 @@ function table() {
             <td className="px-6 py-4   whitespace-nowrap">
             <div className="text-center text-sm text-gray-900">1000</div>   </td>
             <td className="px-6 py-4   whitespace-nowrap">
-            <div className="text-center text-sm text-gray-900">2 </div>   </td>
+            <div className="text-center text-sm text-gray-900">คู่ </div>   </td>
             <td className="px-6 py-4   whitespace-nowrap">
             <div className="text-center text-sm text-gray-900">2 </div>   </td>
 

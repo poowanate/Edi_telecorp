@@ -80,7 +80,7 @@ var color =''
   //       classnamepo ='text-white-300 bg-white hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
   //       classnameposell =  'text-white bg-pink-600  hover:bg-pink-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
   //     }
-  //     if(props.children.props.children[0].props.children == 'ข้อบริษัท'){
+  //     if(props.children.props.children[0].props.children == 'ชื่อบริษัท'){
   //       classnameinvoice ='text-white-300 bg-white hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
   //     }
   //     if(props.children.props.children[0].props.children == 'รายการส่งของ'){
@@ -132,7 +132,7 @@ var color =''
 
 </Link>
 <Link href="/components/invoicelist">
-   <a className={classnameinvoice}>ข้อบริษัท</a>
+   <a className={classnameinvoice}>รายการรับของ</a>
    </Link>
    <Link href="/components/popickup">
    <a className={classnameinvoice}>ภาพรวมรับสินค้า</a>
@@ -144,8 +144,8 @@ var color =''
           {(role == 2) && (
                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                <div className="flex-shrink-0 flex items-center">
-               {closeprofile ? (  <a  onClick={()=>{setcloseprofile(false)}} className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ข้อบริษัท</a>
-         ):(  <a  onClick={()=>{setcloseprofile(true)}} className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ข้อบริษัท</a>
+               {closeprofile ? (  <a  onClick={()=>{setcloseprofile(false)}} className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
+         ):(  <a  onClick={()=>{setcloseprofile(true)}} className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
          )}
                    </div>
                <div className="hidden sm:block sm:ml-6">
@@ -192,7 +192,7 @@ var color =''
       
       {/* <a href="#" className="bg-indigo-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">รายการสั่งซื้อทั้งหมด</a>
 
-      <a href="#" className="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ข้อบริษัท</a> */}
+      <a href="#" className="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ชื่อบริษัท</a> */}
 
  
     </div>

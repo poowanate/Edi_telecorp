@@ -1501,7 +1501,7 @@ function table() {
                               scope="col"
                               className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider"
                             >
-                              สถาที่ส่งมอบ
+                              สถานที่ส่งมอบ
                             </th>
                             <th
                               scope="col"
@@ -1658,7 +1658,7 @@ function table() {
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  สถาที่ส่งมอบ <label className="ml-5">{itemdata.location}</label>
+                  สถานที่ส่งมอบ <label className="ml-5">{itemdata.location}</label>
                 </div>
               </div>
 
@@ -1952,9 +1952,9 @@ function table() {
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  สถาที่ส่งมอบ{" "}
+                  สถานที่ส่งมอบ{" "}
                   <input autoComplete="off" value={itemdata.location}
-                    id="สถาที่ส่งมอบ" onChange={(e) => handleChangedata("location", e)}
+                    id="สถานที่ส่งมอบ" onChange={(e) => handleChangedata("location", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
@@ -2311,9 +2311,9 @@ function table() {
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  สถาที่ส่งมอบ{" "}
+                  สถานที่ส่งมอบ{" "}
                   <input autoComplete="off" value={itemdata.location}
-                    id="สถาที่ส่งมอบ" onChange={(e) => handleChangedata("location", e)}
+                    id="สถานที่ส่งมอบ" onChange={(e) => handleChangedata("location", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
                   />
