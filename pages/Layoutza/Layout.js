@@ -64,10 +64,10 @@ var color =''
   }
  
   // '+{role}+'
-  var classnamepo = 'text-gray-300  hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-  var classnameinvoice = 'text-gray-300  hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-  var classnamesend = 'text-gray-300  hover:bg-pink-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-  var classnameposell = 'text-gray-300  hover:bg-pink-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+  var classnamepo = 'text-gray-300  hover:bg-pink-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+  var classnameinvoice = 'text-gray-300  hover:bg-pink-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+  var classnamesend = 'text-gray-300  hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+  var classnameposell = 'text-gray-300  hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
   if(props.children!= 'EDI'){
   // if(!props.children.props){
    
