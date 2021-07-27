@@ -312,7 +312,7 @@ function table() {
           { title: "", style: { font: { sz: "12", bold: true }, } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
-          { title: "ใบรับของ (IN)", style: { font: { sz: "28", bold: true, color: { rgb: "BE185D" } } } },
+          { title: "ใบส่งของ (OUT)", style: { font: { sz: "28", bold: true, color: { rgb: "BE185D" } } } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
@@ -614,7 +614,8 @@ function table() {
         confirmButtonText: 'ยืนยัน'
       }).then((result) => {
         if (result.isConfirmed) {
-          closef1refresh(1)
+          setisClosef(2)
+          // closef1refresh(1)
         }
       })
 
@@ -685,7 +686,7 @@ function table() {
 
 
             }
-            
+
             // console.log(ggwp)
             ggwp.push(form)
 
@@ -767,7 +768,8 @@ function table() {
             }
           })
         }
-      }})
+      }
+    })
   }
   // edit3
   const handleedit = async (invoice, product) => {
@@ -1631,11 +1633,11 @@ function table() {
               </div> */}
               <div className="flex flex-row">
                 <div className="w-1/3"></div>
-                <div className="content-center w-1/3 text-center flex justify-center items-center text-4xl mt-5 text-pink-700 ">
-                  ใบรับของ (IN)
+                <div className="content-center w-1/3 text-center flex justify-center items-center text-xl font-bold mt-5 text-pink-700 ">
+                  ใบส่งของ (OUT)
                 </div>
                 <div className="flex w-1/3 justify-end items-end mr-5">
-                  <ExcelFile element={<button className="bk_blue ct br_1 py-1 px-3 btn_h ml-3 text-white bg-pink-700">Download</button>}>
+                  <ExcelFile element={<button className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
                     <ExcelSheet dataSet={excelEX.excelHead} name="report" />
                   </ExcelFile></div>
               </div>
@@ -1886,26 +1888,33 @@ function table() {
                   </a>
                 </div>
               </div>
-              <div className=" flex justify-end  mr-10 mt-5">
-                <div className="">
-                  {upload ? (<label className="flex items-center px-4 py-6 bg-pink-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-pink-700 ">
-                    <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                    </svg>
-                    <span className="ml-2 text-base leading-normal">อัพโหลด</span>
-                    <input autoComplete="off" type='file' onChange={handleUpload} className="hidden" />
-                  </label>) : ''}
+              <div className=" flex flex-row justify-end  mr-10 mt-5">
+                <div className="w-1/3">
 
                 </div>
+                <div className="w-1/3">
+                  <div className="content-center text-center justify-items-center text-xl font-bold  text-pink-800 ">
+                    ใบส่งของ (OUT)
+                  </div>
+                </div>
+                <div className="w-1/3">
+                  <div className="flex flex-row justify-end items-center">
+                    {upload ? (<label className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded flex flex-row">
+                      <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                      </svg>
+                      <span className="ml-2 text-base leading-normal flex items-center">อัพโหลด</span>
+                      <input autoComplete="off" type='file' onChange={handleUpload} className="hidden" />
+                    </label>) : ''}
+                    <a id="downloadexcel" href="../download/template.xlsx" hidden download> file_name </a>
+                    <button id="my_iframe" onClick={Download} className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+                      ดาวน์โหลด
+                    </button>
+                  </div>
+                </div>
 
-                <a id="downloadexcel" href="../download/template.xlsx" hidden download> file_name </a>
-                <button id="my_iframe" onClick={Download} className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
-                  ดาวน์โหลด
-                </button>
               </div>
-              <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-800 ">
-                ใบรับของ (IN)
-              </div>
+
 
               <div className="grid grid-cols-3 gap-3">
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2501,8 +2510,8 @@ function table() {
                                 <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td>
                               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
-                                <button onClick={(e) => handleRemoveItem2(index, data.id)} className="rounded-full bg-red-400 text-white h-9 w-9 flex items-center justify-center" >
-                                  <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                                {/* <button onClick={(e) => handleRemoveItem2(index, data.id)} className="rounded-full bg-red-400 text-white h-9 w-9 flex items-center justify-center" >
+                                  <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button> */}
 
 
                                 <button onClick={(e) => edittable(index, data.id)} class="rounded-full bg-green-400 text-white h-9 w-9 flex-row items-center justify-center" >

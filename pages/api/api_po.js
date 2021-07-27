@@ -98,7 +98,7 @@ export const edi_po = data => {
         },
      
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        console.log('hasil axios', result)
         return result.data
   
     }).catch(err => {

@@ -151,7 +151,7 @@ function table() {
 </a>
    </div>
 </div>
-<div className="content-center text-center justify-items-center text-4xl mt-5 text-blue-800 ">
+<div className="content-center text-center justify-items-center text-xl font-bold mt-5 text-blue-800 ">
         ใบรับของ (IN)
       </div>
 
