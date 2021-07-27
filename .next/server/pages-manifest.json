@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/components/polistsell": "pages/components/polistsell.js",
   "/components/polist": "pages/components/polist.js",
   "/components/invoicelistsell": "pages/components/invoicelistsell.js",
-  "/components/popickup": "pages/components/popickup.js",
-  "/components/polistsell": "pages/components/polistsell.js"
+  "/components/invoicelist": "pages/components/invoicelist.js"
 }

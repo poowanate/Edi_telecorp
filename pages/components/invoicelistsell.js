@@ -155,21 +155,21 @@ function table() {
     ];
     datasum.push(head5);
     var arr1 = [
-      { value: "รหัส GPU", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "รหัส UNSPSC", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "รหัส TMT", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "รหัส สินค้า", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "BAR CODE", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "ชื่อยา / เวชภัณท์", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "รหัส ผลิต", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "วันที่ผลิต", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "วันที่หมดอายุ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "จำนวน", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "หน่วย", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "ราคาต่อหน่วย", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "ราคารวม VAT", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "จำนวนเงิน", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
-      { value: "จำนวนที่สั่งซื้อ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัส GPU", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "รหัส UNSPSC", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "รหัส TMT", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "รหัส สินค้า", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "BAR CODE", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "ชื่อยา / เวชภัณท์", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "รหัส ผลิต", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "วันที่ผลิต", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "วันที่หมดอายุ", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "จำนวน", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "หน่วย", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "ราคาต่อหน่วย", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "ราคารวม VAT", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "จำนวนเงิน", style: { font: { bold: true, color: { rgb: "14175773" } } } },
+      { value: "จำนวนที่สั่งซื้อ", style: { font: { bold: true, color: { rgb: "14175773" } } } },
     ];
     datasum.push(arr1);
     for (let index = 0; index < exdetail.length; index++) {
@@ -312,7 +312,7 @@ function table() {
           { title: "", style: { font: { sz: "12", bold: true }, } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
-          { title: "ใบส่งของ (OUT)", style: { font: { sz: "28", bold: true, color: { rgb: "BE185D" } } } },
+          { title: "ใบส่งของ (OUT)", style: { font: { sz: "28", bold: true, color: { rgb: "14175773" } } } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
           { title: "", style: { font: { sz: "12", bold: true }, } },
@@ -1382,7 +1382,7 @@ function table() {
         if (isClosef == 1) {
           return (
             <>
-              <div className="content-center text-center justify-items-center text-2xl mt-2 text-pink-800 ">
+              <div className="content-center text-center justify-items-center text-2xl mt-2 text-blue-800 ">
                 รายการส่งของ
               </div>
 
@@ -1391,7 +1391,7 @@ function table() {
               </div>
               <div className="content-center text-right justify-items-end text-xl mr-5 ">
                 <a
-                  className="text-2xl hover:text-pink  text-pink-700 font-bold underline"
+                  className="text-2xl hover:text-blue  text-blue-700 font-bold underline"
                   onClick={() => setisClosef(3)}
                 >
                   สร้างรายการ +
@@ -1410,11 +1410,11 @@ function table() {
                               name="accountType"
                               value="personal"
                             />
-                            <span className="ml-2 text-pink-800">
+                            <span className="ml-2 text-blue-800">
                               เฉพาะวันที่
                             </span>
                           </label>
-                          <input value={date.Ddate} onChange={(e) => dateChange('Ddate', e)} autoComplete="off" className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
+                          <input value={date.Ddate} onChange={(e) => dateChange('Ddate', e)} autoComplete="off" className="ml-3  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 " type="date"></input>
                         </div>
                       </div>
                       <div className="flex-grow">
@@ -1427,35 +1427,35 @@ function table() {
                               name="accountType"
                               value="personal"
                             />
-                            <span className="ml-2 text-pink-800">ตั้งแต่วันที่</span>
+                            <span className="ml-2 text-blue-800">ตั้งแต่วันที่</span>
                           </label>
-                          <input value={date.Sdate} onChange={(e) => dateChange('Sdate', e)} autoComplete="off" className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
-                          <label className="inline-flex items-center ml-2 text-pink-800">
+                          <input value={date.Sdate} onChange={(e) => dateChange('Sdate', e)} autoComplete="off" className="ml-3  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 " type="date"></input>
+                          <label className="inline-flex items-center ml-2 text-blue-800">
                             ถึงวันที่{" "}
                           </label>
-                          <input value={date.Edate} onChange={(e) => dateChange('Edate', e)} autoComplete="off" className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 " type="date"></input>
+                          <input value={date.Edate} onChange={(e) => dateChange('Edate', e)} autoComplete="off" className="ml-3  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 " type="date"></input>
                         </div>
                       </div>
                       <div className="flex-grow">
                         <div className="mt-2">
-                          <label className="inline-flex items-center  text-pink-800">
+                          <label className="inline-flex items-center  text-blue-800">
                             สถานะ{" "}
                           </label>
-                          <select className="form-select ml-2 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 ">
+                          <select className="form-select ml-2 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 ">
                             <option>Active</option>
                             <option>Inactive</option>
                           </select>
-                          <label className="inline-flex items-center ml-2 text-pink-800">
+                          <label className="inline-flex items-center ml-2 text-blue-800">
                             คลัง
                           </label>
-                          <select className="form-select   ml-2 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 ">
+                          <select className="form-select   ml-2 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 ">
                             <option>No data</option>
                             <option>No data</option>
                           </select>
                         </div>
                       </div>
                       <div className="flex-grow-0">
-                        <button className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+                        <button className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                           ค้นหา
                         </button>
                       </div>
@@ -1471,43 +1471,43 @@ function table() {
                           <tr className="bg-gray-50">
                             <th
                               scope="col"
-                              className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider "
+                              className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider "
                             >
                               เลขที่ใบสั่งซื้อ
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider"
+                              className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider"
                             >
                               รหัสผู้จำหน่าย
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider"
+                              className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider"
                             >
                               ผู้จำหน่าย
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider"
+                              className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider"
                             >
                               เลขที่ใบส่งของ
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider"
+                              className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider"
                             >
                               วันที่ใบส่งของ
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider"
+                              className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider"
                             >
                               สถานที่ส่งมอบ
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider"
+                              className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider"
                             >
                               สถานะ
                             </th>
@@ -1563,7 +1563,7 @@ function table() {
                                   <svg class="w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
 
                                 </button>{" "}
-                                <button onClick={() => handleedit(data.pO_NO, data.invoicE_NO)} class="rounded-full bg-pink-500 text-white h-9 w-9 flex-row items-center justify-center">
+                                <button onClick={() => handleedit(data.pO_NO, data.invoicE_NO)} class="rounded-full bg-blue-500 text-white h-9 w-9 flex-row items-center justify-center">
                                   <svg
                                     className="  w-7 h-7 ml-1"
                                     fill="none"
@@ -1608,7 +1608,7 @@ function table() {
               <div className="relative ">
                 <div className="absolute mt-5 ml-10 left-0 top-0">
                   <a onClick={() => closef1refresh(1)}>
-                    <div className="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
+                    <div className="rounded-full h-11 w-11 bg-blue-800 flex items-center justify-center">
                       {" "}
                       <svg
                         className="w-6 h-6 text-white"
@@ -1628,16 +1628,16 @@ function table() {
                   </a>
                 </div>
               </div>
-              {/* <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-800 ">
+              {/* <div className="content-center text-center justify-items-center text-4xl mt-5 text-blue-800 ">
                 ใบรับของ (IN)
               </div> */}
               <div className="flex flex-row">
                 <div className="w-1/3"></div>
-                <div className="content-center w-1/3 text-center flex justify-center items-center text-xl font-bold mt-5 text-pink-700 ">
+                <div className="content-center w-1/3 text-center flex justify-center items-center text-xl font-bold mt-5 text-blue-700 ">
                   ใบส่งของ (OUT)
                 </div>
                 <div className="flex w-1/3 justify-end items-end mr-5">
-                  <ExcelFile element={<button className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
+                  <ExcelFile element={<button className="ml-2 bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
                     <ExcelSheet dataSet={excelEX.excelHead} name="report" />
                   </ExcelFile></div>
               </div>
@@ -1671,7 +1671,7 @@ function table() {
 
                     <button
                       onClick={() => setisClosef(4)}
-                      className="bg-pink-500 ml-2  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-blue-500 ml-2  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       แก้ไข
                     </button>
@@ -1684,96 +1684,96 @@ function table() {
                         <tr className="bg-gray-50">
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider"
                           >
                             รหัส GPU
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัส UNSPSC
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัส TMT
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัสสินค้า
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             Bar code
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider w-1/2"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider w-1/2"
                           >
                             ชื่อยา / เวชภัณท์
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัสผลิต
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             วันที่ผลิต
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b  text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b  text-blue-800 uppercase tracking-wider"
                           >
                             วันที่หมดอายุ
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             จำนวน
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             หน่วย
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             ราคาต่อหน่วย
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             ราคารวม vat
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             จำนวนเงิน
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             จำนวนที่สั่งซื้อ
                           </th>
@@ -1868,7 +1868,7 @@ function table() {
               <div className="relative ">
                 <div className="absolute mt-5 ml-10 left-0 top-0">
                   <a onClick={() => closef1refresh(1)}>
-                    <div className="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
+                    <div className="rounded-full h-11 w-11 bg-blue-800 flex items-center justify-center">
                       {" "}
                       <svg
                         className="w-6 h-6 text-white"
@@ -1893,13 +1893,13 @@ function table() {
 
                 </div>
                 <div className="w-1/3">
-                  <div className="content-center text-center justify-items-center text-xl font-bold  text-pink-800 ">
+                  <div className="content-center text-center justify-items-center text-xl font-bold  text-blue-800 ">
                     ใบส่งของ (OUT)
                   </div>
                 </div>
                 <div className="w-1/3">
                   <div className="flex flex-row justify-end items-center">
-                    {upload ? (<label className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded flex flex-row">
+                    {upload ? (<label className="ml-2 bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex flex-row">
                       <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                       </svg>
@@ -1907,7 +1907,7 @@ function table() {
                       <input autoComplete="off" type='file' onChange={handleUpload} className="hidden" />
                     </label>) : ''}
                     <a id="downloadexcel" href="../download/template.xlsx" hidden download> file_name </a>
-                    <button id="my_iframe" onClick={Download} className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+                    <button id="my_iframe" onClick={Download} className="ml-2 bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                       ดาวน์โหลด
                     </button>
                   </div>
@@ -1923,7 +1923,7 @@ function table() {
                   <input autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
                     id="เลขที่ใบสั่งซื้อ"
                     value={itemdata.pO_NO}
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
 
@@ -1932,7 +1932,7 @@ function table() {
                   <input autoComplete="off" value={itemdata.invoicE_NO}
                     id="เลขที่ใบส่งของ" onChange={(e) => handleChangedata("invoicE_NO", e)}
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -1940,7 +1940,7 @@ function table() {
                   <input autoComplete="off" value={itemdata.producT_NO}
                     id="รหัสผู้จำหน่าย" onChange={(e) => handleChangedata("producT_NO", e)}
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -1948,7 +1948,7 @@ function table() {
                   <input autoComplete="off" value={moment(itemdata.invoicE_DATE, 'DD-MM-YYYY').format('YYYY-MM-DD')}
                     id="วันที่ใบส่งของ" type="date" onChange={(e) => handleChangedata("invoicE_DATE", e)}
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -1956,7 +1956,7 @@ function table() {
                   <input autoComplete="off" value={itemdata.vendoR_NAME} onChange={(e) => handleChangedata("vendoR_NAME", e)}
                     id="ชื่อผู้จำหน่าย"
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
 
@@ -1965,7 +1965,7 @@ function table() {
                   <input autoComplete="off" value={itemdata.location}
                     id="สถานที่ส่งมอบ" onChange={(e) => handleChangedata("location", e)}
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
               </div>
@@ -1975,7 +1975,7 @@ function table() {
                   <div className=" flex justify-end  mr-10 mt-5">
                     <button
                       onClick={() => setisClose(true)}
-                      className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       เพิ่มข้อมูลตาราง
                     </button>
@@ -1986,95 +1986,95 @@ function table() {
                         <tr className="bg-gray-50">
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider"
                           >
                             รหัส GPU
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัส UNSPSC
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัส TMT
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัสสินค้า
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             Bar code
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider w-1/2"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider w-1/2"
                           >
                             ชื่อยา / เวชภัณท์
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัสผลิต
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             วันที่ผลิต
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b  text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b  text-blue-800 uppercase tracking-wider"
                           >
                             วันที่หมดอายุ
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             จำนวน
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             หน่วย
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             ราคาต่อหน่วย
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             ราคารวม vat
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             จำนวนเงิน
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             จำนวนที่สั่งซื้อ
                           </th>
@@ -2166,7 +2166,7 @@ function table() {
                       <textarea
                         cols="60" value={itemdata.remark}
                         rows="5"
-                        className="w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                         onChange={(e) => handleChangedata("remark", e)}
 
                       >
@@ -2180,7 +2180,7 @@ function table() {
                       <input autoComplete="off" type="number" disabled value={itemdata.totaL_AMOUNT} onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
                         id="เลขที่ใบสั่งซื้อ"
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2188,7 +2188,7 @@ function table() {
                       <input autoComplete="off" type="number" value={itemdata.discounT_PERCENTAGE}
                         id="เลขที่ใบสั่งซื้อ" onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2196,7 +2196,7 @@ function table() {
                       <input autoComplete="off" type="number" value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
                         id="เลขที่ใบสั่งซื้อ"
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2204,7 +2204,7 @@ function table() {
                       <input autoComplete="off" type="number" value={itemdata.vat} onChange={(e) => handleChangedata("vat", e)}
                         id="เลขที่ใบสั่งซื้อ"
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2212,7 +2212,7 @@ function table() {
                       <input autoComplete="off" disabled type="number" value={itemdata.total} onChange={(e) => handleChangedata("total", e)}
                         id="เลขที่ใบสั่งซื้อ"
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                   </div>
@@ -2235,7 +2235,7 @@ function table() {
               <div className="relative ">
                 <div className="absolute mt-5 ml-10 left-0 top-0">
                   <a onClick={() => closef1refresh(1)}>
-                    <div className="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center">
+                    <div className="rounded-full h-11 w-11 bg-blue-800 flex items-center justify-center">
                       {" "}
                       <svg
                         className="w-6 h-6 text-white"
@@ -2257,7 +2257,7 @@ function table() {
               </div>
               <div className=" flex justify-end  mr-10 mt-5">
                 <div className="">
-                  {/* {upload ? ( <label className="flex items-center px-4 py-6 bg-pink-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-pink-700 ">
+                  {/* {upload ? ( <label className="flex items-center px-4 py-6 bg-blue-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue-700 ">
         <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
         </svg>
@@ -2267,11 +2267,11 @@ function table() {
 
                 </div>
                 <a id="downloadexcel" href="http://localhost:3000/download/template.xlsx" hidden download> file_name </a>
-                <button id="my_iframe" onClick={Download} className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+                <button id="my_iframe" onClick={Download} className="ml-2 bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   ดาวห์โหลด
                 </button>
               </div>
-              <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-800 ">
+              <div className="content-center text-center justify-items-center text-4xl mt-5 text-blue-800 ">
                 ใบรับของ (IN)
               </div>
 
@@ -2282,7 +2282,7 @@ function table() {
                   <input autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
                     id="เลขที่ใบสั่งซื้อ"
                     value={itemdata.pO_NO}
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
 
@@ -2291,7 +2291,7 @@ function table() {
                   <input autoComplete="off" value={itemdata.invoicE_NO}
                     id="เลขที่ใบส่งของ" onChange={(e) => handleChangedata("invoicE_NO", e)}
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2299,7 +2299,7 @@ function table() {
                   <input autoComplete="off" value={itemdata.producT_NO}
                     id="รหัสผู้จำหน่าย" onChange={(e) => handleChangedata("producT_NO", e)}
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2307,7 +2307,7 @@ function table() {
                   <input autoComplete="off" value={moment(itemdata.invoicE_DATE, 'DD-MM-YYYY').format('YYYY-MM-DD')}
                     id="วันที่ใบส่งของ" type="date" onChange={(e) => handleChangedata("invoicE_DATE", e)}
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2315,7 +2315,7 @@ function table() {
                   <input autoComplete="off" value={itemdata.vendoR_NAME} onChange={(e) => handleChangedata("vendoR_NAME", e)}
                     id="ชื่อผู้จำหน่าย"
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
 
@@ -2324,7 +2324,7 @@ function table() {
                   <input autoComplete="off" value={itemdata.location}
                     id="สถานที่ส่งมอบ" onChange={(e) => handleChangedata("location", e)}
 
-                    className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
                 </div>
               </div>
@@ -2336,19 +2336,19 @@ function table() {
 
                     <button
                       onClick={() => dupplicate()}
-                      className="bg-pink-500 ml-3  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-blue-500 ml-3  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       ทำซ้ำ
                     </button>
                     <button
                       onClick={() => deletecheckbox()}
-                      className="bg-pink-500 ml-3  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-blue-500 ml-3  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       ลบ
                     </button>
                     <button
                       onClick={() => setisClose(true)}
-                      className="bg-pink-500 ml-3  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-blue-500 ml-3  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       เพิ่มข้อมูลตาราง
                     </button>
@@ -2359,101 +2359,101 @@ function table() {
                         <tr className="bg-gray-50">
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider"
                           >
 
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider"
                           >
                             รหัส GPU
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัส UNSPSC
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัส TMT
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัสสินค้า
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             Bar code
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider w-1/2"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider w-1/2"
                           >
                             ชื่อยา / เวชภัณท์
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             รหัสผลิต
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             วันที่ผลิต
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b  text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b  text-blue-800 uppercase tracking-wider"
                           >
                             วันที่หมดอายุ
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             จำนวน
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             หน่วย
                           </th>
 
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             ราคาต่อหน่วย
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             ราคารวม vat
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             จำนวนเงิน
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider"
+                            className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                           >
                             จำนวนที่สั่งซื้อ
                           </th>
@@ -2572,7 +2572,7 @@ function table() {
                       <textarea
                         cols="60" value={itemdata.remark}
                         rows="5"
-                        className="w-full bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="w-full bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                         onChange={(e) => handleChangedata("remark", e)}
 
                       >
@@ -2586,7 +2586,7 @@ function table() {
                       <input autoComplete="off" type="number" disabled value={itemdata.totaL_AMOUNT} onChange={(e) => handleChangedata("totaL_AMOUNT", e)}
                         id="เลขที่ใบสั่งซื้อ"
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2594,7 +2594,7 @@ function table() {
                       <input autoComplete="off" type="number" value={itemdata.discounT_PERCENTAGE}
                         id="เลขที่ใบสั่งซื้อ" onChange={(e) => handleChangedata("discounT_PERCENTAGE", e)}
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2602,7 +2602,7 @@ function table() {
                       <input autoComplete="off" type="number" value={itemdata.discounT_BAHT} onChange={(e) => handleChangedata("discounT_BAHT", e)}
                         id="เลขที่ใบสั่งซื้อ"
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2610,7 +2610,7 @@ function table() {
                       <input autoComplete="off" type="number" value={itemdata.vat} onChange={(e) => handleChangedata("vat", e)}
                         id="เลขที่ใบสั่งซื้อ"
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                     <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
@@ -2618,7 +2618,7 @@ function table() {
                       <input autoComplete="off" disabled type="number" value={itemdata.total} onChange={(e) => handleChangedata("total", e)}
                         id="เลขที่ใบสั่งซื้อ"
 
-                        className="ml-4 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                        className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                       />
                     </div>
                   </div>
@@ -2646,7 +2646,7 @@ function table() {
                   &times;
                 </span>
 
-                <div className="content-center text-center justify-items-center text-3xl mt-5 text-pink-800 ">
+                <div className="content-center text-center justify-items-center text-3xl mt-5 text-blue-800 ">
                   เพิ่มข้อมูลตาราง
                 </div>
                 <div className="grid grid-cols-4 gap-4">
@@ -2656,7 +2656,7 @@ function table() {
                       onChange={(e) => handleChange("c1", e)}
                       id="GPU"
 
-                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700 "
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2665,7 +2665,7 @@ function table() {
                       onChange={(e) => handleChange("c2", e)}
                       id="UNSPSC"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2674,7 +2674,7 @@ function table() {
                       onChange={(e) => handleChange("c3", e)}
                       id="TMT"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2683,7 +2683,7 @@ function table() {
                       onChange={(e) => handleChange("c14", e)}
                       id="BAR_CODE"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2692,7 +2692,7 @@ function table() {
                       onChange={(e) => handleChange("c4", e)}
                       id="BAR_CODE"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2701,7 +2701,7 @@ function table() {
                       onChange={(e) => handleChange("c5", e)}
                       id="namemedi"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2710,7 +2710,7 @@ function table() {
                       onChange={(e) => handleChange("c6", e)}
                       id="codeex"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2720,7 +2720,7 @@ function table() {
                       type="date"
                       id="dateex"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2730,7 +2730,7 @@ function table() {
                       type="date"
                       id="dateendex"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2739,7 +2739,7 @@ function table() {
                       onChange={(e) => handleChange("c9", e)}
                       id="cout"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2748,7 +2748,7 @@ function table() {
                       onChange={(e) => handleChange("c10", e)}
                       id="ex"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700   "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700   "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2757,7 +2757,7 @@ function table() {
                       onChange={(e) => handleChange("c11", e)}
                       id="extcount "
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
 
@@ -2767,7 +2767,7 @@ function table() {
                       onChange={(e) => handleChange("c12", e)}
                       id="extcount "
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2776,7 +2776,7 @@ function table() {
                       onChange={(e) => handleChange("c13", e)}
                       id="extcount "
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                 </div>
@@ -2811,7 +2811,7 @@ function table() {
                   &times;
                 </span>
 
-                <div className="content-center text-center justify-items-center text-3xl mt-5 text-pink-800 ">
+                <div className="content-center text-center justify-items-center text-3xl mt-5 text-blue-800 ">
                   แก้ไขข้อมูลตาราง
                 </div>
                 <div className="grid grid-cols-4 gap-4">
@@ -2822,7 +2822,7 @@ function table() {
                       id="GPU"
                       value={itemtable.c1}
 
-                      className=" w-full bg-white shadow-md rounded border-pink-700 border  text-gray-900  "
+                      className=" w-full bg-white shadow-md rounded border-blue-700 border  text-gray-900  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2832,7 +2832,7 @@ function table() {
                       value={itemtable.c2}
                       id="UNSPSC"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2842,7 +2842,7 @@ function table() {
                       value={itemtable.c3}
                       id="TMT"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2851,7 +2851,7 @@ function table() {
                       onChange={(e) => handleChange("c14", e)}
                       id="BAR_CODE"
                       value={itemtable.c14}
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2861,7 +2861,7 @@ function table() {
                       value={itemtable.c4}
                       id="BAR_CODE"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2871,7 +2871,7 @@ function table() {
                       value={itemtable.c5}
                       id="namemedi"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2881,7 +2881,7 @@ function table() {
                       value={itemtable.c6}
                       id="codeex"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2892,7 +2892,7 @@ function table() {
                       type="date"
                       id="dateex"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2903,7 +2903,7 @@ function table() {
                       type="date"
                       id="dateendex"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2913,7 +2913,7 @@ function table() {
                       value={itemtable.c9}
                       id="cout"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2923,7 +2923,7 @@ function table() {
                       value={itemtable.c10}
                       id="ex"
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700   "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700   "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2933,7 +2933,7 @@ function table() {
                       value={itemtable.c11}
                       id="extcount "
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
 
@@ -2944,7 +2944,7 @@ function table() {
                       value={itemtable.c12}
                       id="extcount "
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2954,7 +2954,7 @@ function table() {
                       value={itemtable.c13}
                       id="extcount "
 
-                      className=" w-full  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-700  "
+                      className=" w-full  bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                     />
                   </div>
                 </div>

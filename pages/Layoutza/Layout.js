@@ -57,10 +57,10 @@ useEffect(() => {
 
 var color =''
   if(role == 1){
-    color = 'bg-indigo-800'
+    color = 'bg-pink-700'
   }
   if(role == 2){
-    color = 'bg-pink-700'
+    color = 'bg-indigo-800'
   }
  
   // '+{role}+'
