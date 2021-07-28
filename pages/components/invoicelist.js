@@ -16,7 +16,7 @@ function table() {
   return (
     <Layout>
         {isClose ? (<>
-            <div className="content-center text-center justify-items-center text-2xl mt-2 text-blue-800 ">
+            <div className="content-center text-center justify-items-center text-2xl mt-2 text-pink-800 ">
         รายการรับของ
       </div>
       <div className="content-center text-center justify-items-center text-xl mt-1 text-gray-600">
@@ -33,35 +33,35 @@ function table() {
               <div className="mt-1">
     <label className="inline-flex items-center">
       <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
-      <span className="ml-2 text-blue-800">เฉพาะวันที่</span>
+      <span className="ml-2 text-pink-800">เฉพาะวันที่</span>
     </label>
-  <input value={date.Ddate} onChange={(e) => dateChange('Ddate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
+  <input value={date.Ddate} onChange={(e) => dateChange('Ddate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
     </div>
               </div>
               <div className="flex-grow">  <div className="mt-1">
     <label className="inline-flex items-center">
       <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
-      <span className="ml-2 text-blue-800">ตั้งแต่วันที่</span>
+      <span className="ml-2 text-pink-800">ตั้งแต่วันที่</span>
     </label>
-  <input value={date.Sdate} onChange={(e) => dateChange('Sdate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
-  <label className="inline-flex items-center ml-2 text-blue-800">ถึงวันที่</label>
-  <input value={date.Edate} onChange={(e) => dateChange('Edate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
+  <input value={date.Sdate} onChange={(e) => dateChange('Sdate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
+  <label className="inline-flex items-center ml-2 text-pink-800">ถึงวันที่</label>
+  <input value={date.Edate} onChange={(e) => dateChange('Edate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
     </div></div>
               <div className="flex-grow"> 
                <div className="mt-1">
-               <label className="inline-flex items-center  text-blue-800">สถานะ </label>
-               <select className="form-select ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ">
+               <label className="inline-flex items-center  text-pink-800">สถานะ </label>
+               <select className="form-select ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ">
     <option>Active</option>
     <option>Inactive</option>
   </select>
-  <label className="inline-flex items-center ml-2 text-blue-800">คลัง</label>
-  <select className="form-select   ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+  <label className="inline-flex items-center ml-2 text-pink-800">คลัง</label>
+  <select className="form-select   ml-2 ppearance-nonebg-gray-200 text-gray-700 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
     <option>No data</option>
     <option>No data</option>
   </select>
     </div></div>
               <div className="flex-grow-0">
-                  <button className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  <button className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
                   ค้นหา</button></div>
              
             </div>
@@ -76,13 +76,13 @@ function table() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-            <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider ">เลขที่ใบสั่งซื้อ</th>
- <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">รหัสผู้จำหน่าย</th>
- <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">ผู้จำหน่าย</th>
- <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">เลขที่ใบส่งของ</th>
- <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">วันที่ใบส่งของ</th>
- <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">สถาที่ส่งมอบ</th>
- <th scope="col" className="px-6 py-3 text-left text-base font-medium text-blue-800 uppercase tracking-wider">สถานะ</th>
+            <th scope="col" className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider ">เลขที่ใบสั่งซื้อ</th>
+ <th scope="col" className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider">รหัสผู้จำหน่าย</th>
+ <th scope="col" className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider">ผู้จำหน่าย</th>
+ <th scope="col" className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider">เลขที่ใบส่งของ</th>
+ <th scope="col" className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider">วันที่ใบส่งของ</th>
+ <th scope="col" className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider">สถานที่ส่งมอบ</th>
+ <th scope="col" className="px-6 py-3 text-left text-base font-medium text-pink-800 uppercase tracking-wider">สถานะ</th>
               <th scope="col" className="relative px-6 py-3">
                 <span className="sr-only">Edit</span>
               </th>
@@ -124,7 +124,7 @@ function table() {
 
               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
               <button  onClick={()=> setisClose(false)} >
-              <svg class="text-blue-800  w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+              <svg class="text-pink-800  w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
             
             </button>  </td>
             </tr>
@@ -145,13 +145,13 @@ function table() {
  <div class="relative ">
   <div class="absolute mt-5 ml-10 left-0 top-0">
     <a onClick={()=>setisClose(true)}>
-  <div class="rounded-full h-11 w-11 bg-indigo-800 flex items-center justify-center"> <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+  <div class="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center"> <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
 
 </div>
 </a>
    </div>
 </div>
-<div className="content-center text-center justify-items-center text-4xl mt-5 text-blue-800 ">
+<div className="content-center text-center justify-items-center text-xl font-bold mt-5 text-pink-800 ">
         ใบรับของ (IN)
       </div>
 
@@ -163,7 +163,7 @@ function table() {
   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">วันที่ใบส่งของ <label className="ml-5">12/12/12</label></div>
   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ชื่อผู้จำหน่าย <label className="ml-5">สมศักดิ์</label></div>
 
-  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถาที่ส่งมอบ <label className="ml-5">ตึกสะอาด</label></div>
+  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถานที่ส่งมอบ <label className="ml-5">ตึกสะอาด</label></div>
 
 </div>
 
@@ -176,21 +176,21 @@ function table() {
         <table className="min-w-full w-full ">
           <thead className="bg-gray-50">
             <tr>
-            <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider">รหัส GPU</th>
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider">รหัส UNSPSC</th>
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider">รหัส TMT</th>
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider">Bar code</th>
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider w-1/2">ชื่อยา / เวชภัณท์</th>
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider">รหัสผลิต</th>
+            <th scope="col" className="px-6 py-3 text-center border-b border-r text-base font-medium  text-pink-800 uppercase tracking-wider">รหัส GPU</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider">รหัส UNSPSC</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider">รหัส TMT</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider">Bar code</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider w-1/2">ชื่อยา / เวชภัณท์</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider">รหัสผลิต</th>
 
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider">วันที่ผลิต</th>
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b  text-blue-800 uppercase tracking-wider">วันที่หมดอายุ</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider">วันที่ผลิต</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b  text-pink-800 uppercase tracking-wider">วันที่หมดอายุ</th>
 
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider">จำนวน</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider">จำนวน</th>
 
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider">หน่วย</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider">หน่วย</th>
 
-<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider">ราคาต่อหน่วย</th>
+<th scope="col" className="px-6 py-3 text-center text-base font-medium border-b border-r text-pink-800 uppercase tracking-wider">ราคาต่อหน่วย</th>
 
         
             </tr>
@@ -217,7 +217,7 @@ function table() {
                 <td className="px-6 py-4   whitespace-nowrap">
                 <div className="text-center text-sm text-gray-900">1000</div>   </td>
                 <td className="px-6 py-4   whitespace-nowrap">
-                <div className="text-center text-sm text-gray-900">2 </div>   </td>
+                <div className="text-center text-sm text-gray-900">คู่ </div>   </td>
                 <td className="px-6 py-4   whitespace-nowrap">
                 <div className="text-center text-sm text-gray-900">2 </div>   </td>
 
@@ -247,7 +247,7 @@ function table() {
             <td className="px-6 py-4   whitespace-nowrap">
             <div className="text-center text-sm text-gray-900">1000</div>   </td>
             <td className="px-6 py-4   whitespace-nowrap">
-            <div className="text-center text-sm text-gray-900">2 </div>   </td>
+            <div className="text-center text-sm text-gray-900">คู่ </div>   </td>
             <td className="px-6 py-4   whitespace-nowrap">
             <div className="text-center text-sm text-gray-900">2 </div>   </td>
 
@@ -277,7 +277,7 @@ function table() {
             <td className="px-6 py-4   whitespace-nowrap">
             <div className="text-center text-sm text-gray-900">1000</div>   </td>
             <td className="px-6 py-4   whitespace-nowrap">
-            <div className="text-center text-sm text-gray-900">2 </div>   </td>
+            <div className="text-center text-sm text-gray-900">คู่ </div>   </td>
             <td className="px-6 py-4   whitespace-nowrap">
             <div className="text-center text-sm text-gray-900">2 </div>   </td>
 
