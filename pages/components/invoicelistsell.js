@@ -1637,30 +1637,41 @@ function table() {
                   ใบส่งของ (OUT)
                 </div>
                 <div className="flex w-1/3 justify-end items-end mr-5">
+                  <button className="ml-2 bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</button>
                   <ExcelFile element={<button className="ml-2 bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
                     <ExcelSheet dataSet={excelEX.excelHead} name="report" />
-                  </ExcelFile></div>
+                  </ExcelFile>
+
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  เลขที่ใบสั่งซื้อ <label className="ml-5">{itemdata.pO_NO}</label>
+              <div className="flex flex-row">
+                <div className="flex flex-col w-1/2 pl-28">
+                  <div className="flex flex-row mt-5  ">
+                    <div className="w-1/2 text-base  font-bold text-right ">เลขที่ใบสั่งซื้อ </div>
+                    <label className="ml-5 w-1/2 text-left">{itemdata.pO_NO}</label>
+                  </div>
+                  <div className="flex flex-row mt-5 ">
+                    <div className="w-1/2 text-base  font-bold text-right ">รหัสผู้จำหน่าย </div>
+                    <label className="ml-5 w-1/2 text-left">{itemdata.producT_NO}</label>
+                  </div>
+                  <div className="flex flex-row mt-5 ">
+                    <div className="w-1/2 text-base  font-bold text-right ">ชื่อผู้จำหน่าย </div>
+                    <label className="ml-5 w-1/2 text-left">{itemdata.vendoR_NAME}</label>
+                  </div>
                 </div>
-
-                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  เลขที่ใบส่งของ <label className="ml-5">{itemdata.invoicE_NO}</label>
-                </div>
-                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  รหัสผู้จำหน่าย <label className="ml-5">{itemdata.producT_NO}</label>
-                </div>
-                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  วันที่ใบส่งของ <label className="ml-5"> {moment(itemdata.invoicE_DATE).format('DD/MM/yyyy')}</label>
-                </div>
-                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  ชื่อผู้จำหน่าย <label className="ml-5">{itemdata.vendoR_NAME}</label>
-                </div>
-
-                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  สถานที่ส่งมอบ <label className="ml-5">{itemdata.location}</label>
+                <div className="flex flex-col w-1/2 ">
+                  <div className="flex flex-row mt-5">
+                    <div className=" text-base  font-bold text-right w-80">เลขที่ใบส่งของ </div>
+                    <label className="ml-5 w-1/2 text-left">{itemdata.invoicE_NO}</label>
+                  </div>
+                  <div className="flex flex-row mt-5">
+                    <div className=" text-base  font-bold text-right w-80">วันที่ใบส่งของ </div>
+                    <label className="ml-5 w-1/2 text-left">{moment(itemdata.invoicE_DATE).format('DD/MM/yyyy')}</label>
+                  </div>
+                  <div className="flex flex-row mt-5">
+                    <div className="text-base  font-bold text-right w-80">สถานที่ส่งมอบ </div>
+                    <label className="ml-5 w-1/2 text-left">{itemdata.location}</label>
+                  </div>
                 </div>
               </div>
 
@@ -1828,36 +1839,33 @@ function table() {
 
                 </div>
               </div>
-              <div className="flex flex-col mb-10">
-                <div className="grid grid-cols-2 gap-3 ml-5 mt-5 mr-10">
-                  <div className="content-center text-left justify-items-center text-base mt-5 font-bold  ">
-                    หมายเหตุ      <label className="ml-5">{itemdata.remark}</label>
+              <div className="flex flex-col mb-10 items-end justify-center">
+                <div className="flex flex-row w-full">
+                  <div class="flex flex-row mt-5 ml-5 w-1/2 justify-start">
+                    <div className="content-center text-right justify-items-center text-base font-bold  ">หมายเหตุ</div>
+                    <label className="ml-3 w-20 text-right">{itemdata.remark}</label>
                   </div>
-                  <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
-                    ราคารวม (ไม่รวม VAT)
-
-                    <label className="ml-5">{itemdata.totaL_AMOUNT}</label>
-
+                  <div class="flex flex-row mt-5 mr-10 w-1/2 justify-end">
+                    <div className="content-center text-right justify-items-center text-base font-bold  ">ราคารวม (ไม่รวม VAT)</div>
+                    <label className=" w-20 text-right">{itemdata.totaL_AMOUNT}</label>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 gap-3 mt-5 mr-10">
-                  <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
-                    ส่วนลด - เปอร์เซ็นต์{" "}
-                    <label className="ml-5">{itemdata.discounT_PERCENTAGE}</label>
-                  </div>
-                  <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
-                    ส่วนลด - บาท{" "}
-                    <label className="ml-5">{itemdata.discounT_BAHT}</label>
-                  </div>
-                  <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
-                    VAT{" "}
-                    <label className="ml-5">{itemdata.vat}</label>
-                  </div>
-                  <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">
-                    ราคารวม{" "}
-                    <label className="ml-5">{itemdata.total}</label>
-                  </div>
-                </div>{" "}
+                <div class="flex flex-row mt-5 mr-10">
+                  <div className="content-center text-right justify-items-center text-base font-bold  ">ส่วนลด - เปอร์เซ็นต์</div>
+                  <label className=" w-20 text-right">{itemdata.discounT_PERCENTAGE}</label>
+                </div>
+                <div class="flex flex-row mt-5 mr-10">
+                  <div className="content-center text-right justify-items-center text-base font-bold  ">ส่วนลด - บาท</div>
+                  <label className=" w-20 text-right">{itemdata.discounT_BAHT}</label>
+                </div>
+                <div class="flex flex-row mt-5 mr-10">
+                  <div className="content-center text-right justify-items-center text-base font-bold  ">VAT</div>
+                  <label className=" w-20 text-right">{itemdata.vat}</label>
+                </div>
+                <div class="flex flex-row mt-5 mr-10">
+                  <div className="content-center text-right justify-items-center text-base font-bold  ">ราคารวม </div>
+                  <label className=" w-20 text-right">{itemdata.total}</label>
+                </div>
               </div>
             </>
           );

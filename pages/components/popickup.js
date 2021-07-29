@@ -328,17 +328,36 @@ function table() {
           <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-800 ">
             รายละเอียดรับสินค้า
           </div>
-
-          <div class="grid grid-cols-2 gap-3">
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่ใบสั่งซื้อ <label className="ml-5">{itemtable[0].invoicE_NO}</label></div>
-
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่สัญญา <label className="ml-5">{itemtable[0].invoicE_NO}</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">กำหนดส่งมอบ <label className="ml-5">  {moment(itemtable[0].invoicE_DATE).format("YYYY-MM-DD")}</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">รหัสผู้จำหน่าย <label className="ml-5">ไม่มี</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ชื่อผู้จำหน่าย <label className="ml-5">{itemtable[0].vendoR_NAME}</label></div>
+<div className="flex flex-row">
+            <div className="flex flex-col w-1/2 pl-28">
+              <div className="flex flex-row mt-5  ">
+                <div className="w-1/2 text-base  font-bold text-right ">เลขที่ใบสั่งซื้อ </div>
+                <label className="ml-5 w-1/2 text-left">{itemtable[0].invoicE_NO}</label>
+              </div>
+              <div className="flex flex-row mt-5 ">
+                <div className="w-1/2 text-base  font-bold text-right ">กำหนดส่งมอบ </div>
+                <label className="ml-5 w-1/2 text-left">{moment(itemtable[0].invoicE_DATE).format("YYYY-MM-DD")}</label>
+              </div>
+              <div className="flex flex-row mt-5 ">
+                <div className="w-1/2 text-base  font-bold text-right ">ชื่อผู้จำหน่าย </div>
+                <label className="ml-5 w-1/2 text-left">{itemtable[0].vendoR_NAME}</label>
+              </div>
+            </div>
+            <div className="flex flex-col w-1/2 ">
+              <div className="flex flex-row mt-5">
+                <div className=" text-base  font-bold text-right w-80">เลขที่สัญญา </div>
+                <label className="ml-5 w-1/2 text-left">{itemtable[0].invoicE_NO}</label>
+              </div>
+              <div className="flex flex-row mt-5">
+                <div className=" text-base  font-bold text-right w-80">รหัสผู้จำหน่าย </div>
+                <label className="ml-5 w-1/2 text-left">ไม่มี</label>
+              </div>
+              <div className="flex flex-row mt-5">
+                <div className="text-base  font-bold text-right w-80"> </div>
+                <label className="ml-5 w-1/2 text-left"></label>
+              </div>
+            </div>
           </div>
-
-
 
           <div className="flex flex-col mt-10">
             <div className=" ">
