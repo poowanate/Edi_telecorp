@@ -41,7 +41,7 @@ const setuplocal = () => {
     
      
         EDI_COMPANYinfo().then(async data => {
-            console.log(data)
+            // console.log(data)
             if (data.error) {
     
             } else {
@@ -56,6 +56,7 @@ const setuplocal = () => {
         fetchdata()
     }, [])
 const insert = ()=>{
+  console.log('insert')
   insertEDI_COMPANYinfo(bindedit).then(async data=>{
     if (data.error) {
       Swal.fire('เพิ่มข้อมูลไม่สำเร็จ', '', 'info')
@@ -69,6 +70,7 @@ const insert = ()=>{
 }
   )}
   const update = ()=>{
+    console.log('update')
     updatecompanyadmin(bindedit).then(async data=>{
       if (data.error) {
         Swal.fire('แก้ไขไม่สำเร็จ', '', 'info')
@@ -92,7 +94,7 @@ const insert = ()=>{
 
     const editdata =(id)=>{
       setisClose(true)
-      seteditorinsert('edit')
+      seteditorinsert('update')
       getcompanyadmin(id).then(data=>{
         if(data.error){
           console.log('no')
@@ -101,7 +103,9 @@ const insert = ()=>{
         else{
           setbindedit({   
             vendoR_NO: data.vendoR_NO,
-          
+            phonenumber: data.phonenumber,
+            username: data.username,
+            password: data.password,
             vendoR_NAME: data.vendoR_NAME,
             shipto: data.shipto,
             address: data.address,
@@ -112,14 +116,14 @@ const insert = ()=>{
       })
     }
     const handleChangedata = (name, e) => {
-      console.log(e.target.value)
-      console.log(bindedit)
+      // console.log(e.target.value)
+      // console.log(bindedit)
       bindedit[name] = e.target.value;
       setbindedit({ ...bindedit })
       }
 const save =(e)=>{
   e.preventDefault();
-  console.log(JSON.stringify(bindedit))
+  // console.log(JSON.stringify(bindedit))
   if(editorinsert=='insert'){
     insert()
   }
@@ -248,7 +252,7 @@ const cleardata =()=>{
                 <button        onClick={() => editdata(data.id)} class="rounded-full bg-green-500 text-white h-9 w-9 flex-row items-center justify-center">
               <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                                 </button>
-                                 <button onClick={(e) => confirmdelete(data.id)} class="rounded-full bg-red-400 text-white h-9 w-9 flex-row items-center justify-center" >
+                                 <button onClick={() => confirmdelete(data.id)} class="rounded-full bg-red-400 text-white h-9 w-9 flex-row items-center justify-center" >
                                   <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
             </td>
    </tr>
@@ -335,6 +339,28 @@ const cleardata =()=>{
                    value={bindedit.phonenumber}
                    onChange={(e) => handleChangedata("phonenumber", e)}
                       id="phonenumber"
+
+
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  username
+                    <input
+                   value={bindedit.username}
+                   onChange={(e) => handleChangedata("username", e)}
+                      id="username"
+
+
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  password
+                    <input
+                   value={bindedit.password}
+                   onChange={(e) => handleChangedata("password", e)}
+                      id="password"
 
 
                       className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "

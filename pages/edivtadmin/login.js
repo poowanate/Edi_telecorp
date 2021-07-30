@@ -48,7 +48,7 @@ console.log(formz)
                 
                     setCookie('name',data.vendoR_NAME)
                     setCookie('role',1)
-                  
+                    setCookie('admintype',1)
                    Router.push('/')
 
        
