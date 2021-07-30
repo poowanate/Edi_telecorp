@@ -2,10 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-<<<<<<< HEAD
-  "/Login": "pages/Login.js"
-=======
-  "/components/polistsell": "pages/components/polistsell.js",
-  "/components/invoicelistsell": "pages/components/invoicelistsell.js"
->>>>>>> 7fa5965b004c656d7f0f3eeb4e11a0f050f9a98a
+  "/Login": "pages/Login.js",
+  "/components/polistsell": "pages/components/polistsell.js"
 }
