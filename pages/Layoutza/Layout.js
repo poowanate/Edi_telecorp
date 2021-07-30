@@ -21,16 +21,16 @@ const Layout =(props) => {
       setrole(2)
      }
     setnameuser(jscookie.get('name'))
-console.log(jscookie.get('role'))
+
     if(jscookie.get('role') =='0'){
       console.log('ggpw')
       setrole(3)
     }
     else if(jscookie.get('role')=='1'){
-      setrole(2)
+      setrole(1)
     }   
     else if(jscookie.get('role')=='2'){
-      setrole(1)
+      setrole(2)
     }
    
     if(jscookie.get('name')==null){
@@ -57,10 +57,11 @@ useEffect(() => {
 
 var color =''
   if(role == 1){
-    color = 'bg-pink-700'
+    color = 'bg-indigo-800'
+    
   }
   if(role == 2){
-    color = 'bg-indigo-800'
+    color = 'bg-pink-700'
   }
  
   // '+{role}+'
@@ -118,7 +119,7 @@ var color =''
         </button>
       </div>
     
-        {(role == 1) && (
+        {(role == 2) && (
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             {/* <div className="flex-shrink-0 flex items-center ">
             <a className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
@@ -141,7 +142,7 @@ var color =''
  </div>    </div>
       </div>
         )}
-          {(role == 2) && (
+          {(role == 1) && (
                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                <div className="flex-shrink-0 flex items-center">
                {closeprofile ? (  <a  onClick={()=>{setcloseprofile(false)}} className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
@@ -203,7 +204,7 @@ var color =''
 <main className=' flex-grow flex flex-col min-h-screen '>
 
 <div className='flex flex-grow item-center justify-between  page-content '>
-{(role == 2) && (
+{(role == 1) && (
   <>
 
 

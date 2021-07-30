@@ -43,6 +43,68 @@ import axios from 'axios';
     });
   }
 
+  export const insertEDI_COMPANYinfo = data => {
+
+    return axios({
+        method: 'POST',   
+        url: `http://103.245.164.54:5003/api/EDI_COMPANY_INFORMATION/`,
+        headers: {
+      
+            'Content-Type': 'application/json'
+        },
+        data:data
+   
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
+  
+  export const getcompanyadmin = (id) => {
+
+    return axios({
+        method: 'GET',   
+        url: `http://103.245.164.54:5003/api/EDI_COMPANY_INFORMATION/`+id,
+        headers: {
+      
+            'Content-Type': 'application/json'
+        },
+
+   
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
+
+  export const updatecompanyadmin = (data) => {
+console.log(data)
+    return axios({
+        method: 'PUT',   
+        url: `http://103.245.164.54:5003/api/EDI_COMPANY_INFORMATION/`+8,
+        headers: {
+      
+            'Content-Type': 'application/json'
+        },data:data
+
+   
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
 
 
   export const postapicompany = data => {

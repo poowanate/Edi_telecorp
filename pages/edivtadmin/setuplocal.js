@@ -1,12 +1,41 @@
 import React,{useEffect,useState} from 'react'
-import {EDI_COMPANYinfo,deleteEDI_COMPANYinfo} from '../api/api_company'
+import {EDI_COMPANYinfo,deleteEDI_COMPANYinfo,getcompanyadmin,updatecompanyadmin,insertEDI_COMPANYinfo} from '../api/api_company'
 
 import Swal from 'sweetalert2'
+import { Formik, ErrorMessage } from 'formik';
+function sweeterror(){
+  Swal.fire({
+    icon: 'error',
+    title: 'Login ไม่สำเร็จ',
+    text: 'USERNAME หรือ PASSWORD ผิดผลาดกรุณาลองอีกครั้ง',
+   
+  })
+}
+
+
 
 const setuplocal = () => {
 
-
+  const handleKeyDown = (event)=>  {
+    if(event.keyCode === 13) { 
+        console.log('Enter key pressed')
+  }
+  }
+  const [bindedit,setbindedit] = useState({
+    vendoR_NO: "",
+    vendoR_NAME: "",
+    shipto: "",
+    address: "",
+    taxid: "",
+    phonenumber: "",
+    username: "",
+    password: "",
+    id:0,
+  });
     const [companydata,setcompanydata] = useState([]);
+    const [editorinsert,seteditorinsert] = useState('');
+    const [isClose,setisClose] = useState(false);
+  
 
     const fetchdata = ()=>{
     
@@ -26,7 +55,94 @@ const setuplocal = () => {
     useEffect(() => {
         fetchdata()
     }, [])
+const insert = ()=>{
+  insertEDI_COMPANYinfo(bindedit).then(async data=>{
+    if (data.error) {
+      Swal.fire('เพิ่มข้อมูลไม่สำเร็จ', '', 'info')
+    } else {
+     await fetchdata()
+   
+     await cleardata()
+  
+     Swal.fire('บันทึกสำเร็จ', '', 'success')
+    }
+}
+  )}
+  const update = ()=>{
+    updatecompanyadmin(bindedit).then(async data=>{
+      if (data.error) {
+        Swal.fire('แก้ไขไม่สำเร็จ', '', 'info')
+      } else {
+       await fetchdata()
+     
+       await cleardata()
+  
+       Swal.fire('บันทึกสำเร็จ', '', 'success')
+      }
+  })
+  }
 
+  const insertdata =()=>{
+    setisClose(true)
+    seteditorinsert('insert')
+    
+      
+    
+  }
+
+    const editdata =(id)=>{
+      setisClose(true)
+      seteditorinsert('edit')
+      getcompanyadmin(id).then(data=>{
+        if(data.error){
+          console.log('no')
+
+        }
+        else{
+          setbindedit({   
+            vendoR_NO: data.vendoR_NO,
+          
+            vendoR_NAME: data.vendoR_NAME,
+            shipto: data.shipto,
+            address: data.address,
+            taxid: data.taxid,
+            id:data.id
+        })
+        }
+      })
+    }
+    const handleChangedata = (name, e) => {
+      console.log(e.target.value)
+      console.log(bindedit)
+      bindedit[name] = e.target.value;
+      setbindedit({ ...bindedit })
+      }
+const save =(e)=>{
+  e.preventDefault();
+  console.log(JSON.stringify(bindedit))
+  if(editorinsert=='insert'){
+    insert()
+  }
+  if(editorinsert=='update'){
+    update()
+  }
+  
+}
+
+const cleardata =()=>{
+ setisClose(false)
+  setbindedit({
+    vendoR_NO: "",
+    vendoR_NAME: "",
+    shipto: "",
+    address: "",
+    taxid: "",
+    phonenumber: "",
+    username: "",
+    password: "",
+    id:0,
+  })
+}
 
     const confirmdelete =(e)=>{
 
@@ -46,6 +162,7 @@ const setuplocal = () => {
           Swal.fire('ทำการลบไม่สำเร็จ', '', 'info')
         } else {
          await fetchdata()
+        await cleardata()
          await Swal.fire('ลบข้อมูลสำเร็จ', '', 'success')
         }
 
@@ -80,152 +197,172 @@ const setuplocal = () => {
   <div  className="p-3 place-self-center"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Export Excel</button></div>
 </div> 
 
-
-<div className="py-2 w-full  mt-5 ">
+<div className="py-2 w-fulls  mt-5 ">
                     <div className="shadow  border-gray-200 sm:rounded-lg">
-                      <table className="min-w-full w-full">
-                        <tr className="bg-gray-50">
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-center bg-green-500 text-base font-medium  text-white uppercase tracking-wider"
-                          >
-                            เพิ่มข้อมูล
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
-                          >
-                           vendoR_NO
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
-                          >
-                           vendoR_NAME
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
-                          >
-                         shipto
-                          </th>
 
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
-                          >
-                         address
-                          </th>
-                       
-                        
-
-                        
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-center bg-indigo-800 text-base font-medium   text-white uppercase tracking-wider"
-                          >
-                           taxid
-                          </th>
-                     
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
-                          >
-                           แก้ไข
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-center bg-indigo-800 text-base font-medium text-white uppercase tracking-wider"
-                          >
-                          ลบ
-                          </th>
-
-                       
-                         
-                        
-                        
-                        </tr>
-                      
-{
+                    <table class="border-collapse w-full">
+    <thead>
+        <tr>
+        
+            <th class="p-3 font-bold uppercase bg-green-500 text-white border  hidden lg:table-cell hover:bg-green-800" onClick={() => insertdata()}>เพิ่มข้อมูล</th>
+            <th class="p-3 font-bold uppercase bg-indigo-800  text-white border hidden lg:table-cell">vendoR_NO</th>
+            <th class="p-3 font-bold uppercase bg-indigo-800  text-white border  hidden lg:table-cell">vendoR_NAME</th>
+            <th class="p-3 font-bold uppercase bg-indigo-800  text-white border  hidden lg:table-cell">shipto</th>
+            <th class="p-3 font-bold uppercase bg-indigo-800  text-white border  hidden lg:table-cell">address</th>
+            <th class="p-3 font-bold uppercase bg-indigo-800  text-white border  hidden lg:table-cell">taxid</th>
+            <th class="p-3 font-bold uppercase bg-indigo-800  text-white border  hidden lg:table-cell">แก้ไข</th>
+       
+        </tr>
+    </thead>
+    <tbody>
+    {
     (companydata.length > 0) ? (
-        companydata.map((data, index) => (
-            <tr key={index}  className="bg-white ">
-            <td className="px-6 py-4  border-r whitespace-nowrap">
-              <div className="text-center text-sm text-gray-900">{data.id} </div>   </td>
-              <td className="px-6 py-4  border-r whitespace-nowrap">
-              <div className="text-center text-sm text-gray-900">{data.vendoR_NO} </div>   </td>
-              <td className="px-6 py-4  border-r whitespace-nowrap"> 
-              <div className="text-center text-sm text-gray-900">{data.vendoR_NAME} </div>   </td>
-              <td className="px-6 py-4  border-r whitespace-nowrap">
-              <div className="text-center text-sm text-gray-900">{data.shipto} </div>   </td>
-              <td className="px-6 py-4  border-r whitespace-nowrap">
-              <div className="text-center text-sm text-gray-900">{data.address} </div>   </td>
-              <td className="px-6 py-4  border-r whitespace-nowrap">
-              <div className="text-center text-sm text-gray-900">{data.taxid} </div>   </td>
-              <td className="px-6 py-4  border-r whitespace-nowrap">
-              <div className="text-center text-sm text-gray-900">   
-           
-              <button  class="rounded-full bg-green-500 text-white h-9 w-9 flex-row items-center justify-center">
+        companydata.map((data, index) => ( <>
+       <tr id={index} class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+   <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">เพิ่มข้อมูล</span>
+                {data.id}
+            </td>
+   <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">vendoR_NO</span>
+                {data.vendoR_NO} 
+            </td>
+   <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">vendoR_NAME</span>
+                {data.vendoR_NAME}
+            </td>
+   <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">shipto</span>
+                {data.shipto}
+            </td>
+   <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">address</span>
+                {data.address}
+            </td>
+   <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">taxid</span>
+                {data.taxid}
+            </td>
+   <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">แก้ไข</span>
+                <button        onClick={() => editdata(data.id)} class="rounded-full bg-green-500 text-white h-9 w-9 flex-row items-center justify-center">
               <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                                 </button>
-           
-           </div>   </td>
-                                <td className="px-6 py-4  border-r whitespace-nowrap">
-              <div className="text-center text-sm text-gray-900">
-              <button onClick={()=>confirmdelete(data.id)}  class="rounded-full bg-red-400 text-white h-9 w-9 flex-row items-center justify-center" >
+                                 <button onClick={(e) => confirmdelete(data.id)} class="rounded-full bg-red-400 text-white h-9 w-9 flex-row items-center justify-center" >
                                   <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                  </div>   </td>
-              </tr>
-        )
-        )): <></>
-}
-                        {/* {
-                          (mapp.length > 0) ? (
-                            mapp.map((data, index) => (
-                              <tr key={index} className="bg-white ">
-                                <td className="px-6 py-4  border-r whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c1} </div>   </td>
-                                <td className="px-6 py-4  border-r whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c2} </div>   </td>
-                                <td className="px-6 py-4  border-r whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>
-                                <td className="px-6 py-4  border-r whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c14} </div>   </td>
+            </td>
+   </tr>
+   </>
+          ))): <></>
+        }
+         </tbody>
+</table>
 
-                                <td className="px-6 py-4  border-r whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td>
-                                <td className="px-6 py-4  border-r whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c5} </div>   </td>
-                                <td className="px-6 py-4  border-r whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c6} </div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{moment(data.c7).format('DD/MM/yyyy')} </div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{moment(data.c8).format('DD/MM/yyyy')} </div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c9}</div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
-                                  <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{((data.c12*7)/100+data.c12).toFixed(2)}</div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
-                                  <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td>
-                              </tr>
-                            ))
-
-                          ) : <></>
-                          // ByeBye!
-                        } */}
-
-                      </table>
-                    </div>
+     </div>
                   </div>
               
+                  {isClose ? (
+        <>
+   
+          <div id="myModal" className="modal">
+            {/* <form onSubmit={savetable}> */}
+      
+            <form onSubmit={save} >
+              <div className="modal-content">
+                <span className="close" onClick={() => cleardata()}>
+                  &times;
+                </span>
+              
+                <div className="content-center text-center justify-items-center text-3xl mt-5 text-blue-800 ">
+                  แก้ไขข้อมูล
+                </div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  vendoR_NO
+                    <input
+                   value={bindedit.vendoR_NO}
+                   onChange={(e) => handleChangedata("vendoR_NO", e)}
+                      id="vendoR_NO"
+
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  vendoR_NAME
+                    <input
+                   value={bindedit.vendoR_NAME}
+                   onChange={(e) => handleChangedata("vendoR_NAME", e)}
+                      id="vendoR_NO"
+
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  shipto
+                    <input
+                   value={bindedit.shipto}
+                   onChange={(e) => handleChangedata("shipto", e)}
+                      id="shipto"
+                  
+
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  address
+                    <input
+                   value={bindedit.address}
+                   onChange={(e) => handleChangedata("address", e)}
+                      id="address"
+
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  taxid
+                    <input
+                   value={bindedit.taxid}
+                   onChange={(e) => handleChangedata("taxid", e)}
+                      id="taxid"
+
+
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "
+                    />
+                  </div>
+                  <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  phonenumber
+                    <input
+                   value={bindedit.phonenumber}
+                   onChange={(e) => handleChangedata("phonenumber", e)}
+                      id="phonenumber"
+
+
+                      className="w-full pearance-nonebg-gray-200 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700 "
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-center mt-6">
+                  <button 
+                    type="submit"
+                    className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    บันทึก
+                  </button>
+                  <button
+                    onClick={() => cleardata()}
+                    className="bg-red-500 ml-4  hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    ยกเลิก
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>{" "}
+        </>
+      ) : (
+        ""
+      )}
         </div>
     )
 }
