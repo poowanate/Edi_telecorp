@@ -364,7 +364,7 @@ function table() {
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.pO_NO} </div>   </td>
                               <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-center text-sm text-gray-900">{data.pO_DATE}  </div>   </td>
+                                <div className="text-center text-sm text-gray-900">{moment(data.pO_DATE).format('DD-MM-yyyy')}  </div>   </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.contracT_NO} </div>   </td>
                               <td className="px-6 py-4 whitespace-nowrap">
@@ -428,15 +428,43 @@ function table() {
                 <ExcelSheet dataSet={excelEX.excelHead} name="report" />
               </ExcelFile></div>
           </div>
-          <div class="grid grid-cols-2 gap-3">
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่ใบสั่งซื้อ <label className="ml-5">{datapodetail.pO_NO}</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">กำหนดส่งมอบ <label className="ml-5">{datapodetail.requesT_DATE}</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">วันที่ออกใบสั่งซื้อ <label className="ml-5">{datapodetail.pO_DATE}</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถานที่ส่งมอบ <label className="ml-5">{datapodetail.shiP_TO}</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่สัญญา <label className="ml-5">{datapodetail.requesT_NO}</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">รหัสผู้จำหน่าย <label className="ml-5">{datapodetail.vendoR_NO}</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ใบขออนุมัติซื้อ <label className="ml-5">ไม่ทราบ</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ชื่อผู้จำหน่าย <label className="ml-5">{datapodetail.vendoR_NAME}</label></div>
+          <div className="flex flex-row">
+            <div className="flex flex-col w-1/2 pl-28">
+              <div className="flex flex-row mt-5  ">
+                <div className="w-1/2 text-base  font-bold text-right ">เลขที่ใบสั่งซื้อ </div>
+                <label className="ml-5 w-1/2 text-left">{datapodetail.pO_NO}</label>
+              </div>
+              <div className="flex flex-row mt-5 ">
+                <div className="w-1/2 text-base  font-bold text-right ">วันที่ออกใบสั่งซื้อ </div>
+                <label className="ml-5 w-1/2 text-left">{moment(datapodetail.pO_DATE).format('DD/MM/yyyy')}</label>
+              </div>
+              <div className="flex flex-row mt-5 ">
+                <div className="w-1/2 text-base  font-bold text-right ">เลขที่สัญญา </div>
+                <label className="ml-5 w-1/2 text-left">{datapodetail.requesT_NO}</label>
+              </div>
+              <div className="flex flex-row mt-5 ">
+                <div className="w-1/2 text-base  font-bold text-right ">ใบขออนุมัติซื้อ </div>
+                <label className="ml-5 w-1/2 text-left">ไม่ทราบ</label>
+              </div>
+            </div>
+            <div className="flex flex-col w-1/2 ">
+              <div className="flex flex-row mt-5">
+                <div className=" text-base  font-bold text-right w-80">กำหนดส่งมอบ </div>
+                <label className="ml-5 w-1/2 text-left">{moment(datapodetail.requesT_DATE).format('DD/MM/yyyy')}</label>
+              </div>
+              <div className="flex flex-row mt-5">
+                <div className=" text-base  font-bold text-right w-80">สถานที่ส่งมอบ </div>
+                <label className="ml-5 w-1/2 text-left">{datapodetail.shiP_TO}</label>
+              </div>
+              <div className="flex flex-row mt-5">
+                <div className="text-base  font-bold text-right w-80">รหัสผู้จำหน่าย </div>
+                <label className="ml-5 w-1/2 text-left">{datapodetail.vendoR_NO}</label>
+              </div>
+              <div className="flex flex-row mt-5">
+                <div className="text-base  font-bold text-right w-80">ชื่อผู้จำหน่าย </div>
+                <label className="ml-5 w-1/2 text-left">{datapodetail.vendoR_NAME}</label>
+              </div>
+            </div>
           </div>
 
 
@@ -493,23 +521,33 @@ function table() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col mb-10">
-            <div class="grid grid-cols-1 gap-3 mt-5 mr-10">
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ราคารวม (ไม่รวม VAT)<label className="ml-5">{datapodetail.totaL_AMOUNT - datapodetail.vat}</label>
-              </div>
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ส่วนลด - เปอร์เซ็นต์<label className="ml-5">{datapodetail.discounT_PERCENTAGE}</label>
-              </div>
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ส่วนลด - บาท<label className="ml-5">{datapodetail.discounT_BAHT}</label>
-              </div>
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">VAT<label className="ml-5">{datapodetail.vat}</label>
-              </div>
-              <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ราคารวม <label className="ml-5">{datapodetail.totaL_AMOUNT}</label>
-              </div>
-            </div> </div></>
+
+          <div className="flex flex-col mb-10 items-end justify-center">
+            <div class="flex flex-row mt-5 mr-10">
+              <div className="content-center text-right justify-items-center text-base font-bold  ">ราคารวม (ไม่รวม VAT)</div>
+              <label className=" w-20 text-right">{datapodetail.totaL_AMOUNT - datapodetail.vat}</label>
+            </div>
+            <div class="flex flex-row mt-5 mr-10">
+              <div className="content-center text-right justify-items-center text-base font-bold  ">ส่วนลด - เปอร์เซ็นต์</div>
+              <label className=" w-20 text-right">{datapodetail.discounT_PERCENTAGE}</label>
+            </div>
+            <div class="flex flex-row mt-5 mr-10">
+              <div className="content-center text-right justify-items-center text-base font-bold  ">ส่วนลด - บาท</div>
+              <label className=" w-20 text-right">{datapodetail.discounT_BAHT}</label>
+            </div>
+            <div class="flex flex-row mt-5 mr-10">
+              <div className="content-center text-right justify-items-center text-base font-bold  ">VAT</div>
+              <label className=" w-20 text-right">{datapodetail.vat}</label>
+            </div>
+            <div class="flex flex-row mt-5 mr-10">
+              <div className="content-center text-right justify-items-center text-base font-bold  ">ราคารวม </div>
+              <label className=" w-20 text-right">{datapodetail.totaL_AMOUNT}</label>
+            </div>
+          </div></>
       }
 
 
-    </Layout>
+    </Layout >
   );
 }
 

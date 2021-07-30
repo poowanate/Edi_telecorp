@@ -185,20 +185,44 @@ function table() {
           <div className="content-center text-center justify-items-center text-xl font-bold mt-5 text-pink-800 ">
             ใบสั่งซื้อ (PO)
           </div>
-
-          <div class="grid grid-cols-2 gap-3">
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่ใบสั่งซื้อ <label className="ml-5">00001</label></div>
-
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">กำหนดส่งมอบ <label className="ml-5">12/03/63</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">วันที่ออกใบสั่งซื้อ <label className="ml-5">13/04/63</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">สถานที่ส่งมอบ <label className="ml-5">อาคารสะอาด</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">เลขที่สัญญา <label className="ml-5">00001</label></div>
-
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">รหัสผู้จำหน่าย <label className="ml-5">00001</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ใบขออนุมัติซื้อ <label className="ml-5">00001</label></div>
-            <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">ชื่อผู้จำหน่าย <label className="ml-5">สมศักดิ์</label></div>
+          <div className="flex flex-row">
+            <div className="flex flex-col w-1/2 pl-28">
+              <div className="flex flex-row mt-5  ">
+                <div className="w-1/2 text-base  font-bold text-right ">เลขที่ใบสั่งซื้อ </div>
+                <label className="ml-5 w-1/2 text-left">00001</label>
+              </div>
+              <div className="flex flex-row mt-5 ">
+                <div className="w-1/2 text-base  font-bold text-right ">วันที่ออกใบสั่งซื้อ </div>
+                <label className="ml-5 w-1/2 text-left">13/04/63</label>
+              </div>
+              <div className="flex flex-row mt-5 ">
+                <div className="w-1/2 text-base  font-bold text-right ">เลขที่สัญญา </div>
+                <label className="ml-5 w-1/2 text-left">00001</label>
+              </div>
+              <div className="flex flex-row mt-5 ">
+                <div className="w-1/2 text-base  font-bold text-right ">ใบขออนุมัติซื้อ </div>
+                <label className="ml-5 w-1/2 text-left">00001</label>
+              </div>
+            </div>
+            <div className="flex flex-col w-1/2 ">
+              <div className="flex flex-row mt-5">
+                <div className=" text-base  font-bold text-right w-80">กำหนดส่งมอบ </div>
+                <label className="ml-5 w-1/2 text-left">12/03/63</label>
+              </div>
+              <div className="flex flex-row mt-5">
+                <div className=" text-base  font-bold text-right w-80">สถานที่ส่งมอบ </div>
+                <label className="ml-5 w-1/2 text-left">อาคารสะอาด</label>
+              </div>
+              <div className="flex flex-row mt-5">
+                <div className="text-base  font-bold text-right w-80">รหัสผู้จำหน่าย </div>
+                <label className="ml-5 w-1/2 text-left">00001</label>
+              </div>
+              <div className="flex flex-row mt-5">
+                <div className="text-base  font-bold text-right w-80">ชื่อผู้จำหน่าย </div>
+                <label className="ml-5 w-1/2 text-left">สมศักดิ์</label>
+              </div>
+            </div>
           </div>
-
 
 
           <div className="flex flex-col mt-10">
