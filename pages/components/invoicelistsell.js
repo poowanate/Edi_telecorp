@@ -1,7 +1,7 @@
 import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
-import { edi_po, getedi_po, GETEDI_ASN } from '../api/api_po'
+import { edi_po, getedi_po, GETEDI_ASN,GETEDI_ASN_todrug } from '../api/api_po'
 import ReactExport from "react-data-export";
 import { edi_asn, ediproduct, getediasn, getediasnbyinvoice, asnupdate, deleteasn } from '../api/api_asn'
 import * as XLSX from 'xlsx';
@@ -653,8 +653,8 @@ function table() {
   const tosendapianother = async (invoice, product) => {
     console.log(invoice, product)
 
-
-    GETEDI_ASN(invoice, product).then(async data => {
+    
+    GETEDI_ASN_todrug(invoice, product).then(async data => {
       console.log(data)
       if (data.length > 0) {
         let ggwp = []
@@ -662,7 +662,7 @@ function table() {
 
           for (let index = 0; index < data[0].orderdetails.length; index++) {
             const form = {
-              id: Number(0),
+              id: Number(data[0].orderdetails[index].pO_DETAIL_ID),
 
               loT_NO: String(data[0].orderdetails[index].batcH_LOT_NO),
               codE_GPU: String(data[0].orderdetails[index].codE_GPU),
@@ -671,7 +671,7 @@ function table() {
               baR_CODE: String(data[0].orderdetails[index].baR_CODE),
               producT_ID: "",
               producT_NO: "",
-              iteM_CODE: "1178",//เพิ่ม
+              iteM_CODE: String(data[0].orderdetails[index].pO_DETAIL_ITEM_CODE),//เพิ่ม
               producT_CODE: data[0].orderdetails[index].producT_CODE,
               producT_NAME: data[0].orderdetails[index].producT_NAME,
               mfG_DATE: data[0].orderdetails[index].mfG_DATE,
@@ -759,15 +759,15 @@ function table() {
           //  console.log(JSON.stringify('['+form+']'))
           let dsadsa = '[' + JSON.stringify(form) + ']'
           console.log(dsadsa)
-          // postapicompany(dsadsa).then(data => {
-          //   console.log(data)
-          //   if (data.error) {
-          //     Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
-          //   }
-          //   else {
-          //     Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
-          //   }
-          // })
+          postapicompany(dsadsa).then(data => {
+            console.log(data)
+            if (data.error) {
+              Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
+            }
+            else {
+              Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
+            }
+          })
         }
       }
     })

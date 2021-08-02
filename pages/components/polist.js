@@ -507,9 +507,9 @@ function table() {
                             <td className="px-6 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.producT_NAME}  </div>   </td>
                             <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">{data.amount}  </div>   </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.qty}  </div>   </td>
+                            <td className="px-6 py-4   whitespace-nowrap">
+                              <div className="text-center text-sm text-gray-900">{data.uniT_PRICE}  </div>   </td>
                           </tr>
                         ))
                       }

@@ -106,5 +106,29 @@ export const edi_po = data => {
         return { error: 'Error......' }
     });
   }
+
+
+
+  export const GETEDI_ASN_todrug = (invoice,product) => {
+  
+    return axios({
+        method: 'GET',
+      
+        url: `   http://103.245.164.54:5003/api/EDI_ASN/GETEDI_ASN_PO_To-DRUG?INVOICE_NO=`+invoice+`&PRODUCT_NO=`+product,
+        // url: `  http://103.245.164.54:5003/api/EDI_ASN/GETEDI_ASN?INVOICE_NO=` +data,
+        headers: {
+          
+            'Content-Type': 'application/json'
+        },
+     
+    }).then((result) => {
+        console.log('hasil axios', result)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
   
 
