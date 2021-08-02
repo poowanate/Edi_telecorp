@@ -808,11 +808,11 @@ calall()
             deliverY_ORDER: String(data[0].invoicE_NO),
             deliverY_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
             pO_NO: String(data[0].pO_NO),
-            pO_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+            pO_DATE: moment(data[0].pO_DATE).format('YYYY-MM-DD'),
             contracT_NO: "",
             requesT_NO: "",
-            requesT_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-            deliveR_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+            requesT_DATE: moment(data[0].requesT_DATE).format('YYYY-MM-DD'),
+            deliveR_DATE: moment(data[0].deliveR_DATE).format('YYYY-MM-DD'),
             shiP_TO: String(data[0].ship_to),
             vendoR_NO: String(data[0].producT_NO),
             vendoR_NAME: String(data[0].vendoR_NAME),
@@ -821,7 +821,7 @@ calall()
             vat: Number((data[0].totaL_AMOUNT * 7) / 100).toFixed(2),
             totaL_AMOUNT: Number(data[0].totaL_AMOUNT),
             remark: data[0].remark,
-            pO_TYPE: "",
+            pO_TYPE: String(data[0].pO_TYPE),
             referencE1: "",
             referencE2: "",
             referencE3: "",
@@ -870,15 +870,15 @@ calall()
           //  console.log(JSON.stringify('['+form+']'))
           let dsadsa = '[' + JSON.stringify(form) + ']'
           console.log(dsadsa)
-          postapicompany(dsadsa).then(data => {
-            console.log(data)
-            if (data.error) {
-              Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
-            }
-            else {
-              Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
-            }
-          })
+          // postapicompany(dsadsa).then(data => {
+          //   console.log(data)
+          //   if (data.error) {
+          //     Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
+          //   }
+          //   else {
+          //     Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
+          //   }
+          // })
         }
       }
     })
@@ -1396,7 +1396,7 @@ const calall =()=>{  //callllll
 
   const saveapipo = async () => {
 
-    var date = moment(itemdata.invoicE_DATE, 'DD-MM-YYYY')
+    var date = moment(itemdata.invoicE_DATE, 'YYYY-MM-DD')
     let discounT_BAHT = itemdata.discounT_BAHT
     let discounT_PERCENTAGE = itemdata.discounT_PERCENTAGE
     let vat = itemdata.vat
@@ -1412,7 +1412,7 @@ const calall =()=>{  //callllll
 
     let data = {
       invoicE_NO: String(itemdata.invoicE_NO),
-      invoicE_DATE: date.format('YYYY-MM-DD'),
+      invoicE_DATE: date,
       remark: String(itemdata.remark),
       discounT_PERCENTAGE: Number(discounT_PERCENTAGE),
       discounT_BAHT: Number(discounT_BAHT),
@@ -1435,8 +1435,8 @@ const calall =()=>{  //callllll
         if (mapp.length > 0) {
           let i = mapp.length - 1;
           for (let index = 0; index < mapp.length; index++) {
-            var c7 = moment(mapp[index].c7, 'DD-MM-YYYY')
-            var c8 = moment(mapp[index].c8, 'DD-MM-YYYY')
+            var c7 = moment(mapp[index].c7, 'YYYY-MM-DD')
+            var c8 = moment(mapp[index].c8, 'YYYY-MM-DD')
 
             console.log(String(itemdata.invoicE_NO))
             let datatable = {
@@ -1451,8 +1451,8 @@ const calall =()=>{  //callllll
               uom: String(mapp[index].c10),
               uniT_PRICE: Number(mapp[index].c11),
               batcH_LOT_NO: String(mapp[index].c6),
-              mfG_DATE: c7.format('YYYY-MM-DD'),
-              exP_DATE: c8.format('YYYY-MM-DD'),
+              mfG_DATE: c7,
+              exP_DATE: c8,
 
               amount: Number(mapp[index].c12),
               total: Number(mapp[index].c13),
@@ -2888,7 +2888,8 @@ const calall =()=>{  //callllll
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     ราคาต่อหน่วย
-                    <input autoComplete="off" type="number"
+                    <input autoComplete="off" 
+                    // type="number"
                       onChange={(e) => handleChange("c11", e)}
                       id="extcount "
 
