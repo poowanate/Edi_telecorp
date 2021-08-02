@@ -671,6 +671,7 @@ function table() {
               baR_CODE: String(data[0].orderdetails[index].baR_CODE),
               producT_ID: "",
               producT_NO: "",
+              iteM_CODE: "1178",//เพิ่ม
               producT_CODE: data[0].orderdetails[index].producT_CODE,
               producT_NAME: data[0].orderdetails[index].producT_NAME,
               mfG_DATE: data[0].orderdetails[index].mfG_DATE,
@@ -758,15 +759,15 @@ function table() {
           //  console.log(JSON.stringify('['+form+']'))
           let dsadsa = '[' + JSON.stringify(form) + ']'
           console.log(dsadsa)
-          postapicompany(dsadsa).then(data => {
-            console.log(data)
-            if (data.error) {
-              Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
-            }
-            else {
-              Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
-            }
-          })
+          // postapicompany(dsadsa).then(data => {
+          //   console.log(data)
+          //   if (data.error) {
+          //     Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
+          //   }
+          //   else {
+          //     Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
+          //   }
+          // })
         }
       }
     })
@@ -1315,7 +1316,7 @@ function table() {
           let i = mapp.length - 1;
           for (let index = 0; index < mapp.length; index++) {
             var c7 = moment(mapp[index].c7, 'DD-MM-YYYY')
-            var c8 = moment(mapp[index].c7, 'DD-MM-YYYY')
+            var c8 = moment(mapp[index].c8, 'DD-MM-YYYY')
 
             console.log(String(itemdata.invoicE_NO))
             let datatable = {
@@ -1952,8 +1953,8 @@ function table() {
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  วันที่ใบส่งของ{" "}
-                  <input autoComplete="off" value={moment(itemdata.invoicE_DATE, 'DD-MM-YYYY').format('YYYY-MM-DD')}
+                  วันที่ใบส่งของ{" "}  
+                  <input autoComplete="off"  value={moment(itemdata.invoicE_DATE).format("YYYY-MM-DD")}
                     id="วันที่ใบส่งของ" type="date" onChange={(e) => handleChangedata("invoicE_DATE", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
@@ -2312,7 +2313,7 @@ function table() {
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   วันที่ใบส่งของ{" "}
-                  <input autoComplete="off" value={moment(itemdata.invoicE_DATE, 'DD-MM-YYYY').format('YYYY-MM-DD')}
+                  <input autoComplete="off"  value={moment(itemdata.invoicE_DATE).format("YYYY-MM-DD")}
                     id="วันที่ใบส่งของ" type="date" onChange={(e) => handleChangedata("invoicE_DATE", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
