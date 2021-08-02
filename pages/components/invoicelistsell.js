@@ -1,7 +1,7 @@
 import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
-import { edi_po, getedi_po, GETEDI_ASN,GETEDI_ASN_todrug } from '../api/api_po'
+import { edi_po, getedi_po, GETEDI_ASN,GETEDI_ASN_todrug,getdataedipobypo } from '../api/api_po'
 import ReactExport from "react-data-export";
 import { edi_asn, ediproduct, getediasn, getediasnbyinvoice, asnupdate, deleteasn } from '../api/api_asn'
 import * as XLSX from 'xlsx';
@@ -64,6 +64,114 @@ function table() {
     c14: "",
     id: 0,
   });
+
+   const searchpo = ()=>{
+     if(itemdata.pO_NO.length>8){
+      getdataedipobypo(itemdata.pO_NO).then(data => {
+        console.log(data)
+        
+        if (data.error) {
+          Swal.fire('ค้นหาไม่สำเร็จกรุณา ลองใหม่อีกครั้ง', '', 'info')
+        } else {
+  if(data.length>0){
+
+
+
+    itemdata['vendoR_NAME'] = data[0].vendoR_NAME
+    itemdata['producT_NO'] = data[0].vendoR_NO
+    itemdata['location'] = data[0].shiP_TO
+
+
+    setitemdata({...itemdata})
+
+
+    if (data[0].pO_DETAILs.length > 0) {
+      let ggwp = []
+      for (let index = 0; index < data[0].pO_DETAILs.length; index++) {
+        const form = {
+          c1: data[0].pO_DETAILs[index].codE_GPU,
+          c2: data[0].pO_DETAILs[index].codE_UNSPSC,
+          c3: data[0].pO_DETAILs[index].codE_TMT,
+          c4: data[0].pO_DETAILs[index].baR_CODE+'ใช้ barcode',
+          c6: data[0].pO_DETAILs[index].baR_CODE+'ใช้ barcode',
+          c5: data[0].pO_DETAILs[index].producT_NAME,
+          c10: 'ไม่รู้หน่วย',
+           c9: data[0].pO_DETAILs[index].qty,
+          c11: data[0].pO_DETAILs[index].uniT_PRICE,
+          c7: data[0].pO_DETAILs[index].mfG_DATE, 
+          c8: data[0].pO_DETAILs[index].exP_DATE,
+          c12: data[0].pO_DETAILs[index].amount,
+          c13: data[0].pO_DETAILs[index].total,
+          c14: data[0].pO_DETAILs[index].producT_CODE,
+
+          id: data[0].pO_DETAILs[index].id,
+
+        }
+        ggwp.push(form)
+        console.log(form)
+      }
+      setmapp(mapp.concat(ggwp))
+    }
+  }
+  else{
+    Swal.fire('ค้นหาไม่สำเร็จกรุณา ลองใหม่อีกครั้ง', '', 'info')
+  }
+          // setisClose(false)
+          // if (data.length > 0) {
+          //   datapodetail['contracT_NO'] = data[0].contracT_NO
+          //   datapodetail['deliveR_DATE'] = data[0].deliveR_DATE
+          //   datapodetail['discounT_BAHT'] = data[0].discounT_BAHT
+          //   datapodetail['discounT_PERCENTAGE'] = data[0].discounT_PERCENTAGE
+          //   datapodetail['pO_DATE'] = data[0].pO_DATE
+          //   datapodetail['pO_NO'] = data[0].pO_NO
+          //   datapodetail['pO_TYPE'] = data[0].pO_TYPE
+          //   datapodetail['referencE1'] = data[0].referencE1
+          //   datapodetail['referencE2'] = data[0].referencE2
+          //   datapodetail['referencE3'] = data[0].referencE3
+          //   datapodetail['requesT_DATE'] = data[0].requesT_DATE
+          //   datapodetail['requesT_NO'] = data[0].requesT_NO
+          //   datapodetail['shiP_TO'] = data[0].shiP_TO
+          //   datapodetail['totaL_AMOUNT'] = data[0].totaL_AMOUNT
+          //   datapodetail['vat'] = data[0].vat
+          //   datapodetail['vendoR_NAME'] = data[0].vendoR_NAME
+          //   datapodetail['vendoR_NO'] = data[0].vendoR_NO
+  
+          //   if (data[0].pO_DETAILs.length > 0) {
+          //     let datapush = []
+          //     for (let index = 0; index < data[0].pO_DETAILs.length; index++) {
+          //       let datatable = {
+          //         amount: Number(data[0].pO_DETAILs[index].amount),
+          //         baR_CODE: String(data[0].pO_DETAILs[index].baR_CODE),
+          //         codE_GPU: String(data[0].pO_DETAILs[index].codE_GPU),
+          //         codE_TMT: String(data[0].pO_DETAILs[index].codE_TMT),
+          //         codE_UNSPSC: String(data[0].pO_DETAILs[index].codE_UNSPSC),
+          //         producT_CODE: String(data[0].pO_DETAILs[index].producT_CODE),
+          //         producT_NAME: String(data[0].pO_DETAILs[index].producT_NAME),
+          //         qty: Number(data[0].pO_DETAILs[index].qty),
+          //         uniT_PRICE: Number(data[0].pO_DETAILs[index].uniT_PRICE),
+          //       }
+          //       datapush.push(datatable)
+          //     }
+  
+          //     setdatapodetailtable(datapush)
+  
+  
+          //   }
+  
+          // }
+  
+        }
+  
+  
+      })
+     }
+     else{
+      Swal.fire('ค้นหาไม่สำเร็จกรุณา ลองใหม่อีกครั้ง', '', 'info')
+     }
+   
+
+   }
+
   const exceldownload = async (ex) => {
     let exhead = ex[0]
     let exdetail = ex[0].orderdetails
@@ -385,7 +493,7 @@ function table() {
       }
 
       setitemdata({ ...itemdata })
-
+calall()
     }
 
   }
@@ -463,6 +571,7 @@ function table() {
 
         setmapp(temp)
         callmoney([...temp])
+        calall()
       }
 
     }
@@ -515,16 +624,18 @@ function table() {
         gebvalue.push(ggwp)
         setmapp(mapp => [...mapp, ggwp]);
         callmoney([...mapp, ggwp])
+        calall()
       }
       console.log(gebvalue)
 
       console.log(mapp)
+    
 
     }
     else if (checklength.length == 0) {
       console.log('non')
     }
-
+  
   }
 
 
@@ -671,7 +782,7 @@ function table() {
               baR_CODE: String(data[0].orderdetails[index].baR_CODE),
               producT_ID: "",
               producT_NO: "",
-              iteM_CODE: String(data[0].orderdetails[index].pO_DETAIL_ITEM_CODE),//เพิ่ม
+              iteM_CODE: Number(data[0].orderdetails[index].pO_DETAIL_ITEM_CODE),//เพิ่ม
               producT_CODE: data[0].orderdetails[index].producT_CODE,
               producT_NAME: data[0].orderdetails[index].producT_NAME,
               mfG_DATE: data[0].orderdetails[index].mfG_DATE,
@@ -1215,6 +1326,15 @@ function table() {
     console.log(mapp);
   };
 
+const calall =()=>{  //callllll
+  console.log('gg')
+  itemdata['discounT_BAHT'] = itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] / 100
+  let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * 7 / 100
+  itemdata['total'] = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) - i
+  itemdata['vat'] = i 
+  setitemdata({ ...itemdata })
+}
+  
   const handleChangedata = (name, e) => {
     console.log(e)
     itemdata[name] = e.target.value;
@@ -1926,15 +2046,18 @@ function table() {
 
 
               <div className="grid grid-cols-3 gap-3">
-                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  เลขที่ใบสั่งซื้อ
+              <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                
+                เลขที่ใบสั่งซื้อ 5
 
-                  <input autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
-                    id="เลขที่ใบสั่งซื้อ"
-                    value={itemdata.pO_NO}
-                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
-                  />
-                </div>
+                <input type="text" autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
+                  id="เลขที่ใบสั่งซื้อ"
+                  value={itemdata.pO_NO}
+                  className="ml-4  forsearch bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
+                />
+                <button onClick={()=>searchpo()}  class=" comboforsearch  bg-blue-500 text-white h-9 w-9 flex-row items-center justify-center"><svg class="  w-7 h-7 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
+            
+              </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบส่งของ{" "}
@@ -2283,16 +2406,19 @@ function table() {
               <div className="content-center text-center justify-items-center text-4xl mt-5 text-blue-800 ">
                 ใบรับของ (IN)
               </div>
-
+          
               <div className="grid grid-cols-3 gap-3">
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                
                   เลขที่ใบสั่งซื้อ
 
-                  <input autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
+                  <input type="text" autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
                     id="เลขที่ใบสั่งซื้อ"
                     value={itemdata.pO_NO}
-                    className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
+                    className="ml-4  forsearch bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
+                  <button  class=" comboforsearch  bg-blue-500 text-white h-9 w-9 flex-row items-center justify-center"><svg class="  w-7 h-7 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
+              
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">

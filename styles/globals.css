@@ -59,3 +59,20 @@ a {
 .test{
   text-align: center;
 }
+
+
+input[type="text"].forsearch {
+  
+  padding-right: 50px;
+}
+
+button.comboforsearch {
+  position: absolute;
+  margin-left: -50px;
+  height: 30px;
+  width: 50px;
+ 
+  color: white;
+  border: 0;
+  -webkit-appearance: none;
+}
