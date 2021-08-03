@@ -80,8 +80,9 @@ function table() {
     itemdata['vendoR_NAME'] = data[0].vendoR_NAME
     itemdata['producT_NO'] = data[0].vendoR_NO
     itemdata['location'] = data[0].shiP_TO
-
-
+    itemdata['total'] = data[0].totaL_AMOUNT
+    itemdata['vat'] = data[0].vat
+    itemdata['totaL_AMOUNT'] = data[0].totaL_AMOUNT- data[0].vat
     setitemdata({...itemdata})
 
 
