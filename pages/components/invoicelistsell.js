@@ -876,15 +876,15 @@ calall()
           //  console.log(JSON.stringify('['+form+']'))
           let dsadsa = '[' + JSON.stringify(form) + ']'
           console.log(dsadsa)
-          // postapicompany(dsadsa).then(data => {
-          //   console.log(data)
-          //   if (data.error) {
-          //     Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
-          //   }
-          //   else {
-          //     Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
-          //   }
-          // })
+          postapicompany(dsadsa).then(data => {
+            console.log(data)
+            if (data.error) {
+              Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
+            }
+            else {
+              Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
+            }
+          })
         }
       }
     })
