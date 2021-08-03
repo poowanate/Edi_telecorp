@@ -105,7 +105,26 @@ console.log(data)
         return { error: 'Error......' }
     });
   }
+  
+  export const putthenapicompany = id => {
 
+    return axios({
+        method: 'PUT',   
+        url: `http://103.245.164.54:5003/api/UpdateASNStatus/`+id,
+        headers: {
+          
+            'Content-Type':'application/json'
+        },
+       
+    }).then((result) => {
+        console.log('hasil axios', result.data)
+        return result.data
+  
+    }).catch(err => {
+        console.log(err);
+        return { error: 'Error......' }
+    });
+  }
 
   export const postapicompany = data => {
 

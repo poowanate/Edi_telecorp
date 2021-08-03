@@ -1,13 +1,13 @@
 import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
-import { edi_po, getedi_po, GETEDI_ASN,GETEDI_ASN_todrug,getdataedipobypo } from '../api/api_po'
+import { edi_po, getedi_po, GETEDI_ASN,GETEDI_ASN_todrug,getdataedipobypo} from '../api/api_po'
 import ReactExport from "react-data-export";
 import { edi_asn, ediproduct, getediasn, getediasnbyinvoice, asnupdate, deleteasn } from '../api/api_asn'
 import * as XLSX from 'xlsx';
 import moment from "moment";
 import Swal from 'sweetalert2'
-import { postapicompany } from '../api/api_company'
+import { postapicompany,putthenapicompany } from '../api/api_company'
 // import template from '../../public/download/template.xlsx';
 
 function table() {
@@ -882,6 +882,15 @@ calall()
               Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
             }
             else {
+              putthenapicompany(data.id).then(data=>{
+               
+                if (data.error) {
+                  Swal.fire('ส่งstatus ไม่สำเร็จ', '', 'info')
+                }
+                else {
+                  console.log(data)
+                } 
+              })
               Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
             }
           })
@@ -2063,8 +2072,8 @@ const calall =()=>{  //callllll
 
               <div className="grid grid-cols-3 gap-3">
               <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                
-                เลขที่ใบสั่งซื้อ 5
+              เลขที่ใบสั่งซื้อ
+                {/* เลขที่ใบสั่งซื้อ 5 */}
 
                 <input type="text" autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
                   id="เลขที่ใบสั่งซื้อ"
