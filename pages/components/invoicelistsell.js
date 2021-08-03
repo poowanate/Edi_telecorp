@@ -65,9 +65,13 @@ function table() {
     id: 0,
   });
 
-   const searchpo = ()=>{
+   const searchpo =  ()=>{
+    cleardata()
+    setmapp([])
+    setchecklength([])
      if(itemdata.pO_NO.length>8){
       getdataedipobypo(itemdata.pO_NO).then(data => {
+       
         console.log(data)
         
         if (data.error) {
@@ -96,7 +100,7 @@ function table() {
           c4: data[0].pO_DETAILs[index].baR_CODE+'ใช้ barcode',
           c6: data[0].pO_DETAILs[index].baR_CODE+'ใช้ barcode',
           c5: data[0].pO_DETAILs[index].producT_NAME,
-          c10: 'ไม่รู้หน่วย',
+          c10: 'ไม่',
            c9: data[0].pO_DETAILs[index].qty,
           c11: data[0].pO_DETAILs[index].uniT_PRICE,
           c7: data[0].pO_DETAILs[index].mfG_DATE, 
@@ -109,9 +113,10 @@ function table() {
 
         }
         ggwp.push(form)
-        console.log(form)
+        console.log(ggwp)
       }
       setmapp(mapp.concat(ggwp))
+      ggwp = []
     }
   }
   else{
@@ -806,26 +811,26 @@ calall()
 
           }
           const form = {
-            deliverY_ORDER: String(data[0].invoicE_NO),
-            deliverY_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
-            pO_NO: String(data[0].pO_NO),
-            pO_DATE: moment(data[0].pO_DATE).format('YYYY-MM-DD'),
-            contracT_NO: "",
-            requesT_NO: "",
-            requesT_DATE: moment(data[0].requesT_DATE).format('YYYY-MM-DD'),
-            deliveR_DATE: moment(data[0].deliveR_DATE).format('YYYY-MM-DD'),
-            shiP_TO: String(data[0].ship_to),
-            vendoR_NO: String(data[0].producT_NO),
-            vendoR_NAME: String(data[0].vendoR_NAME),
-            discounT_PERCENTAGE: Number(data[0].discounT_PERCENTAGE),
-            discounT_BAHT: Number(data[0].discounT_BAHT),
-            vat: Number((data[0].totaL_AMOUNT * 7) / 100).toFixed(2),
-            totaL_AMOUNT: Number(data[0].totaL_AMOUNT),
-            remark: data[0].remark,
-            pO_TYPE: String(data[0].pO_TYPE),
-            referencE1: "",
-            referencE2: "",
-            referencE3: "",
+            rev_IV_DELIVERY_ORDER: String(data[0].invoicE_NO),
+            rev_IV_DELIVERY_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+            rev_IV_PO_NO: String(data[0].pO_NO),
+            rev_IV_PO_DATE: moment(data[0].pO_DATE).format('YYYY-MM-DD'),
+            rev_IV_CONTRACT_NO: "",
+            rev_IV_REQUEST_NO: "",
+            rev_IV_REQUEST_DATE: moment(data[0].requesT_DATE).format('YYYY-MM-DD'),
+            rev_IV_DELIVER_DATE: moment(data[0].deliveR_DATE).format('YYYY-MM-DD'),
+            rev_IV_SHIP_TO: String(data[0].ship_to),
+            rev_IV_VENDOR_NO: String(data[0].producT_NO),
+            rev_IV_VENDOR_NAME: String(data[0].vendoR_NAME),
+            rev_IV_DISCOUNT_PERCENTAGE: Number(data[0].discounT_PERCENTAGE),
+            rev_IV_DISCOUNT_BAHT: Number(data[0].discounT_BAHT),
+            rev_IV_VAT: Number((data[0].totaL_AMOUNT * 7) / 100).toFixed(2),
+            rev_IV_TOTAL_AMOUNT: Number(data[0].totaL_AMOUNT),
+            rev_IV_PO_TYPE: String(data[0].pO_TYPE),
+            rev_IV_REFERENCE1: "",
+            rev_IV_REFERENCE2: "",
+            rev_IV_REFERENCE3: "",
+            rev_IV_REMARK: data[0].remark,
             orderdetails: ggwp
 
 
@@ -1328,11 +1333,21 @@ calall()
   };
 
 const calall =()=>{  //callllll
-  console.log('gg')
-  itemdata['discounT_BAHT'] = itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] / 100
-  let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * 7 / 100
-  itemdata['total'] = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) - i
-  itemdata['vat'] = i 
+  console.log(mapp.length)
+  if(mapp.length>0){
+    itemdata['discounT_BAHT'] = itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] / 100
+    let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * 7 / 100
+    itemdata['total'] = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) - i
+    itemdata['vat'] = i 
+  
+  }
+  else{
+    itemdata['totaL_AMOUNT'] = 0
+    itemdata['discounT_PERCENTAGE'] = 0
+    itemdata['discounT_BAHT'] = 0
+    itemdata['total'] = 0
+    itemdata['vat'] = 0
+  }
   setitemdata({ ...itemdata })
 }
   
@@ -1409,7 +1424,7 @@ const calall =()=>{  //callllll
     if (isNaN(discounT_BAHT)) {
       discounT_BAHT = 0
     }
-
+   
 
     let data = {
       invoicE_NO: String(itemdata.invoicE_NO),
@@ -1427,7 +1442,7 @@ const calall =()=>{  //callllll
     }
     console.log(JSON.stringify(data))
     await edi_asn(data).then(async data => {
-      console.log(data);
+     
       // Router.push('/register/information')
       if (data.error) {
         console.log('ggwp')
@@ -1452,8 +1467,8 @@ const calall =()=>{  //callllll
               uom: String(mapp[index].c10),
               uniT_PRICE: Number(mapp[index].c11),
               batcH_LOT_NO: String(mapp[index].c6),
-              mfG_DATE: c7,
-              exP_DATE: c8,
+              mfG_DATE: mapp[index].c7,
+              exP_DATE: mapp[index].c8,
 
               amount: Number(mapp[index].c12),
               total: Number(mapp[index].c13),
@@ -2106,9 +2121,21 @@ const calall =()=>{  //callllll
               <div className="flex flex-col mt-10">
                 <div className=" ">
                   <div className=" flex justify-end  mr-10 mt-5">
+                  <button
+                      onClick={() => dupplicate()}
+                      className="bg-blue-500 ml-3  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      ทำซ้ำ
+                    </button>
+                    <button
+                      onClick={() => deletecheckbox()}
+                      className="bg-blue-500 ml-3  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      ลบ
+                    </button>
                     <button
                       onClick={() => setisClose(true)}
-                      className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-blue-500  ml-3  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       เพิ่มข้อมูลตาราง
                     </button>
@@ -2117,6 +2144,12 @@ const calall =()=>{  //callllll
                     <div className="shadow  border-gray-200 sm:rounded-lg">
                       <table className="min-w-full w-full">
                         <tr className="bg-gray-50">
+                        <th
+                            scope="col"
+                            className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider"
+                          >
+
+                          </th>
                           <th
                             scope="col"
                             className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider"
@@ -2211,6 +2244,9 @@ const calall =()=>{  //callllll
                           >
                             จำนวนที่สั่งซื้อ
                           </th>
+                          <th scope="col" className="relative px-6 py-3">
+
+</th>
                         </tr>
 
 
@@ -2218,6 +2254,12 @@ const calall =()=>{  //callllll
                         {
                           mapp.map((data, index) => (
                             <tr key={index} className="bg-white ">
+                                 <td className="px-6 py-4  border-r whitespace-nowrap">
+                                <label class="inline-flex items-center mt-3">
+                                  <input autoComplete="off" type="checkbox" id={data.id} checked={data.checked}
+                                    onChange={(e) => setChecked(data.checked, index, data.id)} class="form-checkbox h-6 w-6 text-gray-600" />
+                                </label>
+                              </td>
                               <td className="px-6 py-4  border-r whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c1} </div>   </td>
                               <td className="px-6 py-4  border-r whitespace-nowrap">
@@ -2248,6 +2290,11 @@ const calall =()=>{  //callllll
                                 <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td>
+                                <td className="px-6 py-4   whitespace-nowrap">
+                                <button onClick={(e) => edittable(index, data.id)} class="rounded-full bg-green-400 text-white h-9 w-9 flex-row items-center justify-center" >
+                                  <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                </button>
+                                </td>
                             </tr>
                           ))
                         }
