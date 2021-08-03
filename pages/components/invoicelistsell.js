@@ -199,7 +199,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "เลขที่ใบสั่งซื้อ", style: { font: { bold: true } } },
-      { value: exhead.pO_NO, style: { font: { bold: true } } },
+      { value: exhead.pO_NO||"", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
@@ -208,7 +208,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "เลขที่ใบส่งของ", style: { font: { bold: true } } },
-      { value: exhead.invoicE_NO, style: { font: { bold: true } } },
+      { value: exhead.invoicE_NO||"", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
@@ -218,7 +218,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "รหัสผู้จำหน่าย", style: { font: { bold: true } } },
-      { value: exhead.producT_NO, style: { font: { bold: true } } },
+      { value: exhead.producT_NO||"", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
@@ -227,7 +227,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "วันที่ใบส่งของ ", style: { font: { bold: true } } },
-      { value: moment(exhead.invoicE_DATE).format('DD-MM-yyyy'), style: { font: { bold: true } } },
+      { value: moment(exhead.invoicE_DATE).format('DD/MM/yyyy')||"", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
@@ -236,7 +236,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ชื่อผู้จำหน่าย", style: { font: { bold: true } } },
-      { value: exhead.vendoR_NAME, style: { font: { bold: true } } },
+      { value: exhead.vendoR_NAME||"", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
@@ -245,7 +245,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "สถานที่ส่งมอบ", style: { font: { bold: true } } },
-      { value: exhead.ship_to, style: { font: { bold: true } } },
+      { value: exhead.ship_to||"", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
@@ -289,21 +289,21 @@ function table() {
     for (let index = 0; index < exdetail.length; index++) {
 
       var arr2 = [
-        { value: exdetail[index].codE_GPU },
-        { value: exdetail[index].codE_UNSPSC },
-        { value: exdetail[index].codE_TMT },
-        { value: exdetail[index].producT_CODE },
-        { value: exdetail[index].baR_CODE },
-        { value: exdetail[index].producT_NAME },
-        { value: exdetail[index].producT_ID },
-        { value: moment(exdetail[index].mfG_DATE).format('DD/MM/yyyy') },
-        { value: moment(exdetail[index].exP_DATE).format('DD/MM/yyyy') },
-        { value: exdetail[index].qty },
-        { value: exdetail[index].uom },
-        { value: exdetail[index].uniT_PRICE },
-        { value: ((exdetail[index].amount * 7) / 100 + exdetail[index].amount).toFixed(2) },
-        { value: exdetail[index].amount },
-        { value: exdetail[index].total },
+        { value: exdetail[index].codE_GPU||"" },
+        { value: exdetail[index].codE_UNSPSC||"" },
+        { value: exdetail[index].codE_TMT||"" },
+        { value: exdetail[index].producT_CODE||"" },
+        { value: exdetail[index].baR_CODE||"" },
+        { value: exdetail[index].producT_NAME||"" },
+        { value: exdetail[index].batcH_LOT_NO||"" },
+        { value: moment(exdetail[index].mfG_DATE).format('DD/MM/yyyy')||"" },
+        { value: moment(exdetail[index].exP_DATE).format('DD/MM/yyyy')||"" },
+        { value: exdetail[index].qty||"" },
+        { value: exdetail[index].uom||"" },
+        { value: exdetail[index].uniT_PRICE||"" },
+        { value: ((exdetail[index].amount * 7) / 100 + exdetail[index].amount).toFixed(2)||"" },
+        { value: exdetail[index].amount||"" },
+        { value: exdetail[index].total||"" },
       ];
       datasum.push(arr2);
     }
@@ -327,7 +327,7 @@ function table() {
     datasum.push(foot);
     var foot1 = [
       { value: "หมายเหตุ", style: { font: { bold: true } } },
-      { value: exhead.remark, style: { font: { bold: true } } },
+      { value: exhead.remark||0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
@@ -339,7 +339,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ราคารวม(ไม่รวม VAT)", style: { font: { bold: true } } },
-      { value: exhead.totaL_AMOUNT, style: { font: { bold: true } } },
+      { value: exhead.totaL_AMOUNT||0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot1);
@@ -357,7 +357,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ส่วนลด-เปอร์เซ็นต์ ", style: { font: { bold: true } } },
-      { value: exhead.discounT_PERCENTAGE, style: { font: { bold: true } } },
+      { value: exhead.discounT_PERCENTAGE||0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot2);
@@ -375,7 +375,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ส่วนลด-บาท", style: { font: { bold: true } } },
-      { value: exhead.discounT_BAHT, style: { font: { bold: true } } },
+      { value: exhead.discounT_BAHT||0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot3);
@@ -393,7 +393,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "VAT", style: { font: { bold: true } } },
-      { value: exhead.vat, style: { font: { bold: true } } },
+      { value: exhead.vat||0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot4);
@@ -411,7 +411,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ราคารวม", style: { font: { bold: true } } },
-      { value: exhead.total, style: { font: { bold: true } } },
+      { value: exhead.total||0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot5);
