@@ -3,8 +3,11 @@ import React, { useMemo, useState, useEffect, useRef } from 'react'
 import { getediasn1, getediasnbyinvoice1 } from "../api/api_asn"
 import { data } from "autoprefixer";
 import moment from "moment";
-
+import ReactExport from "react-data-export";
 function table() {
+  const [excelEX, setexcelEX] = useState({ excelHead: null });
+  const ExcelFile = ReactExport.ExcelFile;
+  const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
   const [isClose, setisClose] = useState(true);
   const [showtable, setshowtable] = useState([]);
   const [date, setdate] = useState({
@@ -49,7 +52,119 @@ function table() {
 
 
   );
+  const exceldownload = (ex) => {
+    let exhead = ex[0]
+    let exdetail = ex[0].orderdetails
+    console.log(exhead)
+    console.log(exdetail)
+    let data = [];
+    let datasum = [];
+    var head = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head);
+    var head1 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "เลขที่ใบสั่งซื้อ", style: { font: { bold: true } } },
+      { value: exhead.invoicE_NO || "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "เลขที่สัญญา", style: { font: { bold: true } } },
+      { value: exhead.invoicE_NO || "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head1);
+    var head2 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "กำหนดส่งมอบ", style: { font: { bold: true } } },
+      { value: moment(exhead.invoicE_DATE).format('DD/MM/yyyy') || "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "รหัสผู้จำหน่าย", style: { font: { bold: true } } },
+      { value: "ไม่มี" || "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head2);
+    var head3 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "ชื่อผู้จำหน่าย", style: { font: { bold: true } } },
+      { value: exhead.vendoR_NAME || "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head3);
+    var head5 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head5);
+    var arr1 = [
+      { value: "IN", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "วันที่ส่งของ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "สถานที่ส่งมอบ	", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ลำดับ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัสสินค้า", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ชื่อเวชภัณท์", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "จำนวนรับ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "จำนวนทั้งหมด	", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "สถานะ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+    ];
+    datasum.push(arr1);
+    for (let index = 0; index < exdetail.length; index++) {
 
+      var arr2 = [
+        { value: exdetail[index].producT_NO || "" },
+        { value: moment(exdetail.invoicE_DATE).format('DD/MM/yyyy') || "" },
+        { value: exdetail[index].location || "" },
+        { value: exdetail[index].batcH_LOT_NO || "" },
+        { value: exdetail[index].producT_CODE || "" },
+        { value: exdetail[index].producT_NAME || "" },
+        { value: exdetail[index].qty || "" },
+        { value: exdetail[index].total || "" },
+        { value: "ไม่มี status" },
+      ];
+      datasum.push(arr2);
+    }
+    data = datasum
+    var excelHead = [
+      {
+        columns: [
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "รายละเอียดรับสินค้า", style: { font: { sz: "28", bold: true, color: { rgb: "BE185D" } } } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+        ],
+        data: data
+
+      }
+    ];
+    excelEX.excelHead = excelHead;
+    setexcelEX(excelEX);
+  }
   const sdsad = async () => {
     console.log(itemtable.length)
     if (itemtable.length > 0) {
@@ -131,7 +246,7 @@ function table() {
       if (data.error) {
 
       } else {
-
+        exceldownload(data)
         await setitemtable(data)
         await setitemtablez(data)
         await setisClose(false)
@@ -260,7 +375,7 @@ function table() {
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">
-                                {data.location}
+                                  {data.location}
                                 </div>
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
@@ -325,10 +440,20 @@ function table() {
             </div>
           </div>
           {/* <button onClick={()=>console.log(itemtablez)}>ss</button> */}
-          <div className="content-center text-center justify-items-center text-4xl mt-5 text-pink-800 ">
-            รายละเอียดรับสินค้า
+          <div className="flex flex-row">
+            <div className="w-1/3"></div>
+            <div className="content-center w-1/3 text-center flex justify-center items-center text-xl font-bold mt-5 text-pink-700 ">
+              รายละเอียดรับสินค้า
+            </div>
+            <div className="flex w-1/3 justify-end items-end mr-5">
+
+
+              <ExcelFile element={<button className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
+                <ExcelSheet dataSet={excelEX.excelHead} name="report" />
+              </ExcelFile>
+            </div>
           </div>
-<div className="flex flex-row">
+          <div className="flex flex-row">
             <div className="flex flex-col w-1/2 pl-28">
               <div className="flex flex-row mt-5  ">
                 <div className="w-1/2 text-base  font-bold text-right ">เลขที่ใบสั่งซื้อ </div>

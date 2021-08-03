@@ -1,13 +1,282 @@
 import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from 'react'
 import moment from "moment";
+import ReactExport from "react-data-export";
 function table() {
+  const [excelEX, setexcelEX] = useState({ excelHead: null });
+  const ExcelFile = ReactExport.ExcelFile;
+  const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
   const [isClose, setisClose] = useState(true);
   const [date, setdate] = useState({
     Ddate: moment(new Date()).format("YYYY-MM-DD"),
     Sdate: moment(new Date()).format("YYYY-MM-DD"),
     Edate: moment(new Date()).format("YYYY-MM-DD"),
   });
+  const exceldownload = async (ex) => {
+    let exhead = ex[0]
+    let exdetail = ex[0].orderdetails
+    console.log(exhead)
+    console.log(exdetail)
+    let data = [];
+    let datasum = [];
+    var head = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head);
+    var head1 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "เลขที่ใบสั่งซื้อ", style: { font: { bold: true } } },
+      { value: exhead.pO_NO||"", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "เลขที่ใบส่งของ", style: { font: { bold: true } } },
+      { value: exhead.invoicE_NO||"", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head1);
+    var head2 = [
+
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "รหัสผู้จำหน่าย", style: { font: { bold: true } } },
+      { value: exhead.producT_NO||"", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "วันที่ใบส่งของ ", style: { font: { bold: true } } },
+      { value: moment(exhead.invoicE_DATE).format('DD/MM/yyyy')||"", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head2);
+    var head3 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ชื่อผู้จำหน่าย", style: { font: { bold: true } } },
+      { value: exhead.vendoR_NAME||"", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "สถานที่ส่งมอบ", style: { font: { bold: true } } },
+      { value: exhead.ship_to||"", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head3);
+    var head5 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(head5);
+    var arr1 = [
+      { value: "รหัส GPU", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัส UNSPSC", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัส TMT", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัส สินค้า", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "BAR CODE", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ชื่อยา / เวชภัณท์", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "รหัส ผลิต", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "วันที่ผลิต", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "วันที่หมดอายุ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "จำนวน", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "หน่วย", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ราคาต่อหน่วย", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "ราคารวม VAT", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "จำนวนเงิน", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+      { value: "จำนวนที่สั่งซื้อ", style: { font: { bold: true, color: { rgb: "BE185D" } } } },
+    ];
+    datasum.push(arr1);
+    for (let index = 0; index < exdetail.length; index++) {
+
+      var arr2 = [
+        { value: exdetail[index].codE_GPU||"" },
+        { value: exdetail[index].codE_UNSPSC||"" },
+        { value: exdetail[index].codE_TMT||"" },
+        { value: exdetail[index].producT_CODE||"" },
+        { value: exdetail[index].baR_CODE||"" },
+        { value: exdetail[index].producT_NAME||"" },
+        { value: exdetail[index].batcH_LOT_NO||"" },
+        { value: moment(exdetail[index].mfG_DATE).format('DD/MM/yyyy')||"" },
+        { value: moment(exdetail[index].exP_DATE).format('DD/MM/yyyy')||"" },
+        { value: exdetail[index].qty||"" },
+        { value: exdetail[index].uom||"" },
+        { value: exdetail[index].uniT_PRICE||"" },
+        { value: ((exdetail[index].amount * 7) / 100 + exdetail[index].amount).toFixed(2)||"" },
+        { value: exdetail[index].amount||"" },
+        { value: exdetail[index].total||"" },
+      ];
+      datasum.push(arr2);
+    }
+    var foot = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot);
+    var foot1 = [
+      { value: "หมายเหตุ", style: { font: { bold: true } } },
+      { value: exhead.remark||0, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ราคารวม(ไม่รวม VAT)", style: { font: { bold: true } } },
+      { value: exhead.totaL_AMOUNT||0, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot1);
+    var foot2 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ส่วนลด-เปอร์เซ็นต์ ", style: { font: { bold: true } } },
+      { value: exhead.discounT_PERCENTAGE||0, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot2);
+    var foot3 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ส่วนลด-บาท", style: { font: { bold: true } } },
+      { value: exhead.discounT_BAHT||0, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot3);
+    var foot4 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "VAT", style: { font: { bold: true } } },
+      { value: exhead.vat||0, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot4);
+    var foot5 = [
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+      { value: "ราคารวม", style: { font: { bold: true } } },
+      { value: exhead.total||0, style: { font: { bold: true } } },
+      { value: "", style: { font: { bold: true } } },
+    ];
+    datasum.push(foot5);
+    data = datasum
+    var excelHead = [
+      {
+        columns: [
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "ใบรับของ (IN)", style: { font: { sz: "28", bold: true, color: { rgb: "BE185D" } } } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+          { title: "", style: { font: { sz: "12", bold: true }, } },
+        ],
+        data: data
+
+      }
+    ];
+    excelEX.excelHead = excelHead;
+    setexcelEX(excelEX);
+
+  }
   const dateChange = (name, e) => {
     date[name] = e.target.value;
     console.log(date[name]);
@@ -151,8 +420,18 @@ function table() {
               </a>
             </div>
           </div>
-          <div className="content-center text-center justify-items-center text-xl font-bold mt-5 text-pink-800 ">
+          <div className="flex flex-row">
+            <div className="w-1/3"></div>
+            <div className="content-center w-1/3 text-center flex justify-center items-center text-xl font-bold mt-5 text-pink-700 ">
             ใบรับของ (IN)
+            </div>
+            <div className="flex w-1/3 justify-end items-end mr-5">
+
+
+              <ExcelFile element={<button className="ml-2 bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
+                <ExcelSheet dataSet={excelEX.excelHead} name="report" />
+              </ExcelFile>
+            </div>
           </div>
           <div className="flex flex-row">
             <div className="flex flex-col w-1/2 pl-28">
