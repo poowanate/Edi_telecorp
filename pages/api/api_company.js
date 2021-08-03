@@ -110,7 +110,7 @@ console.log(data)
 
     return axios({
         method: 'PUT',   
-        url: `http://103.245.164.54:5003/api/UpdateASNStatus/`+id,
+        url: `http://103.245.164.54:5003/api/EDI_ASN/UpdateASNStatus/`+id,
         headers: {
           
             'Content-Type':'application/json'

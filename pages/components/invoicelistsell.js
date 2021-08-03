@@ -882,7 +882,7 @@ calall()
               Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
             }
             else {
-              putthenapicompany(data.id).then(data=>{
+              putthenapicompany(data[0].id).then(data=>{
                
                 if (data.error) {
                   Swal.fire('ส่งstatus ไม่สำเร็จ', '', 'info')
