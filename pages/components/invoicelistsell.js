@@ -1783,8 +1783,8 @@ const calall =()=>{  //callllll
                   ใบส่งของ (OUT)
                 </div>
                 <div className="flex w-1/3 justify-end items-end mr-5">
-                  <button className="ml-2 bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</button>
-                  <ExcelFile element={<button className="ml-2 bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
+                  <button onClick={()=>window.print()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</button>
+                  <ExcelFile element={<button className="ml-2 bg-blue-500  print_d_none hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
                     <ExcelSheet dataSet={excelEX.excelHead} name="report" />
                   </ExcelFile>
 
@@ -1821,14 +1821,14 @@ const calall =()=>{  //callllll
                 </div>
               </div>
 
-              <div className="flex flex-col mt-10">
+              <div className="flex flex-col mt-5">
                 {/* kkkk */}
                 <div className=" ">
                   <div className=" flex justify-end  mr-10 mt-5">
 
                     <button
                       onClick={() => setisClosef(4)}
-                      className="bg-blue-500 ml-2  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-blue-500 ml-2 print_d_none hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       แก้ไข
                     </button>
