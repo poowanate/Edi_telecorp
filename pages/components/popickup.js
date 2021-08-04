@@ -550,11 +550,20 @@ function table() {
                           </div>{" "}
                         </td> */}
 
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">
-                                {data.status}
-                            </div>{" "}
-                          </td>
+                          {
+                            (data.balance == "0") ?
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-center text-sm text-gray-900">
+                                  ครบแล้ว
+                                </div>{" "}
+                              </td>
+                              :
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-center text-sm text-gray-900">
+                                  ยังไม่ครับ
+                                </div>{" "}
+                              </td>
+                          }
 
                         </tr>
                         </>
