@@ -76,3 +76,9 @@ button.comboforsearch {
   border: 0;
   -webkit-appearance: none;
 }
+
+@media print {
+  .print_d_none{
+    display: none !important;
+  }
+}
