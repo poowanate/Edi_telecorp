@@ -1,13 +1,13 @@
 import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { set } from "js-cookie";
-import { edi_po, getedi_po, GETEDI_ASN,GETEDI_ASN_todrug,getdataedipobypo} from '../api/api_po'
+import { edi_po, getedi_po, GETEDI_ASN, GETEDI_ASN_todrug, getdataedipobypo } from '../api/api_po'
 import ReactExport from "react-data-export";
 import { edi_asn, ediproduct, getediasn, getediasnbyinvoice, asnupdate, deleteasn } from '../api/api_asn'
 import * as XLSX from 'xlsx';
 import moment from "moment";
 import Swal from 'sweetalert2'
-import { postapicompany,putthenapicompany } from '../api/api_company'
+import { postapicompany, putthenapicompany } from '../api/api_company'
 // import template from '../../public/download/template.xlsx';
 
 function table() {
@@ -28,23 +28,24 @@ function table() {
     setdate({ ...date, [name]: e.target.value || null });
   }
 
-  const search =()=>{
-    if(radio === 'now'){
-      if(datatable2.length>0){  
-        setshowtable(datatable2.filter(x => moment(x.invoicE_DATE).format('DD-MM-yyyy') == moment(date.Ddate).format('DD-MM-yyyy') )) 
+  const search = () => {
+    if (radio === 'now') {
+      if (datatable2.length > 0) {
+        setshowtable(datatable2.filter(x => moment(x.invoicE_DATE).format('DD-MM-yyyy') == moment(date.Ddate).format('DD-MM-yyyy')))
       }
-       //ใช้ได้
+      //ใช้ได้
     }
-    if(radio === 'fromto'){
-      if(datatable2.length>0){
-        setshowtable(datatable2.filter(x => moment(x.invoicE_DATE).format('DD-MM-yyyy') >= moment(date.Sdate).format('DD-MM-yyyy') && moment(x.invoicE_DATE).format('DD-MM-yyyy') <= moment(date.Edate).format('DD-MM-yyyy') ))  //ใช้ได้
-    }}
-     
-      // let search=datatable.sort((a, b) => a.requesT_NO.localeCompare(640004386))
-      
-     
-    
+    if (radio === 'fromto') {
+      if (datatable2.length > 0) {
+        setshowtable(datatable2.filter(x => moment(x.invoicE_DATE).format('DD-MM-yyyy') >= moment(date.Sdate).format('DD-MM-yyyy') && moment(x.invoicE_DATE).format('DD-MM-yyyy') <= moment(date.Edate).format('DD-MM-yyyy')))  //ใช้ได้
+      }
     }
+
+    // let search=datatable.sort((a, b) => a.requesT_NO.localeCompare(640004386))
+
+
+
+  }
 
   const handleClick = e => {
 
@@ -86,63 +87,63 @@ function table() {
     id: 0,
   });
 
-   const searchpo =  ()=>{
+  const searchpo = () => {
     cleardata()
     setmapp([])
     setchecklength([])
-     if(itemdata.pO_NO.length>8){
+    if (itemdata.pO_NO.length > 8) {
       getdataedipobypo(itemdata.pO_NO).then(data => {
-       
+
         console.log(data)
-        
+
         if (data.error) {
           Swal.fire('ค้นหาไม่สำเร็จกรุณา ลองใหม่อีกครั้ง', '', 'info')
         } else {
-  if(data.length>0){
+          if (data.length > 0) {
 
 
 
-    itemdata['vendoR_NAME'] = data[0].vendoR_NAME
-    itemdata['producT_NO'] = data[0].vendoR_NO
-    itemdata['location'] = data[0].shiP_TO
-    itemdata['total'] = data[0].totaL_AMOUNT
-    itemdata['vat'] = data[0].vat
-    itemdata['totaL_AMOUNT'] = data[0].totaL_AMOUNT- data[0].vat
-    setitemdata({...itemdata})
+            itemdata['vendoR_NAME'] = data[0].vendoR_NAME
+            itemdata['producT_NO'] = data[0].vendoR_NO
+            itemdata['location'] = data[0].shiP_TO
+            itemdata['total'] = data[0].totaL_AMOUNT
+            itemdata['vat'] = data[0].vat
+            itemdata['totaL_AMOUNT'] = data[0].totaL_AMOUNT - data[0].vat
+            setitemdata({ ...itemdata })
 
 
-    if (data[0].pO_DETAILs.length > 0) {
-      let ggwp = []
-      for (let index = 0; index < data[0].pO_DETAILs.length; index++) {
-        const form = {
-          c1: data[0].pO_DETAILs[index].codE_GPU,
-          c2: data[0].pO_DETAILs[index].codE_UNSPSC,
-          c3: data[0].pO_DETAILs[index].codE_TMT,
-          c4: data[0].pO_DETAILs[index].baR_CODE+'ใช้ barcode',
-          c6: data[0].pO_DETAILs[index].baR_CODE+'ใช้ barcode',
-          c5: data[0].pO_DETAILs[index].producT_NAME,
-          c10: 'ไม่',
-           c9: data[0].pO_DETAILs[index].qty,
-          c11: data[0].pO_DETAILs[index].uniT_PRICE,
-          c7: data[0].pO_DETAILs[index].mfG_DATE, 
-          c8: data[0].pO_DETAILs[index].exP_DATE,
-          c12: data[0].pO_DETAILs[index].amount,
-          c13: data[0].pO_DETAILs[index].total,
-          c14: data[0].pO_DETAILs[index].producT_CODE,
+            if (data[0].pO_DETAILs.length > 0) {
+              let ggwp = []
+              for (let index = 0; index < data[0].pO_DETAILs.length; index++) {
+                const form = {
+                  c1: data[0].pO_DETAILs[index].codE_GPU,
+                  c2: data[0].pO_DETAILs[index].codE_UNSPSC,
+                  c3: data[0].pO_DETAILs[index].codE_TMT,
+                  c4: data[0].pO_DETAILs[index].baR_CODE + 'ใช้ barcode',
+                  c6: data[0].pO_DETAILs[index].baR_CODE + 'ใช้ barcode',
+                  c5: data[0].pO_DETAILs[index].producT_NAME,
+                  c10: 'ไม่',
+                  c9: data[0].pO_DETAILs[index].qty,
+                  c11: data[0].pO_DETAILs[index].uniT_PRICE,
+                  c7: data[0].pO_DETAILs[index].mfG_DATE,
+                  c8: data[0].pO_DETAILs[index].exP_DATE,
+                  c12: data[0].pO_DETAILs[index].amount,
+                  c13: data[0].pO_DETAILs[index].total,
+                  c14: data[0].pO_DETAILs[index].producT_CODE,
 
-          id: data[0].pO_DETAILs[index].id,
+                  id: data[0].pO_DETAILs[index].id,
 
-        }
-        ggwp.push(form)
-        console.log(ggwp)
-      }
-      setmapp(mapp.concat(ggwp))
-      ggwp = []
-    }
-  }
-  else{
-    Swal.fire('ค้นหาไม่สำเร็จกรุณา ลองใหม่อีกครั้ง', '', 'info')
-  }
+                }
+                ggwp.push(form)
+                console.log(ggwp)
+              }
+              setmapp(mapp.concat(ggwp))
+              ggwp = []
+            }
+          }
+          else {
+            Swal.fire('ค้นหาไม่สำเร็จกรุณา ลองใหม่อีกครั้ง', '', 'info')
+          }
           // setisClose(false)
           // if (data.length > 0) {
           //   datapodetail['contracT_NO'] = data[0].contracT_NO
@@ -162,7 +163,7 @@ function table() {
           //   datapodetail['vat'] = data[0].vat
           //   datapodetail['vendoR_NAME'] = data[0].vendoR_NAME
           //   datapodetail['vendoR_NO'] = data[0].vendoR_NO
-  
+
           //   if (data[0].pO_DETAILs.length > 0) {
           //     let datapush = []
           //     for (let index = 0; index < data[0].pO_DETAILs.length; index++) {
@@ -179,25 +180,25 @@ function table() {
           //       }
           //       datapush.push(datatable)
           //     }
-  
-          //     setdatapodetailtable(datapush)
-  
-  
-          //   }
-  
-          // }
-  
-        }
-  
-  
-      })
-     }
-     else{
-      Swal.fire('ค้นหาไม่สำเร็จกรุณา ลองใหม่อีกครั้ง', '', 'info')
-     }
-   
 
-   }
+          //     setdatapodetailtable(datapush)
+
+
+          //   }
+
+          // }
+
+        }
+
+
+      })
+    }
+    else {
+      Swal.fire('ค้นหาไม่สำเร็จกรุณา ลองใหม่อีกครั้ง', '', 'info')
+    }
+
+
+  }
 
   const exceldownload = async (ex) => {
     let exhead = ex[0]
@@ -220,7 +221,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "เลขที่ใบสั่งซื้อ", style: { font: { bold: true } } },
-      { value: exhead.pO_NO||"", style: { font: { bold: true } } },
+      { value: exhead.pO_NO || "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
@@ -229,7 +230,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "เลขที่ใบส่งของ", style: { font: { bold: true } } },
-      { value: exhead.invoicE_NO||"", style: { font: { bold: true } } },
+      { value: exhead.invoicE_NO || "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
@@ -239,7 +240,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "รหัสผู้จำหน่าย", style: { font: { bold: true } } },
-      { value: exhead.producT_NO||"", style: { font: { bold: true } } },
+      { value: exhead.producT_NO || "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
@@ -248,7 +249,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "วันที่ใบส่งของ ", style: { font: { bold: true } } },
-      { value: moment(exhead.invoicE_DATE).format('DD/MM/yyyy')||"", style: { font: { bold: true } } },
+      { value: moment(exhead.invoicE_DATE).format('DD/MM/yyyy') || "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
@@ -257,7 +258,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ชื่อผู้จำหน่าย", style: { font: { bold: true } } },
-      { value: exhead.vendoR_NAME||"", style: { font: { bold: true } } },
+      { value: exhead.vendoR_NAME || "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
@@ -266,7 +267,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "สถานที่ส่งมอบ", style: { font: { bold: true } } },
-      { value: exhead.ship_to||"", style: { font: { bold: true } } },
+      { value: exhead.ship_to || "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
@@ -310,21 +311,21 @@ function table() {
     for (let index = 0; index < exdetail.length; index++) {
 
       var arr2 = [
-        { value: exdetail[index].codE_GPU||"" },
-        { value: exdetail[index].codE_UNSPSC||"" },
-        { value: exdetail[index].codE_TMT||"" },
-        { value: exdetail[index].producT_CODE||"" },
-        { value: exdetail[index].baR_CODE||"" },
-        { value: exdetail[index].producT_NAME||"" },
-        { value: exdetail[index].batcH_LOT_NO||"" },
-        { value: moment(exdetail[index].mfG_DATE).format('DD/MM/yyyy')||"" },
-        { value: moment(exdetail[index].exP_DATE).format('DD/MM/yyyy')||"" },
-        { value: exdetail[index].qty||"" },
-        { value: exdetail[index].uom||"" },
-        { value: exdetail[index].uniT_PRICE||"" },
-        { value: ((exdetail[index].amount * 7) / 100 + exdetail[index].amount).toFixed(2)||"" },
-        { value: exdetail[index].amount||"" },
-        { value: exdetail[index].total||"" },
+        { value: exdetail[index].codE_GPU || "" },
+        { value: exdetail[index].codE_UNSPSC || "" },
+        { value: exdetail[index].codE_TMT || "" },
+        { value: exdetail[index].producT_CODE || "" },
+        { value: exdetail[index].baR_CODE || "" },
+        { value: exdetail[index].producT_NAME || "" },
+        { value: exdetail[index].batcH_LOT_NO || "" },
+        { value: moment(exdetail[index].mfG_DATE).format('DD/MM/yyyy') || "" },
+        { value: moment(exdetail[index].exP_DATE).format('DD/MM/yyyy') || "" },
+        { value: exdetail[index].qty || "" },
+        { value: exdetail[index].uom || "" },
+        { value: exdetail[index].uniT_PRICE || "" },
+        { value: ((exdetail[index].amount * 7) / 100 + exdetail[index].amount).toFixed(2) || "" },
+        { value: exdetail[index].amount || "" },
+        { value: exdetail[index].total || "" },
       ];
       datasum.push(arr2);
     }
@@ -348,7 +349,7 @@ function table() {
     datasum.push(foot);
     var foot1 = [
       { value: "หมายเหตุ", style: { font: { bold: true } } },
-      { value: exhead.remark||0, style: { font: { bold: true } } },
+      { value: exhead.remark || 0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
@@ -360,7 +361,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ราคารวม(ไม่รวม VAT)", style: { font: { bold: true } } },
-      { value: exhead.totaL_AMOUNT||0, style: { font: { bold: true } } },
+      { value: exhead.totaL_AMOUNT || 0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot1);
@@ -378,7 +379,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ส่วนลด-เปอร์เซ็นต์ ", style: { font: { bold: true } } },
-      { value: exhead.discounT_PERCENTAGE||0, style: { font: { bold: true } } },
+      { value: exhead.discounT_PERCENTAGE || 0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot2);
@@ -396,7 +397,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ส่วนลด-บาท", style: { font: { bold: true } } },
-      { value: exhead.discounT_BAHT||0, style: { font: { bold: true } } },
+      { value: exhead.discounT_BAHT || 0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot3);
@@ -414,7 +415,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "VAT", style: { font: { bold: true } } },
-      { value: exhead.vat||0, style: { font: { bold: true } } },
+      { value: exhead.vat || 0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot4);
@@ -432,7 +433,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "ราคารวม", style: { font: { bold: true } } },
-      { value: exhead.total||0, style: { font: { bold: true } } },
+      { value: exhead.total || 0, style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(foot5);
@@ -521,7 +522,7 @@ function table() {
       }
 
       setitemdata({ ...itemdata })
-calall()
+      calall()
     }
 
   }
@@ -657,13 +658,13 @@ calall()
       console.log(gebvalue)
 
       console.log(mapp)
-    
+
 
     }
     else if (checklength.length == 0) {
       console.log('non')
     }
-  
+
   }
 
 
@@ -792,7 +793,7 @@ calall()
   const tosendapianother = async (invoice, product) => {
     console.log(invoice, product)
 
-    
+
     GETEDI_ASN_todrug(invoice, product).then(async data => {
       console.log(data)
       if (data.length > 0) {
@@ -833,8 +834,8 @@ calall()
 
           }
           const form = {
-            rev_IV_DELIVERY_ORDER: String(data[0].invoicE_NO),
-            rev_IV_DELIVERY_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
+            rev_IV_INVOICE: String(data[0].invoicE_NO),
+            rev_IV_INVOICE_DATE: moment(data[0].invoicE_DATE).format('YYYY-MM-DD'),
             rev_IV_PO_NO: String(data[0].pO_NO),
             rev_IV_PO_DATE: moment(data[0].pO_DATE).format('YYYY-MM-DD'),
             rev_IV_CONTRACT_NO: "",
@@ -898,20 +899,20 @@ calall()
           //  console.log(JSON.stringify('['+form+']'))
           let dsadsa = '[' + JSON.stringify(form) + ']'
           console.log(dsadsa)
-          postapicompany(dsadsa).then(data => {
-            console.log(data)
-            if (data.error) {
+          postapicompany(dsadsa).then(_data => {
+            console.log(_data)
+            if (_data.error) {
               Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
             }
             else {
-              putthenapicompany(data[0].id).then(data=>{
-               
+              putthenapicompany(data[0].id).then(data => {
+
                 if (data.error) {
                   Swal.fire('ส่งstatus ไม่สำเร็จ', '', 'info')
                 }
                 else {
                   console.log(data)
-                } 
+                }
               })
               Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
             }
@@ -1363,25 +1364,25 @@ calall()
     console.log(mapp);
   };
 
-const calall =()=>{  //callllll
-  console.log(mapp.length)
-  if(mapp.length>0){
-    itemdata['discounT_BAHT'] = itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] / 100
-    let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * 7 / 100
-    itemdata['total'] = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) - i
-    itemdata['vat'] = i 
-  
+  const calall = () => {  //callllll
+    console.log(mapp.length)
+    if (mapp.length > 0) {
+      itemdata['discounT_BAHT'] = itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] / 100
+      let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * 7 / 100
+      itemdata['total'] = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) - i
+      itemdata['vat'] = i
+
+    }
+    else {
+      itemdata['totaL_AMOUNT'] = 0
+      itemdata['discounT_PERCENTAGE'] = 0
+      itemdata['discounT_BAHT'] = 0
+      itemdata['total'] = 0
+      itemdata['vat'] = 0
+    }
+    setitemdata({ ...itemdata })
   }
-  else{
-    itemdata['totaL_AMOUNT'] = 0
-    itemdata['discounT_PERCENTAGE'] = 0
-    itemdata['discounT_BAHT'] = 0
-    itemdata['total'] = 0
-    itemdata['vat'] = 0
-  }
-  setitemdata({ ...itemdata })
-}
-  
+
   const handleChangedata = (name, e) => {
     console.log(e)
     itemdata[name] = e.target.value;
@@ -1455,7 +1456,7 @@ const calall =()=>{  //callllll
     if (isNaN(discounT_BAHT)) {
       discounT_BAHT = 0
     }
-   
+
 
     let data = {
       invoicE_NO: String(itemdata.invoicE_NO),
@@ -1473,7 +1474,7 @@ const calall =()=>{  //callllll
     }
     console.log(JSON.stringify(data))
     await edi_asn(data).then(async data => {
-     
+
       // Router.push('/register/information')
       if (data.error) {
         console.log('ggwp')
@@ -1578,7 +1579,7 @@ const calall =()=>{  //callllll
                               name="accountType"
                               value="personal"
                               checked={radio === 'now'}
-                              onChange={()=>setradio('now')}
+                              onChange={() => setradio('now')}
                             />
                             <span className="ml-2 text-blue-800">
                               เฉพาะวันที่
@@ -1597,7 +1598,7 @@ const calall =()=>{  //callllll
                               name="accountType"
                               value="personal"
                               checked={radio === 'fromto'}
-                              onChange={()=>setradio('fromto')}
+                              onChange={() => setradio('fromto')}
                             />
                             <span className="ml-2 text-blue-800">ตั้งแต่วันที่</span>
                           </label>
@@ -1627,7 +1628,7 @@ const calall =()=>{  //callllll
                         </div>
                       </div>
                       <div className="flex-grow-0">
-                        <button onClick={()=>search()} className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button onClick={() => search()} className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                           ค้นหา
                         </button>
                       </div>
@@ -1726,7 +1727,7 @@ const calall =()=>{  //callllll
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Active
+                                  {data.status}
                                 </span>
                               </td>
 
@@ -1809,7 +1810,7 @@ const calall =()=>{  //callllll
                   ใบส่งของ (OUT)
                 </div>
                 <div className="flex w-1/3 justify-end items-end mr-5">
-                  <button onClick={()=>window.print()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</button>
+                  <button onClick={() => window.print()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</button>
                   <ExcelFile element={<button className="ml-2 bg-blue-500  print_d_none hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
                     <ExcelSheet dataSet={excelEX.excelHead} name="report" />
                   </ExcelFile>
@@ -2097,18 +2098,18 @@ const calall =()=>{  //callllll
 
 
               <div className="grid grid-cols-3 gap-3">
-              <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-              เลขที่ใบสั่งซื้อ
-                {/* เลขที่ใบสั่งซื้อ 5 */}
+                <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
+                  เลขที่ใบสั่งซื้อ
+                  {/* เลขที่ใบสั่งซื้อ 5 */}
 
-                <input type="text" autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
-                  id="เลขที่ใบสั่งซื้อ"
-                  value={itemdata.pO_NO}
-                  className="ml-4  forsearch bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
-                />
-                <button onClick={()=>searchpo()}  class=" comboforsearch  bg-blue-500 text-white h-9 w-9 flex-row items-center justify-center"><svg class="  w-7 h-7 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-            
-              </div>
+                  <input type="text" autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
+                    id="เลขที่ใบสั่งซื้อ"
+                    value={itemdata.pO_NO}
+                    className="ml-4  forsearch bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
+                  />
+                  <button onClick={() => searchpo()} class=" comboforsearch  bg-blue-500 text-white h-9 w-9 flex-row items-center justify-center"><svg class="  w-7 h-7 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
+
+                </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   เลขที่ใบส่งของ{" "}
@@ -2127,8 +2128,8 @@ const calall =()=>{  //callllll
                   />
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                  วันที่ใบส่งของ{" "}  
-                  <input autoComplete="off"  value={moment(itemdata.invoicE_DATE).format("YYYY-MM-DD")}
+                  วันที่ใบส่งของ{" "}
+                  <input autoComplete="off" value={moment(itemdata.invoicE_DATE).format("YYYY-MM-DD")}
                     id="วันที่ใบส่งของ" type="date" onChange={(e) => handleChangedata("invoicE_DATE", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
@@ -2156,7 +2157,7 @@ const calall =()=>{  //callllll
               <div className="flex flex-col mt-10">
                 <div className=" ">
                   <div className=" flex justify-end  mr-10 mt-5">
-                  <button
+                    <button
                       onClick={() => dupplicate()}
                       className="bg-blue-500 ml-3  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
@@ -2179,7 +2180,7 @@ const calall =()=>{  //callllll
                     <div className="shadow  border-gray-200 sm:rounded-lg">
                       <table className="min-w-full w-full">
                         <tr className="bg-gray-50">
-                        <th
+                          <th
                             scope="col"
                             className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider"
                           >
@@ -2281,7 +2282,7 @@ const calall =()=>{  //callllll
                           </th>
                           <th scope="col" className="relative px-6 py-3">
 
-</th>
+                          </th>
                         </tr>
 
 
@@ -2289,7 +2290,7 @@ const calall =()=>{  //callllll
                         {
                           mapp.map((data, index) => (
                             <tr key={index} className="bg-white ">
-                                 <td className="px-6 py-4  border-r whitespace-nowrap">
+                              <td className="px-6 py-4  border-r whitespace-nowrap">
                                 <label class="inline-flex items-center mt-3">
                                   <input autoComplete="off" type="checkbox" id={data.id} checked={data.checked}
                                     onChange={(e) => setChecked(data.checked, index, data.id)} class="form-checkbox h-6 w-6 text-gray-600" />
@@ -2325,11 +2326,11 @@ const calall =()=>{  //callllll
                                 <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
                               <td className="px-6 py-4   whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td>
-                                <td className="px-6 py-4   whitespace-nowrap">
+                              <td className="px-6 py-4   whitespace-nowrap">
                                 <button onClick={(e) => edittable(index, data.id)} class="rounded-full bg-green-400 text-white h-9 w-9 flex-row items-center justify-center" >
                                   <svg class=" w-7 h-7 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                                 </button>
-                                </td>
+                              </td>
                             </tr>
                           ))
                         }
@@ -2489,10 +2490,10 @@ const calall =()=>{  //callllll
               <div className="content-center text-center justify-items-center text-4xl mt-5 text-blue-800 ">
                 ใบรับของ (IN)
               </div>
-          
+
               <div className="grid grid-cols-3 gap-3">
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
-                
+
                   เลขที่ใบสั่งซื้อ
 
                   <input type="text" autoComplete="off" onChange={(e) => handleChangedata("pO_NO", e)}
@@ -2500,8 +2501,8 @@ const calall =()=>{  //callllll
                     value={itemdata.pO_NO}
                     className="ml-4  forsearch bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
                   />
-                  <button  class=" comboforsearch  bg-blue-500 text-white h-9 w-9 flex-row items-center justify-center"><svg class="  w-7 h-7 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-              
+                  <button class=" comboforsearch  bg-blue-500 text-white h-9 w-9 flex-row items-center justify-center"><svg class="  w-7 h-7 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
+
                 </div>
 
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
@@ -2522,7 +2523,7 @@ const calall =()=>{  //callllll
                 </div>
                 <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                   วันที่ใบส่งของ{" "}
-                  <input autoComplete="off"  value={moment(itemdata.invoicE_DATE).format("YYYY-MM-DD")}
+                  <input autoComplete="off" value={moment(itemdata.invoicE_DATE).format("YYYY-MM-DD")}
                     id="วันที่ใบส่งของ" type="date" onChange={(e) => handleChangedata("invoicE_DATE", e)}
 
                     className="ml-4 bg-white text-gray-900 border border-blue-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-700  "
@@ -2971,8 +2972,8 @@ const calall =()=>{  //callllll
                   </div>
                   <div className="content-center text-center justify-items-center text-base mt-5 font-bold  ">
                     ราคาต่อหน่วย
-                    <input autoComplete="off" 
-                    // type="number"
+                    <input autoComplete="off"
+                      // type="number"
                       onChange={(e) => handleChange("c11", e)}
                       id="extcount "
 
