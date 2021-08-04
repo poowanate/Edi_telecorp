@@ -5,9 +5,11 @@ import ReactExport from "react-data-export";
 import { getdataedipo, getdataedipobypo } from '../api/api_po'
 function table() {
   const [datatable, setdatatable] = useState([])
+  const [datatable2, setdatatable2] = useState([])
   const [datapodetail, setdatapodetail] = useState([])
   const [datapodetailtable, setdatapodetailtable] = useState([])
   const [ordertable, setordertable] = useState([])
+  const [radio, setradio] = useState('now')
   const [excelEX, setexcelEX] = useState({ excelHead: null });
   const ExcelFile = ReactExport.ExcelFile;
   const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -31,7 +33,7 @@ function table() {
       } else {
 
         setdatatable(data)
-
+        setdatatable2(data)
 
       }
     })
@@ -222,6 +224,24 @@ function table() {
     excelEX.excelHead = excelHead;
     setexcelEX(excelEX);
   }
+  const search =()=>{
+    if(radio === 'now'){
+      if(datatable2.length>0){  
+        setdatatable(datatable2.filter(x => moment(x.pO_DATE).format('DD-MM-yyyy') == moment(date.Ddate).format('DD-MM-yyyy') )) 
+      }
+       //ใช้ได้
+    }
+    if(radio === 'fromto'){
+      if(datatable2.length>0){
+      setdatatable(datatable2.filter(x => moment(x.pO_DATE).format('DD-MM-yyyy') >= moment(date.Sdate).format('DD-MM-yyyy') && moment(x.pO_DATE).format('DD-MM-yyyy') <= moment(date.Edate).format('DD-MM-yyyy') ))  //ใช้ได้
+    }}
+     
+      // let search=datatable.sort((a, b) => a.requesT_NO.localeCompare(640004386))
+      
+     
+    
+    }
+    
   const binddatapo = (e) => {
     getdataedipobypo(e).then(data => {
       if (data.error) {
@@ -276,7 +296,7 @@ function table() {
 
 
     })
-
+  
   }
   return (
     <Layout>
@@ -299,7 +319,8 @@ function table() {
 
                     <div className="mt-2">
                       <label className="inline-flex items-center">
-                        <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
+                        <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal"  checked={radio === 'now'}
+                                   onChange={()=>setradio('now')} />
                         <span className="ml-2 text-pink-700">เฉพาะวันที่</span>
                       </label>
                       <input value={date.Ddate} onChange={(e) => dateChange('Ddate', e)} className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-800 " type="date"></input>
@@ -307,7 +328,8 @@ function table() {
                   </div>
                   <div className="flex-grow">  <div className="mt-2">
                     <label className="inline-flex items-center">
-                      <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
+                      <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal"  checked={radio === 'fromto'}
+                                   onChange={()=>setradio('fromto')} />
                       <span className="ml-2 text-pink-700">ตั้งแต่วันที่</span>
                     </label>
                     <input value={date.Sdate} onChange={(e) => dateChange('Sdate', e)} className="ml-3  bg-white text-gray-900 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-pink-800 " type="date"></input>
@@ -328,7 +350,7 @@ function table() {
                       </select>
                     </div></div>
                   <div className="flex-grow-0">
-                    <button className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+                    <button onClick={()=>search()} className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
                       ค้นหา</button></div>
 
                 </div>

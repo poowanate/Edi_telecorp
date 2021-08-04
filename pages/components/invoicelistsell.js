@@ -12,9 +12,11 @@ import { postapicompany,putthenapicompany } from '../api/api_company'
 
 function table() {
   const [excelEX, setexcelEX] = useState({ excelHead: null });
+  const [datatable2, setdatatable2] = useState([])
   const ExcelFile = ReactExport.ExcelFile;
   const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
   const [isCheck, setIsCheck] = useState([]);
+  const [radio, setradio] = useState('now')
   const [date, setdate] = useState({
     Ddate: moment(new Date()).format("YYYY-MM-DD"),
     Sdate: moment(new Date()).format("YYYY-MM-DD"),
@@ -25,6 +27,25 @@ function table() {
     console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
+
+  const search =()=>{
+    if(radio === 'now'){
+      if(datatable2.length>0){  
+        setshowtable(datatable2.filter(x => moment(x.invoicE_DATE).format('DD-MM-yyyy') == moment(date.Ddate).format('DD-MM-yyyy') )) 
+      }
+       //ใช้ได้
+    }
+    if(radio === 'fromto'){
+      if(datatable2.length>0){
+        setshowtable(datatable2.filter(x => moment(x.invoicE_DATE).format('DD-MM-yyyy') >= moment(date.Sdate).format('DD-MM-yyyy') && moment(x.invoicE_DATE).format('DD-MM-yyyy') <= moment(date.Edate).format('DD-MM-yyyy') ))  //ใช้ได้
+    }}
+     
+      // let search=datatable.sort((a, b) => a.requesT_NO.localeCompare(640004386))
+      
+     
+    
+    }
+
   const handleClick = e => {
 
     const { id, checked } = e.target;
@@ -461,6 +482,7 @@ function table() {
           console.log(dataf)
 
         }
+        setdatatable2(dataf)
         await setshowtable(dataf)
       }
 
@@ -1555,6 +1577,8 @@ const calall =()=>{  //callllll
                               className="form-radio h-4 w-4 "
                               name="accountType"
                               value="personal"
+                              checked={radio === 'now'}
+                              onChange={()=>setradio('now')}
                             />
                             <span className="ml-2 text-blue-800">
                               เฉพาะวันที่
@@ -1572,6 +1596,8 @@ const calall =()=>{  //callllll
                               className="form-radio h-4 w-4 "
                               name="accountType"
                               value="personal"
+                              checked={radio === 'fromto'}
+                              onChange={()=>setradio('fromto')}
                             />
                             <span className="ml-2 text-blue-800">ตั้งแต่วันที่</span>
                           </label>
@@ -1601,7 +1627,7 @@ const calall =()=>{  //callllll
                         </div>
                       </div>
                       <div className="flex-grow-0">
-                        <button className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button onClick={()=>search()} className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                           ค้นหา
                         </button>
                       </div>
