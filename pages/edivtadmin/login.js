@@ -46,7 +46,11 @@ console.log(formz)
               if(data.vendoR_NAME!=null){
                 Authenticate(data, () => {
                 
+                  
+                  setCookie('vendoR_NO',data.vendoR_NO)
                     setCookie('name',data.vendoR_NAME)
+                    setCookie('address',data.address)
+                    
                     setCookie('role',1)
                     setCookie('admintype',1)
                    Router.push('/')
@@ -84,7 +88,7 @@ console.log(formz)
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
           <label for="user" class="sr-only">User</label>
-          <input onChange={handleChange} onBlur={handleBlur} value={values.L_Username} name="L_Username" type="text"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" />
+          <input onChange={handleChange} onBlur={handleBlur} value={values.L_Username} name="L_Username" type="text"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="username" />
           <div className=" h-4">
                       {errors.L_Username &&
                         touched.L_Username &&

@@ -6,6 +6,7 @@ import ReactExport from "react-data-export";
 import { edi_asn, ediproduct, getediasn, getediasnbyinvoice, asnupdate, deleteasn } from '../api/api_asn'
 import * as XLSX from 'xlsx';
 import moment from "moment";
+import jscookie from 'js-cookie';
 import Swal from 'sweetalert2'
 import { postapicompany, putthenapicompany } from '../api/api_company'
 // import template from '../../public/download/template.xlsx';
@@ -476,15 +477,25 @@ function table() {
 
       // Router.push('/register/information')
       if (data.error) {
-
+         
       } else {
+      
         for (let index = 0; index < data.length; index++) {
           dataf.push(data[index])
           console.log(dataf)
 
         }
-        setdatatable2(dataf)
-        await setshowtable(dataf)
+        if(jscookie.get('admintype') == '1'){
+   
+          await  setshowtable(dataf.filter(x => x.producT_NO ==     jscookie.get('vendoR_NO') ))
+          await setdatatable2(dataf.filter(x => x.producT_NO ==     jscookie.get('vendoR_NO') ))
+         
+         }  
+         else{
+          await setdatatable2(dataf)
+          await setshowtable(dataf)
+         }
+       
       }
 
 
@@ -1696,12 +1707,12 @@ function table() {
 
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <div className="text-sm text-gray-900">
-                                  {data.invoicE_NO}
+                                {data.pO_NO}
                                 </div>{" "}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <div className="text-sm text-gray-900">
-                                  {data.pO_NO}
+                                   {data.producT_NO}
                                 </div>{" "}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
@@ -1711,7 +1722,7 @@ function table() {
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <div className="text-sm text-gray-900">
-                                  {data.producT_NO}
+                                   {data.invoicE_NO}
                                 </div>{" "}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">

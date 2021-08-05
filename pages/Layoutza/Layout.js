@@ -55,6 +55,9 @@ const Layout = (props) => {
 
       if (jscookie.get('admintype') == '1') {
         removeCookie('admintype')
+        removeCookie('vendoR_NO')
+        removeCookie('address')
+        
         Router.push('/edivtadmin/login')
       }
       else {
@@ -251,9 +254,9 @@ const Layout = (props) => {
                     <div className={'' + color + ' opacity-95 w-72   relative  space-y-6 '} >
                       <label className="text-white block px-4 text-center">Supplier's profile</label>
 
-                      <label className="text-white block  px-4">บริษัท เจริญการยา จำกัดบริษัท   ผู้จำหนายยา ID.00001 </label>
+                      <label className="text-white block  px-4">{jscookie.get('name')} </label>
 
-                      <label className="text-white block  px-4">ที่อยู่ กรุงเทพมหานคร 173 ถนนดินสอ แขวงเสาชิงช้า เขตพระนคร กรุงเทพฯ 10200  </label>
+                      <label className="text-white block  px-4">{jscookie.get('address')} </label>
 
                       <label className="text-white block  px-4">ติดต่อ โทรศัพท์กลาง : 0-2221-2141-69 โทรสาร 0-2221-2170 </label>
 
@@ -269,7 +272,7 @@ const Layout = (props) => {
 
                 {props.children}
               </div>
-
+            
               {(jscookie.get('admintype') == '1') && (
                 dropdownOpen ? (
 

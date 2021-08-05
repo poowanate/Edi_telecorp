@@ -1,7 +1,8 @@
 import React,{useEffect,useState} from 'react'
 import {EDI_COMPANYinfo,deleteEDI_COMPANYinfo,getcompanyadmin,updatecompanyadmin,insertEDI_COMPANYinfo} from '../api/api_company'
-
+import jscookie from 'js-cookie';
 import Swal from 'sweetalert2'
+import Layout from "../Layoutza/Layout"
 import { Formik, ErrorMessage } from 'formik';
 function sweeterror(){
   Swal.fire({
@@ -33,6 +34,7 @@ const setuplocal = () => {
     id:0,
   });
     const [companydata,setcompanydata] = useState([]);
+    const [companydata2,setcompanydata2] = useState([]);
     const [editorinsert,seteditorinsert] = useState('');
     const [isClose,setisClose] = useState(false);
   
@@ -46,7 +48,17 @@ const setuplocal = () => {
     
             } else {
                
-                setcompanydata(data)
+               
+
+                if(jscookie.get('admintype') == '1'){
+   
+                  await  setcompanydata(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
+                  await setcompanydata2(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
+                 
+                 }  
+                 else{
+               
+                 }
             }
     
         })
@@ -180,6 +192,7 @@ const cleardata =()=>{
   
 
     return (
+      <Layout>
         <div>
             <div class="grid grid-cols-6 gap-4">
   <div className="p-3 place-self-center" ><h2 class="text-xl blod"> Setup Locations</h2></div>
@@ -390,6 +403,7 @@ const cleardata =()=>{
         ""
       )}
         </div>
+        </Layout>
     )
 }
 

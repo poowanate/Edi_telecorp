@@ -1,6 +1,7 @@
 import Layout from "../Layoutza/Layout"
 import React, { useMemo, useState, useEffect, useRef } from 'react'
 import moment from 'moment';
+import jscookie from 'js-cookie';
 import ReactExport from "react-data-export";
 import { getdataedipo, getdataedipobypo } from '../api/api_po'
 function table() {
@@ -26,16 +27,23 @@ function table() {
     setdate({ ...date, [name]: e.target.value || null });
   }
 
-  const fetchdata = () => {
-    getdataedipo().then(data => {
+  const fetchdata = async () => {
+    getdataedipo().then(async data => {
 
       if (data.error) {
 
       } else {
-
-        setdatatable(data)
-        setdatatable2(data)
-
+        if(jscookie.get('admintype') == '1'){
+   
+          await  setdatatable(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
+          await setdatatable2(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
+         
+         }  
+         else{
+          await setdatatable(data)
+          await setdatatable2(data)
+         }
+      
       }
     })
   }
