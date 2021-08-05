@@ -254,7 +254,7 @@ console.log(searchtxt)
           setshowtable(datatable2)
         }
         else{
-          setshowtable(datatable2.filter(x => x.invoicE_NO == searchtxt )) 
+          setshowtable(datatable2.filter(x => x.pO_NO == searchtxt )) 
         }
        
       }
@@ -482,11 +482,11 @@ console.log(searchtxt)
             <div className="flex flex-col w-1/2 pl-28">
               <div className="flex flex-row mt-5  ">
                 <div className="w-1/2 text-base  font-bold text-right ">เลขที่ใบสั่งซื้อ </div>
-                <label className="ml-5 w-1/2 text-left">{itemtable[0].invoicE_NO}</label>
+                <label className="ml-5 w-1/2 text-left">{itemtable[0].pO_NO}</label>
               </div>
               <div className="flex flex-row mt-5 ">
                 <div className="w-1/2 text-base  font-bold text-right ">กำหนดส่งมอบ </div>
-                <label className="ml-5 w-1/2 text-left">{moment(itemtable[0].invoicE_DATE).format("YYYY-MM-DD")}</label>
+                <label className="ml-5 w-1/2 text-left">{moment(itemtable[0].deliveR_DATE).format("YYYY-MM-DD")}</label>
               </div>
               <div className="flex flex-row mt-5 ">
                 <div className="w-1/2 text-base  font-bold text-right ">ชื่อผู้จำหน่าย </div>
@@ -496,7 +496,7 @@ console.log(searchtxt)
             <div className="flex flex-col w-1/2 ">
               <div className="flex flex-row mt-5">
                 <div className=" text-base  font-bold text-right w-80">เลขที่สัญญา </div>
-                <label className="ml-5 w-1/2 text-left">{itemtable[0].invoicE_NO}</label>
+                <label className="ml-5 w-1/2 text-left">{itemtable[0].requesT_NO}</label>
               </div>
               <div className="flex flex-row mt-5">
                 <div className=" text-base  font-bold text-right w-80">รหัสผู้จำหน่าย </div>

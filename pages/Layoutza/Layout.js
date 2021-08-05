@@ -146,9 +146,9 @@ const Layout = (props) => {
 
 
                       </Link>
-                      <Link href="/components/invoicelist">
+                      {/* <Link href="/components/invoicelist">
                         <a className={classnameinvoice}>รายการรับของ</a>
-                      </Link>
+                      </Link> */}
                       <Link href="/components/popickup">
                         <a className={classnameinvoice}>ภาพรวมรับสินค้า</a>
                       </Link>
@@ -174,9 +174,9 @@ const Layout = (props) => {
 
 
                       </Link>
-                      <Link href="/components/invoicelistsell">
+                      {/* <Link href="/components/invoicelistsell">
                         <a className={classnamesend}>รายการส่งของ</a>
-                      </Link>
+                      </Link> */}
 
                     </div> </div>
                 </div>
