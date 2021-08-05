@@ -7,12 +7,15 @@ import { edi_asn, ediproduct, getediasn, getediasnbyinvoice, asnupdate, deleteas
 import * as XLSX from 'xlsx';
 import moment from "moment";
 import jscookie from 'js-cookie';
+import Link from 'next/link'
 import Swal from 'sweetalert2'
 import { postapicompany, putthenapicompany } from '../api/api_company'
 // import template from '../../public/download/template.xlsx';
 
 function table() {
   const [excelEX, setexcelEX] = useState({ excelHead: null });
+  const [datainvoice, setdatainvoice] = useState([])
+  const [dataproduct, setdataproduct] = useState([])
   const [datatable2, setdatatable2] = useState([])
   const ExcelFile = ReactExport.ExcelFile;
   const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -934,6 +937,8 @@ function table() {
   }
   // edit3
   const handleedit = async (invoice, product) => {
+    setdatainvoice(invoice)
+    setdataproduct(product)
     setisClosef(2)
     console.log(invoice, product)
     GETEDI_ASN(invoice, product).then(async data => {
@@ -1821,7 +1826,10 @@ function table() {
                   ใบส่งของ (OUT)
                 </div>
                 <div className="flex w-1/3 justify-end items-end mr-5">
-                  <button onClick={() => window.print()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</button>
+                  <Link href={`/components/invoicelistsellprint?datainvoice=${datainvoice}&dataproduct=${dataproduct}`}>
+                    <a type="button" className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</a>
+                  </Link>
+                  {/* <button onClick={() => pdfprint()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</button> */}
                   <ExcelFile element={<button className="ml-2 bg-blue-500  print_d_none hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
                     <ExcelSheet dataSet={excelEX.excelHead} name="report" />
                   </ExcelFile>

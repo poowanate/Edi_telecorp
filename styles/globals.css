@@ -76,9 +76,67 @@ button.comboforsearch {
   border: 0;
   -webkit-appearance: none;
 }
+.a4 {
+  width: 210mm !important;
+  height: 302mm !important;
+  margin: auto !important;
+  font-size: 14px;
+}
+@media screen and (max-width: 600px) {
+  .disableregis {
+    display: none;
+  }
+}
 
+@media screen and (min-width: 600px) {
+  .disableregisz {
+    display: none;
+  }
+}
 @media print {
+  @page {
+    size: A4;
+  }
   .print_d_none{
     display: none !important;
   }
+  .section {
+    height: 100%;
+    margin: 0px;
+  }
+
+  .print-none,
+  .m_none {
+    display: none !important;
+  }
+
+  #main {
+    margin-left: unset !important;
+    width: 100%;
+
+  }
+
+  .nav-print {
+    position: absolute !important;
+    left: -1000px;
+
+  }
+
+  /* body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    position:absolute;
+    margin: auto;
+    left: 0;
+    top: 0;
+  } */
 }
+/* @media print {
+  .print_d_none{
+    display: none !important;
+  }
+} */
