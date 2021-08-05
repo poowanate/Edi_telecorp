@@ -16,8 +16,8 @@ function table() {
   const Router = useRouter();
   const [mapp, setmapp] = useState([]);
   const fetchData = async () => {
-    let invoice = Router.query.datainvoice
-    let product = Router.query.dataproduct
+    let invoice = localStorage.getItem('datainvoice')
+    let product = localStorage.getItem('dataproduct')
     console.log(invoice, product)
     GETEDI_ASN(invoice, product).then(async data => {
       console.log(data)
@@ -74,8 +74,9 @@ function table() {
 
     })
     setTimeout(() => {
-
-      // window.print()
+      localStorage.removeItem('datainvoice');
+      localStorage.removeItem('dataproduct');
+      window.print()
     }, 1000);
   }
 

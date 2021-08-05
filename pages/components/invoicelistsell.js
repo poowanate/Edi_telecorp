@@ -31,7 +31,11 @@ function table() {
     console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
-
+  const print = async () => {
+   await localStorage.setItem('datainvoice', datainvoice);
+   await localStorage.setItem('dataproduct', dataproduct);
+    window.open("/components/invoicelistsellprint",'_blank')
+}
   const search = () => {
     if (radio === 'now') {
       if (datatable2.length > 0) {
@@ -1826,9 +1830,12 @@ function table() {
                   ใบส่งของ (OUT)
                 </div>
                 <div className="flex w-1/3 justify-end items-end mr-5">
-                  <Link href={`/components/invoicelistsellprint?datainvoice=${datainvoice}&dataproduct=${dataproduct}`}>
+                  {/* <Link href={`/components/invoicelistsellprint?datainvoice=${datainvoice}&dataproduct=${dataproduct}`}>
                     <a type="button" className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</a>
-                  </Link>
+                  </Link> */}
+                  {/* <Link href={`/components/invoicelistsellprint?datainvoice=${datainvoice}&dataproduct=${dataproduct}`}> */}
+                    <a type="button" onClick={()=>print()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</a>
+                  {/* </Link> */}
                   {/* <button onClick={() => pdfprint()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">PrintPDF</button> */}
                   <ExcelFile element={<button className="ml-2 bg-blue-500  print_d_none hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Download</button>}>
                     <ExcelSheet dataSet={excelEX.excelHead} name="report" />
