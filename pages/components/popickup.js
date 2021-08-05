@@ -93,7 +93,7 @@ function table() {
       { value: "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
       { value: "รหัสผู้จำหน่าย", style: { font: { bold: true } } },
-      { value: "ไม่มี" || "", style: { font: { bold: true } } },
+      { value: exhead.producT_NO || "", style: { font: { bold: true } } },
       { value: "", style: { font: { bold: true } } },
     ];
     datasum.push(head2);
@@ -143,7 +143,7 @@ function table() {
         { value: exdetail[index].producT_NAME || "" },
         { value: exdetail[index].qty || "" },
         { value: exdetail[index].total || "" },
-        { value: "ไม่มี status" },
+        { value: exdetail[index].status || "" },
       ];
       datasum.push(arr2);
     }
@@ -360,11 +360,10 @@ console.log(searchtxt)
                       <thead className="bg-gray-50">
                         <tr>
                           <th scope="col" className="px-6 py-3  text-center text-base font-medium text-pink-800 uppercase tracking-wider ">เลขที่ใบสั่งซื้อ</th>
-                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">วันที่ออกใบสั่งซื้อ</th>
-                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">เลขที่สัญญา</th>
-                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">แผนก</th>
-                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">วันที่ขอซื้อ</th>
-                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">กำหนดส่งมอบ</th>
+                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">รหัสผู้จำหน่าย</th>
+                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">ชื่อผู้จำหน่าย</th>
+                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">เลขที่ใบส่งของ</th>
+                          <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">วันที่ส่งของ</th>
                           <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">สถานที่ส่งมอบ</th>
                           <th scope="col" className="px-6 py-3 text-center text-base font-medium text-pink-800 uppercase tracking-wider">สถานะ</th>
 
@@ -376,12 +375,12 @@ console.log(searchtxt)
                             <tr onClick={() => asnbyinvoice(data.invoicE_NO)} key={index} className="bg-white divide-y pointer hover:bg-pink-200  divide-gray-200">
 
                               <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-center text-sm text-gray-900">  {data.invoicE_NO}</div>   </td>
-
-
+                                <div className="text-center text-sm text-gray-900">
+                                  {data.pO_NO}</div> {" "}
+                              </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">
-                                  {data.pO_NO}
+                                  {data.producT_NO}
                                 </div>{" "}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
@@ -391,18 +390,12 @@ console.log(searchtxt)
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">
-                                  {data.producT_NO}
+                                  {data.invoicE_NO}
                                 </div>{" "}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <div className="text-center text-sm text-gray-900">
-                                  {data.invoicE_DATE}
-                                </div>{" "}
-                              </td>
-
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-center text-sm text-gray-900">
-                                  {data.deadline}
+                                  {moment(data.invoicE_DATE).format("YYYY-MM-DD")}
                                 </div>{" "}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
@@ -412,7 +405,7 @@ console.log(searchtxt)
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Active
+                                  {data.status}
                                 </span>
                               </td>
                               {/* 
@@ -507,7 +500,7 @@ console.log(searchtxt)
               </div>
               <div className="flex flex-row mt-5">
                 <div className=" text-base  font-bold text-right w-80">รหัสผู้จำหน่าย </div>
-                <label className="ml-5 w-1/2 text-left">ไม่มี</label>
+                <label className="ml-5 w-1/2 text-left">{itemtable[0].producT_NO}</label>
               </div>
               <div className="flex flex-row mt-5">
                 <div className="text-base  font-bold text-right w-80"> </div>
@@ -589,11 +582,20 @@ console.log(searchtxt)
                           </div>{" "}
                         </td> */}
 
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-center text-sm text-gray-900">
-                              ไม่มี status
-                            </div>{" "}
-                          </td>
+                          {
+                            (data.balance == "0") ?
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-center text-sm text-gray-900">
+                                  ครบแล้ว
+                                </div>{" "}
+                              </td>
+                              :
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-center text-sm text-gray-900">
+                                  ยังไม่ครับ
+                                </div>{" "}
+                              </td>
+                          }
 
                         </tr>
                         </>
