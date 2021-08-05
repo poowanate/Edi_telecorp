@@ -10,6 +10,8 @@ function table() {
   const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
   const [isClose, setisClose] = useState(true);
   const [showtable, setshowtable] = useState([]);
+  const [searchtxt, setsearchtxt] = useState('');
+  const [radio, setradio] = useState('invoiceno')
   const [date, setdate] = useState({
     Ddate: moment(new Date()).format("YYYY-MM-DD"),
     Sdate: moment(new Date()).format("YYYY-MM-DD"),
@@ -213,7 +215,7 @@ function table() {
       }
     }
   }
-
+  const [datatable2, setdatatable2] = useState([])
   const fetchdata = async () => {
 
     let dataf = [];
@@ -229,12 +231,40 @@ function table() {
 
         }
         await setshowtable(dataf)
+        await setdatatable2(dataf)
+        
       }
 
 
 
     })
   }
+
+  const scansearch =()=>{
+console.log(searchtxt)
+    if(radio === 'now'){
+      // if(datatable2.length>0){  
+      //   setshowtable(datatable2.filter(x => moment(x.pO_DATE).format('DD-MM-yyyy') == moment(date.Ddate).format('DD-MM-yyyy') )) 
+      // }
+       //ใช้ได้
+    }
+    if(radio === 'invoiceno'){
+      if(datatable2.length>0){
+        if(searchtxt == ''){
+          setshowtable(datatable2)
+        }
+        else{
+          setshowtable(datatable2.filter(x => x.invoicE_NO == searchtxt )) 
+        }
+       
+      }
+    }
+     
+      // let search=datatable.sort((a, b) => a.requesT_NO.localeCompare(640004386))
+      
+     
+    
+    }
 
   const asnbyinvoice = async (invoice) => {
 
@@ -288,15 +318,17 @@ function table() {
 
                     <div className="mt-1">
                       <label className="inline-flex items-center">
-                        <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
+                        <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal"    checked={radio === 'invoiceno'}
+                                   onChange={()=>setradio('invoiceno')} />
                         <span className="ml-2 text-pink-800">เลขที่การสั่งซื้อ</span>
                       </label>
-                      <input className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 " type="text"></input>
+                      <input onChange={(e)=>setsearchtxt(e.target.value)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 " type="text"></input>
                     </div>
                   </div>
                   <div className="flex-grow">  <div className="mt-1">
                     <label className="inline-flex items-center">
-                      <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal" />
+                      <input type="radio" className="form-radio h-4 w-4 " name="accountType" value="personal"    checked={radio === 'now'}
+                                   onChange={()=>setradio('now')} />
                       <span className="ml-2 text-pink-800">เฉพาะวันที่</span>
                     </label>
                     <input value={date.Ddate} onChange={(e) => dateChange('Ddate', e)} className="ml-3 ppearance-nonebg-gray-200 text-gray-700 border border-pink-500 rounded py-1 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"></input>
@@ -312,7 +344,7 @@ function table() {
 
                     </div></div>
                   <div className="flex-grow-0">
-                    <button className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+                    <button onClick={()=>scansearch()} className="bg-pink-500  hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
                       ค้นหา</button></div>
 
                 </div>
