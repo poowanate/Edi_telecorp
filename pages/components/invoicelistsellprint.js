@@ -312,28 +312,28 @@ function table() {
           </div>
           <div className="flex flex-col mb-10 items-end justify-center">
             <div className="flex flex-row w-full">
-              <div class="flex flex-row mt-5 ml-5 w-1/2 justify-start">
+              <div className="flex flex-row mt-5 ml-5 w-1/2 justify-start">
                 <div className="content-center text-right justify-items-center text-base font-bold  ">หมายเหตุ</div>
                 <label className="ml-3 w-20 text-right">{itemdata.remark}</label>
               </div>
-              <div class="flex flex-row mt-5 mr-10 w-1/2 justify-end">
+              <div className="flex flex-row mt-5 mr-10 w-1/2 justify-end">
                 <div className="content-center text-right justify-items-center text-base font-bold  ">ราคารวม (ไม่รวม VAT)</div>
                 <label className=" w-20 text-right">{itemdata.totaL_AMOUNT}</label>
               </div>
             </div>
-            <div class="flex flex-row mt-5 mr-10">
+            <div className="flex flex-row mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base font-bold  ">ส่วนลด - เปอร์เซ็นต์</div>
               <label className=" w-20 text-right">{itemdata.discounT_PERCENTAGE}</label>
             </div>
-            <div class="flex flex-row mt-5 mr-10">
+            <div className="flex flex-row mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base font-bold  ">ส่วนลด - บาท</div>
               <label className=" w-20 text-right">{itemdata.discounT_BAHT}</label>
             </div>
-            <div class="flex flex-row mt-5 mr-10">
+            <div className="flex flex-row mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base font-bold  ">VAT</div>
               <label className=" w-20 text-right">{itemdata.vat}</label>
             </div>
-            <div class="flex flex-row mt-5 mr-10">
+            <div className="flex flex-row mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base font-bold  ">ราคารวม </div>
               <label className=" w-20 text-right">{itemdata.total}</label>
             </div>
