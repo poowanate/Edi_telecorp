@@ -186,7 +186,7 @@ const Layout = (props) => {
 
                       </Link>
                       <Link href="/components/invoicelistsell">
-                      <label className={Router.pathname == "/components/polistsell" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
+                      <label className={Router.pathname == "/components/invoicelistsell" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
                         <a className={classnamesend}>รายการส่งของ</a>
                         </label>
 
