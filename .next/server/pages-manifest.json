@@ -2,8 +2,13 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+<<<<<<< HEAD
   "/": "pages/index.js",
   "/components/popickup": "pages/components/popickup.js",
   "/components/invoicelist": "pages/components/invoicelist.js",
   "/components/polist": "pages/components/polist.js"
+=======
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
+  "/components/invoicelistsellprint": "pages/components/invoicelistsellprint.js"
+>>>>>>> bf9e67dd473d93389955e0eed4eb0dfe77038844
 }

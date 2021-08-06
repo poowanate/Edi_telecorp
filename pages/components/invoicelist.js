@@ -393,7 +393,7 @@ function table() {
 
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button onClick={() => setisClose(false)} >
-                            <svg class="text-pink-800  w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            <svg className="text-pink-800  w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
 
                           </button>  </td>
                       </tr>
@@ -411,10 +411,10 @@ function table() {
 
       </>) :
         <>
-          <div class="relative ">
-            <div class="absolute mt-5 ml-10 left-0 top-0">
+          <div className="relative ">
+            <div className="absolute mt-5 ml-10 left-0 top-0">
               <a onClick={() => setisClose(true)}>
-                <div class="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center"> <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                <div className="rounded-full h-11 w-11 bg-pink-800 flex items-center justify-center"> <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
 
                 </div>
               </a>
@@ -588,13 +588,13 @@ function table() {
             </div>
           </div>
           <div className="flex flex-col mb-10">
-            <div class="grid grid-cols-2 gap-3 ml-5 mt-5 mr-10">
+            <div className="grid grid-cols-2 gap-3 ml-5 mt-5 mr-10">
               <div className="content-center text-left justify-items-center text-base mt-5 font-bold  ">หมายเหตุ -
               </div>
               <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ราคารวม (ไม่รวม VAT) <input id="VAT_AMOUNT" value="3000" autoComplete="false" className="ml-4 bg-white shadow-md rounded   text-gray-900  " />
               </div>
             </div>
-            <div class="grid grid-cols-1 gap-3 mt-5 mr-10">
+            <div className="grid grid-cols-1 gap-3 mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ส่วนลด - เปอร์เซ็นต์ <input id="VAT_AMOUNT" autoComplete="false" className="ml-4 bg-white shadow-md rounded   text-gray-900  " />
               </div>
               <div className="content-center text-right justify-items-center text-base mt-5 font-bold  ">ส่วนลด - บาท <input id="VAT_AMOUNT" autoComplete="false" className="ml-4 bg-white shadow-md rounded   text-gray-900  " />

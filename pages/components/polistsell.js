@@ -417,7 +417,7 @@ if(radio === 'fromto'){
 
                               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <button onClick={() => binddatapo(data.pO_NO)} >
-                                  <svg class=" text-blue-700 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                  <svg className=" text-blue-700 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
 
                                 </button>
                               </td>
@@ -443,10 +443,10 @@ if(radio === 'fromto'){
 
       ) :
         <>
-          <div class="relative ">
-            <div class="absolute mt-5 ml-10 left-0 top-0">
+          <div className="relative ">
+            <div className="absolute mt-5 ml-10 left-0 top-0">
               <a onClick={() => setisClose(true)}>
-                <div class="rounded-full h-11 w-11 bg-blue-700 flex items-center justify-center"> <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                <div className="rounded-full h-11 w-11 bg-blue-700 flex items-center justify-center"> <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
 
                 </div>
               </a>
@@ -559,23 +559,23 @@ if(radio === 'fromto'){
           </div>
 
           <div className="flex flex-col mb-10 items-end justify-center">
-            <div class="flex flex-row mt-5 mr-10">
+            <div className="flex flex-row mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base font-bold  ">ราคารวม (ไม่รวม VAT)</div>
               <label className=" w-20 text-right">{datapodetail.totaL_AMOUNT - datapodetail.vat}</label>
             </div>
-            <div class="flex flex-row mt-5 mr-10">
+            <div className="flex flex-row mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base font-bold  ">ส่วนลด - เปอร์เซ็นต์</div>
               <label className=" w-20 text-right">{datapodetail.discounT_PERCENTAGE}</label>
             </div>
-            <div class="flex flex-row mt-5 mr-10">
+            <div className="flex flex-row mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base font-bold  ">ส่วนลด - บาท</div>
               <label className=" w-20 text-right">{datapodetail.discounT_BAHT}</label>
             </div>
-            <div class="flex flex-row mt-5 mr-10">
+            <div className="flex flex-row mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base font-bold  ">VAT</div>
               <label className=" w-20 text-right">{datapodetail.vat}</label>
             </div>
-            <div class="flex flex-row mt-5 mr-10">
+            <div className="flex flex-row mt-5 mr-10">
               <div className="content-center text-right justify-items-center text-base font-bold  ">ราคารวม </div>
               <label className=" w-20 text-right">{datapodetail.totaL_AMOUNT}</label>
             </div>
