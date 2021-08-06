@@ -4,7 +4,11 @@ import Link from 'next/link'
 import { removeCookie } from '../api/auth'
 import jscookie from 'js-cookie';
 import { useRouter } from 'next/router'
+
 const Layout = (props) => {
+
+
+  const Router = useRouter();
   if (props) {
 
 
@@ -140,17 +144,21 @@ const Layout = (props) => {
             </div> */}
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex flex-shrink-0  space-x-4">
-                      <Link href="/components/polist">
-
-                        <a className={'text-gray-300  hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} aria-current="page">รายการสั่งซื้อทั้งหมด</a>
-
+                      <Link href="/components/polist" >
+                    <label className={Router.pathname == "/components/polist" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
+                        <a  className={'text-gray-300  hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium' } aria-current="page">รายการสั่งซื้อทั้งหมด</a>
+                        </label>
 
                       </Link>
                       <Link href="/components/invoicelist">
+                      <label className={Router.pathname == "/components/invoicelist" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
                         <a className={classnameinvoice}>รายการรับของ</a>
+                        </label>
                       </Link>
                       <Link href="/components/popickup">
+                      <label className={Router.pathname == "/components/popickup" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
                         <a className={classnameinvoice}>ภาพรวมรับสินค้า</a>
+                        </label>
                       </Link>
 
                     </div>    </div>
@@ -169,13 +177,16 @@ const Layout = (props) => {
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex space-x-4">
                       <Link href="/components/polistsell">
-
+                      <label className={Router.pathname == "/components/polistsell" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
                         <a className={classnameposell} aria-current="page">รายการสั่งซื้อทั้งหมด</a>
-
+</label>
 
                       </Link>
                       <Link href="/components/invoicelistsell">
+                      <label className={Router.pathname == "/components/polistsell" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
                         <a className={classnamesend}>รายการส่งของ</a>
+                        </label>
+
                       </Link>
 
                     </div> </div>
@@ -278,10 +289,11 @@ const Layout = (props) => {
 
                   <><div x-show="dropdownOpen" onClick={() => setdropdownOpen(false)} class="fixed inset-0 h-full w-full z-10"></div><div x-show="dropdownOpen" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
                     <Link href="/edivtadmin/setuplocal">
+                    <label className={Router.pathname == "/edivtadmin/setuplocal" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
                       <a class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                         Set Local
                       </a>
-
+</label>
                     </Link>
 
 
