@@ -3,7 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/components/invoicelistsellprint": "pages/components/invoicelistsellprint.js",
-  "/Login": "pages/Login.js",
   "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
+  "/Login": "pages/Login.js",
   "/components/invoicelistsell": "pages/components/invoicelistsell.js"
 }
