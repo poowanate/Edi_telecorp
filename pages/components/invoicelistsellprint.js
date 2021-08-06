@@ -166,16 +166,16 @@ function table() {
           <div className="flex flex-row">
             <div className="flex flex-col w-1/2">
               <div className="flex flex-row mt-5  ">
-                <div className="w-1/2 text-base  font-bold text-right ">เลขที่ใบสั่งซื้อ </div>
-                <label className="ml-5 w-1/2 text-left">{itemdata.pO_NO}</label>
+                <div className="w-36 text-base  font-bold text-right ">เลขที่ใบสั่งซื้อ </div>
+                <label className="ml-5 w-auto text-left">{itemdata.pO_NO}</label>
               </div>
               <div className="flex flex-row mt-5 ">
-                <div className="w-1/2 text-base  font-bold text-right ">รหัสผู้จำหน่าย </div>
-                <label className="ml-5 w-1/2 text-left">{itemdata.producT_NO}</label>
+                <div className="w-36 text-base  font-bold text-right ">รหัสผู้จำหน่าย </div>
+                <label className="ml-5 w-auto text-left">{itemdata.producT_NO}</label>
               </div>
               <div className="flex flex-row mt-5 ">
-                <div className="w-1/2 text-base  font-bold text-right ">ชื่อผู้จำหน่าย </div>
-                <label className="ml-5 w-1/2 text-left">{itemdata.vendoR_NAME}</label>
+                <div className="w-36 text-base  font-bold text-right ">ชื่อผู้จำหน่าย </div>
+                <label className="ml-5 w-auto text-left">{itemdata.vendoR_NAME}</label>
               </div>
             </div>
             <div className="flex flex-col w-1/2 ">
@@ -194,7 +194,7 @@ function table() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col h-full justify-center">
+        <div className="flex flex-col h-full justify-start pt-10">
           <div className="flex flex-col mt-5">
             <div className=" ">
               <div className="py-2 overflow-x-auto  ">
