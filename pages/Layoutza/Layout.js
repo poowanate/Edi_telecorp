@@ -150,17 +150,14 @@ const Layout = (props) => {
                         </label>
 
                       </Link>
-<<<<<<< HEAD
                       <Link href="/components/invoicelist">
                       <label className={Router.pathname == "/components/invoicelist" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
                         <a className={classnameinvoice}>รายการรับของ</a>
                         </label>
                       </Link>
-=======
                       {/* <Link href="/components/invoicelist">
                         <a className={classnameinvoice}>รายการรับของ</a>
                       </Link> */}
->>>>>>> bf9e67dd473d93389955e0eed4eb0dfe77038844
                       <Link href="/components/popickup">
                       <label className={Router.pathname == "/components/popickup" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
                         <a className={classnameinvoice}>ภาพรวมรับสินค้า</a>
@@ -295,12 +292,9 @@ const Layout = (props) => {
 
                   <><div x-show="dropdownOpen" onClick={() => setdropdownOpen(false)} className="fixed inset-0 h-full w-full z-10"></div><div x-show="dropdownOpen" className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
                     <Link href="/edivtadmin/setuplocal">
-<<<<<<< HEAD
                     <label className={Router.pathname == "/edivtadmin/setuplocal" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
-                      <a class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-=======
+  
                       <a className="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
->>>>>>> bf9e67dd473d93389955e0eed4eb0dfe77038844
                         Set Local
                       </a>
 </label>
