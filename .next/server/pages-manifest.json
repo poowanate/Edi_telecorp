@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/components/invoicelistsell": "pages/components/invoicelistsell.js",
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
   "/components/invoicelistsellprint": "pages/components/invoicelistsellprint.js"
 }

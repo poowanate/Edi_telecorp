@@ -9,11 +9,14 @@ import moment from "moment";
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
+import { useBarcode } from '@createnextapp/react-barcode';
 import { postapicompany, putthenapicompany } from '../api/api_company'
 // import template from '../../public/download/template.xlsx';
 
 function table() {
   const Router = useRouter();
+  const [code1, setcode1] = useState("11");
+  const [code2, setcode2] = useState("2222");
   const [mapp, setmapp] = useState([]);
   const fetchData = async () => {
     let invoice = localStorage.getItem('datainvoice')
@@ -39,7 +42,10 @@ function table() {
         itemdata['id'] = data[0].id
 
         setitemdata({ ...itemdata })
-
+        console.log(data[0].pO_NO.substring(1))
+        console.log(data[0].invoicE_NO)
+        setcode1(data[0].pO_NO.substring(1))
+        setcode2(data[0].invoicE_NO)
         if (data[0].orderdetails.length > 0) {
           let ggwp = []
           for (let index = 0; index < data[0].orderdetails.length; index++) {
@@ -73,13 +79,19 @@ function table() {
 
 
     })
+    // barcode1()
+    // barcode2()
     setTimeout(() => {
       localStorage.removeItem('datainvoice');
       localStorage.removeItem('dataproduct');
       window.print()
     }, 1000);
   }
+  // barcodegen
+  // const { inputRef } = useBarcode({value: 'createnextapp',options: { background: '#ccffff',}});
+  // const { inputRef } = useBarcode({ value: 'fb.com' });
 
+  // return <svg ref={inputRef} />;
   const [itemdata, setitemdata] = useState({
     id: null,
     invoicE_NO: "",
@@ -98,7 +110,26 @@ function table() {
   useEffect(() => {
     fetchData();
   }, []);
+  function barcode1() {
+    const { inputRef } = useBarcode({
+      value: code1,
+      options: {
+        displayValue: true,
+      }
+    });
 
+    return <svg className="w-auto h-20" ref={inputRef} />;
+  };
+  function barcode2() {
+    const { inputRef } = useBarcode({
+      value: code2,
+      options: {
+        displayValue: true,
+      }
+    });
+
+    return <svg className="w-auto h-20" ref={inputRef} />;
+  };
   return (
     <div className="a4 section">
       {/* <div className="content-center text-center justify-items-center text-4xl mt-5 text-blue-800 ">
@@ -108,22 +139,28 @@ function table() {
         <div className="flex flex-col h-56">
           <div className="flex flex-row">
             <div className="w-1/3 flex flex-row">
-              <Image width={200} height={100}
+              <div className="w-full">
+                {barcode1()}
+              </div>
+              {/* <svg ref={inputRef} /> */}
+              {/* <Image width={200} height={100}
                 src="/images/barcode.png"
                 alt="profile"
                 className="mx-auto"
-              />
-              <Image width={200} height={100}
+              /> */}
+              {/* <Image width={200} height={100}
                 src="/images/barcode.png"
                 alt="profile"
                 className="mx-auto"
-              />
+              /> */}
             </div>
             <div className="content-center w-1/3 text-center flex justify-center items-center text-xl font-bold mt-5 text-blue-700 ">
               ใบส่งของ (OUT)
             </div>
-            <div className="flex w-1/3 justify-end items-end mr-5 print_d_none">
-              <button onClick={() => window.print()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">PrintPDF</button>
+            <div className="flex w-1/3 justify-end items-end mr-5">
+                {barcode2()}
+              {/* <svg ref={inputRef} /> */}
+              {/* <button onClick={() => window.print()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">PrintPDF</button> */}
             </div>
           </div>
           <div className="flex flex-row">
@@ -164,98 +201,98 @@ function table() {
                 <div className="shadow  border-gray-200 sm:rounded-lg">
                   <table className="min-w-full w-full">
                     <tr className="bg-gray-50">
-                      <th
+                      {/* <th
                         scope="col"
-                        className="px-6 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center border-b border-r text-base font-medium  text-blue-800 uppercase tracking-wider"
                       >
                         รหัส GPU
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         รหัส UNSPSC
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         รหัส TMT
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         รหัสสินค้า
                       </th>
 
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         Bar code
-                      </th>
+                      </th> */}
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider w-1/2"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         ชื่อยา / เวชภัณท์
                       </th>
-                      <th
+                      {/* <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         รหัสผลิต
                       </th>
 
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         วันที่ผลิต
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b  text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b  text-blue-800 uppercase tracking-wider"
                       >
                         วันที่หมดอายุ
-                      </th>
+                      </th> */}
 
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         จำนวน
                       </th>
 
-                      <th
+                      {/* <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         หน่วย
-                      </th>
+                      </th> */}
 
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         ราคาต่อหน่วย
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         ราคารวม vat
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         จำนวนเงิน
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
+                        className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         จำนวนที่สั่งซื้อ
                       </th>
@@ -266,36 +303,36 @@ function table() {
                       (mapp.length > 0) ? (
                         mapp.map((data, index) => (
                           <tr key={index} className="bg-white ">
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
+                            {/* <td className="px-1 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c1} </div>   </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
+                            <td className="px-1 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c2} </div>   </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
+                            <td className="px-1 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
+                            <td className="px-1 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c14} </div>   </td>
 
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
+                            <td className="px-1 py-4  border-r whitespace-nowrap">
+                              <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td> */}
+                            <td className="px-1 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c5} </div>   </td>
-                            <td className="px-6 py-4  border-r whitespace-nowrap">
+                            {/* <td className="px-1 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c6} </div>   </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
+                            <td className="px-1 py-4   whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{moment(data.c7).format('DD/MM/yyyy')} </div>   </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">{moment(data.c8).format('DD/MM/yyyy')} </div>   </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
+                            <td className="px-1 py-4   whitespace-nowrap">
+                              <div className="text-center text-sm text-gray-900">{moment(data.c8).format('DD/MM/yyyy')} </div>   </td> */}
+                            <td className="px-1 py-4   whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c9}</div>   </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
+                            {/* <td className="px-1 py-4   whitespace-nowrap">
+                              <div className="text-center text-sm text-gray-900">{data.c10} </div>   </td> */}
+                            <td className="px-1 py-4   whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c11} </div>   </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
+                            <td className="px-1 py-4   whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{((data.c12 * 7) / 100 + data.c12).toFixed(2)}</div>   </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
+                            <td className="px-1 py-4   whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
-                            <td className="px-6 py-4   whitespace-nowrap">
+                            <td className="px-1 py-4   whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td>
                           </tr>
                         ))
