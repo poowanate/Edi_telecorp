@@ -13,11 +13,11 @@ import axios from 'axios';
         },
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -34,11 +34,11 @@ import axios from 'axios';
         },
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -55,11 +55,11 @@ import axios from 'axios';
         data:data
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -76,17 +76,17 @@ import axios from 'axios';
 
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
 
   export const updatecompanyadmin = (data) => {
-console.log(data)
+//console.log(data)
     return axios({
         method: 'PUT',   
         url: `http://103.245.164.54:5003/api/EDI_COMPANY_INFORMATION/`+8,
@@ -97,11 +97,11 @@ console.log(data)
 
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -117,11 +117,11 @@ console.log(data)
         },
        
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -137,11 +137,11 @@ console.log(data)
         },
         data: data
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }

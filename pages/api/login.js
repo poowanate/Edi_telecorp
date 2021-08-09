@@ -19,11 +19,11 @@ export const login = data => {
       },
       data: data
   }).then((result) => {
-      console.log('hasil axios', result.data)
+      //console.log('hasil axios', result.data)
       return result.data
 
   }).catch(err => {
-      console.log(err);
+      //console.log(err);
       return { error: 'Error......' }
   });
 }
@@ -40,18 +40,18 @@ export const loginadmin = data => {
       },
       data: data
   }).then((result) => {
-      console.log('hasil axios', result.data)
+      //console.log('hasil axios', result.data)
       return result.data
 
   }).catch(err => {
-      console.log(err);
+      //console.log(err);
       return { error: 'Error......' }
   });
 }
 
 
 export const Authenticate = (data, next) => {
-  // console.log(data);
+  // //console.log(data);
   // setCookie('token', data.users.token)
   // setLocalStorage('user', data.users)
   next()

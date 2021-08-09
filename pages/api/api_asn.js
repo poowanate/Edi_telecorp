@@ -12,11 +12,11 @@ export const edi_asn = data => {
         },
         data: data
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -33,11 +33,11 @@ export const edi_asn = data => {
         },
         data: data
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -54,11 +54,11 @@ export const edi_asn = data => {
         },
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -76,11 +76,11 @@ export const getediasn1 = data => {
         },
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -97,11 +97,11 @@ export const getediasn1 = data => {
         },
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -117,11 +117,11 @@ export const getediasn1 = data => {
         },
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -138,11 +138,11 @@ export const getediasn1 = data => {
         },
         data: data
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -159,11 +159,11 @@ export const getediasn1 = data => {
         },
    
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }

@@ -12,11 +12,11 @@ export const edi_po = data => {
         },
         data: data
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -34,11 +34,11 @@ export const edi_po = data => {
         },
      
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -54,11 +54,11 @@ export const edi_po = data => {
         },
      
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -75,11 +75,11 @@ export const edi_po = data => {
         },
      
     }).then((result) => {
-        console.log('hasil axios', result.data)
+        //console.log('hasil axios', result.data)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -98,11 +98,11 @@ export const edi_po = data => {
         },
      
     }).then((result) => {
-        console.log('hasil axios', result)
+        //console.log('hasil axios', result)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
@@ -122,11 +122,11 @@ export const edi_po = data => {
         },
      
     }).then((result) => {
-        console.log('hasil axios', result)
+        //console.log('hasil axios', result)
         return result.data
   
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         return { error: 'Error......' }
     });
   }
