@@ -294,7 +294,7 @@ const Layout = (props) => {
                     <Link href="/edivtadmin/setuplocal">
                     <label className={Router.pathname == "/edivtadmin/setuplocal" ? "bg-white bg-opacity-25 p-2 rounded" : "p-2"}>
   
-                      <a className="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+                      <a className="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white cursor-pointer ">
                         Set Local
                       </a>
 </label>
