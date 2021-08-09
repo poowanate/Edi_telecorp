@@ -493,9 +493,16 @@ function table() {
 
         }
         if(jscookie.get('admintype') == '1'){
-   
-          await  setshowtable(dataf.filter(x => x.producT_NO ==     jscookie.get('vendoR_NO') ))
-          await setdatatable2(dataf.filter(x => x.producT_NO ==     jscookie.get('vendoR_NO') ))
+          if(  jscookie.get('vendoR_NO') =='TL001'){
+            await setdatatable2(dataf)
+          await setshowtable(dataf)
+          }
+          else{
+            await  setshowtable(dataf.filter(x => x.producT_NO ==     jscookie.get('vendoR_NO') ))
+            await setdatatable2(dataf.filter(x => x.producT_NO ==     jscookie.get('vendoR_NO') ))
+          }
+     
+        
          
          }  
          else{

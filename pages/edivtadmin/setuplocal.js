@@ -51,9 +51,15 @@ const setuplocal = () => {
                
 
                 if(jscookie.get('admintype') == '1'){
-   
-                  await  setcompanydata(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
+                  if(  jscookie.get('vendoR_NO') =='TL001'){
+                    await setcompanydata(data)
+                  await setcompanydata(data)
+                  }
+                  else{
+                    await  setcompanydata(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
                   await setcompanydata2(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
+                  }
+                
                  
                  }  
                  else{

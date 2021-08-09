@@ -34,9 +34,15 @@ function table() {
 
       } else {
         if(jscookie.get('admintype') == '1'){
-   
-          await  setdatatable(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
-          await setdatatable2(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
+            if(  jscookie.get('vendoR_NO') =='TL001'){
+              await setdatatable(data)
+              await setdatatable2(data)
+            }
+            else{
+              await  setdatatable(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
+              await setdatatable2(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
+            }
+       
          
          }  
          else{
