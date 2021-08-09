@@ -83,10 +83,10 @@ const Layout = (props) => {
     }
 
     // '+{role}+'
-    var classnamepo = 'text-gray-300  hover:bg-pink-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-    var classnameinvoice = 'text-gray-300  hover:bg-pink-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-    var classnamesend = 'text-gray-300  hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-    var classnameposell = 'text-gray-300  hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    var classnamepo = 'text-white   hover:bg-pink-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    var classnameinvoice = 'text-white   hover:bg-pink-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    var classnamesend = 'text-white   hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    var classnameposell = 'text-white   hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
     if (props.children != 'EDI') {
       // if(!props.children.props){
 
@@ -112,7 +112,7 @@ const Layout = (props) => {
 
 
     // var isActive = this.context.router.route.location.pathname === this.props.to;
-    // var className = isActive ? 'text-gray-300 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-base font-extrabold' : ''
+    // var className = isActive ? 'text-white hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-base font-extrabold' : ''
     var className = 'gwp'
     return (
       <>
@@ -140,18 +140,18 @@ const Layout = (props) => {
               {(role == 2) && (
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                   {/* <div className="flex-shrink-0 flex items-center ">
-            <a className={'text-gray-300  hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
+            <a className={'text-white   hover:'+color+' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >รายการรับของ</a>
             </div> */}
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex flex-shrink-0  space-x-4">
                       <Link href="/components/polist" >
-                    <label className={Router.pathname == "/components/polist" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
-                        <a  className={'text-gray-300  hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium' } aria-current="page">รายการสั่งซื้อทั้งหมด</a>
+                    <label className={Router.pathname == "/components/polist" ? "bg-white bg-opacity-25 p-2 rounded" : "p-2"}>
+                        <a  className={'text-white   hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium' } aria-current="page">รายการสั่งซื้อทั้งหมด</a>
                         </label>
 
                       </Link>
                       <Link href="/components/invoicelist">
-                      <label className={Router.pathname == "/components/invoicelist" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
+                      <label className={Router.pathname == "/components/invoicelist" ? "bg-white bg-opacity-25 p-2 rounded" : "p-2"}>
                         <a className={classnameinvoice}>รายการรับของ</a>
                         </label>
                       </Link>
@@ -159,7 +159,7 @@ const Layout = (props) => {
                         <a className={classnameinvoice}>รายการรับของ</a>
                       </Link> */}
                       <Link href="/components/popickup">
-                      <label className={Router.pathname == "/components/popickup" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
+                      <label className={Router.pathname == "/components/popickup" ? "bg-white bg-opacity-25 p-2 rounded" : "p-2"}>
                         <a className={classnameinvoice}>ภาพรวมรับสินค้า</a>
                         </label>
                       </Link>
@@ -169,10 +169,10 @@ const Layout = (props) => {
               )}
               {(role == 1) && (
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start print_d_none">
-                  <div className="flex-shrink-0 flex items-center">
-                    {closeprofile ? (<a onClick={() => { setcloseprofile(false) }} className={'text-gray-300  hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
+                  <div className="p-2">
+                    {closeprofile ? (<a onClick={() => { setcloseprofile(false) }} className={'text-white   hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
                     ) : (
-                      <a onClick={() => { setcloseprofile(true) }} className={'text-gray-300  hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
+                      <a onClick={() => { setcloseprofile(true) }} className={'text-white   hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
                     )}
 
 
@@ -180,13 +180,13 @@ const Layout = (props) => {
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex space-x-4">
                       <Link href="/components/polistsell">
-                      <label className={Router.pathname == "/components/polistsell" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
+                      <label className={Router.pathname == "/components/polistsell" ? "bg-white bg-opacity-25 p-2 rounded" : "p-2"}>
                         <a className={classnameposell} aria-current="page">รายการสั่งซื้อทั้งหมด</a>
 </label>
 
                       </Link>
                       <Link href="/components/invoicelistsell">
-                      <label className={Router.pathname == "/components/invoicelistsell" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
+                      <label className={Router.pathname == "/components/invoicelistsell" ? "bg-white bg-opacity-25 p-2 rounded" : "p-2"}>
                         <a className={classnamesend}>รายการส่งของ</a>
                         </label>
 
@@ -198,7 +198,7 @@ const Layout = (props) => {
 
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 print_d_none">
-                <label className={'text-gray-300 hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'}>{nameuser}</label>
+                <label className={'text-white hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'}>{nameuser}</label>
                 {(jscookie.get('admintype') == '1') && (
                   dropdownOpen ? (
                     <>
@@ -230,7 +230,7 @@ const Layout = (props) => {
                 <div className="ml-3 relative print_d_none">
                   <div className={'' + color + ' flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'}>
                     <button onClick={logout} type="button" className={'' + color + ' flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'} id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                      <label className={'text-gray-300 hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'}>Logout</label>
+                      <label className={'text-white hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'}>Logout</label>
                     </button>
                   </div>
 
@@ -248,7 +248,7 @@ const Layout = (props) => {
 
               {/* <a href="#" className="bg-indigo-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">รายการสั่งซื้อทั้งหมด</a>
 
-      <a href="#" className="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ชื่อบริษัท</a> */}
+      <a href="#" className="text-white hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ชื่อบริษัท</a> */}
 
 
             </div>
@@ -292,7 +292,7 @@ const Layout = (props) => {
 
                   <><div x-show="dropdownOpen" onClick={() => setdropdownOpen(false)} className="fixed inset-0 h-full w-full z-10"></div><div x-show="dropdownOpen" className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
                     <Link href="/edivtadmin/setuplocal">
-                    <label className={Router.pathname == "/edivtadmin/setuplocal" ? "bg-white bg-opacity-25 mt-1 rounded" : "mt-1"}>
+                    <label className={Router.pathname == "/edivtadmin/setuplocal" ? "bg-white bg-opacity-25 p-2 rounded" : "p-2"}>
   
                       <a className="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                         Set Local
