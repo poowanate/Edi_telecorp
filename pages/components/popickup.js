@@ -19,7 +19,7 @@ function table() {
   });
   const dateChange = (name, e) => {
     date[name] = e.target.value;
-    console.log(date[name]);
+    //console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
   const [orderlist, setorderlist] = useState({
@@ -57,8 +57,8 @@ function table() {
   const exceldownload = (ex) => {
     let exhead = ex[0]
     let exdetail = ex[0].orderdetails
-    console.log(exhead)
-    console.log(exdetail)
+    //console.log(exhead)
+    //console.log(exdetail)
     let data = [];
     let datasum = [];
     var head = [
@@ -168,7 +168,7 @@ function table() {
     setexcelEX(excelEX);
   }
   const sdsad = async () => {
-    console.log(itemtable.length)
+    //console.log(itemtable.length)
     if (itemtable.length > 0) {
       for (let index = 0; index < itemtable.length; index++) {
         let gebvaluebytop = []
@@ -185,14 +185,14 @@ function table() {
             ];
 
             const filterOptions = ['00212'];
-            console.log(gebvaluebytopz)
+            //console.log(gebvaluebytopz)
             //   let res = gebvaluebytopz.filter(
             //     i => i.gebvaluebytopz.producT_ID.split(",").some(
             //         size => filterOptions.includes(size)
             //     )
             // );
 
-            // console.log(res);
+            // //console.log(res);
             gebvaluebytop.push({
               balance: itemtable[index].orderdetails[index].balance,
               batcH_LOT_NO: itemtable[index].orderdetails[index].batcH_LOT_NO,
@@ -227,7 +227,7 @@ function table() {
       } else {
         for (let index = 0; index < data.length; index++) {
           dataf.push(data[index])
-          console.log(dataf)
+          //console.log(dataf)
 
         }
         await setshowtable(dataf)
@@ -241,7 +241,7 @@ function table() {
   }
 
   const scansearch =()=>{
-console.log(searchtxt)
+//console.log(searchtxt)
     if(radio === 'now'){
       // if(datatable2.length>0){  
       //   setshowtable(datatable2.filter(x => moment(x.pO_DATE).format('DD-MM-yyyy') == moment(date.Ddate).format('DD-MM-yyyy') )) 
@@ -268,10 +268,10 @@ console.log(searchtxt)
 
   const asnbyinvoice = async (invoice) => {
 
-    console.log(invoice)
+    //console.log(invoice)
 
     await getediasnbyinvoice1(invoice).then(async data => {
-      console.log(data)
+      //console.log(data)
       // Router.push('/register/information')
       if (data.error) {
 
@@ -464,7 +464,7 @@ console.log(searchtxt)
               </a>
             </div>
           </div>
-          {/* <button onClick={()=>console.log(itemtablez)}>ss</button> */}
+          {/* <button onClick={()=>//console.log(itemtablez)}>ss</button> */}
           <div className="flex flex-row">
             <div className="w-1/3"></div>
             <div className="content-center w-1/3 text-center flex justify-center items-center text-xl font-bold mt-5 text-pink-700 ">

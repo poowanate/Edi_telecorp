@@ -40,7 +40,7 @@ const login = () => {
             username : L_values.L_Username,
             PASSWORD : L_values.L_Password
           }
-console.log(formz)
+//console.log(formz)
           loginadmin(formz).then(data => {
 
               if(data.vendoR_NAME!=null){
@@ -57,7 +57,7 @@ console.log(formz)
 
        
               })
-              console.log()
+              //console.log()
               }
               else{
                 sweeterror()

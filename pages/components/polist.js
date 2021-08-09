@@ -21,7 +21,7 @@ function table() {
   });
   const dateChange = (name, e) => {
     date[name] = e.target.value;
-    console.log(date[name]);
+    //console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
 
@@ -44,8 +44,8 @@ function table() {
   const exceldownload = (ex) => {
     let exhead = ex[0]
     let exdetail = ex[0].pO_DETAILs
-    console.log(exhead)
-    console.log(exdetail)
+    //console.log(exhead)
+    //console.log(exdetail)
     let data = [];
     let datasum = [];
     var head = [

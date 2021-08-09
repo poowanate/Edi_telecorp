@@ -15,8 +15,8 @@ function table() {
   const exceldownload = async (ex) => {
     let exhead = ex[0]
     let exdetail = ex[0].orderdetails
-    console.log(exhead)
-    console.log(exdetail)
+    //console.log(exhead)
+    //console.log(exdetail)
     let data = [];
     let datasum = [];
     var head = [
@@ -279,7 +279,7 @@ function table() {
   }
   const dateChange = (name, e) => {
     date[name] = e.target.value;
-    console.log(date[name]);
+    //console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
   return (

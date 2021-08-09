@@ -28,7 +28,7 @@ function table() {
   });
   const dateChange = (name, e) => {
     date[name] = e.target.value;
-    console.log(date[name]);
+    //console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
   const print = async () => {
@@ -58,11 +58,11 @@ function table() {
   const handleClick = e => {
 
     const { id, checked } = e.target;
-    console.log(checked)
-    console.log(id)
-    console.log(isCheck.includes(id))
+    //console.log(checked)
+    //console.log(id)
+    //console.log(isCheck.includes(id))
     setIsCheck([...isCheck, id]);
-    console.log(isCheck)
+    //console.log(isCheck)
     if (!checked) {
       setIsCheck(isCheck.filter(item => item !== id));
     }
@@ -102,7 +102,7 @@ function table() {
     if (itemdata.pO_NO.length > 8) {
       getdataedipobypo(itemdata.pO_NO).then(data => {
 
-        console.log(data)
+        //console.log(data)
 
         if (data.error) {
           Swal.fire('ค้นหาไม่สำเร็จกรุณา ลองใหม่อีกครั้ง', '', 'info')
@@ -143,7 +143,7 @@ function table() {
 
                 }
                 ggwp.push(form)
-                console.log(ggwp)
+                //console.log(ggwp)
               }
               setmapp(mapp.concat(ggwp))
               ggwp = []
@@ -211,8 +211,8 @@ function table() {
   const exceldownload = async (ex) => {
     let exhead = ex[0]
     let exdetail = ex[0].orderdetails
-    console.log(exhead)
-    console.log(exdetail)
+    //console.log(exhead)
+    //console.log(exdetail)
     let data = [];
     let datasum = [];
     var head = [
@@ -489,7 +489,7 @@ function table() {
       
         for (let index = 0; index < data.length; index++) {
           dataf.push(data[index])
-          console.log(dataf)
+          //console.log(dataf)
 
         }
         if(jscookie.get('admintype') == '1'){
@@ -521,13 +521,13 @@ function table() {
 
     let totalamount = 0
     let asdsa = item
-    console.log(asdsa, item.length)
+    //console.log(asdsa, item.length)
     if (item.length > 0) {
       for (let index = 0; index < item.length; index++) {
         totalamount = totalamount + Number(item[index].c12)
 
       }
-      console.log(totalamount)
+      //console.log(totalamount)
       itemdata['totaL_AMOUNT'] = totalamount
 
       if (itemdata['discounT_PERCENTAGE'] != '') {
@@ -553,7 +553,7 @@ function table() {
   }
 
   const setChecked = (e, index, g) => {
-    console.log(g, index)
+    //console.log(g, index)
     if (e == undefined) {
 
       mapp[index].checked = true
@@ -579,13 +579,13 @@ function table() {
 
     }
     setmapp([...mapp])
-    console.log(checklength)
+    //console.log(checklength)
   }
 
   const edittable = (idx, id) => {
     setisCloseedit(true)
     const temp = [...mapp];
-    console.log(idx, id, temp[idx])
+    //console.log(idx, id, temp[idx])
     itemtable['c1'] = temp[idx].c1
     itemtable['c2'] = temp[idx].c2
     itemtable['c3'] = temp[idx].c3
@@ -604,7 +604,7 @@ function table() {
     itemtable['idx'] = idx
   }
   const deletecheckbox = async () => {
-    console.log(checklength.length, checklength)
+    //console.log(checklength.length, checklength)
 
 
     const temp = [...mapp];
@@ -612,7 +612,7 @@ function table() {
     let ggwp = deletedOrderItemIds
 
     checklength.sort((a, b) => (a.id < b.id) ? 1 : -1)
-    console.log(checklength)
+    //console.log(checklength)
 
     for (let index = 0; index < checklength.length; index++) {
       // const element = array[index];
@@ -631,7 +631,7 @@ function table() {
     }
     // if (id != 0) {
     //   ggwp = ggwp + ',' + id
-    //   console.log(ggwp)
+    //   //console.log(ggwp)
     //   setdeletedOrderItemIds(ggwp)
     // }
 
@@ -639,7 +639,7 @@ function table() {
     // temp.splice(idx, 1);
 
 
-    // console.log(temp)
+    // //console.log(temp)
     // setmapp(temp)
     // callmoney([...temp])
 
@@ -655,7 +655,7 @@ function table() {
     let gebcodevalue = []
     if (checklength.length > 0) {
       for (let index = 0; index < checklength.length; index++) {
-        console.log(mapp[checklength[index].id].c1, checklength[index])
+        //console.log(mapp[checklength[index].id].c1, checklength[index])
         const ggwp = {
           c1: mapp[checklength[index].id].c1,
           c2: mapp[checklength[index].id].c2,
@@ -680,14 +680,14 @@ function table() {
         callmoney([...mapp, ggwp])
         calall()
       }
-      console.log(gebvalue)
+      //console.log(gebvalue)
 
-      console.log(mapp)
+      //console.log(mapp)
 
 
     }
     else if (checklength.length == 0) {
-      console.log('non')
+      //console.log('non')
     }
 
   }
@@ -713,14 +713,14 @@ function table() {
 
   const editall = async (e) => {
 
-    console.log(itemdata)
-    console.log(mapp)
+    //console.log(itemdata)
+    //console.log(mapp)
     let mo = []
     for (let index = 0; index < mapp.length; index++) {
       var c7 = moment(mapp[index].c7).format('YYYY-MM-DD')
       var c8 = moment(mapp[index].c8).format('YYYY-MM-DD')
 
-      console.log(c7, c8)
+      //console.log(c7, c8)
       let datatable = {
         producT_ID: String(mapp[index].c6),
         codE_GPU: String(mapp[index].c1),
@@ -766,7 +766,7 @@ function table() {
     }
 
 
-    console.log(JSON.stringify(data))
+    //console.log(JSON.stringify(data))
     await asnupdate(e, data).then(() => {
       Swal.fire({
         title: 'สำเร็จ',
@@ -786,7 +786,7 @@ function table() {
 
 
     }).catch(err => {
-      console.log(err);
+      //console.log(err);
 
     })
 
@@ -800,7 +800,7 @@ function table() {
 
     // Update the state
     await setuploadfile({ selectedFile: event.target.files[0] });
-    console.log(uploadfile)
+    //console.log(uploadfile)
     if (uploadfile) {
       await console.log(uploadfile.selectedFile)
 
@@ -816,11 +816,11 @@ function table() {
     }
   }
   const tosendapianother = async (invoice, product) => {
-    console.log(invoice, product)
+    //console.log(invoice, product)
 
 
     GETEDI_ASN_todrug(invoice, product).then(async data => {
-      console.log(data)
+      //console.log(data)
       if (data.length > 0) {
         let ggwp = []
         if (data[0].orderdetails.length > 0) {  //ใครทำต่อตายแน่
@@ -853,7 +853,7 @@ function table() {
 
             }
 
-            // console.log(ggwp)
+            // //console.log(ggwp)
             ggwp.push(form)
 
 
@@ -921,11 +921,11 @@ function table() {
 
           //     }
 
-          //  console.log(JSON.stringify('['+form+']'))
+          //  //console.log(JSON.stringify('['+form+']'))
           let dsadsa = '[' + JSON.stringify(form) + ']'
-          console.log(dsadsa)
+          //console.log(dsadsa)
           postapicompany(dsadsa).then(_data => {
-            console.log(_data)
+            //console.log(_data)
             if (_data.error) {
               Swal.fire('ทำการส่งข้อมูลไม่สำเร็จ', '', 'info')
             }
@@ -936,7 +936,7 @@ function table() {
                   Swal.fire('ส่งstatus ไม่สำเร็จ', '', 'info')
                 }
                 else {
-                  console.log(data)
+                  //console.log(data)
                 }
               })
               Swal.fire('ทำรายการส่งสำเร็จ', '', 'success')
@@ -951,13 +951,13 @@ function table() {
     setdatainvoice(invoice)
     setdataproduct(product)
     setisClosef(2)
-    console.log(invoice, product)
+    //console.log(invoice, product)
     GETEDI_ASN(invoice, product).then(async data => {
-      console.log(data)
+      //console.log(data)
       exceldownload(data)
       if (data.length > 0) {
-        console.log(data[0].invoicE_NO)
-        console.log(data[0].orderdetails.length)
+        //console.log(data[0].invoicE_NO)
+        //console.log(data[0].orderdetails.length)
         itemdata['invoicE_NO'] = data[0].invoicE_NO
         itemdata['producT_NO'] = data[0].producT_NO
         itemdata['pO_NO'] = data[0].pO_NO
@@ -997,10 +997,10 @@ function table() {
 
             }
             ggwp.push(form)
-            console.log(form)
+            //console.log(form)
           }
           setmapp(mapp.concat(ggwp))
-          console.log(mapp)
+          //console.log(mapp)
         }
 
       }
@@ -1038,12 +1038,12 @@ function table() {
         fileData.splice(0, 1)
         const dataheader = fileData[0]
         var edataheader = deleteempty(dataheader)
-        //  console.log(edataheader)
+        //  //console.log(edataheader)
         //  const value = moment(edataheader[3],'DD-MM-YYYY').format('YYYY-MM-DD')
-        //  console.log(edataheader[3])
+        //  //console.log(edataheader[3])
         //  var date = Date.parse(edataheader[3].toString());
         //  var datez = new Date(edataheader[3]); 
-        //  console.log(value,date,datez)
+        //  //console.log(value,date,datez)
         if (edataheader.length > 0) {
           itemdata['invoicE_NO'] = edataheader[0]
           itemdata['producT_NO'] = edataheader[1]
@@ -1067,7 +1067,7 @@ function table() {
 
           for (let indexz = 0; indexz < fileData.length; indexz++) {
             if (fileData[index] === undefined || fileData[index].length == 0) {
-              //  console.log(index)
+              //  //console.log(index)
               fileData.splice(index, 1)
 
 
@@ -1092,9 +1092,9 @@ function table() {
 
           }
         }
-        console.log(tabledata)
+        //console.log(tabledata)
         let ggwp = []
-        console.log(ggwp)
+        //console.log(ggwp)
         for (let index = 0; index < tabledata.length; index++) {
 
           if (tabledata[index][0] !== '' && tabledata[index][1] !== '' && tabledata[index][2] !== '' && tabledata[index][3] !== '' && tabledata[index][4] !== '' && tabledata[index][5] !== '' && tabledata[index][6] !== '' && tabledata[index][7] !== '' && tabledata[index][8] !== '' && tabledata[index][9] !== '' && tabledata[index][0] !== undefined && tabledata[index][1] !== undefined && tabledata[index][2] !== undefined && tabledata[index][3] !== undefined && tabledata[index][4] !== undefined && tabledata[index][5] !== undefined && tabledata[index][6] !== undefined && tabledata[index][7] !== undefined && tabledata[index][8] !== undefined && tabledata[index][9] !== undefined) {
@@ -1169,7 +1169,7 @@ function table() {
   const handleRemoveItem = (idx) => {
     // assigning the list to temp variable
     const temp = [...mapp];
-    console.log(temp)
+    //console.log(temp)
 
     // removing the element using splice
     temp.splice(idx, 1);
@@ -1181,11 +1181,11 @@ function table() {
   const handleRemoveItem2 = (idx, id) => {
     // assigning the list to temp variable
     const temp = [...mapp];
-    console.log(id)
+    //console.log(id)
     let ggwp = deletedOrderItemIds
     if (id != 0) {
       ggwp = ggwp + ',' + id
-      console.log(ggwp)
+      //console.log(ggwp)
       setdeletedOrderItemIds(ggwp)
     }
 
@@ -1193,7 +1193,7 @@ function table() {
     temp.splice(idx, 1);
 
     // updating the list
-    console.log(temp)
+    //console.log(temp)
     setmapp(temp)
     callmoney([...temp])
 
@@ -1202,7 +1202,7 @@ function table() {
 
 
     //   setitemdata({ ...itemdata })
-    //   console.log( itemdata['totaL_AMOUNT'])
+    //   //console.log( itemdata['totaL_AMOUNT'])
 
 
 
@@ -1214,7 +1214,7 @@ function table() {
 
   const deleteinvoietable = (invoice, id) => {
 
-    console.log(id)
+    //console.log(id)
     Swal.fire({
       title: 'ต้องการที่จะลบใช่หรือไม่?',
       text: "Invoice ที่จะลบคือ " + invoice,
@@ -1285,7 +1285,7 @@ function table() {
   const savetableedit = async (e) => {
     e.preventDefault();
 
-    console.log(itemtable.idx);
+    //console.log(itemtable.idx);
     mapp[itemtable.idx].c1 = itemtable.c1
     mapp[itemtable.idx].c2 = itemtable.c2
     mapp[itemtable.idx].c3 = itemtable.c3
@@ -1316,11 +1316,11 @@ function table() {
   const savetable = async (e) => {
     e.preventDefault();
 
-    console.log(e);
+    //console.log(e);
 
     // valuechk = getRandomInt(3000)
     let zaza = itemtable;
-    console.log(zaza)
+    //console.log(zaza)
 
     // settable(itemtable)
     //  await setmapp([...mapp,itemtable]);
@@ -1388,11 +1388,11 @@ function table() {
       itemtable['c12'] = itemtable['c9'] * itemtable['c11']
       setitemtable({ ...itemtable })
     }
-    console.log(mapp);
+    //console.log(mapp);
   };
 
   const calall = () => {  //callllll
-    console.log(mapp.length)
+    //console.log(mapp.length)
     if (mapp.length > 0) {
       itemdata['discounT_BAHT'] = itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] / 100
       let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * 7 / 100
@@ -1411,9 +1411,9 @@ function table() {
   }
 
   const handleChangedata = (name, e) => {
-    console.log(e)
+    //console.log(e)
     itemdata[name] = e.target.value;
-    console.log(itemdata);
+    //console.log(itemdata);
     if (name == "discounT_BAHT") {
       itemdata['discounT_PERCENTAGE'] = (e.target.value * 100) / itemdata['totaL_AMOUNT']
       let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * itemdata['vat'] / 100
@@ -1499,12 +1499,12 @@ function table() {
       vendoR_NAME: String(itemdata.vendoR_NAME),
       location: String(itemdata.location),
     }
-    console.log(JSON.stringify(data))
+    //console.log(JSON.stringify(data))
     await edi_asn(data).then(async data => {
 
       // Router.push('/register/information')
       if (data.error) {
-        console.log('ggwp')
+        //console.log('ggwp')
       } else {
 
         if (mapp.length > 0) {
@@ -1513,7 +1513,7 @@ function table() {
             var c7 = moment(mapp[index].c7, 'YYYY-MM-DD')
             var c8 = moment(mapp[index].c8, 'YYYY-MM-DD')
 
-            console.log(String(itemdata.invoicE_NO))
+            //console.log(String(itemdata.invoicE_NO))
             let datatable = {
               producT_ID: String(index),
               codE_GPU: String(mapp[index].c1),
@@ -1533,12 +1533,12 @@ function table() {
               total: Number(mapp[index].c13),
               producT_CODE: String(mapp[index].c14),
             }
-            console.log(JSON.stringify(datatable))
+            //console.log(JSON.stringify(datatable))
             await ediproduct(datatable).then(async data => {
-              console.log(data);
+              //console.log(data);
               // Router.push('/register/information')
               if (data.error) {
-                console.log('ggwp')
+                //console.log('ggwp')
               } else {
                 if (i == index) {
                   Swal.fire({
@@ -1564,12 +1564,12 @@ function table() {
           }
         }
         else {
-          console.log('ผิดผลาด')
+          //console.log('ผิดผลาด')
         }
       }
     })
 
-    console.log(mapp, mapp.length)
+    //console.log(mapp, mapp.length)
   };
 
   return (

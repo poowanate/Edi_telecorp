@@ -27,7 +27,7 @@ const Layout = (props) => {
       setnameuser(jscookie.get('name'))
 
       if (jscookie.get('role') == '0') {
-        console.log('ggpw')
+        //console.log('ggpw')
         setrole(3)
       }
       else if (jscookie.get('role') == '1') {

@@ -12,7 +12,7 @@ function about() {
       const { register, handleSubmit } = useForm();
       const onSubmit = data => console.log(data);
       const ggg =()=>{
-        console.log('sss')
+        //console.log('sss')
         setdropdownOpen(!dropdownOpen)
 
       }

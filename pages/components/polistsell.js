@@ -23,7 +23,7 @@ function table() {
   });
   const dateChange = (name, e) => {
     date[name] = e.target.value;
-    console.log(date[name]);
+    //console.log(date[name]);
     setdate({ ...date, [name]: e.target.value || null });
   }
 
@@ -77,8 +77,8 @@ if(radio === 'fromto'){
   const exceldownload = (ex) => {
     let exhead = ex[0]
     let exdetail = ex[0].pO_DETAILs
-    console.log(exhead)
-    console.log(exdetail)
+    //console.log(exhead)
+    //console.log(exdetail)
     let data = [];
     let datasum = [];
     var head = [
@@ -259,7 +259,7 @@ if(radio === 'fromto'){
   }
   const binddatapo = (e) => {
     getdataedipobypo(e).then(data => {
-      console.log(data)
+      //console.log(data)
       if (data.error) {
 
       } else {

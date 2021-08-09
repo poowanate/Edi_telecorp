@@ -19,7 +19,7 @@ const setuplocal = () => {
 
   const handleKeyDown = (event)=>  {
     if(event.keyCode === 13) { 
-        console.log('Enter key pressed')
+        //console.log('Enter key pressed')
   }
   }
   const [bindedit,setbindedit] = useState({
@@ -43,7 +43,7 @@ const setuplocal = () => {
     
      
         EDI_COMPANYinfo().then(async data => {
-            // console.log(data)
+            // //console.log(data)
             if (data.error) {
     
             } else {
@@ -74,7 +74,7 @@ const setuplocal = () => {
         fetchdata()
     }, [])
 const insert = ()=>{
-  console.log('insert')
+  //console.log('insert')
   insertEDI_COMPANYinfo(bindedit).then(async data=>{
     if (data.error) {
       Swal.fire('เพิ่มข้อมูลไม่สำเร็จ', '', 'info')
@@ -88,7 +88,7 @@ const insert = ()=>{
 }
   )}
   const update = ()=>{
-    console.log('update')
+    //console.log('update')
     updatecompanyadmin(bindedit).then(async data=>{
       if (data.error) {
         Swal.fire('แก้ไขไม่สำเร็จ', '', 'info')
@@ -115,7 +115,7 @@ const insert = ()=>{
       seteditorinsert('update')
       getcompanyadmin(id).then(data=>{
         if(data.error){
-          console.log('no')
+          //console.log('no')
 
         }
         else{
@@ -134,14 +134,14 @@ const insert = ()=>{
       })
     }
     const handleChangedata = (name, e) => {
-      // console.log(e.target.value)
-      // console.log(bindedit)
+      // //console.log(e.target.value)
+      // //console.log(bindedit)
       bindedit[name] = e.target.value;
       setbindedit({ ...bindedit })
       }
 const save =(e)=>{
   e.preventDefault();
-  // console.log(JSON.stringify(bindedit))
+  // //console.log(JSON.stringify(bindedit))
   if(editorinsert=='insert'){
     insert()
   }

@@ -2,12 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/components/polist": "pages/components/polist.js",
-  "/components/polistsell": "pages/components/polistsell.js",
-  "/": "pages/index.js",
-  "/components/invoicelist": "pages/components/invoicelist.js",
-  "/components/popickup": "pages/components/popickup.js",
-  "/Login": "pages/Login.js",
   "/components/invoicelistsell": "pages/components/invoicelistsell.js",
-  "/edivtadmin/login": "pages/edivtadmin/login.js"
+  "/components/polistsell": "pages/components/polistsell.js"
 }
