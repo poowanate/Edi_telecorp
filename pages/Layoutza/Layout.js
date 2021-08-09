@@ -83,10 +83,10 @@ const Layout = (props) => {
     }
 
     // '+{role}+'
-    var classnamepo = 'text-white   hover:bg-pink-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-    var classnameinvoice = 'text-white   hover:bg-pink-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-    var classnamesend = 'text-white   hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-    var classnameposell = 'text-white   hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    var classnamepo = 'text-white   hover:bg-pink-700 cursor-pointer hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    var classnameinvoice = 'text-white   hover:bg-pink-700 cursor-pointer hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    var classnamesend = 'text-white   hover:bg-indigo-600 cursor-pointer hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    var classnameposell = 'text-white   hover:bg-indigo-600 cursor-pointer hover:text-white px-3 py-2 rounded-md text-sm font-medium'
     if (props.children != 'EDI') {
       // if(!props.children.props){
 
@@ -146,7 +146,7 @@ const Layout = (props) => {
                     <div className="flex flex-shrink-0  space-x-4">
                       <Link href="/components/polist" >
                     <label className={Router.pathname == "/components/polist" ? "bg-white bg-opacity-25 p-2 rounded" : "p-2"}>
-                        <a  className={'text-white   hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium' } aria-current="page">รายการสั่งซื้อทั้งหมด</a>
+                        <a  className={'text-white   hover:' + color + ' hover:text-white cursor-pointer px-3 py-2 rounded-md text-sm font-medium' } aria-current="page">รายการสั่งซื้อทั้งหมด</a>
                         </label>
 
                       </Link>
@@ -170,9 +170,9 @@ const Layout = (props) => {
               {(role == 1) && (
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start print_d_none">
                   <div className="p-2">
-                    {closeprofile ? (<a onClick={() => { setcloseprofile(false) }} className={'text-white   hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
+                    {closeprofile ? (<a onClick={() => { setcloseprofile(false) }} className={'text-white   hover:' + color + ' hover: cursor-pointer text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
                     ) : (
-                      <a onClick={() => { setcloseprofile(true) }} className={'text-white   hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
+                      <a onClick={() => { setcloseprofile(true) }} className={'text-white   hover:' + color + ' hover: cursor-pointer text-white px-3 py-2 rounded-md text-sm font-medium'} >ชื่อบริษัท</a>
                     )}
 
 
@@ -229,8 +229,8 @@ const Layout = (props) => {
 
                 <div className="ml-3 relative print_d_none">
                   <div className={'' + color + ' flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'}>
-                    <button onClick={logout} type="button" className={'' + color + ' flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'} id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                      <label className={'text-white hover:' + color + ' hover:text-white px-3 py-2 rounded-md text-sm font-medium'}>Logout</label>
+                    <button onClick={logout} type="button" className={'' + color + '  flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'} id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                      <label className={'text-white hover:' + color + '  hover: cursor-pointer text-white px-3 py-2 rounded-md text-sm font-medium'}>Logout</label>
                     </button>
                   </div>
 

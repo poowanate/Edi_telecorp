@@ -3,11 +3,10 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/components/polistsell": "pages/components/polistsell.js",
-  "/components/invoicelistsell": "pages/components/invoicelistsell.js",
-  "/edivtadmin/login": "pages/edivtadmin/login.js",
-  "/": "pages/index.js",
   "/Login": "pages/Login.js",
   "/components/invoicelist": "pages/components/invoicelist.js",
-  "/components/popickup": "pages/components/popickup.js",
-  "/components/polist": "pages/components/polist.js"
+  "/components/invoicelistsell": "pages/components/invoicelistsell.js",
+  "/": "pages/index.js",
+  "/components/polist": "pages/components/polist.js",
+  "/components/popickup": "pages/components/popickup.js"
 }

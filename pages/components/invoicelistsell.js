@@ -1587,7 +1587,7 @@ function table() {
               </div>
               <div className="content-center text-right justify-items-end text-xl mr-5 ">
                 <a
-                  className="text-2xl hover:text-blue  text-blue-700 font-bold underline"
+                  className="text-2xl hover:text-blue  text-blue-700 font-bold underline hover: cursor-pointer "
                   onClick={() => setisClosef(3)}
                 >
                   สร้างรายการ +
