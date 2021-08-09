@@ -154,11 +154,16 @@ function table() {
                 className="mx-auto"
               /> */}
             </div>
-            <div className="content-center w-1/3 text-center flex justify-center items-center text-xl font-bold mt-5 text-blue-700 ">
-              ใบส่งของ (OUT)
+            <div className="content-center w-1/3 flex-col text-center flex justify-center items-center text-xl font-bold mt-5 text-blue-700 ">
+              <Image width={150} height={50}
+                src="/images/edilogo.png"
+                alt="profile"
+                className="mx-auto"
+              />
+              <label className="mt-5">ใบส่งของ (OUT)</label>
             </div>
-            <div className="flex w-1/3 justify-end items-end mr-5">
-                {barcode2()}
+            <div className="flex w-1/3 justify-end items-start mr-3">
+              {barcode2()}
               {/* <svg ref={inputRef} /> */}
               {/* <button onClick={() => window.print()} className="ml-2 print_d_none bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">PrintPDF</button> */}
             </div>
@@ -218,7 +223,7 @@ function table() {
                         className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         รหัส TMT
-                      </th>
+                      </th>*/}
                       <th
                         scope="col"
                         className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
@@ -226,12 +231,12 @@ function table() {
                         รหัสสินค้า
                       </th>
 
-                      <th
+                      {/* <th
                         scope="col"
                         className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         Bar code
-                      </th> */}
+                      </th>  */}
                       <th
                         scope="col"
                         className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
@@ -290,12 +295,12 @@ function table() {
                       >
                         จำนวนเงิน
                       </th>
-                      <th
+                      {/* <th
                         scope="col"
                         className="px-1 py-3 text-center text-base font-medium border-b border-r text-blue-800 uppercase tracking-wider"
                       >
                         จำนวนที่สั่งซื้อ
-                      </th>
+                      </th> */}
                     </tr>
 
 
@@ -308,12 +313,12 @@ function table() {
                             <td className="px-1 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c2} </div>   </td>
                             <td className="px-1 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>
+                              <div className="text-center text-sm text-gray-900">{data.c3} </div>   </td>*/}
                             <td className="px-1 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c14} </div>   </td>
-
+                            {/* 
                             <td className="px-1 py-4  border-r whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td> */}
+                              <div className="text-center text-sm text-gray-900">{data.c4} </div>   </td>  */}
                             <td className="px-1 py-4  border-r whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c5} </div>   </td>
                             {/* <td className="px-1 py-4  border-r whitespace-nowrap">
@@ -332,8 +337,8 @@ function table() {
                               <div className="text-center text-sm text-gray-900">{((data.c12 * 7) / 100 + data.c12).toFixed(2)}</div>   </td>
                             <td className="px-1 py-4   whitespace-nowrap">
                               <div className="text-center text-sm text-gray-900">{data.c12} </div>   </td>
-                            <td className="px-1 py-4   whitespace-nowrap">
-                              <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td>
+                            {/* <td className="px-1 py-4   whitespace-nowrap">
+                              <div className="text-center text-sm text-gray-900">{data.c13} </div>   </td> */}
                           </tr>
                         ))
 
