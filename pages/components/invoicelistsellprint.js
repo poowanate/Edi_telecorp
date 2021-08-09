@@ -154,13 +154,13 @@ function table() {
                 className="mx-auto"
               /> */}
             </div>
-            <div className="content-center w-1/3 flex-col text-center flex justify-center items-center text-xl font-bold mt-5 text-blue-700 ">
-              <Image width={150} height={50}
+            <div className="content-center w-1/3 flex-col text-center flex justify-center items-center text-xl font-bold mt-1 text-blue-700 ">
+              <Image width={90} height={30}
                 src="/images/edilogo.png"
                 alt="profile"
                 className="mx-auto"
               />
-              <label className="mt-5">ใบส่งของ (OUT)</label>
+              <label className="text-base">ใบส่งของ (OUT)</label>
             </div>
             <div className="flex w-1/3 justify-end items-start mr-3">
               {barcode2()}
