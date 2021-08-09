@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { removeCookie } from '../api/auth'
 import jscookie from 'js-cookie';
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const Layout = (props) => {
 
@@ -116,6 +117,9 @@ const Layout = (props) => {
     var className = 'gwp'
     return (
       <>
+      <Head>
+        <title>EDI-RJ</title>
+      </Head>
 
         <nav className={color}>
 

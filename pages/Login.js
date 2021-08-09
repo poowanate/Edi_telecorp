@@ -9,6 +9,7 @@ import * as Yup from 'yup';
  import Swal from 'sweetalert2'
  import {setCookie} from './api/auth'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 // const cookies = new Cookies();
  
 
@@ -56,6 +57,9 @@ function sweeterror(){
   return (
     
     <div className="">
+      <Head>
+        <title>EDI-RJ</title>
+      </Head>
       <Formik
         initialValues={{ L_Username: '', L_Password: '' }}
         validationSchema={Yup.object().shape({
