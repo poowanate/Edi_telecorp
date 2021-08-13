@@ -604,11 +604,11 @@ function table() {
     itemtable['idx'] = idx
   }
   const deletecheckbox = async () => {
-    //console.log(checklength.length, checklength)
+    console.log(checklength.length, checklength)
 
 
     const temp = [...mapp];
-
+ 
     let ggwp = deletedOrderItemIds
 
     checklength.sort((a, b) => (a.id < b.id) ? 1 : -1)
@@ -622,9 +622,11 @@ function table() {
 
         setdeletedOrderItemIds(ggwp)
         temp.splice(checklength[index].id, 1);
+        // tempz.splice(checklength[index].id,1)
+
 
         setmapp(temp)
-        callmoney([...temp])
+        // callmoney([...temp])
         calall()
       }
 
@@ -1392,7 +1394,7 @@ function table() {
   };
 
   const calall = () => {  //callllll
-    //console.log(mapp.length)
+    console.log(mapp.length)
     if (mapp.length > 0) {
       itemdata['discounT_BAHT'] = itemdata['totaL_AMOUNT'] * itemdata['discounT_PERCENTAGE'] / 100
       let i = (itemdata['totaL_AMOUNT'] - itemdata['discounT_BAHT']) * 7 / 100

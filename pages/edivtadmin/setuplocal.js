@@ -35,6 +35,7 @@ const setuplocal = () => {
   });
     const [companydata,setcompanydata] = useState([]);
     const [companydata2,setcompanydata2] = useState([]);
+    const [searchtxt,setsearchtxt] = useState('');
     const [editorinsert,seteditorinsert] = useState('');
     const [isClose,setisClose] = useState(false);
   
@@ -53,13 +54,13 @@ const setuplocal = () => {
                 if(jscookie.get('admintype') == '1'){
                   if(  jscookie.get('vendoR_NO') =='TL001'){
                     await setcompanydata(data)
-                  await setcompanydata(data)
+                  await setcompanydata2(data)
                   }
                   else{
                     await  setcompanydata(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
                   await setcompanydata2(data.filter(x => x.vendoR_NO ==     jscookie.get('vendoR_NO') ))
                   }
-                
+              
                  
                  }  
                  else{
@@ -150,6 +151,16 @@ const save =(e)=>{
   }
   
 }
+const search =()=>{
+
+  if(searchtxt!=''){
+    setcompanydata(companydata2.filter(x => x.vendoR_NAME == searchtxt))
+  }
+ 
+  else{
+    setcompanydata(companydata2)
+  }
+}
 
 const cleardata =()=>{
  setisClose(false)
@@ -205,10 +216,10 @@ const cleardata =()=>{
   <div className="col-span-4 p-3">
   <div className="">
   <div className="bg-gray-100 flex items-center rounded-full shadow-xl">
-    <input className="bg-gray-100 rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none" id="search" type="text" placeholder="Search" />
+    <input onChange={(e)=>setsearchtxt(e.target.value)} className="bg-gray-100 rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none" id="search" type="text" placeholder="Search" />
     
     <div className="">
-      <button className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
+      <button onClick={()=>search()} className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
       </button>
       </div>
