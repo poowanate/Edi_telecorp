@@ -3,5 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/Login": "pages/Login.js",
-  "/components/popickup": "pages/components/popickup.js"
+  "/components/popickup": "pages/components/popickup.js",
+  "/components/invoicelist": "pages/components/invoicelist.js",
+  "/components/polist": "pages/components/polist.js"
 }
