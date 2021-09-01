@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/edivtadmin/setuplocal": "pages/edivtadmin/setuplocal.js",
-  "/Login": "pages/Login.js"
+  "/components/invoicelist": "pages/components/invoicelist.js",
+  "/components/polist": "pages/components/polist.js"
 }
